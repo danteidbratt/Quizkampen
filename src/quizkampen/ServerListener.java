@@ -37,7 +37,7 @@ public class ServerListener extends Thread {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        ServerListener sl = new ServerListener();
     }
 }
