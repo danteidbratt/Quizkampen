@@ -15,17 +15,23 @@ public class Server {
 	private Socket clienSocket2;
 	private List<Question> questions = new ArrayList<>();
 	private Question tempQuestion;
+	private SessionQ session;
 	
 	public Server(Socket clientSocket1, Socket clientSocket2) throws IOException{
 		this.clienSocket1 = clientSocket1;
 		this.clienSocket2 = clientSocket2;
 		readQuestionsFromFile();
+		session = new SessionQ();
+		session.setQuestion(questions.get(0));
 		
 		ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
 		ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 		
 		ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
 		ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
+		
+		user1Output.writeObject(session);
+		user2Output.writeObject(session);
 	}
 	public void readQuestionsFromFile() throws FileNotFoundException {
 		File file = new File("Questions_database.txt");

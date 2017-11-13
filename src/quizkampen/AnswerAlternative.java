@@ -1,6 +1,5 @@
 package quizkampen;
 
-
 public class AnswerAlternative {
 	private String answer;
 	private boolean correctAnswer;
