@@ -1,9 +1,10 @@
 package quizkampen;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable{
 	public String question;
 	private List<AnswerAlternative> answers = new ArrayList<>();
 	
