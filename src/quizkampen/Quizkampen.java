@@ -9,6 +9,7 @@ public class Quizkampen {
         System.out.println("Ja! // Anna");
         System.out.println("har lagt till en testmapp // Anna");
         System.out.println("Claudia");
+        System.out.println("Claudia");
     }
 
 }
