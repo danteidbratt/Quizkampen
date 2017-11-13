@@ -7,14 +7,15 @@ import java.net.Socket;
 public class Client {
     
     Socket bridge;
+    SessionQ session;
 
     public Client() {
         try {
             bridge = new Socket("127.0.0.1", 33333);
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
-            
-        } catch (IOException ex) {
+            session = (SessionQ)in.readObject();
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     }
