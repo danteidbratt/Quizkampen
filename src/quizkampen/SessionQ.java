@@ -1,27 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package quizkampen;
 
-/**
- *
- * @author claudiastenberg
- */
 public class SessionQ {
      //portnummer = 33333
    protected String username; 
-   protected String question; 
+   protected Question question; 
    protected String alternative; 
    protected String answer; 
   
-  
+  SessionQ () {
+      
+      
+      
+      
+  }
+   
+   
     protected String getUsername(){
         return username;
     }
     
-    protected String getQuestion(){
+    protected Question getQuestion(){
         return question;
     }
     protected String getAlternative(){
@@ -36,7 +35,7 @@ public class SessionQ {
         username = u;
     }
     
-    protected void setQuestion(String q){
+    protected void setQuestion(Question q){
         question = q;
     }
     
