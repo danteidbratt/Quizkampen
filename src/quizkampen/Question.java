@@ -14,4 +14,7 @@ public class Question {
 	public void setAnswerAlternatives(String answer, boolean isTrue) {
 		answers.add(new AnswerAlternative(answer, isTrue));
 	}
+        public void setQuestion(String question){
+            this.question = question;
+        }
 }
