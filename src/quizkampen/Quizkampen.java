@@ -14,5 +14,4 @@ public class Quizkampen {
 
         System.out.println("Claudia");
     }
-
 }
