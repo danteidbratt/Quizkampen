@@ -1,0 +1,20 @@
+What color has the ocean?
+Blue
+Green
+Red
+Black
+How many arm does a human have?
+2
+3
+5
+6
+What is Davids favorite food?
+Tacos
+Fish balls
+Pizza
+Burger
+What is your name?
+David
+Anna
+Claudia
+Dante
