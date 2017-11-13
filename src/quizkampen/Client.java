@@ -12,7 +12,9 @@ public class Client {
     public Client() {
         try {
             bridge = new Socket("127.0.0.1", 33333);
+            System.out.println("hej");
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
+                        
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
             session = (SessionQ)in.readObject();
             System.out.println(session.getQuestion().question);
