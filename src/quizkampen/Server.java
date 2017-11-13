@@ -29,6 +29,9 @@ public class Server {
 		
 		ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
 		ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
+		
+		user1Output.writeObject(session);
+		user2Output.writeObject(session);
 	}
 	public void readQuestionsFromFile() throws FileNotFoundException {
 		File file = new File("Questions_database.txt");
