@@ -1,6 +1,8 @@
 package quizkampen;
 
-public class AnswerAlternative {
+import java.io.Serializable;
+
+public class AnswerAlternative implements Serializable{
 	private String answer;
 	private boolean correctAnswer;
 	

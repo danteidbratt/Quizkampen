@@ -18,34 +18,34 @@ public class SessionQ implements Serializable{
   }
    
    
-    protected String getUsername(){
+    public String getUsername(){
         return username;
     }
     
-    protected Question getQuestion(){
+    public Question getQuestion(){
         return question;
     }
-    protected String getAlternative(){
+    public String getAlternative(){
         return alternative;  
     }
     
-    protected String getAnswer() {
+    public String getAnswer() {
         return answer; 
     }
     
-    protected void setUsername(String u){
+    public void setUsername(String u){
         username = u;
     }
     
-    protected void setQuestion(Question q){
+    public void setQuestion(Question q){
         question = q;
     }
     
-    protected void setAlternative(String a){
+    public void setAlternative(String a){
         alternative = a;
     }
     
-    protected void setAnswer(String s){
+    public void setAnswer(String s){
         answer = s;
     }
 }

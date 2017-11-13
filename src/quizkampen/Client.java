@@ -14,9 +14,11 @@ public class Client {
             bridge = new Socket("127.0.0.1", 33333);
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
+            
             session = (SessionQ)in.readObject();
             System.out.println(session.getQuestion().question);
             out.writeObject(session);
+            
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
