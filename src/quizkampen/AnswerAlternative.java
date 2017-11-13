@@ -1,8 +1,8 @@
 package quizkampen;
 
-import com.sun.jndi.ldap.Ber;
+import java.io.Serializable;
 
-public class AnswerAlternative {
+public class AnswerAlternative implements Serializable{
 	private String answer;
 	private boolean correctAnswer;
 	

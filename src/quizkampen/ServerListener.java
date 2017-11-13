@@ -11,7 +11,7 @@ public class ServerListener extends Thread {
     SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
-        serverSocket = new ServerSocket(port);
+        serverSocket = new ServerSocket(port);  
     }
 
     @Override
@@ -19,16 +19,7 @@ public class ServerListener extends Thread {
         while (true) {
             try {
                 Socket clientSock1 = serverSocket.accept();
-                
-                ObjectOutputStream user1Output = new ObjectOutputStream(clientSock1.getOutputStream());
-                ObjectInputStream user1Input = new ObjectInputStream(clientSock1.getInputStream());
-                user1Output.writeObject(session);
-                
                 Socket clientSock2 = serverSocket.accept();
-                ObjectOutputStream user2Output = new ObjectOutputStream(clientSock2.getOutputStream());
-                ObjectInputStream user2Input = new ObjectInputStream(clientSock2.getInputStream());
-                user2Output.writeObject(session);
-                
                 Server server = new Server(clientSock1, clientSock2);
 
             } catch (IOException ex) {
@@ -37,7 +28,8 @@ public class ServerListener extends Thread {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        ServerListener sl = new ServerListener();
+        sl.start();
     }
 }
