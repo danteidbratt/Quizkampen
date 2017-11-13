@@ -37,7 +37,7 @@ public class Server {
 		File file = new File("Questions_database.txt");
 		Scanner sc = new Scanner(file);
 		while (sc.hasNextLine()) {
-			tempQuestion = new Question(sc.nextLine());
+		tempQuestion = new Question(sc.nextLine());
             tempQuestion.setAnswerAlternatives(sc.nextLine(), true);
             tempQuestion.setAnswerAlternatives(sc.nextLine(), false);
             tempQuestion.setAnswerAlternatives(sc.nextLine(), false);
