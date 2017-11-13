@@ -39,5 +39,6 @@ public class ServerListener extends Thread {
 
     public static void main(String[] args) throws IOException {
         ServerListener sl = new ServerListener();
+        sl.start();
     }
 }

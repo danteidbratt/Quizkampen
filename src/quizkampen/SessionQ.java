@@ -1,7 +1,9 @@
 
 package quizkampen;
 
-public class SessionQ {
+import java.io.Serializable;
+
+public class SessionQ implements Serializable{
      //portnummer = 33333
    protected String username; 
    protected Question question; 
