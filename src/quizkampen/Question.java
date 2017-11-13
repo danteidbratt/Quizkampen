@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-	String question;
-	List<AnswerAlternative> answers = new ArrayList<>();
+	private String question;
+	private List<AnswerAlternative> answers = new ArrayList<>();
 	
 	public Question(String question) {
 		this.question = question;
