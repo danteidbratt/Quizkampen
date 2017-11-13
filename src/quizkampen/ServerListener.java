@@ -11,7 +11,7 @@ public class ServerListener extends Thread {
     SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
-        serverSocket = new ServerSocket(port);
+        serverSocket = new ServerSocket(port);  
     }
 
     @Override
@@ -37,7 +37,8 @@ public class ServerListener extends Thread {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        ServerListener sl = new ServerListener();
+        sl.start();
     }
 }

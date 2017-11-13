@@ -1,7 +1,5 @@
 package quizkampen;
 
-import com.sun.jndi.ldap.Ber;
-
 public class AnswerAlternative {
 	private String answer;
 	private boolean correctAnswer;
