@@ -8,6 +8,8 @@ public class Window extends JFrame implements ActionListener{
 	WelcomeScreen ws = new WelcomeScreen(this);
 	MenuScreen ms = new MenuScreen(this);
 	GameMenuScreen gms = new GameMenuScreen(this);
+	SettingsScreen ses = new SettingsScreen(this);
+	StatsScreen sts = new StatsScreen(this);
 	
 	public Window() {
 		add(ws);
@@ -21,18 +23,27 @@ public class Window extends JFrame implements ActionListener{
 		if(e.getSource() == ws.okButton) {
 			remove(ws);
 			add(ms);
-			revalidate();
-			repaint();
-		}
-		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton) {
-			System.exit(0);
 		}
 		else if(e.getSource() == ms.newGameButton) {
 			remove(ms);
-			add(ms);
-			revalidate();
-			repaint();
-			
+			add(gms);
 		}
+		else if(e.getSource() == ms.settingsButton) {
+			remove(ms);
+			add(ses);
+		}
+		else if(e.getSource() == ses.backButton) {
+			remove(ses);
+			add(ms);
+		}
+		else if(e.getSource() == gms.backButton) {
+			remove(gms);
+			add(ms);
+		}
+		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
+			System.exit(0);
+		}
+		revalidate();
+		repaint();
 	}
 }
