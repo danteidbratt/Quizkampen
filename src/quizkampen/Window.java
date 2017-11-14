@@ -27,7 +27,7 @@ public class Window extends JFrame implements ActionListener{
 		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton) {
 			System.exit(0);
 		}
-		else if(e.setSource() == ms.newGameButton) {
+		else if(e.getSource() == ms.newGameButton) {
 			remove(ms);
 			add(ms);
 			revalidate();
