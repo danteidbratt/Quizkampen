@@ -27,15 +27,15 @@ public class Database {
 
     public void createSubjectList() {
         science = createQuestionList("Database_Science.txt");
-        film = createQuestionList("Database_Film");
-        food = createQuestionList("Database_Food");
-        celebrities = createQuestionList("Database_Celebrities");
-        music = createQuestionList("Database_Music");
-        politics = createQuestionList("Database_Politics");
-        geography = createQuestionList("Database_Geography");
-        history = createQuestionList("Database_History");
-        it = createQuestionList("Database_IT");
-        sport = createQuestionList("Database_Sport");
+        film = createQuestionList("Database_Film.txt");
+        food = createQuestionList("Database_Food.txt");
+        celebrities = createQuestionList("Database_Celebrities.txt");
+        music = createQuestionList("Database_Music.txt");
+        politics = createQuestionList("Database_Politics.txt");
+        geography = createQuestionList("Database_Geography.txt");
+        history = createQuestionList("Database_History.txt");
+        it = createQuestionList("Database_IT.txt");
+        sport = createQuestionList("Database_Sport.txt");
 
         subjectList.add(science);
         subjectList.add(film);
