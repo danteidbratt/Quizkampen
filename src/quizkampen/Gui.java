@@ -4,12 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Gui extends JFrame {
+    private Client client;
 
     /* Skiss
      *  En frame -> två paneler.
      *  En för spelet och en för knapparna. */
-    Gui() {
-         /* Statistik */
+    Gui(Client client) {
+        this.client = client;
+        startGui();
+    }
+    
+    public void startGui() {
+        /* Statistik */
         JPanel gameStatsPanel = new JPanel();
 
         /* Stats
