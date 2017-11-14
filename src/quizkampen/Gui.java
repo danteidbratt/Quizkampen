@@ -9,8 +9,7 @@ public class Gui extends JFrame {
     /* Skiss
      *  En frame -> två paneler.
      *  En för spelet och en för knapparna. */
-    Gui(Client client) {
-        this.client = client;
+    Gui() {
         startGui();
     }
     
@@ -70,14 +69,15 @@ public class Gui extends JFrame {
         gamePanel.add(gameStatsPanel);
         gamePanel.add(questionPanel);
         gamePanel.add(answerPanel);
+        add(gamePanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.LINE_END);
 
         /* Frame */
         setSize(400,400);
+        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizkampen");
         setLocationRelativeTo(null);
 
-        add(gamePanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.LINE_END);
     }
 }
