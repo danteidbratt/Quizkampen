@@ -1,14 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- *  och öppna templates :)
- */
 package quizkampen;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
-/**
- *
- * @author Anna
- */
-public class LobbyScreen {
+public class LobbyScreen extends JPanel{
+    private JLabel opponentIs = new JLabel("Your opponent is...");
+    JButton subjectOneButton = new JButton("Subject 1");
+    JButton subjectTwoButton = new JButton("Subject 2");
+    JButton subjectThreeButton = new JButton("Subject 3");
+    JButton startButton = new JButton("Start");
     
+    public LobbyScreen(ActionListener al) {
+		setPanel();
+		setActionListener(al);
+    }
+	public void setPanel() {
+        setLayout(new BorderLayout());
+        add(opponentIs, BorderLayout.NORTH);
+        add(subjectOneButton, BorderLayout.WEST);
+        add(subjectTwoButton, BorderLayout.CENTER);
+        add(subjectThreeButton, BorderLayout.EAST);
+        add(startButton, BorderLayout.SOUTH);	
+	}
+	
+	public void setActionListener(ActionListener al) {
+		subjectOneButton.addActionListener(al);
+		subjectTwoButton.addActionListener(al);
+		subjectThreeButton.addActionListener(al);
+	}
 }
