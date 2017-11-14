@@ -22,40 +22,40 @@ public class Server {
     private Question tempQuestion;
     private SessionQ session;
 
-    public Server(Socket clientSocket1, Socket clientSocket2) {
+    public Server(Socket clientSocket1, Socket clientSocket2) throws IOException {
         this.clienSocket1 = clientSocket1;
         this.clienSocket2 = clientSocket2;
+        readQuestionsFromFile();
+        session = new SessionQ();
+        session.setQuestion(questions.get(0));
 
-        try(ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
-            ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
-            ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
-            ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());) {
+        ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
+        ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 
-            readQuestionsFromFile();
-            session = new SessionQ();
-            session.setQuestion(questions.get(1));
-            
-            user1Output.writeObject(session);
-            session = (SessionQ) user1Input.readObject();
-            user2Output.writeObject(session);
-            session = (SessionQ) user2Input.readObject();
+        ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
+        ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
 
-        } catch (ClassNotFoundException | IOException e) {
-            System.out.println(e.getMessage());
-        }
+        user1Output.writeObject(session);
+        user2Output.writeObject(session);
     }
 
-    public void readQuestionsFromFile() throws FileNotFoundException {
-        File file = new File("Questions_database.txt");
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            tempQuestion = new Question(sc.nextLine());
-            tempQuestion.setAnswerAlternatives(sc.nextLine(), true);
-            tempQuestion.setAnswerAlternatives(sc.nextLine(), false);
-            tempQuestion.setAnswerAlternatives(sc.nextLine(), false);
-            tempQuestion.setAnswerAlternatives(sc.nextLine(), false);
-            questions.add(tempQuestion);
+    public void readQuestionsFromFile() throws FileNotFoundException, IOException {
+        BufferedReader in = new BufferedReader(
+                new FileReader("Questions_database.txt"));
+        for (int i = 0; i < 1; i++) {
+            try {
+                tempQuestion = new Question(in.readLine());
+                tempQuestion.setAnswerAlternatives(in.readLine(), true);
+                tempQuestion.setAnswerAlternatives(in.readLine(), false);
+                tempQuestion.setAnswerAlternatives(in.readLine(), false);
+                tempQuestion.setAnswerAlternatives(in.readLine(), false);
+                questions.add(tempQuestion);
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
         }
-        sc.close();
+        in.close();
     }
 }
