@@ -3,6 +3,9 @@ package quizkampen;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+Hämta JPanel med metoden getGameScreen()
+ */
 public class GameScreen {
     private JPanel gameScreen = new JPanel();
 
