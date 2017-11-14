@@ -1,20 +1,31 @@
 package quizkampen;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LobbyScreen extends JPanel{
-    protected JLabel opponentIs = new JLabel("Your opponent is...");
-    protected JButton subjectOne= new JButton("Subject 1");
-    protected JButton subjectTwo = new JButton("Subject 2");
-    protected JButton subjectThree = new JButton("Subject 3");
-    protected JButton start = new JButton("Start");
+    private JLabel opponentIs = new JLabel("Your opponent is...");
+    JButton subjectOneButton = new JButton("Subject 1");
+    JButton subjectTwoButton = new JButton("Subject 2");
+    JButton subjectThreeButton = new JButton("Subject 3");
+    JButton startButton = new JButton("Start");
     
-    public LobbyScreen(){
-        this.setLayout(new BorderLayout());
-        this.add(opponentIs, BorderLayout.NORTH);
-        this.add(subjectOne, BorderLayout.WEST);
-        this.add(subjectTwo, BorderLayout.CENTER);
-        this.add(subjectThree, BorderLayout.EAST);
-        this.add(start, BorderLayout.SOUTH);
+    public LobbyScreen(ActionListener al) {
+		setPanel();
+		setActionListener(al);
     }
+	public void setPanel() {
+        setLayout(new BorderLayout());
+        add(opponentIs, BorderLayout.NORTH);
+        add(subjectOneButton, BorderLayout.WEST);
+        add(subjectTwoButton, BorderLayout.CENTER);
+        add(subjectThreeButton, BorderLayout.EAST);
+        add(startButton, BorderLayout.SOUTH);	
+	}
+	
+	public void setActionListener(ActionListener al) {
+		subjectOneButton.addActionListener(al);
+		subjectTwoButton.addActionListener(al);
+		subjectThreeButton.addActionListener(al);
+	}
 }

@@ -10,12 +10,15 @@ public class Window extends JFrame implements ActionListener{
 	GameMenuScreen gms = new GameMenuScreen(this);
 	SettingsScreen ses = new SettingsScreen(this);
 	StatsScreen sts = new StatsScreen(this);
+	LobbyScreen ls = new LobbyScreen(this);
+	GameScreen gs = new GameScreen(this);
 	
 	public Window() {
 		add(ws);
 		setSize(800, 800);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	@Override
@@ -27,6 +30,19 @@ public class Window extends JFrame implements ActionListener{
 		else if(e.getSource() == ms.newGameButton) {
 			remove(ms);
 			add(gms);
+		}
+		else if(e.getSource() == gms.randomPlayerButton) {
+			remove(gms);
+			add(ls);
+		}
+		else if(e.getSource() == ls.subjectOneButton ||
+				e.getSource() == ls.subjectTwoButton ||
+				e.getSource() == ls.subjectThreeButton) {
+			ls.startButton.addActionListener(this);
+		}
+		else if(e.getSource() == ls.startButton) {
+			remove(ls);
+			add(gs);
 		}
 		else if(e.getSource() == ms.settingsButton) {
 			remove(ms);

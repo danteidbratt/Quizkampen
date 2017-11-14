@@ -1,12 +1,11 @@
 package quizkampen;
 
+import java.awt.GridLayout;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionListener;
 
-/*
-Hämta JPanel med metoden getGameScreen()
- */
-public class GameScreen {
+
+public class GameScreen extends JPanel{
     JPanel gameStatsPanel = new JPanel();
     JPanel gameScreen = new JPanel();
 	JPanel questionPanel = new JPanel();
@@ -15,18 +14,24 @@ public class GameScreen {
     JTextField points = new JTextField("Poäng: 1");
     JTextField questionNumber = new JTextField("Fråga: 1/2");
     JTextField rond = new JTextField("Rond: 2/2");
-    JButton question = new JButton("Vilken huvudstad är störst i Norden?");
-	JButton answer1 = new JButton("1. Oslo");
-	JButton answer2 = new JButton("2. Stockholm");
-	JButton answer3 = new JButton("3. Helsingfors");
-	JButton answer4 = new JButton("4. Göteborg");
+    JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
+	JButton answer1Button = new JButton("1. Oslo");
+	JButton answer2Button = new JButton("2. Stockholm");
+	JButton answer3Button = new JButton("3. Helsingfors");
+	JButton answer4Button = new JButton("4. Göteborg");
 
-    public GameScreen() {
-        questionPanel.add(question);
-        answerPanel.add(answer1);
-        answerPanel.add(answer2);
-        answerPanel.add(answer3);
-        answerPanel.add(answer4);
+    public GameScreen(ActionListener al) {
+		setPanel();
+		setActionListener(al);
+    }
+	
+	public void setPanel() {
+		setLayout(new GridLayout(3, 1));
+        questionPanel.add(questionButton);
+        answerPanel.add(answer1Button);
+        answerPanel.add(answer2Button);
+        answerPanel.add(answer3Button);
+        answerPanel.add(answer4Button);
 
         gameStatsPanel.add(points);
         gameStatsPanel.add(questionNumber);
@@ -41,5 +46,14 @@ public class GameScreen {
 		points.setEditable(false);
         rond.setEditable(false);
 		questionNumber.setEditable(false);
-    }
+		add(gameScreen);
+	}
+	
+	public void setActionListener(ActionListener al) {
+		questionButton.addActionListener(al);
+		answer1Button.addActionListener(al);
+		answer2Button.addActionListener(al);
+		answer3Button.addActionListener(al);
+		answer4Button.addActionListener(al);
+	}
 }
