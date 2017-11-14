@@ -3,17 +3,10 @@ package quizkampen;
 import javax.swing.*;
 import java.awt.*;
 
-public class Gui extends JFrame {
-    private Client client;
+public class GameScreen {
+    private JPanel gameScreen = new JPanel();
 
-    /* Skiss
-     *  En frame -> två paneler.
-     *  En för spelet och en för knapparna. */
-    Gui() {
-        startGui();
-    }
-    
-    public void startGui() {
+    GameScreen() {
         /* Statistik */
         JPanel gameStatsPanel = new JPanel();
 
@@ -28,10 +21,6 @@ public class Gui extends JFrame {
         JTextField rond = new JTextField("Rond: 2/2");
         rond.setEditable(false);
 
-        /* Buttons */
-        JButton forfeit = new JButton("Ge upp");
-        JButton findOpponent = new JButton("Hitta motståndare");
-
         /* TODO hämta data */
         JButton question = new JButton("Vilken huvudstad är störst i Norden?");
 
@@ -39,7 +28,6 @@ public class Gui extends JFrame {
         JButton answer2 = new JButton("2. Stockholm");
         JButton answer3 = new JButton("3. Helsingfors");
         JButton answer4 = new JButton("4. Göteborg");
-
 
         JPanel questionPanel = new JPanel();
         questionPanel.add(question);
@@ -54,30 +42,18 @@ public class Gui extends JFrame {
         gameStatsPanel.add(questionNumber);
         gameStatsPanel.add(rond);
 
-         /* Button panel */
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+        /* Top panel */
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.PAGE_AXIS));
+        topPanel.add(gameStatsPanel);
+        topPanel.add(questionPanel);
 
-        buttonPanel.add(forfeit);
-        buttonPanel.add(findOpponent);
+        gameScreen.setLayout(new BoxLayout(gameScreen, BoxLayout.PAGE_AXIS));
+        gameScreen.add(topPanel);
+        gameScreen.add(answerPanel);
+    }
 
-        /* Game panel */
-        JPanel gamePanel = new JPanel();
-        gamePanel.setLayout(new BoxLayout(gamePanel, BoxLayout.PAGE_AXIS));
-
-        /* Gamepanel */
-        gamePanel.add(gameStatsPanel);
-        gamePanel.add(questionPanel);
-        gamePanel.add(answerPanel);
-        add(gamePanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.LINE_END);
-
-        /* Frame */
-        setSize(400,400);
-        setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quizkampen");
-        setLocationRelativeTo(null);
-
+    public JPanel getGameScreen() {
+        return gameScreen;
     }
 }
