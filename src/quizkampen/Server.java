@@ -22,44 +22,6 @@ public class Server {
     private Question tempQuestion;
     private SessionQ session;
 
-<<<<<<< HEAD
-    public Server(Socket clientSocket1, Socket clientSocket2) throws IOException {
-        this.clienSocket1 = clientSocket1;
-        this.clienSocket2 = clientSocket2;
-        readQuestionsFromFile();
-        session = new SessionQ();
-        session.setQuestion(questions.get(0));
-
-        ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
-        ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
-
-        ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
-        ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
-
-        user1Output.writeObject(session);
-        user2Output.writeObject(session);
-    }
-
-    public void readQuestionsFromFile() throws FileNotFoundException {
-        BufferedReader in = new BufferedReader(
-                new FileReader("Questions_database.txt"));
-        for (int i = 0; i < 5; i++) {
-            try {
-                tempQuestion = new Question(in.readLine());
-                tempQuestion.setAnswerAlternatives(in.readLine(), true);
-                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-                questions.add(tempQuestion);
-                in.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Server.class.getName()).
-                        log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-}
-=======
     public Server(Socket clientSocket1, Socket clientSocket2) {
         this.clienSocket1 = clientSocket1;
         this.clienSocket2 = clientSocket2;
@@ -97,4 +59,3 @@ public class Server {
         sc.close();
     }
 }
->>>>>>> master
