@@ -32,12 +32,20 @@ public class Window extends JFrame implements ActionListener{
 			remove(ms);
 			add(ses);
 		}
+		else if(e.getSource() == gms.backButton) {
+			remove(gms);
+			add(ms);
+		}
 		else if(e.getSource() == ses.backButton) {
 			remove(ses);
 			add(ms);
 		}
-		else if(e.getSource() == gms.backButton) {
-			remove(gms);
+		else if(e.getSource() == ms.statsButton) {
+			remove(ms);
+			add(sts);
+		}
+		else if(e.getSource() == sts.backButton) {
+			remove(sts);
 			add(ms);
 		}
 		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
