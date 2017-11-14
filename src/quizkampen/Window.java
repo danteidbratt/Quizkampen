@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener{
 	WelcomeScreen ws = new WelcomeScreen(this);
+	MenuScreen ms = new MenuScreen(this);
+	GameMenuScreen gms = new GameMenuScreen(this);
 	
 	public Window() {
 		add(ws);
@@ -16,6 +18,21 @@ public class Window extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if(e.getSource() == ws.okButton) {
+			remove(ws);
+			add(ms);
+			revalidate();
+			repaint();
+		}
+		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton) {
+			System.exit(0);
+		}
+		else if(e.setSource() == ms.newGameButton) {
+			remove(ms);
+			add(ms);
+			revalidate();
+			repaint();
+			
+		}
 	}
 }

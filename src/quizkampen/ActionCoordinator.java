@@ -7,7 +7,7 @@ public class ActionCoordinator implements ActionListener{
 	WelcomeScreen a = new WelcomeScreen();
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == a.ok) {
+		if(e.getSource() == a.okButton) {
 			
 		}
 	}
