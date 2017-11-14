@@ -1,4 +1,4 @@
-package quizkampen
+package quizkampen;
 
 import javax.swing.*;
 import java.awt.*;
