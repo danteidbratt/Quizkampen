@@ -14,11 +14,11 @@ public class SettingsScreen extends JPanel{
 	private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
-	private final JRadioButton blue = new JRadioButton("Blue", true);
-	private final JRadioButton red = new JRadioButton("Red", false);
-	private final JRadioButton yellow = new JRadioButton("Yellow", false);
+	JRadioButton blue = new JRadioButton("Blue", true);
+	JRadioButton red = new JRadioButton("Red", false);
+	JRadioButton green = new JRadioButton("Green", false);
 	ButtonGroup buttonGroup = new ButtonGroup();
-    JButton backButton = new JButton("Back"); 
+    JButton backButton = new JButton("Back");
     
     Color backgroundColor;
     Font buttonFont;
@@ -47,17 +47,17 @@ public class SettingsScreen extends JPanel{
 		backButton.setFont(buttonFont);
 		blue.setFont(buttonFont);
 		red.setFont(buttonFont);
-		yellow.setFont(buttonFont);
+		green.setFont(buttonFont);
 		blue.setOpaque(false);
 		red.setOpaque(false);
-		yellow.setOpaque(false);
+		green.setOpaque(false);
 		centerPanel.add(blue);
 		centerPanel.add(red);
-		centerPanel.add(yellow);
+		centerPanel.add(green);
 		centerPanel.add(backButton);
 		buttonGroup.add(blue);
 		buttonGroup.add(red);
-		buttonGroup.add(yellow);
+		buttonGroup.add(green);
 		
         add(logo, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
@@ -69,7 +69,7 @@ public class SettingsScreen extends JPanel{
     public void setActionListener(ActionListener al){
 		blue.addActionListener(al);
 		red.addActionListener(al);
-		yellow.addActionListener(al);
+		green.addActionListener(al);
         backButton.addActionListener(al);
     }
 }

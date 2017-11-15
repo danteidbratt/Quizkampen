@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener{
         private Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
-        private Color backgroundColor = new Color(0,0,255);
+        private Color backgroundColor;
         
 	WelcomeScreen ws = new WelcomeScreen(this, buttonFont, backgroundColor);
 	MenuScreen ms = new MenuScreen(this, buttonFont, backgroundColor);
@@ -19,6 +19,7 @@ public class Window extends JFrame implements ActionListener{
 	GameScreen gs = new GameScreen(this, buttonFont, backgroundColor);
 	
 	public Window() {
+		backgroundColor = new Color(0,0,255);
 		setTitle("QuizFights");
 		add(ws);
 		setSize(500, 809);
@@ -77,6 +78,15 @@ public class Window extends JFrame implements ActionListener{
 		else if(e.getSource() == sts.backButton) {
 			remove(sts);
 			add(ms);
+		}
+		else if(ses.blue.isSelected()) {
+			backgroundColor = new Color(0,0,255);
+		}
+		else if(ses.red.isSelected()) {
+			backgroundColor = new Color(255,0,0);
+		}
+		else if(ses.green.isSelected()) {
+			backgroundColor = new Color(0,255,0);
 		}
 		else if(e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
 			System.exit(0);
