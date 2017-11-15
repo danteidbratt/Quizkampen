@@ -22,7 +22,7 @@ public class Database {
     protected List<Question> history;
     protected List<Question> it;
     protected List<Question> sport;
-    protected List<List> subjectList;
+    protected List<List<Question>> subjectList = new ArrayList<List<Question>>();
     protected SessionQ sessionQ;
 
     public void createSubjectList() {
@@ -49,32 +49,26 @@ public class Database {
         subjectList.add(sport);
     }
 
-    public SessionQ loadThreeQuestions(SessionQ session) {
+    public void loadThreeSubjects(SessionQ session) {
         sessionQ = session;
+        createSubjectList();
 
-        
-       // KOMMENTERA BORT NÄR TEXTFILERNA ÄR FYLLDA MED FRÅGOR // ANNA & CLAUDIA
-//        Random rn = new Random();
-//
-//        int one = rn.nextInt(subjectList.size() - 1);
-//        int two;  
-//        while ((two = rn.nextInt(subjectList.size() - 1)) == one) {
-//            two = rn.nextInt(subjectList.size() - 1);
-//        }      
-//        int three;
-//        while ((three= rn.nextInt(subjectList.size() - 1)) == two 
-//                || (three = rn.nextInt(subjectList.size() - 1)) == one) {
-//            three = rn.nextInt(subjectList.size() - 1);
-//        }
-//
-//        sessionQ.setProposedSubjectOne(subjectList.get(one));
-//        sessionQ.setProposedSubjectOne(subjectList.get(two));
-//        sessionQ.setProposedSubjectThree(subjectList.get(three));
+        Random rn = new Random();
 
-        sessionQ.setProposedSubjectOne(subjectList.get(0));
-        sessionQ.setProposedSubjectTwo(subjectList.get(1));
-        sessionQ.setProposedSubjectThree(subjectList.get(2));
-        return sessionQ;
+        int one = rn.nextInt(subjectList.size() - 1);
+        int two;
+        while ((two = rn.nextInt(subjectList.size() - 1)) == one) {
+            two = rn.nextInt(subjectList.size() - 1);
+        }
+        int three;
+        while ((three = rn.nextInt(subjectList.size() - 1)) == two
+                || (three = rn.nextInt(subjectList.size() - 1)) == one) {
+            three = rn.nextInt(subjectList.size() - 1);
+        }
+
+        sessionQ.setProposedSubjectOne(subjectList.get(one));
+        sessionQ.setProposedSubjectOne(subjectList.get(two));
+        sessionQ.setProposedSubjectThree(subjectList.get(three));
 
     }
 

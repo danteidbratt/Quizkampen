@@ -1,7 +1,6 @@
 package quizkampen;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,10 +24,9 @@ public class Server {
     public Server(Socket clientSocket1, Socket clientSocket2) throws IOException {
         this.clienSocket1 = clientSocket1;
         this.clienSocket2 = clientSocket2;
-//        readQuestionsFromFile();
         session = new SessionQ();
-        session = database.loadThreeQuestions(session);
-//        session.setQuestion(questions.get(0));
+
+        database.loadThreeSubjects(session);
 
         ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
         ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -41,23 +38,4 @@ public class Server {
         user2Output.writeObject(session);
     }
 
-//    public void readQuestionsFromFile() throws FileNotFoundException, IOException {
-//        BufferedReader in = new BufferedReader(
-//                new FileReader("Questions_database.txt"));
-//        for (int i = 0; i < 1; i++) {
-//            try {
-//                tempQuestion = new Question(in.readLine());
-//                tempQuestion.setAnswerAlternatives(in.readLine(), true);
-//                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-//                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-//                tempQuestion.setAnswerAlternatives(in.readLine(), false);
-//                questions.add(tempQuestion);
-//                in.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Server.class.getName()).
-//                        log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        in.close();
-//    }
 }
