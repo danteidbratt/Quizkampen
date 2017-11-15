@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class SettingsScreen extends JPanel{
-	JLabel loga = new JLabel("Settings");
+	private final JLabel loga = new JLabel("Settings");
     JButton backButton = new JButton("Back"); 
     
     public SettingsScreen(ActionListener al) {
