@@ -1,17 +1,28 @@
 
 package quizkampen;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MenuScreen extends JPanel{
-    
-    JLabel logo = new JLabel("QuizFigths");
+    private final JLabel logo = new JLabel("QuizFigths");
+    private final JLabel sideSpaceWest = new JLabel("");
+	private final JLabel sideSpaceEast = new JLabel("");
+	private final JLabel bottomSpace = new JLabel("");
+	private final JPanel centerPanel = new JPanel();
+	
     JButton newGameButton = new JButton("New Game");
     JButton settingsButton = new JButton("Settings");
     JButton statsButton = new JButton("Stats");
+	JButton logoutButton = new JButton("Logout");
     JButton exitButton = new JButton("Exit");
+	
+	private final Color backgroundColor = new Color(0,0,255);
     
     public MenuScreen(ActionListener al){
         setActionListener(al);
@@ -19,12 +30,30 @@ public class MenuScreen extends JPanel{
     }
     
     private void setPanel(){
-        setLayout(new GridLayout(5, 1));
-        add(logo);
-        add(newGameButton);
-        add(settingsButton);
-        add(statsButton);
-        add(exitButton);
+        setLayout(new BorderLayout());
+		setBackground(backgroundColor);
+		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		logo.setPreferredSize(new Dimension(0, 200));
+		logo.setForeground(Color.YELLOW);
+		logo.setFont(new Font("SansSarif", 2, 80));
+		
+		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+		sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+		bottomSpace.setPreferredSize(new Dimension(0, 120));
+		
+		centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
+		centerPanel.setBackground(backgroundColor);
+        centerPanel.add(newGameButton);
+        centerPanel.add(settingsButton);
+        centerPanel.add(statsButton);
+        centerPanel.add(logoutButton);
+        centerPanel.add(exitButton);
+		
+        add(logo, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+		add(sideSpaceWest, BorderLayout.WEST);
+		add(sideSpaceEast, BorderLayout.EAST);
+		add(bottomSpace, BorderLayout.SOUTH);
     }
     
     private void setActionListener(ActionListener al){

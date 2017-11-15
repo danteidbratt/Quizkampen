@@ -14,8 +14,9 @@ public class Window extends JFrame implements ActionListener{
 	GameScreen gs = new GameScreen(this);
 	
 	public Window() {
+		setTitle("QuizFights");
 		add(ws);
-		setSize(800, 800);
+		setSize(500, 809);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

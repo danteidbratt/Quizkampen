@@ -1,15 +1,32 @@
 package quizkampen;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.*;
 
 public class WelcomeScreen extends JPanel{
+	private final JPanel loginPanel = new JPanel();
+	private final JPanel centerPanel = new JPanel();
+	private final JPanel exitPanel = new JPanel();
+	
 	private final JLabel logo = new JLabel("QuizFights");
-	private final JTextField userNameInput = new JTextField("Enter username to start");
+	private final JLabel loginText = new JLabel("Login");
+	private final JLabel centerSpace = new JLabel("");
+	private final JLabel sideSpaceWest = new JLabel("");
+	private final JLabel sideSpaceEast = new JLabel("");
+	private final JLabel bottomSpace = new JLabel("");
+	
+	JTextField userNameInput = new JTextField("Enter username to start");
 	JButton okButton = new JButton("OK");
 	JButton exitButton = new JButton("EXIT");
-//	private ActionCoordinator ac = new ActionCoordinator();
+	
+	private final Color backgroundColor = new Color(0,0,255);
 	
 	public WelcomeScreen(ActionListener al) {
 		setPanel();
@@ -17,12 +34,52 @@ public class WelcomeScreen extends JPanel{
 	}
 	
 	public void setPanel() {
-		setLayout(new GridLayout(5, 1));
+		setLayout(new BorderLayout());
+		setBackground(backgroundColor);
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		add(logo);
-		add(userNameInput);
-		add(okButton);
-		add(exitButton);
+		logo.setPreferredSize(new Dimension(0, 200));
+		logo.setForeground(Color.YELLOW);
+		logo.setFont(new Font("SansSarif", 2, 80));
+		
+		
+		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+		sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+		bottomSpace.setPreferredSize(new Dimension(0, 200));
+		
+		loginPanel.setLayout(new GridLayout(3, 1, 0, 5));
+		loginPanel.setBackground(backgroundColor);
+		loginText.setHorizontalAlignment(SwingConstants.CENTER);
+		loginText.setFont(new Font("SansSerif", 3, 30));
+		loginText.setForeground(Color.GREEN);
+		loginPanel.add(loginText);
+		loginPanel.add(userNameInput);
+		loginPanel.add(okButton);
+		
+		centerPanel.setLayout(new GridLayout(3, 1));
+		centerPanel.setBackground(backgroundColor);
+		centerPanel.add(loginPanel);
+		centerPanel.add(centerSpace);
+		centerPanel.add(exitPanel);
+		
+		exitPanel.setLayout(new GridLayout(3, 1));
+		exitPanel.setBackground(backgroundColor);
+		exitPanel.add(exitButton);
+		
+		
+		add(logo, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+		add(sideSpaceWest, BorderLayout.WEST);
+		add(sideSpaceEast, BorderLayout.EAST);
+		add(bottomSpace, BorderLayout.SOUTH);
+		
+		FocusAdapter a = new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				userNameInput.setText("");
+			}
+		};
+		userNameInput.addFocusListener(a);
+		okButton.requestFocusInWindow();
 	}
 	public void setActionListener(ActionListener al) {
 		okButton.addActionListener(al);
