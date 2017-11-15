@@ -11,10 +11,10 @@ import javax.swing.*;
 
 public class MenuScreen extends JPanel{
     private final JLabel logo = new JLabel("QuizFigths");
+    private final JPanel centerPanel = new JPanel();
     private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
-    private final JPanel centerPanel = new JPanel();
 	
     JButton newGameButton = new JButton("New Game");
     JButton settingsButton = new JButton("Settings");
@@ -27,8 +27,8 @@ public class MenuScreen extends JPanel{
     
     
     public MenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
-                this.backgroundColor = backgroundColor;
-                this.buttonFont = buttonFont;
+		this.backgroundColor = backgroundColor;
+		this.buttonFont = buttonFont;
 		setPanel();
 		setActionListener(al);
 	}
