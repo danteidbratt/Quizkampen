@@ -22,20 +22,20 @@ public class Database {
     protected List<Question> history;
     protected List<Question> it;
     protected List<Question> sport;
-    protected List<List> subjectList;
+    protected List<List<Question>> subjectList = new ArrayList<List<Question>>();
     protected SessionQ sessionQ;
 
     public void createSubjectList() {
         science = createQuestionList("Database_Science.txt");
-        film = createQuestionList("Database_Film");
-        food = createQuestionList("Database_Food");
-        celebrities = createQuestionList("Database_Celebrities");
-        music = createQuestionList("Database_Music");
-        politics = createQuestionList("Database_Politics");
-        geography = createQuestionList("Database_Geography");
-        history = createQuestionList("Database_History");
-        it = createQuestionList("Database_IT");
-        sport = createQuestionList("Database_Sport");
+        film = createQuestionList("Database_Film.txt");
+        food = createQuestionList("Database_Food.txt");
+        celebrities = createQuestionList("Database_Celebrities.txt");
+        music = createQuestionList("Database_Music.txt");
+        politics = createQuestionList("Database_Politics.txt");
+        geography = createQuestionList("Database_Geography.txt");
+        history = createQuestionList("Database_History.txt");
+        it = createQuestionList("Database_IT.txt");
+        sport = createQuestionList("Database_Sport.txt");
 
         subjectList.add(science);
         subjectList.add(film);
@@ -49,32 +49,26 @@ public class Database {
         subjectList.add(sport);
     }
 
-    public SessionQ loadThreeQuestions(SessionQ session) {
+    public void loadThreeSubjects(SessionQ session) {
         sessionQ = session;
+        createSubjectList();
 
-        
-       // KOMMENTERA BORT NÄR TEXTFILERNA ÄR FYLLDA MED FRÅGOR // ANNA & CLAUDIA
-//        Random rn = new Random();
-//
-//        int one = rn.nextInt(subjectList.size() - 1);
-//        int two;  
-//        while ((two = rn.nextInt(subjectList.size() - 1)) == one) {
-//            two = rn.nextInt(subjectList.size() - 1);
-//        }      
-//        int three;
-//        while ((three= rn.nextInt(subjectList.size() - 1)) == two 
-//                || (three = rn.nextInt(subjectList.size() - 1)) == one) {
-//            three = rn.nextInt(subjectList.size() - 1);
-//        }
-//
-//        sessionQ.setProposedSubjectOne(subjectList.get(one));
-//        sessionQ.setProposedSubjectOne(subjectList.get(two));
-//        sessionQ.setProposedSubjectThree(subjectList.get(three));
+        Random rn = new Random();
 
-        sessionQ.setProposedSubjectOne(subjectList.get(0));
-        sessionQ.setProposedSubjectTwo(subjectList.get(1));
-        sessionQ.setProposedSubjectThree(subjectList.get(2));
-        return sessionQ;
+        int one = rn.nextInt(subjectList.size() - 1);
+        int two;
+        while ((two = rn.nextInt(subjectList.size() - 1)) == one) {
+            two = rn.nextInt(subjectList.size() - 1);
+        }
+        int three;
+        while ((three = rn.nextInt(subjectList.size() - 1)) == two
+                || (three = rn.nextInt(subjectList.size() - 1)) == one) {
+            three = rn.nextInt(subjectList.size() - 1);
+        }
+
+        sessionQ.setProposedSubjectOne(subjectList.get(one));
+        sessionQ.setProposedSubjectOne(subjectList.get(two));
+        sessionQ.setProposedSubjectThree(subjectList.get(three));
 
     }
 
