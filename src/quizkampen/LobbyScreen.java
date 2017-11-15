@@ -4,11 +4,12 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LobbyScreen extends JPanel{
-    private JLabel opponentIs = new JLabel("Your opponent is...");
+    private JLabel nextOpponentIs = new JLabel("Your opponent is...");
     JButton subjectOneButton = new JButton("Subject 1");
     JButton subjectTwoButton = new JButton("Subject 2");
     JButton subjectThreeButton = new JButton("Subject 3");
     JButton startButton = new JButton("Start");
+    JButton backButton = new JButton("Back");
     
     public LobbyScreen(ActionListener al) {
 		setPanel();
@@ -16,7 +17,7 @@ public class LobbyScreen extends JPanel{
     }
 	public void setPanel() {
         setLayout(new BorderLayout());
-        add(opponentIs, BorderLayout.NORTH);
+        add(nextOpponentIs, BorderLayout.NORTH);
         add(subjectOneButton, BorderLayout.WEST);
         add(subjectTwoButton, BorderLayout.CENTER);
         add(subjectThreeButton, BorderLayout.EAST);
