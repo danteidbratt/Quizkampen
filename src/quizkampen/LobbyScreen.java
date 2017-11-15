@@ -18,7 +18,6 @@ public class LobbyScreen extends JPanel{
     JPanel opponentPanel = new JPanel();
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
-    JLabel topBottomSpace2 = new JLabel("");
     JLabel nextOpponentIs = new JLabel("Your opponent is...");
     JLabel opponentLabel = new JLabel("God");
     
@@ -61,11 +60,8 @@ public class LobbyScreen extends JPanel{
             opponentLabel.setFont(new Font("SansSerif", 3, 30));
             topBottomSpace1.setBackground(backgroundColor);
             topBottomSpace1.setOpaque(true);
-//            topBottomSpace2.setBackground(backgroundColor);
-//            topBottomSpace2.setOpaque(true);
             topBottomPanel.add(opponentLabel);
             topBottomPanel.add(topBottomSpace1);
-//            topBottomPanel.add(topBottomSpace2);
             nextOpponentIs.setFont(new Font("SansSerif", 1, 15));
             nextOpponentIs.setForeground(Color.GREEN);
             
