@@ -2,12 +2,20 @@ package quizkampen;
 
 public class SessionHandler {
     private SessionQ sessionQ;
-    protected States state = States.CONNECTED;
-    protected enum States {CONNECTED, WAITINGFOROPPONENTTOCONNECT,
+    private States state;
+    private enum States {CONNECTED, WAITINGFOROPPONENTTOCONNECT,
         PLAYINGGAME, WAITINGFORSERVER, IDLE
     }
 
-    public void checkStates() {
+    public SessionHandler(SessionQ sessionQ) {
+        this.sessionQ = sessionQ;
+    }
+
+    public void setState(States state) {
+        this.state = state;
+    }
+
+    public void checkState() {
         switch(this.state) {
             case CONNECTED:
 
@@ -31,22 +39,8 @@ public class SessionHandler {
         }
     }
 
-
-
-
-
-
-
-    public SessionHandler(SessionQ sessionQ) {
-        this.sessionQ = sessionQ;
-    }
-
-    public void setSessionQ(SessionQ sessionQ) {
-
-    }
-
     public static void main(String[] args) {
-        //SessionHandler sessionHandler = new SessionHandler();
+        
     }
 }
 
