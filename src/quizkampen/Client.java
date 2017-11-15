@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    
+    SessionHandler sessionHandler;
     Socket bridge;
     SessionQ session;
 
@@ -19,6 +19,8 @@ public class Client {
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
             
             session = (SessionQ)in.readObject();
+            sessionHandler = new SessionHandler(session);
+
             System.out.println(session.proposedSubjectOne.get(0).question);
             
 //            System.out.println(session.getQuestion().question);
