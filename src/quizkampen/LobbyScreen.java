@@ -28,5 +28,6 @@ public class LobbyScreen extends JPanel{
 		subjectOneButton.addActionListener(al);
 		subjectTwoButton.addActionListener(al);
 		subjectThreeButton.addActionListener(al);
+		backButton.addActionListener(al);
 	}
 }
