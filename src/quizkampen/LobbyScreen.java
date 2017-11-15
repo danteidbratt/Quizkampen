@@ -42,8 +42,6 @@ public class LobbyScreen extends JPanel{
     public LobbyScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
-        setPanel();
-        setActionListener(al);
     }
 	public void setPanel() {
             setLayout(new BorderLayout());

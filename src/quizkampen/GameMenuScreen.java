@@ -22,13 +22,11 @@ public class GameMenuScreen extends JPanel {
     JButton exitButton = new JButton("Exit");
 	
 	private Color backgroundColor = new Color(0,0,255);
-        private Font buttonFont;
+        private final Font buttonFont;
     
     public GameMenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
                 this.backgroundColor = backgroundColor;
                 this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
     }
     
     public void setPanel(){

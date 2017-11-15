@@ -6,34 +6,32 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+public class GameScreen extends JPanel {
 
-public class GameScreen extends JPanel{
     JPanel gameStatsPanel = new JPanel();
     JPanel gameScreen = new JPanel();
-	JPanel questionPanel = new JPanel();
-	JPanel answerPanel = new JPanel();
-	JPanel topPanel = new JPanel();
+    JPanel questionPanel = new JPanel();
+    JPanel answerPanel = new JPanel();
+    JPanel topPanel = new JPanel();
     JTextField points = new JTextField("Poäng: 1");
     JTextField questionNumber = new JTextField("Fråga: 1/2");
     JTextField rond = new JTextField("Rond: 2/2");
     JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
-	JButton answer1Button = new JButton("1. Oslo");
-	JButton answer2Button = new JButton("2. Stockholm");
-	JButton answer3Button = new JButton("3. Helsingfors");
-	JButton answer4Button = new JButton("4. Göteborg");
-        
-        Color backgroundColor;
-        Font buttonFont;
+    JButton answer1Button = new JButton("1. Oslo");
+    JButton answer2Button = new JButton("2. Stockholm");
+    JButton answer3Button = new JButton("3. Helsingfors");
+    JButton answer4Button = new JButton("4. Göteborg");
+
+    Color backgroundColor;
+    Font buttonFont;
 
     public GameScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
-                this.backgroundColor = backgroundColor;
-                this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
-	}
-	
-	public void setPanel() {
-		setLayout(new GridLayout(3, 1));
+        this.backgroundColor = backgroundColor;
+        this.buttonFont = buttonFont;
+    }
+
+    public void setPanel() {
+        setLayout(new GridLayout(3, 1));
         questionPanel.add(questionButton);
         answerPanel.add(answer1Button);
         answerPanel.add(answer2Button);
@@ -50,17 +48,17 @@ public class GameScreen extends JPanel{
         gameScreen.setLayout(new BoxLayout(gameScreen, BoxLayout.PAGE_AXIS));
         gameScreen.add(topPanel);
         gameScreen.add(answerPanel);
-		points.setEditable(false);
+        points.setEditable(false);
         rond.setEditable(false);
-		questionNumber.setEditable(false);
-		add(gameScreen);
-	}
-	
-	public void setActionListener(ActionListener al) {
-		questionButton.addActionListener(al);
-		answer1Button.addActionListener(al);
-		answer2Button.addActionListener(al);
-		answer3Button.addActionListener(al);
-		answer4Button.addActionListener(al);
-	}
+        questionNumber.setEditable(false);
+        add(gameScreen);
+    }
+
+    public void setActionListener(ActionListener al) {
+        questionButton.addActionListener(al);
+        answer1Button.addActionListener(al);
+        answer2Button.addActionListener(al);
+        answer3Button.addActionListener(al);
+        answer4Button.addActionListener(al);
+    }
 }

@@ -27,13 +27,13 @@ public class MenuScreen extends JPanel{
     
     
     public MenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-		this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
+            this.backgroundColor = backgroundColor;
+            this.buttonFont = buttonFont;
+            setPanel();
+            setActionListener(al);
 	}
     
-    private void setPanel(){
+    public void setPanel(){
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,7 +65,7 @@ public class MenuScreen extends JPanel{
 		add(bottomSpace, BorderLayout.SOUTH);
     }
     
-    private void setActionListener(ActionListener al){
+    public void setActionListener(ActionListener al){
         newGameButton.addActionListener(al);
         settingsButton.addActionListener(al);
         statsButton.addActionListener(al);

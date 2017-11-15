@@ -21,8 +21,6 @@ public class StatsScreen extends JPanel{
     public StatsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
                 this.backgroundColor = backgroundColor;
                 this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
 	}
     
     public void setPanel(){
