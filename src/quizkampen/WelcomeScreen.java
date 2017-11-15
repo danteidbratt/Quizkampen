@@ -26,11 +26,14 @@ public class WelcomeScreen extends JPanel{
 	JButton okButton = new JButton("OK");
 	JButton exitButton = new JButton("EXIT");
 	
-	private final Color backgroundColor = new Color(0,0,255);
+	Color backgroundColor;
+        Font buttonFont;
 	
-	public WelcomeScreen(ActionListener al) {
+	public WelcomeScreen(ActionListener al, Font buttonFont, int r, int b, int g) {
 		setPanel();
 		setActionListener(al);
+                this.buttonFont = buttonFont;
+                this.backgroundColor = new Color(r, g, b);
 	}
 	
 	public void setPanel() {
@@ -80,6 +83,8 @@ public class WelcomeScreen extends JPanel{
 		};
 		userNameInput.addFocusListener(a);
 		okButton.requestFocusInWindow();
+                
+                repaint();
 	}
 	public void setActionListener(ActionListener al) {
 		okButton.addActionListener(al);

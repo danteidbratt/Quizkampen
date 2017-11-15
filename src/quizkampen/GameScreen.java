@@ -1,5 +1,7 @@
 package quizkampen;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -19,11 +21,16 @@ public class GameScreen extends JPanel{
 	JButton answer2Button = new JButton("2. Stockholm");
 	JButton answer3Button = new JButton("3. Helsingfors");
 	JButton answer4Button = new JButton("4. Göteborg");
+        
+        Color backgroundColor;
+        Font buttonFont;
 
-    public GameScreen(ActionListener al) {
+    public GameScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
 		setPanel();
 		setActionListener(al);
-    }
+                this.buttonFont = buttonFont;
+                this.backgroundColor = backgroundColor;
+	}
 	
 	public void setPanel() {
 		setLayout(new GridLayout(3, 1));

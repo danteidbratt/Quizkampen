@@ -22,12 +22,16 @@ public class MenuScreen extends JPanel{
     JButton logoutButton = new JButton("Logout");
     JButton exitButton = new JButton("Exit");
 	
-    private Color backgroundColor = new Color(0,0,255);
+    private Color backgroundColor;
+    private Font buttonFont;
     
-    public MenuScreen(ActionListener al){
-        setActionListener(al);
-        setPanel();
-    }
+    
+    public MenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+		setPanel();
+		setActionListener(al);
+                this.buttonFont = buttonFont;
+                this.backgroundColor = backgroundColor;
+	}
     
     private void setPanel(){
         setLayout(new BorderLayout());
@@ -60,6 +64,7 @@ public class MenuScreen extends JPanel{
         newGameButton.addActionListener(al);
         settingsButton.addActionListener(al);
         statsButton.addActionListener(al);
+        logoutButton.addActionListener(al);
         exitButton.addActionListener(al);
     }
 }
