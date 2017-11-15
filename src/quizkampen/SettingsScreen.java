@@ -6,6 +6,13 @@ import javax.swing.*;
 
 public class SettingsScreen extends JPanel{
 	private final JLabel loga = new JLabel("Settings");
+	private final JLabel sideSpaceWest = new JLabel("");
+    private final JLabel sideSpaceEast = new JLabel("");
+    private final JLabel bottomSpace = new JLabel("");
+	private final JRadioButton blue = new JRadioButton("Blue", true);
+	private final JRadioButton red = new JRadioButton("Red", false);
+	private final JRadioButton yellow = new JRadioButton("Yellow", false);
+	ButtonGroup buttonGroup = new ButtonGroup();
     JButton backButton = new JButton("Back"); 
     
     public SettingsScreen(ActionListener al) {
