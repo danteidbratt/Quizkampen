@@ -22,6 +22,10 @@ public class Client {
            
             session = (SessionQ)in.readObject();
             System.out.println(session.proposedSubjectOne.get(0).question);
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(0).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(1).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(2).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(3).getAnswer());
             
             out.writeObject(session);
             
