@@ -21,27 +21,34 @@ public class GameMenuScreen extends JPanel {
     JButton backButton = new JButton("Back"); 
     JButton exitButton = new JButton("Exit");
 	
-	private final Color backgroundColor = new Color(0,0,255);
+	private Color backgroundColor = new Color(0,0,255);
+        private Font buttonFont;
     
-    public GameMenuScreen(ActionListener al) {
-        setPanel();
-        setActionListener(al);
-    }   
+    public GameMenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+                this.backgroundColor = backgroundColor;
+                this.buttonFont = buttonFont;
+		setPanel();
+		setActionListener(al);
+    }
     
     public void setPanel(){
         setLayout(new BorderLayout());
-		setBackground(backgroundColor);
+        setBackground(backgroundColor);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
-		logo.setPreferredSize(new Dimension(0, 200));
-		logo.setForeground(Color.YELLOW);
-		logo.setFont(new Font("SansSarif", 2, 80));
-		
-		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
-		sideSpaceEast.setPreferredSize(new Dimension(100, 0));
-		bottomSpace.setPreferredSize(new Dimension(0, 120));
-		
-		centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
-		centerPanel.setBackground(backgroundColor);
+        logo.setPreferredSize(new Dimension(0, 200));
+        logo.setForeground(Color.YELLOW);
+        logo.setFont(new Font("SansSarif", 2, 80));
+
+        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+        sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+        bottomSpace.setPreferredSize(new Dimension(0, 120));
+
+        centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
+        centerPanel.setBackground(backgroundColor);
+        randomPlayerButton.setFont(buttonFont);
+        searchButton.setFont(buttonFont);
+        backButton.setFont(buttonFont);
+        exitButton.setFont(buttonFont);
         centerPanel.add(randomPlayerButton);
         centerPanel.add(searchButton);
         centerPanel.add(backButton);

@@ -1,5 +1,7 @@
 package quizkampen;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -15,10 +17,15 @@ public class SettingsScreen extends JPanel{
 	ButtonGroup buttonGroup = new ButtonGroup();
     JButton backButton = new JButton("Back"); 
     
-    public SettingsScreen(ActionListener al) {
-        setPanel();
-        setActionListener(al);
-    }   
+    Color backgroundColor;
+    Font buttonFont;
+    
+    public SettingsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+                this.backgroundColor = backgroundColor;
+                this.buttonFont = buttonFont;
+		setPanel();
+		setActionListener(al);
+	}
     
     public void setPanel() {
         setLayout(new GridLayout(5, 1));

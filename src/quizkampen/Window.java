@@ -1,17 +1,22 @@
 package quizkampen;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener{
-	WelcomeScreen ws = new WelcomeScreen(this);
-	MenuScreen ms = new MenuScreen(this);
-	GameMenuScreen gms = new GameMenuScreen(this);
-	SettingsScreen ses = new SettingsScreen(this);
-	StatsScreen sts = new StatsScreen(this);
-	LobbyScreen ls = new LobbyScreen(this);
-	GameScreen gs = new GameScreen(this);
+        private Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
+        private Color backgroundColor = new Color(0,0,255);
+        
+	WelcomeScreen ws = new WelcomeScreen(this, buttonFont, backgroundColor);
+	MenuScreen ms = new MenuScreen(this, buttonFont, backgroundColor);
+	GameMenuScreen gms = new GameMenuScreen(this, buttonFont, backgroundColor);
+	SettingsScreen ses = new SettingsScreen(this, buttonFont, backgroundColor);
+	StatsScreen sts = new StatsScreen(this, buttonFont, backgroundColor);
+	LobbyScreen ls = new LobbyScreen(this, buttonFont, backgroundColor);
+	GameScreen gs = new GameScreen(this, buttonFont, backgroundColor);
 	
 	public Window() {
 		setTitle("QuizFights");
@@ -37,8 +42,8 @@ public class Window extends JFrame implements ActionListener{
 			add(ls);
 		}
 		else if(e.getSource() == ls.subjectOneButton ||
-				e.getSource() == ls.subjectTwoButton ||
-				e.getSource() == ls.subjectThreeButton) {
+                        e.getSource() == ls.subjectTwoButton ||
+                        e.getSource() == ls.subjectThreeButton) {
 			ls.startButton.addActionListener(this);
 		}
 		else if(e.getSource() == ls.startButton) {
@@ -65,6 +70,10 @@ public class Window extends JFrame implements ActionListener{
 			remove(ms);
 			add(sts);
 		}
+                else if(e.getSource() == ms.logoutButton) {
+                        remove(ms);
+                        add(ws);
+                }
 		else if(e.getSource() == sts.backButton) {
 			remove(sts);
 			add(ms);

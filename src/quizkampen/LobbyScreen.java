@@ -18,9 +18,12 @@ public class LobbyScreen extends JPanel{
     JPanel opponentPanel = new JPanel();
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
-    JLabel nextOpponentIs = new JLabel("Your opponent is...");
-    JLabel opponentLabel = new JLabel("God");
+    JLabel nextOpponentIs = new JLabel("  Your opponent is...");
+    JLabel opponentLabel = new JLabel("...");
     
+    JPanel centerCenterPanel = new JPanel();
+    JLabel centerTopSpace = new JLabel();
+    JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
     JButton subjectOneButton = new JButton("Subject 1");
     JButton subjectTwoButton = new JButton("Subject 2");
@@ -32,9 +35,13 @@ public class LobbyScreen extends JPanel{
     JPanel buttonPanel = new JPanel();
     JButton startButton = new JButton("Start");
     JButton backButton = new JButton("Back");
-    private Color backgroundColor = new Color(0,0,255);
     
-    public LobbyScreen(ActionListener al) {
+    private Color backgroundColor;
+    Font buttonFont;
+    
+    public LobbyScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        this.buttonFont = buttonFont;
         setPanel();
         setActionListener(al);
     }
@@ -43,8 +50,8 @@ public class LobbyScreen extends JPanel{
             setBackground(backgroundColor);
             
             topSpace.setPreferredSize(new Dimension(0, 100));
-            sideSpaceEast.setPreferredSize(new Dimension(100, 0));
-            sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+            sideSpaceEast.setPreferredSize(new Dimension(70, 0));
+            sideSpaceWest.setPreferredSize(new Dimension(70, 0));
             bottomSpace.setPreferredSize(new Dimension(0, 120));
             
             opponentPanel.setLayout(new BorderLayout(0, 20));
@@ -70,16 +77,32 @@ public class LobbyScreen extends JPanel{
             
             centerPanel.setLayout(new GridLayout(3, 1, 0, 20));
             centerPanel.setBackground(backgroundColor);
+            
+            centerCenterPanel.setLayout(new BorderLayout());
+            centerTopSpace.setBackground(backgroundColor);
+            centerTopSpace.setOpaque(true);
+            centerTopSpace.setPreferredSize(new Dimension(0, 30));
+            centerBotSpace.setBackground(backgroundColor);
+            centerBotSpace.setOpaque(true);
+            centerBotSpace.setPreferredSize(new Dimension(0, 30));
             subjectPanel.setLayout(new GridLayout(1, 3, 10, 0));
             subjectPanel.setBackground(backgroundColor);
+            subjectOneButton.setFont(buttonFont);
+            subjectTwoButton.setFont(buttonFont);
+            subjectThreeButton.setFont(buttonFont);
             subjectPanel.add(subjectOneButton);
             subjectPanel.add(subjectTwoButton);
             subjectPanel.add(subjectThreeButton);
+            centerCenterPanel.add(centerTopSpace, BorderLayout.NORTH);
+            centerCenterPanel.add(subjectPanel, BorderLayout.CENTER);
+            centerCenterPanel.add(centerBotSpace, BorderLayout.SOUTH);
             
             bottomPanel.setLayout(new GridLayout(3, 1, 0, 0));
             bottomPanel.setBackground(backgroundColor);
             buttonPanel.setLayout(new GridLayout(1, 2, 10, 0));
             buttonPanel.setBackground(backgroundColor);
+            backButton.setFont(buttonFont);
+            startButton.setFont(buttonFont);
             buttonPanel.add(backButton);
             buttonPanel.add(startButton);
             bottomPanel.add(bottomTopSpace);
@@ -87,7 +110,7 @@ public class LobbyScreen extends JPanel{
             bottomPanel.add(bottomBottomSpace);
             
             centerPanel.add(opponentPanel);
-            centerPanel.add(subjectPanel);
+            centerPanel.add(centerCenterPanel);
             centerPanel.add(bottomPanel);
         
             add(topSpace, BorderLayout.NORTH);
@@ -98,6 +121,7 @@ public class LobbyScreen extends JPanel{
 	}
 	
 	public void setActionListener(ActionListener al) {
+                backButton.addActionListener(al);
 		subjectOneButton.addActionListener(al);
 		subjectTwoButton.addActionListener(al);
 		subjectThreeButton.addActionListener(al);
