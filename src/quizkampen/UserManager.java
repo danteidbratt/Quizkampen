@@ -6,14 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-/*
-Läser .ser när objektet när UserManager skapas
-Skriver till filen varje gång den skapar en ny användare
- */
 public class UserManager implements Serializable {
     private ArrayList<User> userList = new ArrayList<>();
 
     public UserManager() {
+        fileExist();
         readFile();
     }
 
@@ -64,23 +61,25 @@ public class UserManager implements Serializable {
     private void readFile() {
 
         try {
-            Path path = Paths.get("users.ser");
-
-            if((!Files.exists(path))){
-                writeToFile();
-            } else {
-                FileInputStream fis = new FileInputStream("users.ser");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                userList = (ArrayList<User>) ois.readObject();
-                ois.close();
-            }
-
+            FileInputStream fis = new FileInputStream("users.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            userList = (ArrayList<User>) ois.readObject();
+            ois.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    private void fileExist() {
+        Path path = Paths.get("users.ser");
+        if ((!Files.exists(path))) {
+            writeToFile();
+        }
+    }
+
+    /* Testar klassen */
     public static void main(String[] args) {
+
         UserManager userManager = new UserManager();
         userManager.addUser("Test");
     }
