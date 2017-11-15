@@ -29,11 +29,11 @@ public class WelcomeScreen extends JPanel{
 	Color backgroundColor;
         Font buttonFont;
 	
-	public WelcomeScreen(ActionListener al, Font buttonFont, int r, int b, int g) {
+	public WelcomeScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+                this.backgroundColor = backgroundColor;
+                this.buttonFont = buttonFont;
 		setPanel();
 		setActionListener(al);
-                this.buttonFont = buttonFont;
-                this.backgroundColor = new Color(r, g, b);
 	}
 	
 	public void setPanel() {
@@ -54,20 +54,24 @@ public class WelcomeScreen extends JPanel{
 		loginText.setHorizontalAlignment(SwingConstants.CENTER);
 		loginText.setFont(new Font("SansSerif", 3, 30));
 		loginText.setForeground(Color.GREEN);
+                userNameInput.setHorizontalAlignment(SwingConstants.CENTER);
+                okButton.setFont(buttonFont);
 		loginPanel.add(loginText);
 		loginPanel.add(userNameInput);
 		loginPanel.add(okButton);
+		
+		exitPanel.setLayout(new GridLayout(3, 1));
+		exitPanel.setBackground(backgroundColor);
+                exitButton.setFont(buttonFont);
+		exitPanel.add(exitButton);
+                exitPanel.revalidate();
+                exitPanel.repaint();
 		
 		centerPanel.setLayout(new GridLayout(3, 1));
 		centerPanel.setBackground(backgroundColor);
 		centerPanel.add(loginPanel);
 		centerPanel.add(centerSpace);
 		centerPanel.add(exitPanel);
-		
-		exitPanel.setLayout(new GridLayout(3, 1));
-		exitPanel.setBackground(backgroundColor);
-		exitPanel.add(exitButton);
-		
 		
 		add(logo, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
@@ -84,6 +88,7 @@ public class WelcomeScreen extends JPanel{
 		userNameInput.addFocusListener(a);
 		okButton.requestFocusInWindow();
                 
+                revalidate();
                 repaint();
 	}
 	public void setActionListener(ActionListener al) {

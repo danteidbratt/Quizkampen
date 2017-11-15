@@ -27,26 +27,31 @@ public class MenuScreen extends JPanel{
     
     
     public MenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+                this.backgroundColor = backgroundColor;
+                this.buttonFont = buttonFont;
 		setPanel();
 		setActionListener(al);
-                this.buttonFont = buttonFont;
-                this.backgroundColor = backgroundColor;
 	}
     
     private void setPanel(){
         setLayout(new BorderLayout());
-		setBackground(backgroundColor);
-		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		logo.setPreferredSize(new Dimension(0, 200));
-		logo.setForeground(Color.YELLOW);
-		logo.setFont(new Font("SansSarif", 2, 80));
-		
-		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
-		sideSpaceEast.setPreferredSize(new Dimension(100, 0));
-		bottomSpace.setPreferredSize(new Dimension(0, 120));
-		
-		centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
-		centerPanel.setBackground(backgroundColor);
+        setBackground(backgroundColor);
+        logo.setHorizontalAlignment(SwingConstants.CENTER);
+        logo.setPreferredSize(new Dimension(0, 200));
+        logo.setForeground(Color.YELLOW);
+        logo.setFont(new Font("SansSarif", 2, 80));
+
+        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+        sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+        bottomSpace.setPreferredSize(new Dimension(0, 120));
+
+        centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
+        centerPanel.setBackground(backgroundColor);
+        newGameButton.setFont(buttonFont);
+        settingsButton.setFont(buttonFont);
+        statsButton.setFont(buttonFont);
+        logoutButton.setFont(buttonFont);
+        exitButton.setFont(buttonFont);
         centerPanel.add(newGameButton);
         centerPanel.add(settingsButton);
         centerPanel.add(statsButton);

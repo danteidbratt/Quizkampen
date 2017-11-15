@@ -28,7 +28,6 @@ public class LobbyScreen extends JPanel{
     JButton subjectOneButton = new JButton("Subject 1");
     JButton subjectTwoButton = new JButton("Subject 2");
     JButton subjectThreeButton = new JButton("Subject 3");
-    Font subjectFont = new Font("SansSerif", 1, 14);
     
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
@@ -37,14 +36,14 @@ public class LobbyScreen extends JPanel{
     JButton startButton = new JButton("Start");
     JButton backButton = new JButton("Back");
     
-    private Color backgroundColor = new Color(0,0,255);
-    private Font buttonFont;
+    private Color backgroundColor;
+    Font buttonFont;
     
     public LobbyScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        this.buttonFont = buttonFont;
         setPanel();
         setActionListener(al);
-        this.buttonFont = buttonFont;
-        this.backgroundColor = backgroundColor;
     }
 	public void setPanel() {
             setLayout(new BorderLayout());
@@ -88,9 +87,9 @@ public class LobbyScreen extends JPanel{
             centerBotSpace.setPreferredSize(new Dimension(0, 30));
             subjectPanel.setLayout(new GridLayout(1, 3, 10, 0));
             subjectPanel.setBackground(backgroundColor);
-            subjectOneButton.setFont(subjectFont);
-            subjectTwoButton.setFont(subjectFont);
-            subjectThreeButton.setFont(subjectFont);
+            subjectOneButton.setFont(buttonFont);
+            subjectTwoButton.setFont(buttonFont);
+            subjectThreeButton.setFont(buttonFont);
             subjectPanel.add(subjectOneButton);
             subjectPanel.add(subjectTwoButton);
             subjectPanel.add(subjectThreeButton);
@@ -102,6 +101,8 @@ public class LobbyScreen extends JPanel{
             bottomPanel.setBackground(backgroundColor);
             buttonPanel.setLayout(new GridLayout(1, 2, 10, 0));
             buttonPanel.setBackground(backgroundColor);
+            backButton.setFont(buttonFont);
+            startButton.setFont(buttonFont);
             buttonPanel.add(backButton);
             buttonPanel.add(startButton);
             bottomPanel.add(bottomTopSpace);
@@ -121,7 +122,6 @@ public class LobbyScreen extends JPanel{
 	
 	public void setActionListener(ActionListener al) {
                 backButton.addActionListener(al);
-                startButton.addActionListener(al);
 		subjectOneButton.addActionListener(al);
 		subjectTwoButton.addActionListener(al);
 		subjectThreeButton.addActionListener(al);

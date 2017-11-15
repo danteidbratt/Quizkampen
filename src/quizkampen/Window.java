@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener{
-        private Font buttonFont = new Font("SansSarif", Font.BOLD, 16);
+        private Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
         private Color backgroundColor = new Color(0,0,255);
         
-	WelcomeScreen ws = new WelcomeScreen(this, buttonFont, 0,0,255);
+	WelcomeScreen ws = new WelcomeScreen(this, buttonFont, backgroundColor);
 	MenuScreen ms = new MenuScreen(this, buttonFont, backgroundColor);
 	GameMenuScreen gms = new GameMenuScreen(this, buttonFont, backgroundColor);
 	SettingsScreen ses = new SettingsScreen(this, buttonFont, backgroundColor);
@@ -42,8 +42,8 @@ public class Window extends JFrame implements ActionListener{
 			add(ls);
 		}
 		else if(e.getSource() == ls.subjectOneButton ||
-				e.getSource() == ls.subjectTwoButton ||
-				e.getSource() == ls.subjectThreeButton) {
+                        e.getSource() == ls.subjectTwoButton ||
+                        e.getSource() == ls.subjectThreeButton) {
 			ls.startButton.addActionListener(this);
 		}
 		else if(e.getSource() == ls.startButton) {

@@ -15,14 +15,14 @@ public class StatsScreen extends JPanel{
     JLabel test5 = new JLabel("Age?");
     JButton backButton = new JButton("Back");
     
-    Color backgroundColor;
+    private Color backgroundColor = new Color(0,0,255);
     Font buttonFont;
 
     public StatsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+                this.backgroundColor = backgroundColor;
+                this.buttonFont = buttonFont;
 		setPanel();
 		setActionListener(al);
-                this.buttonFont = buttonFont;
-                this.backgroundColor = backgroundColor;
 	}
     
     public void setPanel(){
