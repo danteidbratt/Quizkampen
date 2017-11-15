@@ -1,4 +1,5 @@
 package quizkampen;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class LobbyScreen extends JPanel{
+public class LobbyScreen extends JPanel implements Runnable{
     private final JLabel topSpace = new JLabel("");
     private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
@@ -124,5 +125,10 @@ public class LobbyScreen extends JPanel{
             subjectOneButton.addActionListener(al);
             subjectTwoButton.addActionListener(al);
             subjectThreeButton.addActionListener(al);
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
