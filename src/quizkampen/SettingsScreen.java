@@ -16,8 +16,6 @@ public class SettingsScreen extends JPanel{
     public SettingsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
                 this.backgroundColor = backgroundColor;
                 this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
 	}
     
     public void setPanel() {

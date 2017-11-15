@@ -32,8 +32,6 @@ public class WelcomeScreen extends JPanel{
 	public WelcomeScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
                 this.backgroundColor = backgroundColor;
                 this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
 	}
 	
 	public void setPanel() {
