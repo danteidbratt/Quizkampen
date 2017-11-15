@@ -12,17 +12,17 @@ import javax.swing.*;
 public class MenuScreen extends JPanel{
     private final JLabel logo = new JLabel("QuizFigths");
     private final JLabel sideSpaceWest = new JLabel("");
-	private final JLabel sideSpaceEast = new JLabel("");
-	private final JLabel bottomSpace = new JLabel("");
-	private final JPanel centerPanel = new JPanel();
+    private final JLabel sideSpaceEast = new JLabel("");
+    private final JLabel bottomSpace = new JLabel("");
+    private final JPanel centerPanel = new JPanel();
 	
     JButton newGameButton = new JButton("New Game");
     JButton settingsButton = new JButton("Settings");
     JButton statsButton = new JButton("Stats");
-	JButton logoutButton = new JButton("Logout");
+    JButton logoutButton = new JButton("Logout");
     JButton exitButton = new JButton("Exit");
 	
-	private final Color backgroundColor = new Color(0,0,255);
+    private Color backgroundColor = new Color(0,0,255);
     
     public MenuScreen(ActionListener al){
         setActionListener(al);
