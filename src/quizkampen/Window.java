@@ -53,6 +53,10 @@ public class Window extends JFrame implements ActionListener{
 			remove(gms);
 			add(ms);
 		}
+		else if(e.getSource() == ls.backButton) {
+			remove(ls);
+			add(gms);
+		}
 		else if(e.getSource() == ses.backButton) {
 			remove(ses);
 			add(ms);
