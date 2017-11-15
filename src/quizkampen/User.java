@@ -1,6 +1,8 @@
 package quizkampen;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     
     boolean isPremuim;
     private String userName;
