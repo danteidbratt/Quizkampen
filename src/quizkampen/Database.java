@@ -67,13 +67,14 @@ public class Database {
         }
 
         sessionQ.setProposedSubjectOne(subjectList.get(one));
-        sessionQ.setProposedSubjectOne(subjectList.get(two));
+        sessionQ.setProposedSubjectTwo(subjectList.get(two));
         sessionQ.setProposedSubjectThree(subjectList.get(three));
 
     }
 
     public ListClass createQuestionList(String filename, String name) {
         ListClass<Question> tempList = new ListClass<Question>();
+//        List<Question> tempList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             String tempString;
@@ -91,6 +92,7 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+//        temp.setName(name);
         tempList.setName(name);
         return tempList;
     }

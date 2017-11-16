@@ -7,9 +7,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Client {
-    
+
     Socket bridge;
     SessionQ session;
+    Window w;
 
     public Client() {
         try {
@@ -19,27 +20,22 @@ public class Client {
             w.ws.setPanel();
             w.ws.setActionListener(w);
             
-            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());                   
+            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
-           
-            session = (SessionQ)in.readObject();
+
+            session = (SessionQ) in.readObject();
+            w.setSessionQ(session);
             SessionHandler sessionHandler = new SessionHandler(session);
 
-            System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(1));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(2));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(3));
-            
             out.writeObject(session);
-            
-    }   catch (IOException ex) {
+
+        } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-    }   catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
+
     public static void main(String[] args) {
         Client c = new Client();
     }

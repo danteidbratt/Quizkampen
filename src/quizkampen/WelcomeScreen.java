@@ -98,4 +98,10 @@ public class WelcomeScreen extends JPanel implements IPanel {
         okButton.addActionListener(al);
         exitButton.addActionListener(al);
     }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
+    }
 }

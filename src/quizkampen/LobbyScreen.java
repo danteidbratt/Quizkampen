@@ -27,9 +27,9 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
     JLabel centerTopSpace = new JLabel();
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
-    JButton subjectOneButton = new JButton("Subject 1");
-    JButton subjectTwoButton = new JButton("Subject 2");
-    JButton subjectThreeButton = new JButton("Subject 3");
+    JButton subjectOneButton = new JButton("");
+    JButton subjectTwoButton = new JButton("");
+    JButton subjectThreeButton = new JButton("");
     
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
@@ -149,5 +149,11 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
                 System.out.println(e.getMessage());
             }
         }
+    }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
     }
 }

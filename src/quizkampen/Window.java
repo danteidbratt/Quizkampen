@@ -8,6 +8,7 @@ import java.util.*;
 import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener {
+    protected SessionQ session;
 
     private final Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
     private final Color backgroundColor = new Color(0, 0, 255);
@@ -28,6 +29,10 @@ public class Window extends JFrame implements ActionListener {
         sts = new StatsScreen(buttonFont, backgroundColor);
         ls = new LobbyScreen(buttonFont, backgroundColor);
         gs = new GameScreen(buttonFont, backgroundColor);
+    }
+    
+    public void setSessionQ(SessionQ session){
+        this.session = session;
     }
 
     public void setFrame() {
@@ -63,14 +68,31 @@ public class Window extends JFrame implements ActionListener {
             add(gms);
         } else if (e.getSource() == gms.randomPlayerButton) {
             remove(gms);
+            ls.subjectOneButton.setText(session.proposedSubjectOne.getName());
+            ls.subjectTwoButton.setText(session.proposedSubjectTwo.getName());
+            ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
             add(ls);
-        } else if (e.getSource() == ls.subjectOneButton
-                || e.getSource() == ls.subjectTwoButton
-                || e.getSource() == ls.subjectThreeButton) {
+        } else if (e.getSource() == ls.subjectOneButton) {
+            session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
-        } else if (e.getSource() == ls.startButton) {
+        } else if (e.getSource() == ls.subjectTwoButton) {
+            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if (e.getSource() == ls.subjectThreeButton) {
+            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+            System.out.println("hej3");
+        } else if(e.getSource() == ls.subjectTwoButton){
+            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if(e.getSource() == ls.subjectThreeButton){
+            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if(e.getSource() == ls.startButton){
             remove(ls);
+            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
             add(gs);
+            
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
             add(ses);
@@ -94,6 +116,12 @@ public class Window extends JFrame implements ActionListener {
             add(ms);
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
+        } else if (e.getSource() == ses.blue){
+            
+        } else if (e.getSource() == ses.green){
+            
+        } else if (e.getSource() == ses.red){
+            
         }
         revalidate();
         repaint();
