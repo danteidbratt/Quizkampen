@@ -8,28 +8,28 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SettingsScreen extends JPanel{
-	private final JLabel logo = new JLabel("QuizFights");
+public class SettingsScreen extends JPanel implements IPanel {
+
+    private final JLabel logo = new JLabel("QuizFights");
     private final JPanel centerPanel = new JPanel();
-	private final JLabel sideSpaceWest = new JLabel("");
+    private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
-	JRadioButton blue = new JRadioButton("Blue", true);
-	JRadioButton red = new JRadioButton("Red", false);
-	JRadioButton green = new JRadioButton("Green", false);
-	ButtonGroup buttonGroup = new ButtonGroup();
+    JRadioButton blue = new JRadioButton("Blue", true);
+    JRadioButton red = new JRadioButton("Red", false);
+    JRadioButton green = new JRadioButton("Green", false);
+    ButtonGroup buttonGroup = new ButtonGroup();
     JButton backButton = new JButton("Back");
-    
+
     Color backgroundColor;
     Font buttonFont;
-    
-    public SettingsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+
+    public SettingsScreen(Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
-		setPanel();
-		setActionListener(al);
-	}
-    
+    }
+
+    @Override
     public void setPanel() {
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
@@ -37,39 +37,40 @@ public class SettingsScreen extends JPanel{
         logo.setPreferredSize(new Dimension(0, 200));
         logo.setForeground(Color.YELLOW);
         logo.setFont(new Font("SansSarif", 2, 80));
-		
-		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
+
+        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
         sideSpaceEast.setPreferredSize(new Dimension(100, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
-		
-		centerPanel.setLayout(new GridLayout(4, 1));
+
+        centerPanel.setLayout(new GridLayout(4, 1));
         centerPanel.setBackground(backgroundColor);
-		backButton.setFont(buttonFont);
-		blue.setFont(buttonFont);
-		red.setFont(buttonFont);
-		green.setFont(buttonFont);
-		blue.setOpaque(false);
-		red.setOpaque(false);
-		green.setOpaque(false);
-		centerPanel.add(blue);
-		centerPanel.add(red);
-		centerPanel.add(green);
-		centerPanel.add(backButton);
-		buttonGroup.add(blue);
-		buttonGroup.add(red);
-		buttonGroup.add(green);
-		
+        backButton.setFont(buttonFont);
+        blue.setFont(buttonFont);
+        red.setFont(buttonFont);
+        green.setFont(buttonFont);
+        blue.setOpaque(false);
+        red.setOpaque(false);
+        green.setOpaque(false);
+        centerPanel.add(blue);
+        centerPanel.add(red);
+        centerPanel.add(green);
+        centerPanel.add(backButton);
+        buttonGroup.add(blue);
+        buttonGroup.add(red);
+        buttonGroup.add(green);
+
         add(logo, BorderLayout.NORTH);
-		add(centerPanel, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
         add(sideSpaceWest, BorderLayout.WEST);
         add(sideSpaceEast, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
-    
-    public void setActionListener(ActionListener al){
-		blue.addActionListener(al);
-		red.addActionListener(al);
-		green.addActionListener(al);
+
+    @Override
+    public void setActionListener(ActionListener al) {
+        blue.addActionListener(al);
+        red.addActionListener(al);
+        green.addActionListener(al);
         backButton.addActionListener(al);
     }
 }
