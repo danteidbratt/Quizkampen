@@ -11,8 +11,8 @@ abstract public class MasterPanel extends JPanel implements IPanel{
     protected JLabel logo = new JLabel("QuizFights");
     protected Color logoColor = Color.YELLOW;
     protected Font logoFont = new Font("SansSarif", 2, 80);
-    protected Font buttonFont = new Font("SansSarif", Font.BOLD, 20);;
-    protected Color backgroundColor = Color.BLUE;;
+    protected Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
+    protected Color backgroundColor = Color.BLUE;
     protected Color infoTextColor = Color.WHITE;
     protected Font infoTextFontBig = new Font("SansSerif", 3, 30);
     protected Font infoTextFontSmall = new Font("SansSerif", 1, 20);

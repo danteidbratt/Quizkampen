@@ -44,7 +44,7 @@ public class UserManager implements Serializable {
     }
 
     private void writeToFile() {
-        FileOutputStream fos = null;
+        FileOutputStream fos;
         try {
             fos = new FileOutputStream("users.ser");
 

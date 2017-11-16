@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 public interface IPanel {
     
-    public void setPanel();
+    void setPanel();
     
-    public void setActionListener(ActionListener al);
+    void setActionListener(ActionListener al);
     
-    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor);
+    void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor);
     
 }

@@ -54,13 +54,12 @@ public class SessionQ implements Serializable {
         }
     }
 
-    public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
+    private List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> lista = new ArrayList<Question>();
-        ListClass<Question> searchList = list;
-        Collections.shuffle(searchList);
+        Collections.shuffle(list);
 
         for (int i = 0; i < howManyQuestions; i++) {
-            lista.add(searchList.get(i));
+            lista.add(lista.get(i));
         }
         return lista;
     }

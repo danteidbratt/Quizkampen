@@ -1,8 +1,5 @@
 package quizkampen;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,7 +16,6 @@ public class Server {
     private Socket clienSocket2;
     private List<Question> questions = new ArrayList<>();
     private Question tempQuestion;
-    private SessionQ session;
     protected Database database = new Database();
     protected boolean waitingForClient2 = false;
     ServerSocket serverSocket;
@@ -27,7 +23,7 @@ public class Server {
     public Server(Socket clientSocket1, ServerSocket serverSocket) {                // NY
         try {
             this.serverSocket = serverSocket;
-            session = new SessionQ();
+            SessionQ session = new SessionQ();
 
             database.loadThreeSubjects(session);
 
