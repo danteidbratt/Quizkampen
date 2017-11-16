@@ -2,29 +2,27 @@ package quizkampen;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class LobbyScreen extends JPanel implements IPanel, Runnable{
+public class LobbyScreen extends MasterPanel implements Runnable{
+    
     public Thread animation = new Thread(this);
-    private final JLabel topSpace = new JLabel("");
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
-    private final JLabel bottomSpace = new JLabel("");
     
     JPanel centerPanel = new JPanel();
     
     JPanel opponentPanel = new JPanel();
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
-    JLabel nextOpponentIs = new JLabel("  Your opponent is...");
+    JLabel nextOpponentIs = new JLabel("- Next Opponent -");
     JLabel opponentLabel = new JLabel("...");
     
     JPanel centerCenterPanel = new JPanel();
-    JLabel centerTopSpace = new JLabel();
+    JLabel centerTopSpace = new JLabel("Choose Subject");
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
     JButton subjectOneButton = new JButton("");
@@ -38,42 +36,35 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
     JButton startButton = new JButton("Start");
     JButton backButton = new JButton("Back");
     
-    boolean loopAnimation;
-    private Color backgroundColor;
-    private Font buttonFont;
-    
-    public LobbyScreen(Font buttonFont, Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-        this.buttonFont = buttonFont;
-        loopAnimation = true;
-    }
+    public boolean loopAnimation = true;
     
     @Override
     public void setPanel() {
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
 
-        topSpace.setPreferredSize(new Dimension(0, 100));
-        sideSpaceEast.setPreferredSize(new Dimension(70, 0));
-        sideSpaceWest.setPreferredSize(new Dimension(70, 0));
+        topSpace.setPreferredSize(new Dimension(0, 80));
+        rightSpace.setPreferredSize(new Dimension(70, 0));
+        leftSpace.setPreferredSize(new Dimension(70, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
 
-        opponentPanel.setLayout(new BorderLayout(0, 20));
+        opponentPanel.setLayout(new BorderLayout(0, 10));
         opponentPanel.setBackground(backgroundColor);
         topBottomPanel.setLayout(new GridLayout(2, 1, 0, 5));
         topBottomPanel.setBackground(backgroundColor);
         opponentLabel.setBackground(backgroundColor);
         opponentLabel.setOpaque(true);
-        opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
         opponentLabel.setForeground(Color.WHITE);
         opponentLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLabel.setFont(new Font("SansSerif", 3, 30));
+        opponentLabel.setFont(infoTextFontBig);
         topBottomSpace1.setBackground(backgroundColor);
         topBottomSpace1.setOpaque(true);
         topBottomPanel.add(opponentLabel);
         topBottomPanel.add(topBottomSpace1);
-        nextOpponentIs.setFont(new Font("SansSerif", 1, 15));
-        nextOpponentIs.setForeground(Color.GREEN);
+        nextOpponentIs.setHorizontalAlignment(SwingConstants.CENTER);
+        nextOpponentIs.setFont(infoTextFontSmall);
+        nextOpponentIs.setForeground(infoTextColor);
 
         opponentPanel.add(nextOpponentIs, BorderLayout.NORTH);
         opponentPanel.add(topBottomPanel, BorderLayout.CENTER);
@@ -82,9 +73,12 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
         centerPanel.setBackground(backgroundColor);
 
         centerCenterPanel.setLayout(new BorderLayout());
+        centerTopSpace.setHorizontalAlignment(SwingConstants.CENTER);
+        centerTopSpace.setFont(infoTextFontBig);
+        centerTopSpace.setForeground(infoTextColor);
         centerTopSpace.setBackground(backgroundColor);
         centerTopSpace.setOpaque(true);
-        centerTopSpace.setPreferredSize(new Dimension(0, 30));
+        centerTopSpace.setPreferredSize(new Dimension(0, 50));
         centerBotSpace.setBackground(backgroundColor);
         centerBotSpace.setOpaque(true);
         centerBotSpace.setPreferredSize(new Dimension(0, 30));
@@ -102,12 +96,13 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
 
         bottomPanel.setLayout(new GridLayout(3, 1, 0, 0));
         bottomPanel.setBackground(backgroundColor);
-        buttonPanel.setLayout(new GridLayout(1, 2, 10, 0));
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.setBackground(backgroundColor);
         backButton.setFont(buttonFont);
+        backButton.setPreferredSize(new Dimension(160, 40));
         startButton.setFont(buttonFont);
+        startButton.setPreferredSize(new Dimension(160, 40));
         buttonPanel.add(backButton);
-        buttonPanel.add(startButton);
         bottomPanel.add(bottomTopSpace);
         bottomPanel.add(buttonPanel);
         bottomPanel.add(bottomBottomSpace);
@@ -117,17 +112,16 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
         centerPanel.add(bottomPanel);
 
         add(topSpace, BorderLayout.NORTH);
-        add(sideSpaceEast, BorderLayout.EAST);
-        add(sideSpaceWest, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
         add(bottomSpace, BorderLayout.SOUTH);
         add(centerPanel, BorderLayout.CENTER);
-        
-        animation.start();
     }
 
     @Override
     public void setActionListener(ActionListener al) {
             backButton.addActionListener(al);
+            startButton.addActionListener(al);
             subjectOneButton.addActionListener(al);
             subjectTwoButton.addActionListener(al);
             subjectThreeButton.addActionListener(al);
@@ -149,11 +143,5 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
                 System.out.println(e.getMessage());
             }
         }
-    }
-    
-    @Override
-    public void setCustomColor(Color c) {
-        backgroundColor = c;
-        repaint();
     }
 }

@@ -17,8 +17,8 @@ public class Client {
             this.bridge = new Socket("127.0.0.1", 33333);
             Window w = new Window();
             w.setFrame();
-            w.ws.setPanel();
-            w.ws.setActionListener(w);
+            w.welcomeScreen.setPanel();
+            w.welcomeScreen.setActionListener(w);
             
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
