@@ -63,31 +63,39 @@ public class Window extends JFrame implements ActionListener {
             remove(ws);
             ws.userNameInput.setText("Enter username to start");
             add(ms);
+
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);
             add(gms);
+
         } else if (e.getSource() == gms.randomPlayerButton) {
             remove(gms);
-            ls.subjectOneButton.setText(session.proposedSubjectOne.getName());
-            ls.subjectTwoButton.setText(session.proposedSubjectTwo.getName());
-            ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
+            ls.subjectOneButton.setText(session.proposedSubjectList.get(0).getName());
+            ls.subjectTwoButton.setText(session.proposedSubjectList.get(1).getName());
+            ls.subjectThreeButton.setText(session.proposedSubjectList.get(2).getName());
             add(ls);
+
         } else if (e.getSource() == ls.subjectOneButton) {
             session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
+
         } else if (e.getSource() == ls.subjectTwoButton) {
             session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
+
         } else if (e.getSource() == ls.subjectThreeButton) {
             session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
+
             System.out.println("hej3");
         } else if(e.getSource() == ls.subjectTwoButton){
             session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
+
         } else if(e.getSource() == ls.subjectThreeButton){
             session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
+
         } else if(e.getSource() == ls.startButton){
             remove(ls);
             gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());

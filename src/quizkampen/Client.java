@@ -25,7 +25,7 @@ public class Client {
 
             session = (SessionQ) in.readObject();
             w.setSessionQ(session);
-            SessionHandler sessionHandler = new SessionHandler(session);
+            new SessionHandler(session);
 
             out.writeObject(session);
 

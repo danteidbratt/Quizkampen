@@ -12,11 +12,11 @@ public class SessionQ implements Serializable {
     protected String chosenSubjectOne;  // LÄGG IN I LISTA ISTÄLLET
     protected String chosenSubjectTwo;
 
-    protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
-    protected ListClass<Question> proposedSubjectTwo;
-    protected ListClass<Question> proposedSubjectThree;
+    //protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
+    //protected ListClass<Question> proposedSubjectTwo;
+    //protected ListClass<Question> proposedSubjectThree;
 
-    private List<ListClass<Question>> proposedSubjectList;      // lägg de tre listorna ovan
+    protected List<ListClass> proposedSubjectList;      // lägg de tre listorna ovan
 
     public List<Question> currentQuestions;
     private boolean requestingNewSubjects = false;
@@ -53,18 +53,6 @@ public class SessionQ implements Serializable {
         return chosenSubjectTwo;
     }
 
-    public void setProposedSubjectOne(ListClass lista) {
-        this.proposedSubjectOne = lista;
-    }
-
-    public void setProposedSubjectTwo(ListClass lista) {
-        this.proposedSubjectTwo = lista;
-    }
-
-    public void setProposedSubjectThree(ListClass lista) {
-        this.proposedSubjectThree = lista;
-    }
-
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubjectOne(chosenSubject);
 
@@ -98,18 +86,6 @@ public class SessionQ implements Serializable {
         return lista;
     }
 
-    public ListClass getProposedSubjectOne() {
-        return proposedSubjectOne;
-    }
-
-    public ListClass getProposedSubjectTwo() {
-        return proposedSubjectTwo;
-    }
-
-    public ListClass getProposedSubjectThree() {
-        return proposedSubjectThree;
-    }
-
     public List<Question> getCurrentQuestions() {
         return currentQuestions;
     }
@@ -136,9 +112,5 @@ public class SessionQ implements Serializable {
 
     public boolean getRequestingNewSubjects() {
         return this.requestingNewSubjects;
-    }
-
-    public List<ListClass<Question>> getProposedSubjectList() {
-        return proposedSubjectList;
     }
 }

@@ -22,7 +22,7 @@ public class Database {
     protected ListClass<Question> history;
     protected ListClass<Question> it;
     protected ListClass<Question> sport;
-    protected List<ListClass<Question>> subjectList = new ArrayList<ListClass<Question>>();
+    protected List<ListClass<Question>> subjectList = new ArrayList<>();
     protected SessionQ sessionQ;
 
     Database () {
@@ -65,18 +65,14 @@ public class Database {
                 || (three = rn.nextInt(subjectList.size() - 1)) == one) {
             three = rn.nextInt(subjectList.size() - 1);
         }
-
-        sessionQ.setProposedSubjectOne(subjectList.get(one));
-        sessionQ.setProposedSubjectTwo(subjectList.get(two));
-        sessionQ.setProposedSubjectThree(subjectList.get(three));
-
+        
         /* Subjectlist */
         sessionQ.addProposedSubject(subjectList.get(one));
         sessionQ.addProposedSubject(subjectList.get(two));
         sessionQ.addProposedSubject(subjectList.get(three));
     }
 
-    public ListClass createQuestionList(String filename, String name) {
+    public ListClass<Question> createQuestionList(String filename, String name) {
         ListClass<Question> tempList = new ListClass<Question>();
 //        List<Question> tempList = new ArrayList<>();
         try {
