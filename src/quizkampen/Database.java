@@ -65,7 +65,7 @@ public class Database {
                 || (three = rn.nextInt(subjectList.size() - 1)) == one) {
             three = rn.nextInt(subjectList.size() - 1);
         }
-        
+
         /* Subjectlist */
         sessionQ.addProposedSubject(subjectList.get(one));
         sessionQ.addProposedSubject(subjectList.get(two));
