@@ -73,13 +73,17 @@ public class Window extends JFrame implements ActionListener {
             ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
             add(ls);
         } else if (e.getSource() == ls.subjectOneButton) {
+            session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
         } else if (e.getSource() == ls.subjectTwoButton) {
+            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
         } else if (e.getSource() == ls.subjectThreeButton) {
+            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
         } else if (e.getSource() == ls.startButton) {
             remove(ls);
+            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
             add(gs);
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);

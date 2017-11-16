@@ -14,7 +14,7 @@ public class SessionQ implements Serializable {
 //    protected List<ListClass> propsedSubjectList
 //            = Arrays.asList(proposedSubjectOne,
 //            proposedSubjectTwo, proposedSubjectThree);
-    protected List<Question> currentQuestions;
+    public List<Question> currentQuestions;
     private int totalRonds;
     private int totalQuestionsinRond;
 

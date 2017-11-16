@@ -29,11 +29,11 @@ public class GameScreen extends JPanel implements IPanel {
     JLabel roundBoxLabel = new JLabel("  1/2  ");
     JLabel roundSpace = new JLabel("");
     List<JLabel> questionBoxes = new ArrayList<>();
-    JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
-    JButton answer1Button = new JButton("1. Oslo");
-    JButton answer2Button = new JButton("2. Stockholm");
-    JButton answer3Button = new JButton("3. Helsingfors");
-    JButton answer4Button = new JButton("4. Göteborg");
+    JButton questionButton = new JButton("");
+    JButton answer1Button = new JButton("");
+    JButton answer2Button = new JButton("");
+    JButton answer3Button = new JButton("");
+    JButton answer4Button = new JButton("");
 
     Color backgroundColor;
     Font buttonFont;
