@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Question implements Serializable {
 
-    public String question;
+    protected String question;
     protected List<AnswerAlternative> answers = new ArrayList<>();
 
     public Question(String question) {
@@ -25,7 +25,10 @@ public class Question implements Serializable {
         return question;
     }
 
-    public List getAnsweAlternative() {
+    public List<AnswerAlternative> getAnswerAlternatives() {
         return answers;
+    }
+    public String getAnswerAlternative(int questionIndex){
+        return this.answers.get(questionIndex).getAnswer();
     }
 }
