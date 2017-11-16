@@ -1,4 +1,3 @@
-
 package quizkampen;
 
 import java.awt.BorderLayout;
