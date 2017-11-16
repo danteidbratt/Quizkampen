@@ -36,6 +36,14 @@ public class Server {
 
         user1Output.writeObject(session);
         user2Output.writeObject(session);
+        
+        while(true){
+            if(session.getRequestingNewSubjects() == true){
+                // fyll på frågor
+                
+                session.setRequestingNewSubjects(false);
+            }
+        }
     }
 
 }

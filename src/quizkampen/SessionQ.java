@@ -17,6 +17,7 @@ public class SessionQ implements Serializable {
     public List<Question> currentQuestions;
     private int totalRonds;
     private int totalQuestionsinRond;
+    private boolean requestingNewSubjects = false;
 
     public String getUsername() {
         return username;
@@ -113,5 +114,12 @@ public class SessionQ implements Serializable {
     }
     public int getTotalRonds(){
         return this.totalRonds;
+    }
+    
+    public void setRequestingNewSubjects(boolean trueOrFalse){
+        this.requestingNewSubjects = trueOrFalse;
+    }
+    public boolean getRequestingNewSubjects(){
+        return this.requestingNewSubjects;
     }
 }
