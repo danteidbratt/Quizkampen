@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GameScreen extends JPanel {
+public class GameScreen extends JPanel implements IPanel{
 	private final JPanel centerPanel = new JPanel();
 	private final JPanel roundPanel = new JPanel();
 	private final JPanel questionPanel = new JPanel();
@@ -27,12 +27,6 @@ public class GameScreen extends JPanel {
 	JLabel roundSpace = new JLabel("");
 	JPanel questionsPanel = new JPanel();
 	List<JLabel> questionBoxes = new ArrayList<>();
-//	JLabel questionBox1 = new JLabel("");
-//	JLabel questionBox2 = new JLabel("");
-//	JLabel questionBox3 = new JLabel("");
-//	JLabel questionBox4 = new JLabel("");
-//	JLabel questionBox5 = new JLabel("");
-	
     JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
     JButton answer1Button = new JButton("1. Oslo");
     JButton answer2Button = new JButton("2. Stockholm");
@@ -75,31 +69,10 @@ public class GameScreen extends JPanel {
 			questionBoxes.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 			questionPanel.add(questionBoxes.get(i));
 		}
-//		questionBox1.setPreferredSize(new Dimension(60, 37));
-//		questionBox1.setOpaque(true);
-//		questionBox1.setBackground(Color.gray);
-//		questionBox1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-//		questionBox2.setPreferredSize(new Dimension(60, 37));
-//		questionBox2.setOpaque(true);
-//		questionBox2.setBackground(Color.gray);
-//		questionBox2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-//		questionBox3.setPreferredSize(new Dimension(60, 37));
-//		questionBox3.setOpaque(true);
-//		questionBox3.setBackground(Color.gray);
-//		questionBox3.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-//		questionBox4.setPreferredSize(new Dimension(60, 37));
-//		questionBox4.setOpaque(true);
-//		questionBox4.setBackground(Color.gray);
-//		questionBox4.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-//		questionBox5.setPreferredSize(new Dimension(60, 37));
-//		questionBox5.setOpaque(true);
-//		questionBox5.setBackground(Color.gray);
-////		questionBox5.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-//		questionsPanel.add(questionBox1);
-//		questionsPanel.add(questionBox2);
-//		questionsPanel.add(questionBox3);
-//		questionsPanel.add(questionBox4);
-//		questionsPanel.add(questionBox5);
+		for (JLabel questionBoxe : questionBoxes) {
+			System.out.println("hej");
+		}
+
 		roundSpace.setPreferredSize(new Dimension(0, 20));
 		roundPanel.add(roundTextLabel);
 		roundPanel.add(roundBoxLabel);
