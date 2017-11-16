@@ -8,7 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class LobbyScreen extends JPanel implements Runnable{
+public class LobbyScreen extends JPanel implements IPanel, Runnable{
     public Thread animation = new Thread(this);
     private final JLabel topSpace = new JLabel("");
     private final JLabel sideSpaceWest = new JLabel("");
@@ -39,16 +39,16 @@ public class LobbyScreen extends JPanel implements Runnable{
     JButton backButton = new JButton("Back");
     
     boolean loopAnimation;
-    
     private Color backgroundColor;
-    Font buttonFont;
+    private Font buttonFont;
     
-    public LobbyScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+    public LobbyScreen(Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
         loopAnimation = true;
     }
     
+    @Override
     public void setPanel() {
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
@@ -121,8 +121,11 @@ public class LobbyScreen extends JPanel implements Runnable{
         add(sideSpaceWest, BorderLayout.WEST);
         add(bottomSpace, BorderLayout.SOUTH);
         add(centerPanel, BorderLayout.CENTER);
+        
+        animation.start();
     }
 
+    @Override
     public void setActionListener(ActionListener al) {
             backButton.addActionListener(al);
             subjectOneButton.addActionListener(al);

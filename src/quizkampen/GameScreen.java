@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.time.Year;
 
-public class GameScreen extends JPanel {
+public class GameScreen extends JPanel implements IPanel {
 	private final JPanel centerPanel = new JPanel();
 	private final JPanel roundPanel = new JPanel();
 	private final JPanel questionPanel = new JPanel();
@@ -24,7 +24,6 @@ public class GameScreen extends JPanel {
 	JPanel roundQuestionsPanel = new JPanel();
 	JLabel questionBox1 = new JLabel("");
 	JLabel questionBox2 = new JLabel("");
-	
     JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
     JButton answer1Button = new JButton("1. Oslo");
     JButton answer2Button = new JButton("2. Stockholm");
@@ -34,11 +33,12 @@ public class GameScreen extends JPanel {
     Color backgroundColor;
     Font buttonFont;
 
-    public GameScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+    public GameScreen(Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
     }
 
+    @Override
     public void setPanel() {
         setLayout(new BorderLayout());
 		topSpace.setPreferredSize(new Dimension(0, 50));
@@ -59,6 +59,7 @@ public class GameScreen extends JPanel {
 		add(bottomSpace, BorderLayout.SOUTH);
     }
 
+    @Override
     public void setActionListener(ActionListener al) {
         questionButton.addActionListener(al);
         answer1Button.addActionListener(al);
