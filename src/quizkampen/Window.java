@@ -67,9 +67,9 @@ public class Window extends JFrame implements ActionListener {
             add(gameMenuScreen);
         } else if (e.getSource() == gameMenuScreen.randomPlayerButton) {
             remove(gameMenuScreen);
-            lobbyScreen.subjectOneButton.setText(session.getProposedSubjectOne().getName());
-            lobbyScreen.subjectTwoButton.setText(session.getProposedSubjectTwo().getName());
-            lobbyScreen.subjectThreeButton.setText(session.getProposedSubjectThree().getName());
+            lobbyScreen.subjectOneButton.setText(session.getProposedSubjectList().get(0).getName());
+            lobbyScreen.subjectTwoButton.setText(session.getProposedSubjectList().get(1).getName());
+            lobbyScreen.subjectThreeButton.setText(session.getProposedSubjectList().get(2).getName());
             add(lobbyScreen);
         } else if (e.getSource() == lobbyScreen.subjectOneButton) {
             session.setCurrentQuestions(lobbyScreen.subjectOneButton.getText(), session.getTotalQsInRond());

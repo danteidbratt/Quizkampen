@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,20 +46,18 @@ public class Database {
         subjectList.add(history);
         subjectList.add(it);
         subjectList.add(sport); // index 9
-    
-}
+    }
+
     public void loadThreeSubjects(SessionQ session) {
-        sessionQ = session;
         Collections.shuffle(subjectList);
 
-        sessionQ.setProposedSubjectOne(subjectList.get(0));
-        sessionQ.setProposedSubjectTwo(subjectList.get(1));
-        sessionQ.setProposedSubjectThree(subjectList.get(2));
+        //List<ListClass> temp = Arrays.asList(subjectList.get(0), subjectList.get(1), subjectList.get(2));
 
         /* Subjectlist */
-        //sessionQ.proposedSubjectList.add(subjectList.get(one));
-        //sessionQ.proposedSubjectList.add(subjectList.get(two));
-        //sessionQ.proposedSubjectList.add(subjectList.get(three));
+        session.setProposedSubjectList(Arrays.asList(subjectList.get(0), subjectList.get(1), subjectList.get(2)));
+
+        /* Subjectlist */
+
         //sessionQ.addProposedSubject(subjectList.get(one));
         //sessionQ.addProposedSubject(subjectList.get(two));
         //sessionQ.addProposedSubject(subjectList.get(three));
