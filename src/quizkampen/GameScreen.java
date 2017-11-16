@@ -1,21 +1,30 @@
 package quizkampen;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.Year;
 
 public class GameScreen extends JPanel {
-
-    JPanel gameStatsPanel = new JPanel();
-    JPanel gameScreen = new JPanel();
-    JPanel questionPanel = new JPanel();
-    JPanel answerPanel = new JPanel();
-    JPanel topPanel = new JPanel();
-    JTextField points = new JTextField("Poäng: 1");
-    JTextField questionNumber = new JTextField("Fråga: 1/2");
-    JTextField rond = new JTextField("Rond: 2/2");
+	private final JPanel centerPanel = new JPanel();
+	private final JPanel roundPanel = new JPanel();
+	private final JPanel questionPanel = new JPanel();
+	private final JLabel topSpace = new JLabel("");
+    private final JLabel sideSpaceWest = new JLabel("");
+    private final JLabel sideSpaceEast = new JLabel("");
+    private final JLabel bottomSpace = new JLabel("");
+	
+	JLabel roundTextLabel = new JLabel("Round");
+	JLabel roundBoxLabel = new JLabel("1/2");
+	JLabel roundSpace = new JLabel("");
+	JPanel roundQuestionsPanel = new JPanel();
+	JLabel questionBox1 = new JLabel("");
+	JLabel questionBox2 = new JLabel("");
+	
     JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
     JButton answer1Button = new JButton("1. Oslo");
     JButton answer2Button = new JButton("2. Stockholm");
@@ -31,27 +40,23 @@ public class GameScreen extends JPanel {
     }
 
     public void setPanel() {
-        setLayout(new GridLayout(3, 1));
-        questionPanel.add(questionButton);
-        answerPanel.add(answer1Button);
-        answerPanel.add(answer2Button);
-        answerPanel.add(answer3Button);
-        answerPanel.add(answer4Button);
-
-        gameStatsPanel.add(points);
-        gameStatsPanel.add(questionNumber);
-        gameStatsPanel.add(rond);
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.PAGE_AXIS));
-        topPanel.add(gameStatsPanel);
-        topPanel.add(questionPanel);
-
-        gameScreen.setLayout(new BoxLayout(gameScreen, BoxLayout.PAGE_AXIS));
-        gameScreen.add(topPanel);
-        gameScreen.add(answerPanel);
-        points.setEditable(false);
-        rond.setEditable(false);
-        questionNumber.setEditable(false);
-        add(gameScreen);
+        setLayout(new BorderLayout());
+		topSpace.setPreferredSize(new Dimension(0, 50));
+		sideSpaceWest.setPreferredSize(new Dimension(70, 0));
+        sideSpaceEast.setPreferredSize(new Dimension(70, 0));
+        bottomSpace.setPreferredSize(new Dimension(0, 120));
+		
+		centerPanel.setLayout(new GridLayout(3, 1));
+		
+		roundPanel.setLayout(new BoxLayout(roundPanel, BoxLayout.Y_AXIS));
+		roundPanel.
+		
+		
+		add(topSpace, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+        add(sideSpaceWest, BorderLayout.WEST);
+        add(sideSpaceEast, BorderLayout.EAST);
+		add(bottomSpace, BorderLayout.SOUTH);
     }
 
     public void setActionListener(ActionListener al) {

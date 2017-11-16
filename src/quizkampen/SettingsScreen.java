@@ -14,16 +14,21 @@ public class SettingsScreen extends JPanel{
 	private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
-	JRadioButton blue = new JRadioButton("Blue", true);
-	JRadioButton red = new JRadioButton("Red", false);
-	JRadioButton green = new JRadioButton("Green", false);
-	ButtonGroup buttonGroup = new ButtonGroup();
-    JButton backButton = new JButton("Back");
+	final JRadioButton blue;
+	final JRadioButton red;
+	final JRadioButton green;
+	final ButtonGroup buttonGroup;
+    final JButton backButton;
     
     Color backgroundColor;
     Font buttonFont;
     
     public SettingsScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+		blue = new JRadioButton("Blue", true);
+		red = new JRadioButton("Red", false);
+		green = new JRadioButton("Green", false);
+		buttonGroup = new ButtonGroup();
+		backButton = new JButton("Back");
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
 		setPanel();

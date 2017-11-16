@@ -11,8 +11,8 @@ import javax.swing.*;
 public class LobbyScreen extends JPanel implements Runnable{
     public Thread animation = new Thread(this);
     private final JLabel topSpace = new JLabel("");
-    private final JLabel leftSpace = new JLabel("");
-    private final JLabel rightSpace = new JLabel("");
+    private final JLabel sideSpaceWest = new JLabel("");
+    private final JLabel sideSpaceEast = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
     
     JPanel centerPanel = new JPanel();
@@ -54,8 +54,8 @@ public class LobbyScreen extends JPanel implements Runnable{
         setBackground(backgroundColor);
 
         topSpace.setPreferredSize(new Dimension(0, 100));
-        rightSpace.setPreferredSize(new Dimension(70, 0));
-        leftSpace.setPreferredSize(new Dimension(70, 0));
+        sideSpaceEast.setPreferredSize(new Dimension(70, 0));
+        sideSpaceWest.setPreferredSize(new Dimension(70, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
 
         opponentPanel.setLayout(new BorderLayout(0, 20));
@@ -117,8 +117,8 @@ public class LobbyScreen extends JPanel implements Runnable{
         centerPanel.add(bottomPanel);
 
         add(topSpace, BorderLayout.NORTH);
-        add(rightSpace, BorderLayout.EAST);
-        add(leftSpace, BorderLayout.WEST);
+        add(sideSpaceEast, BorderLayout.EAST);
+        add(sideSpaceWest, BorderLayout.WEST);
         add(bottomSpace, BorderLayout.SOUTH);
         add(centerPanel, BorderLayout.CENTER);
     }
