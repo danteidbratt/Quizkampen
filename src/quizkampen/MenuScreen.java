@@ -71,4 +71,10 @@ public class MenuScreen extends JPanel implements IPanel{
         logoutButton.addActionListener(al);
         exitButton.addActionListener(al);
     }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
+    }
 }

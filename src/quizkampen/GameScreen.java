@@ -127,4 +127,10 @@ public class GameScreen extends JPanel implements IPanel {
         answer3Button.addActionListener(al);
         answer4Button.addActionListener(al);
     }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
+    }
 }
