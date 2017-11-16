@@ -65,7 +65,7 @@ public class LobbyScreen extends JPanel implements Runnable{
         opponentLabel.setBackground(backgroundColor);
         opponentLabel.setOpaque(true);
         opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-        opponentLabel.setForeground(Color.BLACK);
+        opponentLabel.setForeground(Color.WHITE);
         opponentLabel.setHorizontalAlignment(SwingConstants.CENTER);
         opponentLabel.setFont(new Font("SansSerif", 3, 30));
         topBottomSpace1.setBackground(backgroundColor);
