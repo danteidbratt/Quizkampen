@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Window extends JFrame implements ActionListener {
 
@@ -47,14 +46,17 @@ public class Window extends JFrame implements ActionListener {
         panelList.add(sts);
         panelList.add(ls);
         panelList.add(gs);
-        panelList.forEach(e -> e.setPanel());
-        panelList.forEach(e -> e.setActionListener(this));
+        panelList.forEach(e -> {
+            e.setPanel();
+            e.setActionListener(this);
+        });
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ws.okButton) {
+        if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
             remove(ws);
+            ws.userNameInput.setText("Enter username to start");
             add(ms);
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);
