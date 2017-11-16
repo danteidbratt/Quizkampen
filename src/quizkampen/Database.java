@@ -66,15 +66,18 @@ public class Database {
             three = rn.nextInt(subjectList.size() - 1);
         }
 
-        sessionQ.setProposedSubjectOne(subjectList.get(one));
-        sessionQ.setProposedSubjectTwo(subjectList.get(two));
-        sessionQ.setProposedSubjectThree(subjectList.get(three));
+        sessionQ.setProposedSubject(subjectList.get(one));
+        sessionQ.setProposedSubject(subjectList.get(two));
+        sessionQ.setProposedSubject(subjectList.get(three));
+        
+//        sessionQ.setProposedSubjectOne(subjectList.get(one));
+//        sessionQ.setProposedSubjectTwo(subjectList.get(two));
+//        sessionQ.setProposedSubjectThree(subjectList.get(three));
 
     }
 
     public ListClass createQuestionList(String filename, String name) {
         ListClass<Question> tempList = new ListClass<Question>();
-//        List<Question> tempList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             String tempString;
@@ -91,8 +94,6 @@ public class Database {
         } catch (IOException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        temp.setName(name);
         tempList.setName(name);
         return tempList;
     }
