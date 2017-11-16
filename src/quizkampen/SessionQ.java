@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.*;
 
 public class SessionQ implements Serializable {
-    //portnummer = 33333
 
     protected String username;
     protected String chosenSubjectOne;
     protected String chosenSubjectTwo;
-
     public ListClass<Question> proposedSubjectOne;
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
@@ -63,16 +61,6 @@ public class SessionQ implements Serializable {
                break;
            }
        }
-       
-        if (chosenSubject.equals(proposedSubjectOne.getName())) {
-            currentQuestions = getRandomQsFromList(2, proposedSubjectOne);
-        }
-        else if(chosenSubject.equals(proposedSubjectTwo.getName())){
-            currentQuestions = getRandomQsFromList(2, proposedSubjectTwo);
-        }
-        else if(chosenSubject.equals(proposedSubjectThree.getName())){
-            currentQuestions = getRandomQsFromList(2, proposedSubjectThree);
-        }
     }
     
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list){
