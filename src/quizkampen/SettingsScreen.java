@@ -1,37 +1,26 @@
 package quizkampen;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SettingsScreen extends JPanel implements IPanel {
+public class SettingsScreen extends MasterPanel {
 
-    private final JLabel logo = new JLabel("QuizFights");
     private final JPanel centerPanel = new JPanel();
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
-    private final JLabel bottomSpace = new JLabel("");
-	final JRadioButton blue;
-	final JRadioButton red;
-	final JRadioButton green;
-	final ButtonGroup buttonGroup;
+    final JRadioButton blue;
+    final JRadioButton red;
+    final JRadioButton green;
+    final ButtonGroup buttonGroup;
     final JButton backButton;
-    
-    Color backgroundColor;
-    Font buttonFont;
-    
-    public SettingsScreen(Font buttonFont, Color backgroundColor) {
-		blue = new JRadioButton("Blue", true);
-		red = new JRadioButton("Red", false);
-		green = new JRadioButton("Green", false);
-		buttonGroup = new ButtonGroup();
-		backButton = new JButton("Back");
-        this.backgroundColor = backgroundColor;
-        this.buttonFont = buttonFont;
+
+    public SettingsScreen() {
+        blue = new JRadioButton("Blue", true);
+        red = new JRadioButton("Red", false);
+        green = new JRadioButton("Green", false);
+        buttonGroup = new ButtonGroup();
+        backButton = new JButton("Back");
     }
 
     @Override
@@ -40,11 +29,11 @@ public class SettingsScreen extends JPanel implements IPanel {
         setBackground(backgroundColor);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setPreferredSize(new Dimension(0, 200));
-        logo.setForeground(Color.YELLOW);
-        logo.setFont(new Font("SansSarif", 2, 80));
+        logo.setForeground(logoColor);
+        logo.setFont(logoFont);
 
-        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
-        sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+        leftSpace.setPreferredSize(new Dimension(100, 0));
+        rightSpace.setPreferredSize(new Dimension(100, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
 
         centerPanel.setLayout(new GridLayout(4, 1));
@@ -66,8 +55,8 @@ public class SettingsScreen extends JPanel implements IPanel {
 
         add(logo, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(sideSpaceWest, BorderLayout.WEST);
-        add(sideSpaceEast, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
 
@@ -77,11 +66,5 @@ public class SettingsScreen extends JPanel implements IPanel {
         red.addActionListener(al);
         green.addActionListener(al);
         backButton.addActionListener(al);
-    }
-    
-    @Override
-    public void setCustomColor(Color c) {
-        backgroundColor = c;
-        repaint();
     }
 }

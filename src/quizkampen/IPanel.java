@@ -9,6 +9,6 @@ public interface IPanel {
     
     public void setActionListener(ActionListener al);
     
-    public void setCustomColor(Color c);
+    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor);
     
 }

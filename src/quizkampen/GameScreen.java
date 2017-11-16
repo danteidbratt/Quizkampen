@@ -12,22 +12,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameScreen extends JPanel implements IPanel {
+public class GameScreen extends MasterPanel {
 
     private final JPanel centerPanel = new JPanel();
-    private JPanel roundPanel = new JPanel();
-    private JPanel questionsPanel = new JPanel();
-    private final JLabel logo = new JLabel("QuizFights");
-    private final JLabel topSpace = new JLabel("");
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
-    private final JLabel bottomSpace = new JLabel("");
+    private final JPanel roundPanel = new JPanel();
+    private final JPanel questionsPanel = new JPanel();
     private final JPanel cardsPanel = new JPanel();
     private final JPanel answerCardsPanel= new JPanel();
 
-    JLabel roundTextLabel = new JLabel("Round");
-    JLabel roundBoxLabel = new JLabel("  1/2  ");
-    JLabel roundSpace = new JLabel("");
+    private final JLabel roundTextLabel = new JLabel("Round");
+    private JLabel roundBoxLabel = new JLabel("  1/2  ");
+    private final JLabel roundSpace = new JLabel("");
     List<JLabel> questionBoxes = new ArrayList<>();
     JButton questionButton = new JButton("");
     JButton answer1Button = new JButton("");
@@ -35,22 +30,15 @@ public class GameScreen extends JPanel implements IPanel {
     JButton answer3Button = new JButton("");
     JButton answer4Button = new JButton("");
 
-    Color backgroundColor;
-    Font buttonFont;
     int amountOfQuestions = 5;
-
-    public GameScreen(Font buttonFont, Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-        this.buttonFont = buttonFont;
-    }
 
     @Override
     public void setPanel() {
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
         topSpace.setPreferredSize(new Dimension(0, 50));
-        sideSpaceWest.setPreferredSize(new Dimension(70, 0));
-        sideSpaceEast.setPreferredSize(new Dimension(70, 0));
+        leftSpace.setPreferredSize(new Dimension(70, 0));
+        rightSpace.setPreferredSize(new Dimension(70, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 80));
 
         centerPanel.setLayout(new BorderLayout(0, 50));
@@ -91,9 +79,9 @@ public class GameScreen extends JPanel implements IPanel {
         answer2Button.setFont(buttonFont);
         answer3Button.setFont(buttonFont);
         answer4Button.setFont(buttonFont);
-        answer1Button.setBackground(Color.GREEN);
-        answer1Button.setOpaque(true);
-        answer1Button.setBorderPainted(false);
+//        answer1Button.setBackground(Color.GREEN);
+//        answer1Button.setOpaque(true);
+//        answer1Button.setBorderPainted(false);
         answerCardsPanel.add(answer1Button);
         answerCardsPanel.add(answer2Button);
         answerCardsPanel.add(answer3Button);
@@ -105,8 +93,8 @@ public class GameScreen extends JPanel implements IPanel {
         logo.setBackground(backgroundColor);
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
-        logo.setForeground(Color.YELLOW);
-        logo.setFont(new Font("SansSarif", 3, 60));
+        logo.setForeground(logoColor);
+        logo.setFont(logoFont);
 
         centerPanel.add(roundPanel, BorderLayout.NORTH);
         centerPanel.add(cardsPanel);
@@ -114,8 +102,8 @@ public class GameScreen extends JPanel implements IPanel {
         
         add(topSpace, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(sideSpaceWest, BorderLayout.WEST);
-        add(sideSpaceEast, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
 
@@ -126,11 +114,5 @@ public class GameScreen extends JPanel implements IPanel {
         answer2Button.addActionListener(al);
         answer3Button.addActionListener(al);
         answer4Button.addActionListener(al);
-    }
-    
-    @Override
-    public void setCustomColor(Color c) {
-        backgroundColor = c;
-        repaint();
     }
 }

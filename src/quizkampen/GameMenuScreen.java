@@ -1,19 +1,13 @@
 package quizkampen;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class GameMenuScreen extends JPanel implements IPanel {
+public class GameMenuScreen extends MasterPanel{
 
-    private final JLabel logo = new JLabel("QuizFigths");
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
-    private final JLabel bottomSpace = new JLabel("");
     private final JPanel centerPanel = new JPanel();
 
     JButton randomPlayerButton = new JButton("Random player");
@@ -21,25 +15,17 @@ public class GameMenuScreen extends JPanel implements IPanel {
     JButton backButton = new JButton("Back");
     JButton exitButton = new JButton("Exit");
 
-    private Color backgroundColor = new Color(0, 0, 255);
-    private final Font buttonFont;
-
-    public GameMenuScreen(Font buttonFont, Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-        this.buttonFont = buttonFont;
-    }
-
     @Override
     public void setPanel() {
         setLayout(new BorderLayout());
         setBackground(backgroundColor);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setPreferredSize(new Dimension(0, 200));
-        logo.setForeground(Color.YELLOW);
-        logo.setFont(new Font("SansSarif", 2, 80));
+        logo.setForeground(logoColor);
+        logo.setFont(logoFont);
 
-        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
-        sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+        leftSpace.setPreferredSize(new Dimension(100, 0));
+        rightSpace.setPreferredSize(new Dimension(100, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
 
         centerPanel.setLayout(new GridLayout(5, 1, 0, 7));
@@ -55,8 +41,8 @@ public class GameMenuScreen extends JPanel implements IPanel {
 
         add(logo, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(sideSpaceWest, BorderLayout.WEST);
-        add(sideSpaceEast, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
 
@@ -66,11 +52,5 @@ public class GameMenuScreen extends JPanel implements IPanel {
         searchButton.addActionListener(al);
         backButton.addActionListener(al);
         exitButton.addActionListener(al);
-    }
-    
-    @Override
-    public void setCustomColor(Color c) {
-        backgroundColor = c;
-        repaint();
     }
 }
