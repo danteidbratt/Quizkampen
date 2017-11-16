@@ -36,7 +36,7 @@ public class Server {
 
             user1Output.writeObject(session);
 
-            while (waitingForClient2 == false) {                                     // Ny metod som connectar till klient nr 2
+            while (!waitingForClient2) {                                     // Ny metod som connectar till klient nr 2
                 Socket clientSocket2;
                 if ((clientSocket2 = serverSocket.accept()) != null) {
                     ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
@@ -47,7 +47,7 @@ public class Server {
             }
 
             while (true) {
-                if (session.getRequestingNewSubjects() == true) {
+                if (session.getRequestingNewSubjects()) {
                     // fyll på frågor
                     session.setRequestingNewSubjects(false);
                 }

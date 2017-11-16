@@ -10,7 +10,7 @@ public class SessionQ implements Serializable {
     protected String username;
 
     protected List<String> chosenSubject = new ArrayList<String>();  // NY    
-    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
+    private List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
     public List<Question> currentQuestions;
 
     private boolean requestingNewSubjects = false;
@@ -23,6 +23,10 @@ public class SessionQ implements Serializable {
         username = u;
     }
 
+    public void clearProposedSubjectList() {
+        proposedSubjectList.clear();
+    }
+    
     public void setChosenSubject(String subject) {
         this.chosenSubject.add(subject);
     }
@@ -87,5 +91,9 @@ public class SessionQ implements Serializable {
 
     public boolean getRequestingNewSubjects() {
         return this.requestingNewSubjects;
+    }
+
+    public List<ListClass> getProposedSubjectList() {
+        return proposedSubjectList;
     }
 }
