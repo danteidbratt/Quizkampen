@@ -67,7 +67,7 @@ public class Database {
         }
 
         sessionQ.setProposedSubjectOne(subjectList.get(one));
-        sessionQ.setProposedSubjectOne(subjectList.get(two));
+        sessionQ.setProposedSubjectTwo(subjectList.get(two));
         sessionQ.setProposedSubjectThree(subjectList.get(three));
 
     }
