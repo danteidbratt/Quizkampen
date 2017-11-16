@@ -12,18 +12,14 @@ public class SessionQ implements Serializable {
     protected String chosenSubjectOne;  // LÄGG IN I LISTA ISTÄLLET
     protected String chosenSubjectTwo;
 
-    //protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
-    //protected ListClass<Question> proposedSubjectTwo;
-    //protected ListClass<Question> proposedSubjectThree;
+    private ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
+    private ListClass<Question> proposedSubjectTwo;
+    private ListClass<Question> proposedSubjectThree;
 
-    protected List<ListClass> proposedSubjectList;      // lägg de tre listorna ovan
+    protected List<ListClass<Question>> proposedSubjectList;      // lägg de tre listorna ovan
 
     public List<Question> currentQuestions;
     private boolean requestingNewSubjects = false;
-
-    public void addProposedSubject(ListClass<Question> list) {
-        proposedSubjectList.add(list);
-    }
 
     public void resetProposedSubjectList() {
         proposedSubjectList = null;
@@ -57,7 +53,7 @@ public class SessionQ implements Serializable {
         setChosenSubjectOne(chosenSubject);
 
         System.out.println("1");
-        /*
+
         if (proposedSubjectOne.getName().equals(chosenSubject)) {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne);
         } else if (proposedSubjectTwo.getName().equals(chosenSubject)) {
@@ -65,15 +61,15 @@ public class SessionQ implements Serializable {
         } else if (proposedSubjectThree.getName().equals(chosenSubject)) {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree);
         }
-*/
-        for (ListClass<Question> l : proposedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
 
+        /*
+        for (ListClass l : proposedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
             if (l.getName().equals(chosenSubject)) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 System.out.println("2");
                 break;
             }
-        }
+        }*/
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
@@ -112,5 +108,29 @@ public class SessionQ implements Serializable {
 
     public boolean getRequestingNewSubjects() {
         return this.requestingNewSubjects;
+    }
+
+    public void setProposedSubjectOne(ListClass<Question> proposedSubjectOne) {
+        this.proposedSubjectOne = proposedSubjectOne;
+    }
+
+    public void setProposedSubjectTwo(ListClass<Question> proposedSubjectTwo) {
+        this.proposedSubjectTwo = proposedSubjectTwo;
+    }
+
+    public void setProposedSubjectThree(ListClass<Question> proposedSubjectThree) {
+        this.proposedSubjectThree = proposedSubjectThree;
+    }
+
+    public ListClass<Question> getProposedSubjectOne() {
+        return proposedSubjectOne;
+    }
+
+    public ListClass<Question> getProposedSubjectTwo() {
+        return proposedSubjectTwo;
+    }
+
+    public ListClass<Question> getProposedSubjectThree() {
+        return proposedSubjectThree;
     }
 }
