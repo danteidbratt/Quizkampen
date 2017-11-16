@@ -94,6 +94,7 @@ public class WelcomeScreen extends JPanel implements IPanel {
 
     @Override
     public void setActionListener(ActionListener al) {
+        userNameInput.addActionListener(al);
         okButton.addActionListener(al);
         exitButton.addActionListener(al);
     }
