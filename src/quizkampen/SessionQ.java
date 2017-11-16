@@ -12,18 +12,10 @@ public class SessionQ implements Serializable {
     protected String chosenSubjectOne;  // LÄGG IN I LISTA ISTÄLLET
     protected String chosenSubjectTwo;
 
-    private ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
-    private ListClass<Question> proposedSubjectTwo;
-    private ListClass<Question> proposedSubjectThree;
-
-    protected List<ListClass<Question>> proposedSubjectList;      // lägg de tre listorna ovan
+    private List<ListClass> proposedSubjectList;      // lägg de tre listorna ovan
 
     public List<Question> currentQuestions;
     private boolean requestingNewSubjects = false;
-
-    public void resetProposedSubjectList() {
-        proposedSubjectList = null;
-    }
 
     public String getUsername() {
         return username;
@@ -52,24 +44,13 @@ public class SessionQ implements Serializable {
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubjectOne(chosenSubject);
 
-        System.out.println("1");
-
-        if (proposedSubjectOne.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne);
-        } else if (proposedSubjectTwo.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectTwo);
-        } else if (proposedSubjectThree.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree);
-        }
-
-        /*
-        for (ListClass l : proposedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
+        for (ListClass l : proposedSubjectList) {
             if (l.getName().equals(chosenSubject)) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 System.out.println("2");
                 break;
             }
-        }*/
+        }
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
@@ -110,27 +91,11 @@ public class SessionQ implements Serializable {
         return this.requestingNewSubjects;
     }
 
-    public void setProposedSubjectOne(ListClass<Question> proposedSubjectOne) {
-        this.proposedSubjectOne = proposedSubjectOne;
+    public List<ListClass> getProposedSubjectList() {
+        return proposedSubjectList;
     }
 
-    public void setProposedSubjectTwo(ListClass<Question> proposedSubjectTwo) {
-        this.proposedSubjectTwo = proposedSubjectTwo;
-    }
-
-    public void setProposedSubjectThree(ListClass<Question> proposedSubjectThree) {
-        this.proposedSubjectThree = proposedSubjectThree;
-    }
-
-    public ListClass<Question> getProposedSubjectOne() {
-        return proposedSubjectOne;
-    }
-
-    public ListClass<Question> getProposedSubjectTwo() {
-        return proposedSubjectTwo;
-    }
-
-    public ListClass<Question> getProposedSubjectThree() {
-        return proposedSubjectThree;
+    public void setProposedSubjectList(List<ListClass> proposedSubjectList) {
+        this.proposedSubjectList = proposedSubjectList;
     }
 }
