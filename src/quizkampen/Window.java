@@ -16,10 +16,10 @@ public class Window extends JFrame implements ActionListener {
     WelcomeScreen ws;
     MenuScreen ms;
     GameMenuScreen gms;
-    SettingsScreen ses;
-    StatsScreen sts;
     LobbyScreen ls;
     GameScreen gs;
+    SettingsScreen ses;
+    StatsScreen sts;
 
     public Window() {
         ws = new WelcomeScreen(this, buttonFont, backgroundColor);
@@ -51,6 +51,7 @@ public class Window extends JFrame implements ActionListener {
         sts.setActionListener(this);
         ls.setPanel();
         ls.setActionListener(this);
+        ls.animation.start();
         gs.setPanel();
         gs.setActionListener(this);
     }

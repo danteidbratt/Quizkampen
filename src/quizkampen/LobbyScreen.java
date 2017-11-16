@@ -9,9 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LobbyScreen extends JPanel implements Runnable{
+    public Thread animation = new Thread(this);
     private final JLabel topSpace = new JLabel("");
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
+    private final JLabel leftSpace = new JLabel("");
+    private final JLabel rightSpace = new JLabel("");
     private final JLabel bottomSpace = new JLabel("");
     
     JPanel centerPanel = new JPanel();
@@ -37,12 +38,15 @@ public class LobbyScreen extends JPanel implements Runnable{
     JButton startButton = new JButton("Start");
     JButton backButton = new JButton("Back");
     
+    boolean loopAnimation;
+    
     private Color backgroundColor;
     Font buttonFont;
     
     public LobbyScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
+        loopAnimation = true;
     }
     
     public void setPanel() {
@@ -50,8 +54,8 @@ public class LobbyScreen extends JPanel implements Runnable{
         setBackground(backgroundColor);
 
         topSpace.setPreferredSize(new Dimension(0, 100));
-        sideSpaceEast.setPreferredSize(new Dimension(70, 0));
-        sideSpaceWest.setPreferredSize(new Dimension(70, 0));
+        rightSpace.setPreferredSize(new Dimension(70, 0));
+        leftSpace.setPreferredSize(new Dimension(70, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 120));
 
         opponentPanel.setLayout(new BorderLayout(0, 20));
@@ -63,7 +67,6 @@ public class LobbyScreen extends JPanel implements Runnable{
         opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         opponentLabel.setForeground(Color.BLACK);
         opponentLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLabel.setForeground(Color.WHITE);
         opponentLabel.setFont(new Font("SansSerif", 3, 30));
         topBottomSpace1.setBackground(backgroundColor);
         topBottomSpace1.setOpaque(true);
@@ -114,8 +117,8 @@ public class LobbyScreen extends JPanel implements Runnable{
         centerPanel.add(bottomPanel);
 
         add(topSpace, BorderLayout.NORTH);
-        add(sideSpaceEast, BorderLayout.EAST);
-        add(sideSpaceWest, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
         add(bottomSpace, BorderLayout.SOUTH);
         add(centerPanel, BorderLayout.CENTER);
     }
@@ -129,6 +132,19 @@ public class LobbyScreen extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while(loopAnimation){
+            try {
+                opponentLabel.setText("");
+                Thread.sleep(400);
+                opponentLabel.setText(".");
+                Thread.sleep(400);
+                opponentLabel.setText(". .");
+                Thread.sleep(400);
+                opponentLabel.setText(". . .");
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

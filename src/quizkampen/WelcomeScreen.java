@@ -45,7 +45,7 @@ public class WelcomeScreen extends JPanel{
 		
 		sideSpaceWest.setPreferredSize(new Dimension(100, 0));
 		sideSpaceEast.setPreferredSize(new Dimension(100, 0));
-		bottomSpace.setPreferredSize(new Dimension(0, 200));
+		bottomSpace.setPreferredSize(new Dimension(0, 150));
 		
 		loginPanel.setLayout(new GridLayout(3, 1, 0, 5));
 		loginPanel.setBackground(backgroundColor);
@@ -53,6 +53,7 @@ public class WelcomeScreen extends JPanel{
 		loginText.setFont(new Font("SansSerif", 3, 30));
 		loginText.setForeground(Color.GREEN);
                 userNameInput.setHorizontalAlignment(SwingConstants.CENTER);
+                userNameInput.setFont(new Font("SansSerif", 1, 16));
                 okButton.setFont(buttonFont);
 		loginPanel.add(loginText);
 		loginPanel.add(userNameInput);
