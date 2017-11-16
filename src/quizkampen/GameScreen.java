@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class GameScreen extends JPanel {
+public class GameScreen extends JPanel implements IPanel {
 
     JPanel gameStatsPanel = new JPanel();
     JPanel gameScreen = new JPanel();
@@ -25,11 +25,12 @@ public class GameScreen extends JPanel {
     Color backgroundColor;
     Font buttonFont;
 
-    public GameScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
+    public GameScreen(Font buttonFont, Color backgroundColor) {
         this.backgroundColor = backgroundColor;
         this.buttonFont = buttonFont;
     }
 
+    @Override
     public void setPanel() {
         setLayout(new GridLayout(3, 1));
         questionPanel.add(questionButton);
@@ -54,6 +55,7 @@ public class GameScreen extends JPanel {
         add(gameScreen);
     }
 
+    @Override
     public void setActionListener(ActionListener al) {
         questionButton.addActionListener(al);
         answer1Button.addActionListener(al);
