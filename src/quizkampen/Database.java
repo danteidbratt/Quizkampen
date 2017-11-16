@@ -25,7 +25,8 @@ public class Database {
     protected List<List<Question>> subjectList = new ArrayList<List<Question>>();
     protected SessionQ sessionQ;
 
-    public void createSubjectList() {
+    Database () {
+    
         science = createQuestionList("Database_Science.txt");
         film = createQuestionList("Database_Film.txt");
         food = createQuestionList("Database_Food.txt");
@@ -47,11 +48,11 @@ public class Database {
         subjectList.add(history);
         subjectList.add(it);
         subjectList.add(sport);
-    }
-
+    
+}
     public void loadThreeSubjects(SessionQ session) {
         sessionQ = session;
-        createSubjectList();
+       
 
         Random rn = new Random();
 

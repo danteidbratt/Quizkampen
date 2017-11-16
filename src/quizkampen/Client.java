@@ -14,14 +14,20 @@ public class Client {
     public Client() {
         try {
             this.bridge = new Socket("127.0.0.1", 33333);
-//            Gui gui = new Gui();
             Window w = new Window();
+            w.setFrame();
+            w.ws.setPanel();
+            w.ws.setActionListener(w);
+            
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());                   
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
-
            
             session = (SessionQ)in.readObject();
             System.out.println(session.proposedSubjectOne.get(0).question);
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(0).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(1).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(2).getAnswer());
+            System.out.println(session.proposedSubjectOne.get(0).answers.get(3).getAnswer());
             
             out.writeObject(session);
             

@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Server.java</file>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Question.java</file>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Gui.java</file>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/SessionQ.java</file>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Quizkampen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/MenuScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/LobbyScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/GameMenuScreen.java</file>
             <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Client.java</file>
             <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/ServerListener.java</file>
-            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/AnswerAlternative.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/WelcomeScreen.java</file>
         </group>
     </open-files>
 </project-private>
