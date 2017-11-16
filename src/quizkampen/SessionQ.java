@@ -1,10 +1,7 @@
 package quizkampen;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SessionQ implements Serializable {
     //portnummer = 33333
@@ -16,6 +13,8 @@ public class SessionQ implements Serializable {
     public ListClass<Question> proposedSubjectOne;
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
+    protected List<ListClass> propsedSubjectList = Arrays.asList(proposedSubjectOne,
+            proposedSubjectTwo, proposedSubjectThree);
     protected List<Question> currentQuestions; 
 
     
@@ -57,6 +56,14 @@ public class SessionQ implements Serializable {
     
     public void setCurrentQuestions(String chosenSubject){
        setChosenSubjectOne(chosenSubject);
+
+       for(ListClass l : propsedSubjectList) {
+           if(chosenSubject.equalsIgnoreCase(l.getName())) {
+               currentQuestions = getRandomQsFromList(2,l);
+               break;
+           }
+       }
+       
         if (chosenSubject.equals(proposedSubjectOne.getName())) {
             currentQuestions = getRandomQsFromList(2, proposedSubjectOne);
         }
