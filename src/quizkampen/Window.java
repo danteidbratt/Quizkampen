@@ -8,6 +8,7 @@ import java.util.*;
 import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener {
+    protected SessionQ session;
 
     private final Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
     private final Color backgroundColor = new Color(0, 0, 255);
@@ -20,7 +21,7 @@ public class Window extends JFrame implements ActionListener {
     SettingsScreen ses;
     StatsScreen sts;
 
-    public Window() {
+    public Window(SessionQ session) {
         ws = new WelcomeScreen(buttonFont, backgroundColor);
         ms = new MenuScreen(buttonFont, backgroundColor);
         gms = new GameMenuScreen(buttonFont, backgroundColor);
@@ -28,6 +29,7 @@ public class Window extends JFrame implements ActionListener {
         sts = new StatsScreen(buttonFont, backgroundColor);
         ls = new LobbyScreen(buttonFont, backgroundColor);
         gs = new GameScreen(buttonFont, backgroundColor);
+        this.session = session;
     }
 
     public void setFrame() {

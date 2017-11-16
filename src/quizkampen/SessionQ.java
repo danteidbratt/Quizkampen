@@ -53,12 +53,12 @@ public class SessionQ implements Serializable {
         this.proposedSubjectThree = lista;
     }
 
-    public void setCurrentQuestions(String chosenSubject) {
+    public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubjectOne(chosenSubject);
 
         for (ListClass l : propsedSubjectList) {
             if (chosenSubject.equalsIgnoreCase(l.getName())) {
-                currentQuestions = getRandomQsFromList(2, l);
+                currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 break;
             }
         }
