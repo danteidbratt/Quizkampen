@@ -15,11 +15,19 @@ public class SessionQ implements Serializable {
     protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
-    protected List<ListClass> propsedSubjectList      // lägg de tre listorna ovan
-            = Arrays.asList(proposedSubjectOne,       // i en sån här lista
-            proposedSubjectTwo, proposedSubjectThree);
+
+    private List<ListClass<Question>> proposedSubjectList;      // lägg de tre listorna ovan
+
     public List<Question> currentQuestions;
     private boolean requestingNewSubjects = false;
+
+    public void addProposedSubject(ListClass<Question> list) {
+        proposedSubjectList.add(list);
+    }
+
+    public void resetProposedSubjectList() {
+        proposedSubjectList = null;
+    }
 
     public String getUsername() {
         return username;
@@ -60,6 +68,7 @@ public class SessionQ implements Serializable {
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubjectOne(chosenSubject);
 
+        System.out.println("1");
         /*
         if (proposedSubjectOne.getName().equals(chosenSubject)) {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne);
@@ -69,9 +78,11 @@ public class SessionQ implements Serializable {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree);
         }
 */
-        for (ListClass l : propsedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
-            if (chosenSubject.equalsIgnoreCase(l.getName())) {
+        for (ListClass<Question> l : proposedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
+
+            if (l.getName().equals(chosenSubject)) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
+                System.out.println("2");
                 break;
             }
         }
@@ -125,5 +136,9 @@ public class SessionQ implements Serializable {
 
     public boolean getRequestingNewSubjects() {
         return this.requestingNewSubjects;
+    }
+
+    public List<ListClass<Question>> getProposedSubjectList() {
+        return proposedSubjectList;
     }
 }

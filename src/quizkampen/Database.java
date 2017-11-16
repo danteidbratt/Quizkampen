@@ -70,6 +70,10 @@ public class Database {
         sessionQ.setProposedSubjectTwo(subjectList.get(two));
         sessionQ.setProposedSubjectThree(subjectList.get(three));
 
+        /* Subjectlist */
+        sessionQ.addProposedSubject(subjectList.get(one));
+        sessionQ.addProposedSubject(subjectList.get(two));
+        sessionQ.addProposedSubject(subjectList.get(three));
     }
 
     public ListClass createQuestionList(String filename, String name) {
