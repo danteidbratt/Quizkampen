@@ -16,9 +16,7 @@ public class SessionQ implements Serializable {
     protected List<Question> proposedSubjectTwo;
     protected List<Question> proposedSubjectThree;
 
-    SessionQ() {
-
-    }
+    
 
     public String getUsername() {
         return username;
