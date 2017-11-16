@@ -49,6 +49,11 @@ public class SessionQ implements Serializable {
     public void setProposedSubjectThree(List lista) {
         this.proposedSubjectThree = lista;
     }
+    
+    //public void setCurrentQuestions(String chosenSubject){
+       // setChosenSubjectOne(chosenSubject);
+        //if (chosenSubject.equals(proposedSubjectOne))
+    //}
 
     public List getProposedSubjectOne() {
         return proposedSubjectOne;
@@ -61,7 +66,7 @@ public class SessionQ implements Serializable {
     public List getProposedSubjectThree() {
         return proposedSubjectThree;
     }
-    public List getcurrentQuestions() {
+    public List getCurrentQuestions() {
         return currentQuestions; 
     }
 }
