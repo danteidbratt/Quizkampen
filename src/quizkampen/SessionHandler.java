@@ -3,12 +3,19 @@ package quizkampen;
 public class SessionHandler {
     private SessionQ sessionQ;
     private States state;
+    private int totalRonds; 
+    private int totalQuestionsinRond;
+    private PropertiesReader p; 
+    
+    
     private enum States {CONNECTED, WAITINGFOROPPONENTTOCONNECT,
-        PLAYINGGAME, WAITINGFORSERVER, IDLE
-    }
+        PLAYINGGAME, WAITINGFORSERVER, IDLE }
 
     public SessionHandler(SessionQ sessionQ) {
         this.sessionQ = sessionQ;
+        p = new PropertiesReader(); 
+        this.totalRonds = p.getRonds(); 
+        this.totalQuestionsinRond = p.getQuestionsInRond();
     }
 
     public void setState(States state) {
@@ -37,10 +44,6 @@ public class SessionHandler {
 
                 break;
         }
-    }
-
-    public static void main(String[] args) {
-        
     }
 }
 
