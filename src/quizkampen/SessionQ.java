@@ -8,17 +8,11 @@ public class SessionQ implements Serializable {
     private int totalRonds;
     private int totalQuestionsinRond;
     protected String username;
-    
-    protected String chosenSubjectOne;  // LÄGG IN I LISTA ISTÄLLET
-    protected String chosenSubjectTwo;
 
-    protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
-    protected ListClass<Question> proposedSubjectTwo;
-    protected ListClass<Question> proposedSubjectThree;
-//    protected List<ListClass> propsedSubjectList      // lägg de tre listorna ovan 
-//            = Arrays.asList(proposedSubjectOne,       // i en sån här lista
-//            proposedSubjectTwo, proposedSubjectThree);
+    protected List<String> chosenSubject = new ArrayList<String>();  // NY    
+    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
     public List<Question> currentQuestions;
+
     private boolean requestingNewSubjects = false;
 
     public String getUsername() {
@@ -29,51 +23,31 @@ public class SessionQ implements Serializable {
         username = u;
     }
 
-    public void setChosenSubjectOne(String chosenSubject) {
-        this.chosenSubjectOne = chosenSubject;
+    public void setChosenSubject(String subject) {
+        this.chosenSubject.add(subject);
     }
 
-    public void setChosenSubjectTwo(String chosenSubject) {
-        this.chosenSubjectTwo = chosenSubject;
+    public List<String> getChosenSubject() {
+        return this.chosenSubject;
     }
 
-    public String getChosenSubjectOne() {
-        return chosenSubjectOne;
+    public void setProposedSubject(ListClass subjectList) {
+        this.proposedSubjectList.add(subjectList);
     }
 
-    public String getChosenSubjectTwo() {
-        return chosenSubjectTwo;
-    }
-
-    public void setProposedSubjectOne(ListClass lista) {
-        this.proposedSubjectOne = lista;
-    }
-
-    public void setProposedSubjectTwo(ListClass lista) {
-        this.proposedSubjectTwo = lista;
-    }
-
-    public void setProposedSubjectThree(ListClass lista) {
-        this.proposedSubjectThree = lista;
+    public List<ListClass> getProposedSubject() {
+        return proposedSubjectList;
     }
 
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
-        setChosenSubjectOne(chosenSubject);
+        setChosenSubject(chosenSubject);
 
-        if (proposedSubjectOne.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne);
-        } else if (proposedSubjectTwo.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectTwo);
-        } else if (proposedSubjectThree.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree);
+        for (ListClass l : proposedSubjectList) {                                  // NY (Davens metod)
+            if (chosenSubject.equalsIgnoreCase(l.getName())) {
+                currentQuestions = getRandomQsFromList(howManyQuestions, l);
+                break;
+            }
         }
-
-//        for (ListClass l : propsedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
-//            if (chosenSubject.equalsIgnoreCase(l.getName())) {
-//                currentQuestions = getRandomQsFromList(howManyQuestions, l);
-//                break;
-//            }
-//        }
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
@@ -85,18 +59,6 @@ public class SessionQ implements Serializable {
             lista.add(searchList.get(i));
         }
         return lista;
-    }
-
-    public ListClass getProposedSubjectOne() {
-        return proposedSubjectOne;
-    }
-
-    public ListClass getProposedSubjectTwo() {
-        return proposedSubjectTwo;
-    }
-
-    public ListClass getProposedSubjectThree() {
-        return proposedSubjectThree;
     }
 
     public List<Question> getCurrentQuestions() {

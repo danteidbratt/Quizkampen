@@ -6,12 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerListener extends Thread {
+
     protected int port = 33333;
     ServerSocket serverSocket;
-    //SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
-        serverSocket = new ServerSocket(port);  
+        serverSocket = new ServerSocket(port);
     }
 
     @Override
@@ -19,9 +19,7 @@ public class ServerListener extends Thread {
         while (true) {
             try {
                 Socket clientSock1 = serverSocket.accept();
-                Socket clientSock2 = serverSocket.accept();
-                Server server = new Server(clientSock1, clientSock2);
-
+                Server server = new Server(clientSock1, serverSocket);
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             }
