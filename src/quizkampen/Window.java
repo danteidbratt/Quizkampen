@@ -72,13 +72,23 @@ public class Window extends JFrame implements ActionListener {
             ls.subjectTwoButton.setText(session.proposedSubjectTwo.getName());
             ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
             add(ls);
-        } else if (e.getSource() == ls.subjectOneButton
-                || e.getSource() == ls.subjectTwoButton
-                || e.getSource() == ls.subjectThreeButton) {
+        } else if (e.getSource() == ls.subjectOneButton){
+            System.out.println("hej");
+            session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
+            System.out.println("hej2");
             ls.startButton.addActionListener(this);
-        } else if (e.getSource() == ls.startButton) {
+            System.out.println("hej3");
+        } else if(e.getSource() == ls.subjectTwoButton){
+            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if(e.getSource() == ls.subjectThreeButton){
+            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if(e.getSource() == ls.startButton){
             remove(ls);
+            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
             add(gs);
+            
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
             add(ses);
