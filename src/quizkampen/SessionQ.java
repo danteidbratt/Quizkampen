@@ -98,7 +98,7 @@ public class SessionQ implements Serializable {
         return proposedSubjectThree;
     }
 
-    public List getCurrentQuestions() {
+    public List<Question> getCurrentQuestions() {
         return currentQuestions;
     }
     
