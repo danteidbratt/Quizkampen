@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -52,24 +53,11 @@ public class Database {
 }
     public void loadThreeSubjects(SessionQ session) {
         sessionQ = session;
+        Collections.shuffle(subjectList);
 
-        Random rn = new Random();
-
-        int one = rn.nextInt(subjectList.size() - 1);
-        int two;
-        while ((two = rn.nextInt(subjectList.size() - 1)) == one) {
-            two = rn.nextInt(subjectList.size() - 1);
-        }
-        int three;
-        while ((three = rn.nextInt(subjectList.size() - 1)) == two
-                || (three = rn.nextInt(subjectList.size() - 1)) == one) {
-            three = rn.nextInt(subjectList.size() - 1);
-        }
-
-        sessionQ.setProposedSubjectOne(subjectList.get(one));
-        sessionQ.setProposedSubjectTwo(subjectList.get(two));
-        sessionQ.setProposedSubjectThree(subjectList.get(three));
-
+        sessionQ.setProposedSubjectOne(subjectList.get(0));
+        sessionQ.setProposedSubjectTwo(subjectList.get(1));
+        sessionQ.setProposedSubjectThree(subjectList.get(2));
     }
 
     public ListClass createQuestionList(String filename, String name) {
