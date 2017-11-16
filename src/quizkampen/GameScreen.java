@@ -16,7 +16,7 @@ import java.util.List;
 public class GameScreen extends JPanel implements IPanel{
 	private final JPanel centerPanel = new JPanel();
 	private final JPanel roundPanel = new JPanel();
-	private final JPanel questionPanel = new JPanel();
+	private final JPanel questionsPanel = new JPanel();
 	private final JLabel topSpace = new JLabel("");
     private final JLabel sideSpaceWest = new JLabel("");
     private final JLabel sideSpaceEast = new JLabel("");
@@ -25,7 +25,6 @@ public class GameScreen extends JPanel implements IPanel{
 	JLabel roundTextLabel = new JLabel("Round");
 	JLabel roundBoxLabel = new JLabel("1/2");
 	JLabel roundSpace = new JLabel("");
-	JPanel questionsPanel = new JPanel();
 	List<JLabel> questionBoxes = new ArrayList<>();
     JButton questionButton = new JButton("Vilken huvudstad är störst i Norden?");
     JButton answer1Button = new JButton("1. Oslo");
@@ -42,6 +41,7 @@ public class GameScreen extends JPanel implements IPanel{
         this.buttonFont = buttonFont;
     }
 
+	@Override
     public void setPanel() {
         setLayout(new BorderLayout());
 		setBackground(backgroundColor);
@@ -67,10 +67,7 @@ public class GameScreen extends JPanel implements IPanel{
 			questionBoxes.get(i).setOpaque(true);
 			questionBoxes.get(i).setBackground(Color.gray);
 			questionBoxes.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-			questionPanel.add(questionBoxes.get(i));
-		}
-		for (JLabel questionBoxe : questionBoxes) {
-			System.out.println("hej");
+			questionsPanel.add(questionBoxes.get(i));
 		}
 
 		roundSpace.setPreferredSize(new Dimension(0, 20));
@@ -86,6 +83,7 @@ public class GameScreen extends JPanel implements IPanel{
 		add(bottomSpace, BorderLayout.SOUTH);
     }
 
+	@Override
     public void setActionListener(ActionListener al) {
         questionButton.addActionListener(al);
         answer1Button.addActionListener(al);
