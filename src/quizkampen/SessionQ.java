@@ -9,9 +9,11 @@ public class SessionQ implements Serializable {
     protected String username;
     protected String chosenSubjectOne;
     protected String chosenSubjectTwo;
-    public List<Question> proposedSubjectOne;
-    protected List<Question> proposedSubjectTwo;
-    protected List<Question> proposedSubjectThree;
+
+    public ListClass<Question> proposedSubjectOne;
+    protected ListClass<Question> proposedSubjectTwo;
+    protected ListClass<Question> proposedSubjectThree;
+    protected List<Question> currentQuestions; 
 
     
     public String getUsername() {
@@ -38,28 +40,35 @@ public class SessionQ implements Serializable {
         return chosenSubjectTwo;
     }
 
-    public void setProposedSubjectOne(List lista) {
+    public void setProposedSubjectOne(ListClass lista) {
         this.proposedSubjectOne = lista;
     }
 
-    public void setProposedSubjectTwo(List lista) {
+    public void setProposedSubjectTwo(ListClass lista) {
         this.proposedSubjectTwo = lista;
     }
 
-    public void setProposedSubjectThree(List lista) {
+    public void setProposedSubjectThree(ListClass lista) {
         this.proposedSubjectThree = lista;
     }
+    
+    //public void setCurrentQuestions(String chosenSubject){
+       // setChosenSubjectOne(chosenSubject);
+        //if (chosenSubject.equals(proposedSubjectOne))
+    //}
 
-    public List getProposedSubjectOne() {
+    public ListClass getProposedSubjectOne() {
         return proposedSubjectOne;
     }
 
-    public List getProposedSubjectTwo() {
+    public ListClass getProposedSubjectTwo() {
         return proposedSubjectTwo;
     }
 
-    public List getProposedSubjectThree() {
+    public ListClass getProposedSubjectThree() {
         return proposedSubjectThree;
     }
-    
+    public List getCurrentQuestions() {
+        return currentQuestions; 
+    }
 }

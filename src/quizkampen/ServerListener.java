@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class ServerListener extends Thread {
     protected int port = 33333;
     ServerSocket serverSocket;
-    SessionQ session = new SessionQ();
+    //SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
         serverSocket = new ServerSocket(port);  
