@@ -8,13 +8,11 @@ public class SessionQ implements Serializable {
     private int totalRonds;
     private int totalQuestionsinRond;
     protected String username;
-    
-    protected String chosenSubjectOne;  // LÄGG IN I LISTA ISTÄLLET
-    protected String chosenSubjectTwo;
 
-    private List<ListClass> proposedSubjectList;      // lägg de tre listorna ovan
-
+    protected List<String> chosenSubject = new ArrayList<String>();  // NY    
+    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
     public List<Question> currentQuestions;
+
     private boolean requestingNewSubjects = false;
 
     public String getUsername() {
@@ -25,27 +23,27 @@ public class SessionQ implements Serializable {
         username = u;
     }
 
-    public void setChosenSubjectOne(String chosenSubject) {
-        this.chosenSubjectOne = chosenSubject;
+    public void setChosenSubject(String subject) {
+        this.chosenSubject.add(subject);
     }
 
-    public void setChosenSubjectTwo(String chosenSubject) {
-        this.chosenSubjectTwo = chosenSubject;
+    public List<String> getChosenSubject() {
+        return this.chosenSubject;
     }
 
-    public String getChosenSubjectOne() {
-        return chosenSubjectOne;
+    public void setProposedSubject(ListClass subjectList) {
+        this.proposedSubjectList.add(subjectList);
     }
 
-    public String getChosenSubjectTwo() {
-        return chosenSubjectTwo;
+    public List<ListClass> getProposedSubject() {
+        return proposedSubjectList;
     }
 
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
-        setChosenSubjectOne(chosenSubject);
+        setChosenSubject(chosenSubject);
 
-        for (ListClass l : proposedSubjectList) {
-            if (l.getName().equals(chosenSubject)) {
+        for (ListClass l : proposedSubjectList) {                                  // NY (Davens metod)
+            if (chosenSubject.equalsIgnoreCase(l.getName())) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 break;
             }
@@ -53,11 +51,12 @@ public class SessionQ implements Serializable {
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
-        List<Question> lista = new ArrayList<>();
-        Collections.shuffle(list);
+        List<Question> lista = new ArrayList<Question>();
+        ListClass<Question> searchList = list;
+        Collections.shuffle(searchList);
 
         for (int i = 0; i < howManyQuestions; i++) {
-            lista.add(((ListClass<Question>) list).get(i));
+            lista.add(searchList.get(i));
         }
         return lista;
     }
@@ -88,13 +87,5 @@ public class SessionQ implements Serializable {
 
     public boolean getRequestingNewSubjects() {
         return this.requestingNewSubjects;
-    }
-
-    public List<ListClass> getProposedSubjectList() {
-        return proposedSubjectList;
-    }
-
-    public void setProposedSubjectList(List<ListClass> proposedSubjectList) {
-        this.proposedSubjectList = proposedSubjectList;
     }
 }
