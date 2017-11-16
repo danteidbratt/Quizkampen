@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Window extends JFrame implements ActionListener {
 
@@ -22,13 +21,13 @@ public class Window extends JFrame implements ActionListener {
     StatsScreen sts;
 
     public Window() {
-        ws = new WelcomeScreen(this, buttonFont, backgroundColor);
-        ms = new MenuScreen(this, buttonFont, backgroundColor);
-        gms = new GameMenuScreen(this, buttonFont, backgroundColor);
-        ses = new SettingsScreen(this, buttonFont, backgroundColor);
-        sts = new StatsScreen(this, buttonFont, backgroundColor);
-        ls = new LobbyScreen(this, buttonFont, backgroundColor);
-        gs = new GameScreen(this, buttonFont, backgroundColor);
+        ws = new WelcomeScreen(buttonFont, backgroundColor);
+        ms = new MenuScreen(buttonFont, backgroundColor);
+        gms = new GameMenuScreen(buttonFont, backgroundColor);
+        ses = new SettingsScreen(buttonFont, backgroundColor);
+        sts = new StatsScreen(buttonFont, backgroundColor);
+        ls = new LobbyScreen(buttonFont, backgroundColor);
+        gs = new GameScreen(buttonFont, backgroundColor);
     }
 
     public void setFrame() {
@@ -38,28 +37,26 @@ public class Window extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        List<JPanel> panelList = new ArrayList<>();
-        ws.setPanel();
-        ws.setActionListener(this);
-        ms.setPanel();
-        ws.setActionListener(this);
-        gms.setPanel();
-        gms.setActionListener(this);
-        ses.setPanel();
-        ses.setActionListener(this);
-        sts.setPanel();
-        sts.setActionListener(this);
-        ls.setPanel();
-        ls.setActionListener(this);
-        ls.animation.start();
-        gs.setPanel();
-        gs.setActionListener(this);
+        
+        List<IPanel> panelList = new ArrayList<>();
+        panelList.add(ws);
+        panelList.add(ms);
+        panelList.add(gms);
+        panelList.add(ses);
+        panelList.add(sts);
+        panelList.add(ls);
+        panelList.add(gs);
+        panelList.forEach(e -> {
+            e.setPanel();
+            e.setActionListener(this);
+        });
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ws.okButton) {
+        if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
             remove(ws);
+            ws.userNameInput.setText("Enter username to start");
             add(ms);
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);

@@ -23,7 +23,8 @@ public class Client {
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
            
             session = (SessionQ)in.readObject();
-//            SessionHandler sessionHandler = new SessionHandler(session);
+            SessionHandler sessionHandler = new SessionHandler(session);
+
             System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(1));

@@ -9,9 +9,11 @@ public class SessionQ implements Serializable {
     protected String username;
     protected String chosenSubjectOne;
     protected String chosenSubjectTwo;
+
     public ListClass<Question> proposedSubjectOne;
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
+    protected List<Question> currentQuestions; 
 
     
     public String getUsername() {
@@ -49,6 +51,11 @@ public class SessionQ implements Serializable {
     public void setProposedSubjectThree(ListClass lista) {
         this.proposedSubjectThree = lista;
     }
+    
+    //public void setCurrentQuestions(String chosenSubject){
+       // setChosenSubjectOne(chosenSubject);
+        //if (chosenSubject.equals(proposedSubjectOne))
+    //}
 
     public ListClass getProposedSubjectOne() {
         return proposedSubjectOne;
@@ -61,5 +68,7 @@ public class SessionQ implements Serializable {
     public ListClass getProposedSubjectThree() {
         return proposedSubjectThree;
     }
-    
+    public List getCurrentQuestions() {
+        return currentQuestions; 
+    }
 }
