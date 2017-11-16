@@ -49,21 +49,6 @@ public class Window extends JFrame implements ActionListener {
         panelList.add(gs);
         panelList.forEach(e -> e.setPanel());
         panelList.forEach(e -> e.setActionListener(this));
-        
-//        ws.setPanel();
-//        ws.setActionListener(this);
-//        ms.setPanel();
-//        ms.setActionListener(this);
-//        gms.setPanel();
-//        gms.setActionListener(this);
-//        ses.setPanel();
-//        ses.setActionListener(this);
-//        sts.setPanel();
-//        sts.setActionListener(this);
-//        ls.setPanel();
-//        ls.setActionListener(this);
-//        gs.setPanel();
-//        gs.setActionListener(this);
     }
 
     @Override
