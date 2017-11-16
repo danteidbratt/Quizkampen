@@ -15,9 +15,9 @@ public class SessionQ implements Serializable {
     protected ListClass<Question> proposedSubjectOne; // GÖR PROTECTED - fixa bugg
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
-//    protected List<ListClass> propsedSubjectList      // lägg de tre listorna ovan 
-//            = Arrays.asList(proposedSubjectOne,       // i en sån här lista
-//            proposedSubjectTwo, proposedSubjectThree);
+    protected List<ListClass> propsedSubjectList      // lägg de tre listorna ovan
+            = Arrays.asList(proposedSubjectOne,       // i en sån här lista
+            proposedSubjectTwo, proposedSubjectThree);
     public List<Question> currentQuestions;
     private boolean requestingNewSubjects = false;
 
@@ -60,6 +60,7 @@ public class SessionQ implements Serializable {
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubjectOne(chosenSubject);
 
+        /*
         if (proposedSubjectOne.getName().equals(chosenSubject)) {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne);
         } else if (proposedSubjectTwo.getName().equals(chosenSubject)) {
@@ -67,22 +68,21 @@ public class SessionQ implements Serializable {
         } else if (proposedSubjectThree.getName().equals(chosenSubject)) {
             currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree);
         }
-
-//        for (ListClass l : propsedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
-//            if (chosenSubject.equalsIgnoreCase(l.getName())) {
-//                currentQuestions = getRandomQsFromList(howManyQuestions, l);
-//                break;
-//            }
-//        }
+*/
+        for (ListClass l : propsedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
+            if (chosenSubject.equalsIgnoreCase(l.getName())) {
+                currentQuestions = getRandomQsFromList(howManyQuestions, l);
+                break;
+            }
+        }
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
-        List<Question> lista = new ArrayList<Question>();
-        ListClass<Question> searchList = list;
-        Collections.shuffle(searchList);
+        List<Question> lista = new ArrayList<>();
+        Collections.shuffle(list);
 
         for (int i = 0; i < howManyQuestions; i++) {
-            lista.add(searchList.get(i));
+            lista.add(((ListClass<Question>) list).get(i));
         }
         return lista;
     }
