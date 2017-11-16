@@ -12,33 +12,33 @@ import java.util.logging.Logger;
 
 public class Database {
 
-    protected List<Question> science;
-    protected List<Question> film;
-    protected List<Question> food;
-    protected List<Question> celebrities;
-    protected List<Question> music;
-    protected List<Question> politics;
-    protected List<Question> geography;
-    protected List<Question> history;
-    protected List<Question> it;
-    protected List<Question> sport;
-    protected List<List<Question>> subjectList = new ArrayList<List<Question>>();
+    protected ListClass<Question> science;
+    protected ListClass<Question> film;
+    protected ListClass<Question> food;
+    protected ListClass<Question> celebrities;
+    protected ListClass<Question> music;
+    protected ListClass<Question> politics;
+    protected ListClass<Question> geography;
+    protected ListClass<Question> history;
+    protected ListClass<Question> it;
+    protected ListClass<Question> sport;
+    protected List<ListClass<Question>> subjectList = new ArrayList<ListClass<Question>>();
     protected SessionQ sessionQ;
 
     Database () {
     
-        science = createQuestionList("Database_Science.txt");
-        film = createQuestionList("Database_Film.txt");
-        food = createQuestionList("Database_Food.txt");
-        celebrities = createQuestionList("Database_Celebrities.txt");
-        music = createQuestionList("Database_Music.txt");
-        politics = createQuestionList("Database_Politics.txt");
-        geography = createQuestionList("Database_Geography.txt");
-        history = createQuestionList("Database_History.txt");
-        it = createQuestionList("Database_IT.txt");
-        sport = createQuestionList("Database_Sport.txt");
+        science = createQuestionList("Database_Science.txt", "Science");
+        film = createQuestionList("Database_Film.txt", "Film");
+        food = createQuestionList("Database_Food.txt", "Food");
+        celebrities = createQuestionList("Database_Celebrities.txt", "Celebrities");
+        music = createQuestionList("Database_Music.txt", "Music");
+        politics = createQuestionList("Database_Politics.txt", "Politics");
+        geography = createQuestionList("Database_Geography.txt", "Geography");
+        history = createQuestionList("Database_History.txt", "History");
+        it = createQuestionList("Database_IT.txt", "IT");
+        sport = createQuestionList("Database_Sport.txt", "Sport");
 
-        subjectList.add(science);
+        subjectList.add(science); // index 0
         subjectList.add(film);
         subjectList.add(food);
         subjectList.add(celebrities);
@@ -47,12 +47,11 @@ public class Database {
         subjectList.add(geography);
         subjectList.add(history);
         subjectList.add(it);
-        subjectList.add(sport);
+        subjectList.add(sport); // index 9
     
 }
     public void loadThreeSubjects(SessionQ session) {
         sessionQ = session;
-       
 
         Random rn = new Random();
 
@@ -73,13 +72,14 @@ public class Database {
 
     }
 
-    public List createQuestionList(String filename) {
-        List<Question> tempList = new ArrayList<>();
+    public ListClass createQuestionList(String filename, String name) {
+        ListClass<Question> tempList = new ListClass<Question>();
+//        List<Question> tempList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
-            String temp;
-            while ((temp = in.readLine()) != null) {
-                Question tempQuestion = new Question(temp);
+            String tempString;
+            while ((tempString = in.readLine()) != null) {
+                Question tempQuestion = new Question(tempString);
                 tempQuestion.setAnswerAlternatives(in.readLine(), true);
                 for (int i = 0; i < 3; i++) {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
@@ -91,6 +91,9 @@ public class Database {
         } catch (IOException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+//        temp.setName(name);
+        tempList.setName(name);
         return tempList;
     }
 
