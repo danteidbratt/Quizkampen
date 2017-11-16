@@ -38,7 +38,7 @@ public class Database {
         it = createQuestionList("Database_IT.txt", "IT");
         sport = createQuestionList("Database_Sport.txt", "Sport");
 
-        subjectList.add(science); // index 0
+        subjectList.add(science);
         subjectList.add(film);
         subjectList.add(food);
         subjectList.add(celebrities);
@@ -47,7 +47,7 @@ public class Database {
         subjectList.add(geography);
         subjectList.add(history);
         subjectList.add(it);
-        subjectList.add(sport); // index 9
+        subjectList.add(sport);
     
 }
     public void loadThreeSubjects(SessionQ session) {
@@ -69,11 +69,6 @@ public class Database {
         sessionQ.setProposedSubject(subjectList.get(one));
         sessionQ.setProposedSubject(subjectList.get(two));
         sessionQ.setProposedSubject(subjectList.get(three));
-        
-//        sessionQ.setProposedSubjectOne(subjectList.get(one));
-//        sessionQ.setProposedSubjectTwo(subjectList.get(two));
-//        sessionQ.setProposedSubjectThree(subjectList.get(three));
-
     }
 
     public ListClass createQuestionList(String filename, String name) {

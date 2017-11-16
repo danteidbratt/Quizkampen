@@ -42,15 +42,7 @@ public class SessionQ implements Serializable {
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubject(chosenSubject);
 
-//        if (proposedSubjectList.get(0).getName().equals(chosenSubject)) {
-//            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectList.get(0));
-//        } else if (proposedSubjectList.get(1).getName().equals(chosenSubject)) {
-//            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectList.get(1));
-//        } else if (proposedSubjectList.get(2).getName().equals(chosenSubject)) {
-//            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectList.get(2));
-//        }
-
-        for (ListClass l : proposedSubjectList) {                                  // ÄNDRA KODEN OVANFÖR TILL EN SÅN HÄR LISTA
+        for (ListClass l : proposedSubjectList) {                                  // NY (Davens metod)
             if (chosenSubject.equalsIgnoreCase(l.getName())) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 break;
