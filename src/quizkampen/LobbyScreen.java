@@ -150,4 +150,10 @@ public class LobbyScreen extends JPanel implements IPanel, Runnable{
             }
         }
     }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
+    }
 }

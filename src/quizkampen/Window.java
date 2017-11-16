@@ -72,10 +72,14 @@ public class Window extends JFrame implements ActionListener {
             ls.subjectTwoButton.setText(session.proposedSubjectTwo.getName());
             ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
             add(ls);
-        } else if (e.getSource() == ls.subjectOneButton){
-            System.out.println("hej");
+        } else if (e.getSource() == ls.subjectOneButton) {
             session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
-            System.out.println("hej2");
+            ls.startButton.addActionListener(this);
+        } else if (e.getSource() == ls.subjectTwoButton) {
+            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
+            ls.startButton.addActionListener(this);
+        } else if (e.getSource() == ls.subjectThreeButton) {
+            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
             ls.startButton.addActionListener(this);
             System.out.println("hej3");
         } else if(e.getSource() == ls.subjectTwoButton){
@@ -112,6 +116,12 @@ public class Window extends JFrame implements ActionListener {
             add(ms);
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
+        } else if (e.getSource() == ses.blue){
+            
+        } else if (e.getSource() == ses.green){
+            
+        } else if (e.getSource() == ses.red){
+            
         }
         revalidate();
         repaint();

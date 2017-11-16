@@ -67,4 +67,10 @@ public class GameMenuScreen extends JPanel implements IPanel {
         backButton.addActionListener(al);
         exitButton.addActionListener(al);
     }
+    
+    @Override
+    public void setCustomColor(Color c) {
+        backgroundColor = c;
+        repaint();
+    }
 }
