@@ -10,20 +10,21 @@ public class Client {
 
     Socket bridge;
     SessionQ session;
+    Window w;
 
     public Client() {
         try {
             this.bridge = new Socket("127.0.0.1", 33333);
 
-            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
-
-            session = (SessionQ) in.readObject();
-            Window w = new Window(session);
+            SessionHandler sessionHandler = new SessionHandler(session);
+            w = new Window(session);
             w.setFrame();
             w.ws.setPanel();
             w.ws.setActionListener(w);
-            SessionHandler sessionHandler = new SessionHandler(session);
+            
+            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
+            session = (SessionQ) in.readObject();
 
             System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));

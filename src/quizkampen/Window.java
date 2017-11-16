@@ -65,6 +65,9 @@ public class Window extends JFrame implements ActionListener {
             add(gms);
         } else if (e.getSource() == gms.randomPlayerButton) {
             remove(gms);
+            ls.subjectOneButton.setText(session.propsedSubjectList.get(0).getName());
+            ls.subjectTwoButton.setText(session.propsedSubjectList.get(1).getName());
+            ls.subjectThreeButton.setText(session.propsedSubjectList.get(2).getName());
             add(ls);
         } else if (e.getSource() == ls.subjectOneButton
                 || e.getSource() == ls.subjectTwoButton
