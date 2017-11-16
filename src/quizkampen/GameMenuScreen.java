@@ -24,8 +24,8 @@ public class GameMenuScreen extends JPanel {
         private final Font buttonFont;
     
     public GameMenuScreen(ActionListener al, Font buttonFont, Color backgroundColor) {
-                this.backgroundColor = backgroundColor;
-                this.buttonFont = buttonFont;
+		this.backgroundColor = backgroundColor;
+		this.buttonFont = buttonFont;
     }
     
     public void setPanel(){
