@@ -12,7 +12,7 @@ public class SessionQ implements Serializable {
     public List<Question> proposedSubjectOne;
     protected List<Question> proposedSubjectTwo;
     protected List<Question> proposedSubjectThree;
-
+    protected List<Question> currentQuestions; 
     
     public String getUsername() {
         return username;
@@ -61,5 +61,7 @@ public class SessionQ implements Serializable {
     public List getProposedSubjectThree() {
         return proposedSubjectThree;
     }
-    
+    public List getcurrentQuestions() {
+        return currentQuestions; 
+    }
 }
