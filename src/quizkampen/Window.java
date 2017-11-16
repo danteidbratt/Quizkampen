@@ -90,7 +90,7 @@ public class Window extends JFrame implements ActionListener {
             ls.startButton.addActionListener(this);
         } else if(e.getSource() == ls.startButton){
             remove(ls);
-            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
+            gs.questionButton.setText(session.getCurrentQuestions().get(0).getQuestionQ());
             add(gs);
             
         } else if (e.getSource() == ms.settingsButton) {
