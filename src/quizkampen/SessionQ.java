@@ -11,8 +11,9 @@ public class SessionQ implements Serializable {
     public ListClass<Question> proposedSubjectOne;
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
-    protected List<ListClass> propsedSubjectList = Arrays.asList(proposedSubjectOne,
-            proposedSubjectTwo, proposedSubjectThree);
+//    protected List<ListClass> propsedSubjectList
+//            = Arrays.asList(proposedSubjectOne,
+//            proposedSubjectTwo, proposedSubjectThree);
     protected List<Question> currentQuestions;
     private int totalRonds;
     private int totalQuestionsinRond;
@@ -53,16 +54,16 @@ public class SessionQ implements Serializable {
         this.proposedSubjectThree = lista;
     }
 
-    public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
-        setChosenSubjectOne(chosenSubject);
-
-        for (ListClass l : propsedSubjectList) {
-            if (chosenSubject.equalsIgnoreCase(l.getName())) {
-                currentQuestions = getRandomQsFromList(howManyQuestions, l);
-                break;
-            }
-        }
-    }
+//    public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
+//        setChosenSubjectOne(chosenSubject);
+//
+//        for (ListClass l : propsedSubjectList) {
+//            if (chosenSubject.equalsIgnoreCase(l.getName())) {
+//                currentQuestions = getRandomQsFromList(howManyQuestions, l);
+//                break;
+//            }
+//        }
+//    }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> lista = new ArrayList<Question>();

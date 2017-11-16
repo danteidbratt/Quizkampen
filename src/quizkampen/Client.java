@@ -27,12 +27,6 @@ public class Client {
             w.setSessionQ(session);
             SessionHandler sessionHandler = new SessionHandler(session);
 
-            System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(1));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(2));
-            System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(3));
-
             out.writeObject(session);
 
         } catch (IOException ex) {
