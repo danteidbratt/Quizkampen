@@ -24,10 +24,7 @@ public class Client {
            
             session = (SessionQ)in.readObject();
             SessionHandler sessionHandler = new SessionHandler(session);
-<<<<<<< HEAD
-=======
-            
->>>>>>> b176597a720e92d81c00ea15667e92c13de8b20e
+
             System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(1));
