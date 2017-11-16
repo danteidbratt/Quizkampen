@@ -15,16 +15,17 @@ public class Client {
     public Client() {
         try {
             this.bridge = new Socket("127.0.0.1", 33333);
-
-            SessionHandler sessionHandler = new SessionHandler(session);
-            w = new Window(session);
+            Window w = new Window();
             w.setFrame();
             w.ws.setPanel();
             w.ws.setActionListener(w);
             
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
+
             session = (SessionQ) in.readObject();
+            w.setSessionQ(session);
+            SessionHandler sessionHandler = new SessionHandler(session);
 
             System.out.println(session.proposedSubjectOne.get(0).getQuestionQ());
             System.out.println(session.proposedSubjectOne.get(0).getAnswerAlternative(0));

@@ -21,7 +21,7 @@ public class Window extends JFrame implements ActionListener {
     SettingsScreen ses;
     StatsScreen sts;
 
-    public Window(SessionQ session) {
+    public Window() {
         ws = new WelcomeScreen(buttonFont, backgroundColor);
         ms = new MenuScreen(buttonFont, backgroundColor);
         gms = new GameMenuScreen(buttonFont, backgroundColor);
@@ -29,6 +29,9 @@ public class Window extends JFrame implements ActionListener {
         sts = new StatsScreen(buttonFont, backgroundColor);
         ls = new LobbyScreen(buttonFont, backgroundColor);
         gs = new GameScreen(buttonFont, backgroundColor);
+    }
+    
+    public void setSessionQ(SessionQ session){
         this.session = session;
     }
 
