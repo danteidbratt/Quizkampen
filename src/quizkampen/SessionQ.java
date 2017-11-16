@@ -9,17 +9,12 @@ public class SessionQ implements Serializable {
     protected String username;
     protected String chosenSubjectOne;
     protected String chosenSubjectTwo;
-<<<<<<< HEAD
+
     public ListClass<Question> proposedSubjectOne;
     protected ListClass<Question> proposedSubjectTwo;
     protected ListClass<Question> proposedSubjectThree;
-
-=======
-    public List<Question> proposedSubjectOne;
-    protected List<Question> proposedSubjectTwo;
-    protected List<Question> proposedSubjectThree;
     protected List<Question> currentQuestions; 
->>>>>>> ClaudiaFeture
+
     
     public String getUsername() {
         return username;
