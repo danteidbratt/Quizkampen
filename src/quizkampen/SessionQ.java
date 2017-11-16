@@ -47,7 +47,6 @@ public class SessionQ implements Serializable {
         for (ListClass l : proposedSubjectList) {
             if (l.getName().equals(chosenSubject)) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
-                System.out.println("2");
                 break;
             }
         }
