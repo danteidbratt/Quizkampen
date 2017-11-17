@@ -11,7 +11,7 @@ public class SessionQ implements Serializable {
 
     protected List<String> chosenSubject = new ArrayList<String>();  // NY    
     private List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
-    public List<Question> currentQuestions;
+    public List currentQuestions;
 
     private boolean requestingNewSubjects = false;
 
@@ -54,12 +54,13 @@ public class SessionQ implements Serializable {
         }
     }
 
-    private List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
+    //TODO fixa? eller funka den
+    private List<Question> getRandomQsFromList(int howManyQuestions, ListClass<Question> list) {
         List<Question> lista = new ArrayList<Question>();
         Collections.shuffle(list);
 
         for (int i = 0; i < howManyQuestions; i++) {
-            lista.add(lista.get(i));
+            lista.add(list.get(i));
         }
         return lista;
     }
