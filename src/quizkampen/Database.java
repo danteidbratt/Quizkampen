@@ -97,6 +97,7 @@ public class Database {
                 for (int i = 0; i < 3; i++) {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
                 }
+                tempQuestion.shuffleAnswers();  // Blandar svaren
                 tempList.add(tempQuestion);
             }
         } catch (FileNotFoundException ex) {

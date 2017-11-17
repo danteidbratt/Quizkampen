@@ -90,13 +90,12 @@ public class Window extends JFrame implements ActionListener {
             ls.startButton.addActionListener(this);
         } else if(e.getSource() == ls.startButton){
             remove(ls);
-            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
-            gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0));
-            gs.answer2Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(1));
-            gs.answer3Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(2));
-            gs.answer4Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(3));
+            gs.questionButton.setText(session.getCurrentQuestions().get(0).getQuestionQ());
+            gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0).getAnswer());
+            gs.answer2Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(1).getAnswer());
+            gs.answer3Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(2).getAnswer());
+            gs.answer4Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(3).getAnswer());
             add(gs);
-            
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
             add(ses);
