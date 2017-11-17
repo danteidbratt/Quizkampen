@@ -2,6 +2,7 @@ package quizkampen;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Question implements Serializable {
@@ -25,10 +26,13 @@ public class Question implements Serializable {
         return question;
     }
 
+    public void shuffleAnswers() {
+        Collections.shuffle(answers);
+    }
+
     public List<AnswerAlternative> getAnswerAlternatives() {
         return answers;
     }
-    public String getAnswerAlternative(int questionIndex){
-        return this.answers.get(questionIndex).getAnswer();
-    }
+
+    public AnswerAlternative getAnswerAlternative(int questionIndex) { return answers.get(questionIndex); }
 }
