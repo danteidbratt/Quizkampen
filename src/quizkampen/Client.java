@@ -6,23 +6,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Client {
+    private Window w;
 
-    Socket bridge;
-    SessionQ session;
-    Window w;
+    private void startGui(Client client) {
+        w = new Window(client);
+        w.setFrame();
+        w.welcomeScreen.setPanel();
+        w.welcomeScreen.setActionListener(w);
+    }
 
-    public Client() {
+    public void connect() {
         try {
-            this.bridge = new Socket("127.0.0.1", 33333);
-            Window w = new Window();
-            w.setFrame();
-            w.welcomeScreen.setPanel();
-            w.welcomeScreen.setActionListener(w);
-            
+            Socket bridge = new Socket("127.0.0.1", 33333);
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
 
-            session = (SessionQ) in.readObject();
+            SessionQ session = (SessionQ) in.readObject();
             w.setSessionQ(session);
             new SessionHandler(session);
 
@@ -36,6 +35,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        Client c = new Client();
+        Client client = new Client();
+        client.startGui(client);
     }
 }

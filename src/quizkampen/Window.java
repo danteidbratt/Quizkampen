@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener {
     private SessionQ session;
-
+    private Client client;
     List<IPanel> panelList;
 
     WelcomeScreen welcomeScreen;
@@ -19,7 +19,8 @@ public class Window extends JFrame implements ActionListener {
     SettingsScreen settingsScreen;
     StatsScreen statsScreen;
 
-    public Window() {
+    public Window(Client client) {
+        this.client = client;
         welcomeScreen = new WelcomeScreen();
         menuScreen = new MenuScreen();
         gameMenuScreen = new GameMenuScreen();
@@ -67,6 +68,7 @@ public class Window extends JFrame implements ActionListener {
             add(gameMenuScreen);
         } else if (e.getSource() == gameMenuScreen.randomPlayerButton) {
             remove(gameMenuScreen);
+            client.connect();
             lobbyScreen.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
             lobbyScreen.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
             lobbyScreen.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
