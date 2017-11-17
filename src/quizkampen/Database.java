@@ -54,7 +54,7 @@ public class Database {
     }
 
     public void loadThreeSubjects(SessionQ session) {                   // NY - istället för metoden nedanför
-        sessionQ = session;
+        sessionQ = session;                                             // Behövs den här?
         sessionQ.proposedSubjectList.clear();
         Collections.shuffle(subjectList);
         int counter = 0;
