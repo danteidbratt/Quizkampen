@@ -58,8 +58,8 @@ public class Database {
         sessionQ.proposedSubjectList.clear();
         Collections.shuffle(subjectList);
         int counter = 0;
-        while (listFull == false) {
-            if ((sessionQ.getChosenSubject().contains(subjectList.get(counter).getName())) == false) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
+        while (!listFull) {
+            if (!(sessionQ.getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
                 sessionQ.setProposedSubject(subjectList.get(counter));                 // ADD ÄMNE TILL PROPOSED SUBJECT-LISTAN
             }
             counter++;
