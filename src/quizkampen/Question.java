@@ -34,5 +34,5 @@ public class Question implements Serializable {
         return answers;
     }
 
-    public AnswerAlternative getAnswerAlternative(int questionIndex) { return answers.get(0); }
+    public AnswerAlternative getAnswerAlternative(int questionIndex) { return answers.get(questionIndex); }
 }
