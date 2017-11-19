@@ -54,7 +54,7 @@ public class Database {
     }
 
     public void loadThreeSubjects(SessionQ session) {                   // NY - istället för metoden nedanför
-//        sessionQ = session;                                             // Behövs den här?
+        sessionQ = session;                                             // Behövs den här? - Kan skickas in i konstruktorn ist / Anna
         sessionQ.proposedSubjectList.clear();
         Collections.shuffle(subjectList);
         int counter = 0;
@@ -97,7 +97,7 @@ public class Database {
                 for (int i = 0; i < 3; i++) {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
                 }
-//                tempQuestion.shuffleAnswers();  // Blandar svaren
+//                tempQuestion.shuffleAnswers();  // Blandar svaren - Kommenterar bort tills vi har skrivit metoden / Anna
                 tempList.add(tempQuestion);
             }
         } catch (FileNotFoundException ex) {
