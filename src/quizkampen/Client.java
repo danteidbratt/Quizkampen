@@ -17,8 +17,6 @@ public class Client {
             this.bridge = new Socket("127.0.0.1", 33333);
             Window w = new Window();
             w.setFrame();
-            w.ws.setPanel();
-            w.ws.setActionListener(w);
             
             ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
@@ -35,7 +33,7 @@ public class Client {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static void main(String[] args) {
         Client c = new Client();
     }

@@ -7,9 +7,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.*;
 
 public class ResultScreen extends MasterPanel{
@@ -23,34 +20,31 @@ public class ResultScreen extends MasterPanel{
     JLabel namePanelspace = new JLabel(" ");
     JLabel rightName = new JLabel("Satan");
     JPanel numberDisplay = new JPanel();
-    JLabel leftNumber = new JLabel("0");
+    JLabel leftNumber = new JLabel("");
     JLabel dash = new JLabel("-");
-    JLabel rightNumber = new JLabel("0");
+    JLabel rightNumber = new JLabel("");
     
     JPanel roundPanel = new JPanel();
-    JPanel[] rounds = new JPanel[6];
-    JLabel space1 = new JLabel("Round 1");
-    JLabel space2 = new JLabel("Round 2");
-    JLabel space3 = new JLabel("Round 3");
-    JLabel space4 = new JLabel("Round 4");
-    JLabel space5 = new JLabel("Round 5");
-    JLabel space6 = new JLabel("Round 6");
-    JPanel stats1 = new JPanel();
-    JPanel stats2 = new JPanel();
-    JPanel stats3 = new JPanel();
-    JPanel stats4 = new JPanel();
-    JPanel stats5 = new JPanel();
-    JPanel stats6 = new JPanel();
     
+    JPanel[] rounds = new JPanel[6];
+    JLabel[] roundSpaces = new JLabel[6];
+    JPanel[] stats = new JPanel[6];
     JPanel[][] threes = new JPanel[6][2];
     JLabel[][] boxes = new JLabel[6][6];
     JLabel[] subjects = new JLabel[6];
     
     JPanel botPanel = new JPanel();
     JButton nextButton = new JButton("Next Round");
+    
+    int subjectCounter;
 
-    public ResultScreen(int numberOfRounds){
+    public ResultScreen(int numberOfRounds, String playerName, String opponentName){
         this.numberOfRounds = numberOfRounds;
+        leftName.setText(playerName);
+        rightName.setText(opponentName);
+        leftNumber.setText("0");
+        rightNumber.setText("0");
+        subjectCounter = 0;
     }
     
     @Override
@@ -129,30 +123,18 @@ public class ResultScreen extends MasterPanel{
         add(leftSpace, BorderLayout.WEST);
         add(rightSpace, BorderLayout.EAST);
         add(botPanel, BorderLayout.SOUTH);
+        
+        setNumberOfRounds();
     }
     
     private void setRounds(){
-        int lCounter = 0;
-        int pCounter = 1;
-        List<JLabel> LabelList = new ArrayList<> ();
-        LabelList = Arrays.asList(space1, space2, space3, space4, space5, space6);
-        LabelList.forEach(e -> {e.setBackground(backgroundColor); e.setFont(new Font("SansSerif", 2, 22));
-                                e.setForeground(infoTextColor); e.setVisible(true);
-                                e.setHorizontalAlignment(SwingConstants.CENTER); e.setOpaque(true);});
-        
-        List<JPanel> PanelList = new ArrayList<> ();
-        PanelList = Arrays.asList(stats1, stats2, stats3, stats4, stats5, stats6);
-        PanelList.forEach(e -> {e.setLayout(new GridLayout(1, 3, 5, 0)); e.setBackground(backgroundColor);});
-        
-        for (int i = 0; i < rounds.length; i++) {
-            rounds[i] = new JPanel();
-            rounds[i].setLayout(new GridLayout(2, 1, 0, 0));
-            rounds[i].setBackground(backgroundColor);
-//            rounds[i].setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-            rounds[i].add(LabelList.get(i));
-            rounds[i].add(PanelList.get(i));
-            roundPanel.add(rounds[i]);
-            
+        for (int i = 0; i < roundSpaces.length; i++) {
+            roundSpaces[i] = new JLabel("Round " + String.valueOf(i+1));
+            roundSpaces[i].setBackground(backgroundColor);
+            roundSpaces[i].setOpaque(true);
+            roundSpaces[i].setForeground(infoTextColor);
+            roundSpaces[i].setFont(new Font("SansSerif", 2, 22));
+            roundSpaces[i].setHorizontalAlignment(SwingConstants.CENTER);
         }
         
         for (int i = 0; i < boxes.length; i++) {
@@ -187,14 +169,52 @@ public class ResultScreen extends MasterPanel{
             subjects[i].setForeground(infoTextColor);
         }
         
-        for (int i = 0; i < PanelList.size(); i++) {
-            int counterHej = 0;
-            PanelList.get(i).add(threes[i][counterHej++]);
-            PanelList.get(i).add(subjects[i]);
-            PanelList.get(i).add(threes[i][counterHej]);
+        for (int i = 0; i < stats.length; i++) {
+            stats[i] = new JPanel();
+            stats[i].setLayout(new GridLayout(1, 3, 5, 0));
+            stats[i].setBackground(backgroundColor);
+            int j = 0;
+            stats[i].add(threes[i][j++]);
+            stats[i].add(subjects[i]);
+            stats[i].add(threes[i][j]);
+        }
+        
+        for (int i = 0; i < rounds.length; i++) {
+            rounds[i] = new JPanel();
+            rounds[i].setLayout(new GridLayout(2, 1, 0, 0));
+            rounds[i].setBackground(backgroundColor);
+            rounds[i].add(roundSpaces[i]);
+            rounds[i].add(stats[i]);
+            roundPanel.add(rounds[i]);
         }
     }
-
+    
+    private void setNumberOfRounds(){
+        for (int i = rounds.length-1; i >= numberOfRounds; i--) {
+            rounds[i].setVisible(false);
+        }
+    }
+    
+    public void setPlayerName(String playerName){
+        leftName.setText(playerName);
+    }
+    
+    public void setOpponentName(String opponentName){
+        rightName.setText(opponentName);
+    }
+    
+    public void increasePlayerScore(){
+        leftNumber.setText(String.valueOf(Integer.parseInt(leftNumber.getText()) + 1));
+    }
+    
+    public void increaseOpponentScore(){
+        rightNumber.setText(String.valueOf(Integer.parseInt(rightNumber.getText()) + 1));
+    }
+    
+    public void setSubject(String subject){
+        subjects[subjectCounter++].setText("- " + subject + " -");
+    }
+    
     @Override
     public void setActionListener(ActionListener al) {
     }

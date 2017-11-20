@@ -22,7 +22,7 @@ public class Window extends JFrame implements ActionListener {
 
     public Window() {
         ws = new WelcomeScreen();
-        rs = new ResultScreen(0);
+        rs = new ResultScreen(5, "Dante", "David");
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
@@ -116,11 +116,11 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
         } else if (e.getSource() == ses.blue){
-           panelList.forEach(x -> x.setCustomColor(Color.BLUE, Color.YELLOW, Color.WHITE));
+           panelList.forEach(x -> x.setCustomColor(new Color(20, 0, 150), Color.YELLOW, Color.WHITE));
         } else if (e.getSource() == ses.green){
-            panelList.forEach(x -> x.setCustomColor(Color.GREEN, Color.BLUE, Color.MAGENTA));
+            panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
         } else if (e.getSource() == ses.red){
-            panelList.forEach(x -> x.setCustomColor(Color.RED, Color.WHITE, Color.WHITE));
+            panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
         revalidate();
         repaint();
