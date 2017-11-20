@@ -76,12 +76,15 @@ public class ServerListener extends Thread {
                 out1 = new ObjectOutputStream(clientSock.getOutputStream());
                 in1 = new ObjectInputStream(clientSock.getInputStream());
                 String userName1 = (String) in1.readObject();
-                System.out.println(userName1);
                 if (um.userExist(userName1)) {
+                    System.out.println("hej");
                     out1.writeObject(um.getUser(userName1));
+                    System.out.println("anna finns");
                 } else {
+                    System.out.println("heeej");
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
+                    System.out.println("fiins ej");
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);

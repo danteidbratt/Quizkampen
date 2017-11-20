@@ -86,8 +86,6 @@ public class Window extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
-            remove(ws);
-            ws.userNameInput.setText("Enter username to start");
             String user = ws.userNameInput.getText();
             try {
                 if (user != null) {
@@ -96,6 +94,7 @@ public class Window extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
+            remove(ws);
             add(ms);
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);
