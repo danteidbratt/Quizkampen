@@ -5,18 +5,15 @@ import java.util.*;
 
 public class SessionQ implements Serializable {
 
-    protected String username;
-    protected String chosenSubjectOne;
-    protected String chosenSubjectTwo;
-    public ListClass<Question> proposedSubjectOne;
-    protected ListClass<Question> proposedSubjectTwo;
-    protected ListClass<Question> proposedSubjectThree;
-//    protected List<ListClass> propsedSubjectList
-//            = Arrays.asList(proposedSubjectOne,
-//            proposedSubjectTwo, proposedSubjectThree);
-    public List<Question> currentQuestions;
     private int totalRonds;
     private int totalQuestionsinRond;
+    protected String username;
+
+    protected List<String> chosenSubject = new ArrayList<String>();  // NY    
+    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
+    public List<Question> currentQuestions;
+
+    private boolean requestingNewSubjects = false;
 
     public String getUsername() {
         return username;
@@ -26,53 +23,31 @@ public class SessionQ implements Serializable {
         username = u;
     }
 
-    public void setChosenSubjectOne(String chosenSubject) {
-        this.chosenSubjectOne = chosenSubject;
+    public void setChosenSubject(String subject) {
+        this.chosenSubject.add(subject);
     }
 
-    public void setChosenSubjectTwo(String chosenSubject) {
-        this.chosenSubjectTwo = chosenSubject;
+    public List<String> getChosenSubject() {
+        return this.chosenSubject;
     }
 
-    public String getChosenSubjectOne() {
-        return chosenSubjectOne;
+    public void setProposedSubject(ListClass subjectList) {
+        this.proposedSubjectList.add(subjectList);
     }
 
-    public String getChosenSubjectTwo() {
-        return chosenSubjectTwo;
-    }
-
-    public void setProposedSubjectOne(ListClass lista) {
-        this.proposedSubjectOne = lista;
-    }
-
-    public void setProposedSubjectTwo(ListClass lista) {
-        this.proposedSubjectTwo = lista;
-    }
-
-    public void setProposedSubjectThree(ListClass lista) {
-        this.proposedSubjectThree = lista;
+    public List<ListClass> getProposedSubject() {
+        return proposedSubjectList;
     }
 
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
-        setChosenSubjectOne(chosenSubject);
-        
-        if (proposedSubjectOne.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectOne); 
-        }
-        else if (proposedSubjectTwo.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectTwo); 
-        }
-        else if (proposedSubjectThree.getName().equals(chosenSubject)) {
-            currentQuestions = getRandomQsFromList(howManyQuestions, proposedSubjectThree); 
-        }
+        setChosenSubject(chosenSubject);
 
-//        for (ListClass l : propsedSubjectList) {
-//            if (chosenSubject.equalsIgnoreCase(l.getName())) {
-//                currentQuestions = getRandomQsFromList(howManyQuestions, l);
-//                break;
-//            }
-//        }
+        for (ListClass l : proposedSubjectList) {                                  // NY (Davens metod)
+            if (chosenSubject.equalsIgnoreCase(l.getName())) {
+                currentQuestions = getRandomQsFromList(howManyQuestions, l);
+                break;
+            }
+        }
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
@@ -86,32 +61,31 @@ public class SessionQ implements Serializable {
         return lista;
     }
 
-    public ListClass getProposedSubjectOne() {
-        return proposedSubjectOne;
-    }
-
-    public ListClass getProposedSubjectTwo() {
-        return proposedSubjectTwo;
-    }
-
-    public ListClass getProposedSubjectThree() {
-        return proposedSubjectThree;
-    }
-
     public List<Question> getCurrentQuestions() {
         return currentQuestions;
     }
-    
-    public void setTotalQsInRond(int totalQuestions){
+
+    public void setTotalQsInRond(int totalQuestions) {
         this.totalQuestionsinRond = totalQuestions;
     }
-    public void setTotalRonds(int totalRonds){
+
+    public void setTotalRonds(int totalRonds) {
         this.totalRonds = totalRonds;
     }
-    public int getTotalQsInRond(){
+
+    public int getTotalQsInRond() {
         return this.totalQuestionsinRond;
     }
-    public int getTotalRonds(){
+
+    public int getTotalRonds() {
         return this.totalRonds;
+    }
+
+    public void setRequestingNewSubjects(boolean trueOrFalse) {
+        this.requestingNewSubjects = trueOrFalse;
+    }
+
+    public boolean getRequestingNewSubjects() {
+        return this.requestingNewSubjects;
     }
 }
