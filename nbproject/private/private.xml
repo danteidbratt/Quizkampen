@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
-=======
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/MasterPanel.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/GameScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/SessionQ.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/GameMenuScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Client.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/ServerListener.java</file>
+        </group>
     </open-files>
->>>>>>> master
 </project-private>
