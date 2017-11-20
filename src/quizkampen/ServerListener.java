@@ -35,7 +35,6 @@ public class ServerListener extends Thread {
 
         protected int port2 = 33334;
         ServerSocket loginSocket;
-        UserManager um = new UserManager();
 
         public UserServerListener() {
             try {
@@ -48,23 +47,52 @@ public class ServerListener extends Thread {
         @Override
         public void run() {
             while (true) {
-                try {
-                    Socket clientSocket2 = loginSocket.accept();
-                    ObjectOutputStream out = new ObjectOutputStream(clientSocket2.getOutputStream());
-                    ObjectInputStream in = new ObjectInputStream(clientSocket2.getInputStream());
-                    String userName = (String) in.readObject();
-                    System.out.println(userName);
-                    if (um.userExist(userName)) {
-                        out.writeObject(um.getUser(userName));
-                    } else {
-                        um.addUser(userName);
-                        out.writeObject(um.getUser(userName));
-                    }
 
-                } catch (IOException | ClassNotFoundException ex) {
+                try {
+                    Socket clientSocket1 = loginSocket.accept();
+                    UserServerConnection uc = new UserServerConnection(clientSocket1);
+                    uc.start();
+                } catch (IOException ex) {
                     Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+    }
 
+    public class UserServerConnection extends Thread {
+
+        Socket clientSock;
+
+        public UserServerConnection(Socket clientSocket) {
+            this.clientSock = clientSocket;
+        }
+
+        @Override
+        public void run() {
+            ObjectOutputStream out1 = null;
+            ObjectInputStream in1 = null;
+            UserManager um = new UserManager();
+            try {
+                out1 = new ObjectOutputStream(clientSock.getOutputStream());
+                in1 = new ObjectInputStream(clientSock.getInputStream());
+                String userName1 = (String) in1.readObject();
+                System.out.println(userName1);
+                if (um.userExist(userName1)) {
+                    out1.writeObject(um.getUser(userName1));
+                } else {
+                    um.addUser(userName1);
+                    out1.writeObject(um.getUser(userName1));
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    out1.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

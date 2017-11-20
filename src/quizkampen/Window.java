@@ -23,7 +23,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inUserServer;
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
-    
+
     Socket gameServerSocket;
 
     List<IPanel> panelList;
@@ -48,7 +48,9 @@ public class Window extends JFrame implements ActionListener {
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
+            System.out.println("output connected");
             inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
+            System.out.println("inputconnected");
         } catch (IOException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,45 +98,31 @@ public class Window extends JFrame implements ActionListener {
             }
             add(ms);
         } else if (e.getSource() == ms.newGameButton) {
+            remove(ms);
+            add(gms);
         } else if (e.getSource() == gms.randomPlayerButton) {
-            remove(gms);
-
-            
-            
-            
-            ObjectOutputStream out = null;
             try {
-                // här ska man koppla upp sig till servern
-                this.gameServerSocket = new Socket("127.0.0.1", 33333);
+                remove(gms);
+
+                this.gameServerSocket = new Socket("127.0.0.1", portGame);
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
                 session = (SessionQ) inGameServer.readObject();
 
                 SessionHandler sessionHandler = new SessionHandler(session);
-                
+
                 outGameServer.writeObject(session);
-                remove(ms);
-                add(gms);
+
+                ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
+                ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
+                ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
+                add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    out.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-            
-            
-            
-            
-            
-            ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
-            ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
-            ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
-            add(ls);
+
         } else if (e.getSource() == ls.subjectOneButton) {
             session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
             ls.buttonPanel.add(ls.startButton);
