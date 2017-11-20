@@ -83,17 +83,6 @@ public class Window extends JFrame implements ActionListener {
         } else if(e.getSource() == ls.startButton){
             remove(ls);
 			String questionText = "<html><p>" + session.currentQuestions.get(0).getQuestionQ() + "</p></html>";
-//			String questionText = "";
-//			Scanner sc = new Scanner(temp);
-//			int words = 0;
-//			while(sc.hasNext()) {
-//				questionText += sc.next();
-//				words++;
-//				if(words >= 5 && questionText.length() >= 15) {
-//					questionText += 
-//				}
-//				
-//			}
             gs.questionButton.setText(questionText);
             gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0));
             gs.answer2Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(1));
