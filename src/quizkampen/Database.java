@@ -98,6 +98,7 @@ public class Database {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
                 }
 //                tempQuestion.shuffleAnswers();  // Blandar svaren - Kommenterar bort tills vi har skrivit metoden / Anna
+                Collections.shuffle(tempQuestion.getAnswerAlternatives());  // den här blandar?
                 tempList.add(tempQuestion);
             }
         } catch (FileNotFoundException ex) {

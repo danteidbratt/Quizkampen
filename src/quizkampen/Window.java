@@ -1,7 +1,6 @@
 package quizkampen;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -10,9 +9,8 @@ import javax.swing.JFrame;
 public class Window extends JFrame implements ActionListener {
     protected SessionQ session;
 
-    private final Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
-    private final Color backgroundColor = new Color(0, 0, 255);
-
+    List<IPanel> panelList;
+    
     WelcomeScreen ws;
     MenuScreen ms;
     GameMenuScreen gms;
@@ -22,13 +20,13 @@ public class Window extends JFrame implements ActionListener {
     StatsScreen sts;
 
     public Window() {
-        ws = new WelcomeScreen(buttonFont, backgroundColor);
-        ms = new MenuScreen(buttonFont, backgroundColor);
-        gms = new GameMenuScreen(buttonFont, backgroundColor);
-        ses = new SettingsScreen(buttonFont, backgroundColor);
-        sts = new StatsScreen(buttonFont, backgroundColor);
-        ls = new LobbyScreen(buttonFont, backgroundColor);
-        gs = new GameScreen(buttonFont, backgroundColor);
+        ws = new WelcomeScreen();
+        ms = new MenuScreen();
+        gms = new GameMenuScreen();
+        ses = new SettingsScreen();
+        sts = new StatsScreen();
+        ls = new LobbyScreen();
+        gs = new GameScreen();
     }
     
     public void setSessionQ(SessionQ session){
@@ -43,18 +41,19 @@ public class Window extends JFrame implements ActionListener {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        List<IPanel> panelList = new ArrayList<>();
+        panelList = new ArrayList<>();
         panelList.add(ws);
         panelList.add(ms);
         panelList.add(gms);
         panelList.add(ses);
         panelList.add(sts);
-        panelList.add(ls);
         panelList.add(gs);
+        panelList.add(ls);
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(this);
         });
+        ls.animation.start();
     }
 
     @Override
@@ -74,20 +73,13 @@ public class Window extends JFrame implements ActionListener {
             add(ls);
         } else if (e.getSource() == ls.subjectOneButton) {
             session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
-            ls.startButton.addActionListener(this);
+            ls.buttonPanel.add(ls.startButton);
         } else if (e.getSource() == ls.subjectTwoButton) {
             session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
-            ls.startButton.addActionListener(this);
+            ls.buttonPanel.add(ls.startButton);
         } else if (e.getSource() == ls.subjectThreeButton) {
             session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
-            ls.startButton.addActionListener(this);
-            System.out.println("hej3");
-        } else if(e.getSource() == ls.subjectTwoButton){
-            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
-            ls.startButton.addActionListener(this);
-        } else if(e.getSource() == ls.subjectThreeButton){
-            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
-            ls.startButton.addActionListener(this);
+            ls.buttonPanel.add(ls.startButton);
         } else if(e.getSource() == ls.startButton){
             remove(ls);
             gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
@@ -104,6 +96,7 @@ public class Window extends JFrame implements ActionListener {
             remove(gms);
             add(ms);
         } else if (e.getSource() == ls.backButton) {
+            ls.buttonPanel.remove(ls.startButton);
             remove(ls);
             add(gms);
         } else if (e.getSource() == ses.backButton) {
@@ -121,11 +114,11 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
         } else if (e.getSource() == ses.blue){
-            
+           panelList.forEach(x -> x.setCustomColor(Color.BLUE, Color.YELLOW, Color.WHITE));
         } else if (e.getSource() == ses.green){
-            
+            panelList.forEach(x -> x.setCustomColor(Color.GREEN, Color.BLUE, Color.MAGENTA));
         } else if (e.getSource() == ses.red){
-            
+            panelList.forEach(x -> x.setCustomColor(Color.RED, Color.WHITE, Color.WHITE));
         }
         revalidate();
         repaint();

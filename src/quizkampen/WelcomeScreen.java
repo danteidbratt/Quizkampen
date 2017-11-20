@@ -1,7 +1,6 @@
 package quizkampen;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -10,30 +9,18 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.*;
 
-public class WelcomeScreen extends JPanel implements IPanel {
+public class WelcomeScreen extends MasterPanel {
 
     private final JPanel loginPanel = new JPanel();
     private final JPanel centerPanel = new JPanel();
     private final JPanel exitPanel = new JPanel();
 
-    private final JLabel logo = new JLabel("QuizFights");
     private final JLabel loginText = new JLabel("Login");
     private final JLabel centerSpace = new JLabel("");
-    private final JLabel sideSpaceWest = new JLabel("");
-    private final JLabel sideSpaceEast = new JLabel("");
-    private final JLabel bottomSpace = new JLabel("");
 
     JTextField userNameInput = new JTextField("Enter username to start");
     JButton okButton = new JButton("OK");
     JButton exitButton = new JButton("EXIT");
-
-    Color backgroundColor;
-    Font buttonFont;
-
-    public WelcomeScreen(Font buttonFont, Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-        this.buttonFont = buttonFont;
-    }
 
     @Override
     public void setPanel() {
@@ -41,18 +28,18 @@ public class WelcomeScreen extends JPanel implements IPanel {
         setBackground(backgroundColor);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setPreferredSize(new Dimension(0, 200));
-        logo.setForeground(Color.YELLOW);
-        logo.setFont(new Font("SansSarif", 2, 80));
+        logo.setForeground(logoColor);
+        logo.setFont(logoFont);
 
-        sideSpaceWest.setPreferredSize(new Dimension(100, 0));
-        sideSpaceEast.setPreferredSize(new Dimension(100, 0));
+        leftSpace.setPreferredSize(new Dimension(100, 0));
+        rightSpace.setPreferredSize(new Dimension(100, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 150));
 
         loginPanel.setLayout(new GridLayout(3, 1, 0, 5));
         loginPanel.setBackground(backgroundColor);
         loginText.setHorizontalAlignment(SwingConstants.CENTER);
-        loginText.setFont(new Font("SansSerif", 3, 30));
-        loginText.setForeground(Color.GREEN);
+        loginText.setFont(infoTextFontBig);
+        loginText.setForeground(infoTextColor);
         userNameInput.setHorizontalAlignment(SwingConstants.CENTER);
         userNameInput.setFont(new Font("SansSerif", 1, 16));
         okButton.setFont(buttonFont);
@@ -75,8 +62,8 @@ public class WelcomeScreen extends JPanel implements IPanel {
 
         add(logo, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
-        add(sideSpaceWest, BorderLayout.WEST);
-        add(sideSpaceEast, BorderLayout.EAST);
+        add(leftSpace, BorderLayout.WEST);
+        add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
 
         FocusAdapter a = new FocusAdapter() {
@@ -97,11 +84,5 @@ public class WelcomeScreen extends JPanel implements IPanel {
         userNameInput.addActionListener(al);
         okButton.addActionListener(al);
         exitButton.addActionListener(al);
-    }
-    
-    @Override
-    public void setCustomColor(Color c) {
-        backgroundColor = c;
-        repaint();
     }
 }
