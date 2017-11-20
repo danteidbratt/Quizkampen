@@ -68,9 +68,9 @@ public class Window extends JFrame implements ActionListener {
             add(gms);
         } else if (e.getSource() == gms.randomPlayerButton) {
             remove(gms);
-            ls.subjectOneButton.setText(session.proposedSubjectOne.getName());
-            ls.subjectTwoButton.setText(session.proposedSubjectTwo.getName());
-            ls.subjectThreeButton.setText(session.proposedSubjectThree.getName());
+            ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
+            ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
+            ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
             add(ls);
         } else if (e.getSource() == ls.subjectOneButton) {
             session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
@@ -90,7 +90,11 @@ public class Window extends JFrame implements ActionListener {
             ls.startButton.addActionListener(this);
         } else if(e.getSource() == ls.startButton){
             remove(ls);
-            gs.questionButton.setText(session.getCurrentQuestions().get(0).getQuestionQ());
+            gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
+            gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0));
+            gs.answer2Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(1));
+            gs.answer3Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(2));
+            gs.answer4Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(3));
             add(gs);
             
         } else if (e.getSource() == ms.settingsButton) {

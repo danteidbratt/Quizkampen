@@ -1,20 +1,22 @@
 package quizkampen;
 
 public class SessionHandler {
+
     private SessionQ sessionQ;
     private States state;
-    private int totalRonds; 
+    private int totalRonds;
     private int totalQuestionsinRond;
-    private PropertiesReader p; 
-    
-    
-    private enum States {CONNECTED, WAITINGFOROPPONENTTOCONNECT,
-        PLAYINGGAME, WAITINGFORSERVER, IDLE }
+    private PropertiesReader p;
+
+    private enum States {
+        CONNECTED, WAITINGFOROPPONENTTOCONNECT,
+        PLAYINGGAME, WAITINGFORSERVER, IDLE
+    }
 
     public SessionHandler(SessionQ sessionQ) {
         this.sessionQ = sessionQ;
-        p = new PropertiesReader(); 
-        this.totalRonds = p.getRonds(); 
+        p = new PropertiesReader();
+        this.totalRonds = p.getRonds();
         this.totalQuestionsinRond = p.getQuestionsInRond();
         this.sessionQ.setTotalRonds(totalRonds);
         this.sessionQ.setTotalQsInRond(totalQuestionsinRond);
@@ -25,7 +27,7 @@ public class SessionHandler {
     }
 
     public void checkState() {
-        switch(this.state) {
+        switch (this.state) {
             case CONNECTED:
 
                 break;
@@ -48,4 +50,3 @@ public class SessionHandler {
         }
     }
 }
-

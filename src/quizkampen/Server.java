@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +21,40 @@ public class Server {
     private Question tempQuestion;
     private SessionQ session;
     protected Database database = new Database();
+    protected boolean waitingForClient2 = false;
+    ServerSocket serverSocket;
 
-    public Server(Socket clientSocket1, Socket clientSocket2) throws IOException {
-        this.clienSocket1 = clientSocket1;
-        this.clienSocket2 = clientSocket2;
-        session = new SessionQ();
+    public Server(Socket clientSocket1, ServerSocket serverSocket) {    // NY
+        try {
+            this.serverSocket = serverSocket;
+            session = new SessionQ();
 
-        database.loadThreeSubjects(session);
+            database.loadThreeSubjects(session);
 
-        ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
-        ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
+            ObjectOutputStream user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
+            ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 
-        ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
-        ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
+            user1Output.writeObject(session);
 
-        user1Output.writeObject(session);
-        user2Output.writeObject(session);
+            while (!waitingForClient2) {                                // Ny metod som connectar till klient nr 2
+                Socket clientSocket2;
+                if ((clientSocket2 = serverSocket.accept()) != null) {
+                    ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
+                    ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
+                    user2Output.writeObject(session);
+                    waitingForClient2 = true;
+                }
+            }
+
+            while (true) {
+                if (session.getRequestingNewSubjects()) {
+                    // fyll på frågor
+                    session.setRequestingNewSubjects(false);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
