@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 
 public class LobbyScreen2 extends MasterPanel{
     
@@ -65,7 +64,7 @@ public class LobbyScreen2 extends MasterPanel{
         subjectIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         subjectButton.setPreferredSize(new Dimension(100, 100));
         subjectButton.setFont(buttonFont);
-        subjectIconPanel.add(subjectButton);
+//        subjectIconPanel.add(subjectButton);
         centerMidPanel.add(textLabel2, BorderLayout.NORTH);
         centerMidPanel.add(subjectIconPanel, BorderLayout.CENTER);
         
@@ -79,7 +78,7 @@ public class LobbyScreen2 extends MasterPanel{
         readyButton.setPreferredSize(new Dimension(180, 70));
         readyIconPanel.setBackground(backgroundColor);
         readyIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        readyIconPanel.add(readyButton);
+//        readyIconPanel.add(readyButton);
         centerBotPanel.add(centerBotTopSpace, BorderLayout.NORTH);
         centerBotPanel.add(readyIconPanel, BorderLayout.CENTER);
         
@@ -97,6 +96,13 @@ public class LobbyScreen2 extends MasterPanel{
         add(leftSpace, BorderLayout.WEST);
         add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
+    }
+    
+    public void addButtons(){
+        subjectIconPanel.add(subjectButton);
+        readyIconPanel.add(readyButton);
+        revalidate();
+        repaint();
     }
 
     @Override

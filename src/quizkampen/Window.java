@@ -15,25 +15,19 @@ public class Window extends JFrame implements ActionListener {
     MenuScreen ms;
     GameMenuScreen gms;
     LobbyScreen ls;
-    
-    //**********
-    LobbyScreen2 ls2;
-    //***********
-    
     GameScreen gs;
+    ResultScreen rs;
     SettingsScreen ses;
     StatsScreen sts;
 
     public Window() {
         ws = new WelcomeScreen();
+        rs = new ResultScreen(0);
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
         sts = new StatsScreen();
         ls = new LobbyScreen();
-        //*************
-        ls2 = new LobbyScreen2();
-        //*************
         gs = new GameScreen();
     }
     
@@ -51,15 +45,13 @@ public class Window extends JFrame implements ActionListener {
         
         panelList = new ArrayList<>();
         panelList.add(ws);
+        panelList.add(rs);
         panelList.add(ms);
         panelList.add(gms);
         panelList.add(ses);
         panelList.add(sts);
         panelList.add(gs);
         panelList.add(ls);
-        //***********
-        panelList.add(ls2);
-        //***********
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(this);
@@ -71,7 +63,7 @@ public class Window extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
             remove(ws);
-            add(ls2);
+            add(ms);
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);
             add(gms);
