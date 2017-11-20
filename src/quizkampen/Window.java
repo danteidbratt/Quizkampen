@@ -15,6 +15,11 @@ public class Window extends JFrame implements ActionListener {
     MenuScreen ms;
     GameMenuScreen gms;
     LobbyScreen ls;
+    
+    //**********
+    LobbyScreen2 ls2;
+    //***********
+    
     GameScreen gs;
     SettingsScreen ses;
     StatsScreen sts;
@@ -26,6 +31,9 @@ public class Window extends JFrame implements ActionListener {
         ses = new SettingsScreen();
         sts = new StatsScreen();
         ls = new LobbyScreen();
+        //*************
+        ls2 = new LobbyScreen2();
+        //*************
         gs = new GameScreen();
     }
     
@@ -49,6 +57,9 @@ public class Window extends JFrame implements ActionListener {
         panelList.add(sts);
         panelList.add(gs);
         panelList.add(ls);
+        //***********
+        panelList.add(ls2);
+        //***********
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(this);
@@ -60,8 +71,7 @@ public class Window extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
             remove(ws);
-            ws.userNameInput.setText("Enter username to start");
-            add(ms);
+            add(ls2);
         } else if (e.getSource() == ms.newGameButton) {
             remove(ms);
             add(gms);
