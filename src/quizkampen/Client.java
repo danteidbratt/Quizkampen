@@ -13,27 +13,27 @@ public class Client {
     Window w;
 
     public Client() {
-        try {
-            this.bridge = new Socket("127.0.0.1", 33333);
+//        try {
             Window w = new Window();
+//            this.bridge = new Socket("127.0.0.1", 33333);
+
             w.setFrame();
             w.ws.setPanel();
             w.ws.setActionListener(w);
-            
-            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
 
-            session = (SessionQ) in.readObject();
-            w.setSessionQ(session);
-            SessionHandler sessionHandler = new SessionHandler(session);
-
-            out.writeObject(session);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            ObjectOutputStream out = new ObjectOutputStream(bridge.getOutputStream());
+//            ObjectInputStream in = new ObjectInputStream(bridge.getInputStream());
+//            session = (SessionQ) in.readObject();
+//            w.setSessionQ(session);
+//            SessionHandler sessionHandler = new SessionHandler(session);
+//
+//            out.writeObject(session);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
     }
 
     public static void main(String[] args) {

@@ -3,14 +3,31 @@ package quizkampen;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener {
+
     protected SessionQ session;
+    protected int portUser = 33334;
+    protected int portGame = 33333;
+    protected Socket userServerSocket;
+    ObjectOutputStream outUserServer;
+    ObjectInputStream inUserServer;
+    ObjectOutputStream outGameServer;
+    ObjectInputStream inGameServer;
+    
+    Socket gameServerSocket;
 
     List<IPanel> panelList;
-    
+
     WelcomeScreen ws;
     MenuScreen ms;
     GameMenuScreen gms;
@@ -27,9 +44,17 @@ public class Window extends JFrame implements ActionListener {
         sts = new StatsScreen();
         ls = new LobbyScreen();
         gs = new GameScreen();
+
+        try {
+            this.userServerSocket = new Socket("127.0.0.1", portUser);
+            outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
+            inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public void setSessionQ(SessionQ session){
+
+    public void setSessionQ(SessionQ session) {
         this.session = session;
     }
 
@@ -40,7 +65,7 @@ public class Window extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         panelList = new ArrayList<>();
         panelList.add(ws);
         panelList.add(ms);
@@ -61,12 +86,51 @@ public class Window extends JFrame implements ActionListener {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
             remove(ws);
             ws.userNameInput.setText("Enter username to start");
+            String user = ws.userNameInput.getText();
+            try {
+                if (user != null) {
+                    outUserServer.writeObject(user);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            }
             add(ms);
         } else if (e.getSource() == ms.newGameButton) {
-            remove(ms);
-            add(gms);
         } else if (e.getSource() == gms.randomPlayerButton) {
             remove(gms);
+
+            
+            
+            
+            ObjectOutputStream out = null;
+            try {
+                // här ska man koppla upp sig till servern
+                this.gameServerSocket = new Socket("127.0.0.1", 33333);
+                outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
+                inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
+                session = (SessionQ) inGameServer.readObject();
+
+                SessionHandler sessionHandler = new SessionHandler(session);
+                
+                outGameServer.writeObject(session);
+                remove(ms);
+                add(gms);
+            } catch (IOException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            
+            
+            
+            
             ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
             ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
             ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
@@ -80,7 +144,7 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ls.subjectThreeButton) {
             session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
             ls.buttonPanel.add(ls.startButton);
-        } else if(e.getSource() == ls.startButton){
+        } else if (e.getSource() == ls.startButton) {
             remove(ls);
             gs.questionButton.setText(session.currentQuestions.get(0).getQuestionQ());
             gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0));
@@ -88,7 +152,7 @@ public class Window extends JFrame implements ActionListener {
             gs.answer3Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(2));
             gs.answer4Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(3));
             add(gs);
-            
+
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
             add(ses);
@@ -113,11 +177,11 @@ public class Window extends JFrame implements ActionListener {
             add(ms);
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
-        } else if (e.getSource() == ses.blue){
-           panelList.forEach(x -> x.setCustomColor(Color.BLUE, Color.YELLOW, Color.WHITE));
-        } else if (e.getSource() == ses.green){
+        } else if (e.getSource() == ses.blue) {
+            panelList.forEach(x -> x.setCustomColor(Color.BLUE, Color.YELLOW, Color.WHITE));
+        } else if (e.getSource() == ses.green) {
             panelList.forEach(x -> x.setCustomColor(Color.GREEN, Color.BLUE, Color.MAGENTA));
-        } else if (e.getSource() == ses.red){
+        } else if (e.getSource() == ses.red) {
             panelList.forEach(x -> x.setCustomColor(Color.RED, Color.WHITE, Color.WHITE));
         }
         revalidate();

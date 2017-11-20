@@ -22,11 +22,9 @@ public class Server {
     private SessionQ session;
     protected Database database = new Database();
     protected boolean waitingForClient2 = false;
-    ServerSocket serverSocket;
 
-    public Server(Socket clientSocket1, ServerSocket serverSocket) {    // NY
+    public Server(Socket clientSocket1) {    // NY
         try {
-            this.serverSocket = serverSocket;
             session = new SessionQ();
 
             database.loadThreeSubjects(session);
@@ -36,15 +34,15 @@ public class Server {
 
             user1Output.writeObject(session);
 
-            while (!waitingForClient2) {                                // Ny metod som connectar till klient nr 2
-                Socket clientSocket2;
-                if ((clientSocket2 = serverSocket.accept()) != null) {
-                    ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
-                    ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
-                    user2Output.writeObject(session);
-                    waitingForClient2 = true;
-                }
-            }
+//            while (!waitingForClient2) {                                // Ny metod som connectar till klient nr 2
+//                Socket clientSocket2;
+//                if ((clientSocket2 = serverSocket.accept()) != null) {
+//                    ObjectOutputStream user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
+//                    ObjectInputStream user2Input = new ObjectInputStream(clientSocket2.getInputStream());
+//                    user2Output.writeObject(session);
+//                    waitingForClient2 = true;
+//                }
+//            }
 
             while (true) {
                 if (session.getRequestingNewSubjects()) {
@@ -55,6 +53,10 @@ public class Server {
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void setPlayer2(Socket clientsocket2){
+        this.clienSocket2 = clientsocket2;
     }
 
 }
