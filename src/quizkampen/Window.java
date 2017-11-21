@@ -22,6 +22,8 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inUserServer;
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
+    protected User user; 
+    protected int playerNumber;
 
     Socket gameServerSocket;
 
@@ -88,12 +90,18 @@ public class Window extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
-            String user = ws.userNameInput.getText();
+            String userName = ws.userNameInput.getText();
             try {
-                if (user != null) {
-                    outUserServer.writeObject(user);
+                if (userName != null) {
+                    outUserServer.writeObject(userName);
+                }
+                if ((user = (User)inUserServer.readObject()) != null) {
+                    this.setUser(user);
+                    System.out.println(user.getUserName());
                 }
             } catch (IOException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
             remove(ws);
@@ -109,7 +117,19 @@ public class Window extends JFrame implements ActionListener {
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
                 session = (SessionQ) inGameServer.readObject();
-
+                if (session.getUserNameOne() == null) {
+                    session.setUserNameOne(this.user);
+                    this.setPlayerNumber(1);
+                }
+                else {
+                    session.setUserNameTwo(this.user);
+                    this.setPlayerNumber(2);
+                }
+                outGameServer.writeObject(session);
+                
+                System.out.println("User one; " + session.getUserNameOne().getUserName() + 
+                        ", nr: " + this.getPlayerNumber());
+                
                 SessionHandler sessionHandler = new SessionHandler(session);
 
                 outGameServer.writeObject(session);
@@ -117,6 +137,7 @@ public class Window extends JFrame implements ActionListener {
                 ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
                 ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
                 ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
+                
                 add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,5 +196,17 @@ public class Window extends JFrame implements ActionListener {
         }
         revalidate();
         repaint();
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User u) {
+        this.user = u;
+    }
+    public int getPlayerNumber(){
+        return this.playerNumber;
+    }
+    public void setPlayerNumber(int number){
+        this.playerNumber = number;
     }
 }

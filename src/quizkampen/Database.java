@@ -53,7 +53,7 @@ public class Database {
 
     }
 
-    public void loadThreeSubjects(SessionQ session) {                   
+    public void loadThreeSubjects(SessionQ session) {                   // NY - istället för metoden nedanför
         sessionQ = session;                                             // Behövs den här? - Kan skickas in i konstruktorn ist / Anna
         sessionQ.proposedSubjectList.clear();
         Collections.shuffle(subjectList);
@@ -81,7 +81,8 @@ public class Database {
                 for (int i = 0; i < 3; i++) {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
                 }
-                Collections.shuffle(tempQuestion.getAnswerAlternatives()); 
+//                tempQuestion.shuffleAnswers();  // Blandar svaren - Kommenterar bort tills vi har skrivit metoden / Anna
+                Collections.shuffle(tempQuestion.getAnswerAlternatives());  // den här blandar?
                 tempList.add(tempQuestion);
             }
         } catch (FileNotFoundException ex) {
