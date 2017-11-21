@@ -9,7 +9,7 @@ public class ServerListener extends Thread {
 
     protected int port1 = 33333;
     ServerSocket serverSocket1;
-    SessionQ session = new SessionQ();
+//    SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
         serverSocket1 = new ServerSocket(port1);

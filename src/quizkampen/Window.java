@@ -117,8 +117,6 @@ public class Window extends JFrame implements ActionListener {
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
                 session = (SessionQ) inGameServer.readObject();
-                
-                
                 if (session.getUserNameOne() == null) {
                     session.setUserNameOne(this.user);
                     this.setPlayerNumber(1);
@@ -127,10 +125,10 @@ public class Window extends JFrame implements ActionListener {
                     session.setUserNameTwo(this.user);
                     this.setPlayerNumber(2);
                 }
+                outGameServer.writeObject(session);
                 
-                System.out.println("User one; " + session.getUserNameOne() + 
+                System.out.println("User one; " + session.getUserNameOne().getUserName() + 
                         ", nr: " + this.getPlayerNumber());
-                System.out.println("User two; " + session.getUserNameTwo());
                 
                 SessionHandler sessionHandler = new SessionHandler(session);
 
