@@ -34,8 +34,11 @@ public class Server implements Runnable {
             ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 
             user1Output.writeObject(session);
+            session = (SessionQ)user1Input.readObject();
 
         } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
