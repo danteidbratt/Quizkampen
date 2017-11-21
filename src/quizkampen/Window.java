@@ -38,7 +38,7 @@ public class Window extends JFrame implements ActionListener {
 
     public Window() {
         ws = new WelcomeScreen();
-        rs = new ResultScreen(5, "Dante", "David");
+        rs = new ResultScreen(4, "Dante", "David");
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
