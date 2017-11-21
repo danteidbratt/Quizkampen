@@ -1,13 +1,7 @@
 package quizkampen;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,9 +17,7 @@ public class Database {
     protected ListClass<Question> history;
     protected ListClass<Question> it;
     protected ListClass<Question> sport;
-    protected List<ListClass<Question>> subjectList = new ArrayList<ListClass<Question>>();
-    protected SessionQ sessionQ;
-    private boolean listFull = false;
+    protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
     Database() {
 
@@ -50,37 +42,14 @@ public class Database {
         subjectList.add(history);
         subjectList.add(it);
         subjectList.add(sport);
-
     }
 
-    public void loadThreeSubjects(SessionQ session) {                   // NY - istället för metoden nedanför
-        sessionQ = session;                                             // Behövs den här? - Kan skickas in i konstruktorn ist / Anna
-        sessionQ.proposedSubjectList.clear();
-
-        Random rn = new Random();
-        ListClass<Question> temp;
-        for (int i = 0; i < subjectList.size(); i++) {
-            int index = rn.nextInt(subjectList.size() - 1);
-            temp = subjectList.get(index);
-            subjectList.set(index, subjectList.get(i));
-            subjectList.set(i, temp);
-        }
-
-        int counter = 0;
-        while (!listFull) {
-            if (!(sessionQ.getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
-                sessionQ.setProposedSubject(subjectList.get(counter));                 // ADD ÄMNE TILL PROPOSED SUBJECT-LISTAN
-            }
-            counter++;
-            if (sessionQ.getProposedSubject().size() == 3) { // OM LISTAN ÄR FULL - BREAK
-                listFull = true;
-            }
-
-        }
+    public List<ListClass<Question>> loadSubjectList() {
+        return this.subjectList;
     }
 
     public ListClass createQuestionList(String filename, String name) {
-        ListClass<Question> tempList = new ListClass<Question>();
+        ListClass<Question> tempList = new ListClass<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             String tempString;
@@ -97,7 +66,7 @@ public class Database {
                     int index = rn.nextInt(tempQuestion.getAnswerAlternatives().size() - 1);
                     temp = tempQuestion.getAnswerAlternatives().get(index);
                     tempQuestion.getAnswerAlternatives().set(index, tempQuestion.getAnswerAlternatives().get(i));
-                    tempQuestion.getAnswerAlternatives().set(i, temp);                   
+                    tempQuestion.getAnswerAlternatives().set(i, temp);
                 }
                 tempList.add(tempQuestion);
             }

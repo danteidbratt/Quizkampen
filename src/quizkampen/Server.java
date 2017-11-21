@@ -1,17 +1,9 @@
 package quizkampen;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.logging.*;
 
 public class Server {
 
@@ -26,8 +18,11 @@ public class Server {
 
     public Server(Socket clientSocket1) {
         try {
+            this.clientSocket1 = clientSocket1;
             session = new SessionQ();
-            database.loadThreeSubjects(session);
+            session.setSubjectList(database.loadSubjectList());
+            session.loadThreeSubjects();
+            
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -72,7 +67,7 @@ public class Server {
 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
-                database.loadThreeSubjects(session);    // laddar om 3 ämnen i session
+                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user2Output.writeObject(session);       //P2 får de nya ämnena
                 session = (SessionQ) user2Input.readObject();    // läser in valt ämne från P2 
                 // ska P1 få reda på nästa valda ämne?
@@ -83,7 +78,7 @@ public class Server {
                 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
-                database.loadThreeSubjects(session);    // laddar om 3 ämnen i session
+                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user1Output.writeObject(session);       // skickar ämnen till P1
 
             }
