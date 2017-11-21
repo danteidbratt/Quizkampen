@@ -22,6 +22,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inUserServer;
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
+    protected User user; 
 
     Socket gameServerSocket;
 
@@ -88,12 +89,18 @@ public class Window extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == ws.okButton || e.getSource() == ws.userNameInput) {
-            String user = ws.userNameInput.getText();
+            String userName = ws.userNameInput.getText();
             try {
-                if (user != null) {
-                    outUserServer.writeObject(user);
+                if (userName != null) {
+                    outUserServer.writeObject(userName);
+                }
+                if ((user = (User)inUserServer.readObject()) != null) {
+                    this.setUser(user);
+                    System.out.println(user.getUserName());
                 }
             } catch (IOException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
             remove(ws);
@@ -109,7 +116,18 @@ public class Window extends JFrame implements ActionListener {
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
                 session = (SessionQ) inGameServer.readObject();
-
+                
+                
+                if (session.getUserNameOne() == null) {
+                    session.setUserNameOne(this.user);
+                }
+                else {
+                    session.setUserNameTwo(this.user);
+                }
+                
+                System.out.println("User one; " + session.getUserNameOne());
+                System.out.println("User two; " + session.getUserNameTwo());
+                
                 SessionHandler sessionHandler = new SessionHandler(session);
 
                 outGameServer.writeObject(session);
@@ -175,5 +193,11 @@ public class Window extends JFrame implements ActionListener {
         }
         revalidate();
         repaint();
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User u) {
+        this.user = u;
     }
 }
