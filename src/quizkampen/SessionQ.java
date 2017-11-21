@@ -8,12 +8,16 @@ public class SessionQ implements Serializable {
     private int totalRonds;
     private int totalQuestionsinRond;
     protected User userOne;
-    protected User userTwo; 
-
-    protected List<String> chosenSubject = new ArrayList<String>();  // NY    
-    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
+    protected User userTwo;
+    private boolean listFull = false;
+    protected List<String> chosenSubject = new ArrayList<String>();
+    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();
     public List<Question> currentQuestions;
-    private boolean requestingNewSubjects = false;
+    protected List<ListClass<Question>> subjectList = new ArrayList<ListClass<Question>>();
+
+    public void setSubjectList(List<ListClass<Question>> subjectList) {
+        this.subjectList = subjectList;
+    }
 
     public User getUserNameOne() {
         return userOne;
@@ -22,19 +26,25 @@ public class SessionQ implements Serializable {
     public void setUserNameOne(User u) {
         userOne = u;
     }
+
     public User getUserNameTwo() {
-    return userTwo; 
+        return userTwo;
     }
+
     public void setUserNameTwo(User u) {
         userTwo = u;
     }
-    
+
     public void setChosenSubject(String subject) {
         this.chosenSubject.add(subject);
     }
 
     public List<String> getChosenSubject() {
         return this.chosenSubject;
+    }
+
+    public void clearProposedSubjectList() {
+        this.proposedSubjectList.clear();
     }
 
     public void setProposedSubject(ListClass subjectList) {
@@ -48,7 +58,7 @@ public class SessionQ implements Serializable {
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
         setChosenSubject(chosenSubject);
 
-        for (ListClass l : proposedSubjectList) {                                  // NY (Davens metod)
+        for (ListClass l : proposedSubjectList) {                               
             if (chosenSubject.equalsIgnoreCase(l.getName())) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
                 break;
@@ -59,7 +69,16 @@ public class SessionQ implements Serializable {
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> lista = new ArrayList<Question>();
         ListClass<Question> searchList = list;
-        Collections.shuffle(searchList);
+
+        Random rn = new Random();
+        Question temp;
+        for (int i = 0; i < searchList.size(); i++) {
+            int index = rn.nextInt(searchList.size() - 1);
+
+            temp = searchList.get(index);
+            searchList.set(index, searchList.get(i));
+            searchList.set(i, temp);
+        }
 
         for (int i = 0; i < howManyQuestions; i++) {
             lista.add(searchList.get(i));
@@ -87,11 +106,27 @@ public class SessionQ implements Serializable {
         return this.totalRonds;
     }
 
-    public void setRequestingNewSubjects(boolean trueOrFalse) {
-        this.requestingNewSubjects = trueOrFalse;
-    }
+    public void loadThreeSubjects() {
+        this.getProposedSubject().clear();
 
-    public boolean getRequestingNewSubjects() {
-        return this.requestingNewSubjects;
+        Random rn = new Random();
+        ListClass<Question> temp;
+        for (int i = 0; i < subjectList.size(); i++) {
+            int index = rn.nextInt(subjectList.size() - 1);
+            temp = subjectList.get(index);
+            subjectList.set(index, subjectList.get(i));
+            subjectList.set(i, temp);
+        }
+
+        int counter = 0;
+        while (!listFull) {
+            if (!(getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
+                setProposedSubject(subjectList.get(counter));             // ADD ÄMNE TILL PROPOSED SUBJECT-LISTAN
+            }
+            counter++;
+            if (getProposedSubject().size() == 3) { // OM LISTAN ÄR FULL - BREAK
+                listFull = true;
+            }
+        }
     }
 }

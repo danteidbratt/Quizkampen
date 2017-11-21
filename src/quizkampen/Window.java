@@ -24,7 +24,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inUserServer;
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
-    protected User user; 
+    protected User user;
     protected int playerNumber;
 
     Socket gameServerSocket;
@@ -97,7 +97,7 @@ public class Window extends JFrame implements ActionListener {
                 if (userName != null) {
                     outUserServer.writeObject(userName);
                 }
-                if ((user = (User)inUserServer.readObject()) != null) {
+                if ((user = (User) inUserServer.readObject()) != null) {
                     this.setUser(user);
                     System.out.println(user.getUserName());
                 }
@@ -122,16 +122,15 @@ public class Window extends JFrame implements ActionListener {
                 if (session.getUserNameOne() == null) {
                     session.setUserNameOne(this.user);
                     this.setPlayerNumber(1);
-                }
-                else {
+                } else {
                     session.setUserNameTwo(this.user);
                     this.setPlayerNumber(2);
                 }
                 outGameServer.writeObject(session);
-                
-                System.out.println("User one; " + session.getUserNameOne().getUserName() + 
-                        ", nr: " + this.getPlayerNumber());
-                
+
+                System.out.println("User one; " + session.getUserNameOne().getUserName()
+                        + ", nr: " + this.getPlayerNumber());
+
                 SessionHandler sessionHandler = new SessionHandler(session);
 
                 outGameServer.writeObject(session);
@@ -143,7 +142,7 @@ public class Window extends JFrame implements ActionListener {
                 ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
                 ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
                 ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
-                
+
                 add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,11 +209,11 @@ public class Window extends JFrame implements ActionListener {
             add(ms);
         } else if (e.getSource() == ws.exitButton || e.getSource() == ms.exitButton || e.getSource() == gms.exitButton) {
             System.exit(0);
-        } else if (e.getSource() == ses.blue){
-           panelList.forEach(x -> x.setCustomColor(new Color(20, 0, 150), Color.YELLOW, Color.WHITE));
-        } else if (e.getSource() == ses.green){
+        } else if (e.getSource() == ses.blue) {
+            panelList.forEach(x -> x.setCustomColor(new Color(20, 0, 150), Color.YELLOW, Color.WHITE));
+        } else if (e.getSource() == ses.green) {
             panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
-        } else if (e.getSource() == ses.red){
+        } else if (e.getSource() == ses.red) {
             panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
         
@@ -240,16 +239,20 @@ public class Window extends JFrame implements ActionListener {
         revalidate();
         repaint();
     }
+
     public User getUser() {
         return user;
     }
+
     public void setUser(User u) {
         this.user = u;
     }
-    public int getPlayerNumber(){
+
+    public int getPlayerNumber() {
         return this.playerNumber;
     }
-    public void setPlayerNumber(int number){
+
+    public void setPlayerNumber(int number) {
         this.playerNumber = number;
     }
 }
