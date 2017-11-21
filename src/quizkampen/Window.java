@@ -157,12 +157,13 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ls.startButton) {
             remove(ls);
             gs.questionButton.setText("<html><p>" + session.currentQuestions.get(0).getQuestionQ() + "</p></html>");
-            gs.answer1Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(0));
-            gs.answer2Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(1));
-            gs.answer3Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(2));
-            gs.answer4Button.setText(session.getCurrentQuestions().get(0).getAnswerAlternative(3));
+            for (int i = 0; i < gs.answerButtons.length; i++) {
+                gs.answerButtons[i].setButton(session.getCurrentQuestions().get(0).getAnswerAlternatives().get(i));
+            }
             add(gs);
-
+        } else if (e.getSource() == gs.nextQuestionButton){
+            
+            
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
             add(ses);
@@ -193,6 +194,18 @@ public class Window extends JFrame implements ActionListener {
             panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
         } else if (e.getSource() == ses.red){
             panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
+        }
+        
+        for (int i = 0; i < gs.answerButtons.length; i++) {
+            if(e.getSource() == gs.answerButtons[i]){
+                gs.colorChosenButton(gs.answerButtons[i]);
+            gs.revealCorrectAnswer();
+            if(gs.answerButtons[i].getIsCorrect())
+                gs.questionBoxes.get(i).setBackground(Color.GREEN);
+            else
+                gs.questionBoxes.get(i).setBackground(Color.RED);
+            gs.nextQuestionButton.setVisible(true);
+            }
         }
         revalidate();
         repaint();

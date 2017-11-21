@@ -18,19 +18,19 @@ public class GameScreen extends MasterPanel {
     private final JPanel roundPanel = new JPanel();
     private final JPanel questionsPanel = new JPanel();
     private final JPanel cardsPanel = new JPanel();
-    private final JPanel answerCardsPanel= new JPanel();
+    private final JPanel answerCardsPanel = new JPanel();
+    private final JPanel centerBotPanel = new JPanel();
 
     private final JLabel roundTextLabel = new JLabel("Round");
     private JLabel roundBoxLabel = new JLabel("  1/2  ");
     private final JLabel roundSpace = new JLabel("");
     List<JLabel> questionBoxes = new ArrayList<>();
     JButton questionButton = new JButton("");
-    JButton answer1Button = new JButton("");
-    JButton answer2Button = new JButton("");
-    JButton answer3Button = new JButton("");
-    JButton answer4Button = new JButton("");
+    AnswerButton[] answerButtons = new AnswerButton[4];
+    JPanel buttonPanel = new JPanel();
+    JButton nextQuestionButton = new JButton("Next Question");
 
-    int amountOfQuestions = 5;
+    int amountOfQuestions = 3;
 
     @Override
     public void setPanel() {
@@ -39,9 +39,9 @@ public class GameScreen extends MasterPanel {
         topSpace.setPreferredSize(new Dimension(0, 50));
         leftSpace.setPreferredSize(new Dimension(70, 0));
         rightSpace.setPreferredSize(new Dimension(70, 0));
-        bottomSpace.setPreferredSize(new Dimension(0, 80));
+        bottomSpace.setPreferredSize(new Dimension(0, 50));
 
-        centerPanel.setLayout(new BorderLayout(0, 50));
+        centerPanel.setLayout(new BorderLayout(0, 30));
         centerPanel.setBackground(backgroundColor);
 
         roundPanel.setLayout(new BoxLayout(roundPanel, BoxLayout.Y_AXIS));
@@ -71,37 +71,40 @@ public class GameScreen extends MasterPanel {
         roundPanel.add(roundBoxLabel);
         roundPanel.add(roundSpace);
         roundPanel.add(questionsPanel);
-        
+
         cardsPanel.setLayout(new GridLayout(2, 1, 0, 50));
         cardsPanel.setBackground(backgroundColor);
         answerCardsPanel.setLayout(new GridLayout(2, 2, 10, 10));
         answerCardsPanel.setBackground(backgroundColor);
-        answer1Button.setFont(buttonFontSmall);
-        answer2Button.setFont(buttonFontSmall);
-        answer2Button.setForeground(Color.GREEN);
-        answer3Button.setFont(buttonFontSmall);
-        answer4Button.setFont(buttonFontSmall);
-        answer1Button.setBackground(Color.GREEN);
-        answer1Button.setOpaque(true);
-        answer1Button.setBorderPainted(false);
-        answerCardsPanel.add(answer1Button);
-        answerCardsPanel.add(answer2Button);
-        answerCardsPanel.add(answer3Button);
-        answerCardsPanel.add(answer4Button);
+        setAnswerButtons();
+        
         questionButton.setFont(new Font("SansSarif", Font.BOLD, 15));
         cardsPanel.add(questionButton);
         cardsPanel.add(answerCardsPanel);
-        
+
+        centerBotPanel.setLayout(new BorderLayout(0, 0));
+        centerBotPanel.setBackground(backgroundColor);
+        centerBotPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.setBackground(backgroundColor);
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.setPreferredSize(new Dimension(0, 100));
+        nextQuestionButton.setFont(buttonFont);
+        nextQuestionButton.setVisible(false);
+        nextQuestionButton.setPreferredSize(new Dimension(180, 80));
+        buttonPanel.add(nextQuestionButton);
         logo.setBackground(backgroundColor);
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setForeground(logoColor);
         logo.setFont(new Font("SansSarif", 2, 60));
+        
+        centerBotPanel.add(buttonPanel, BorderLayout.NORTH);
+        centerBotPanel.add(logo, BorderLayout.CENTER);
 
         centerPanel.add(roundPanel, BorderLayout.NORTH);
         centerPanel.add(cardsPanel);
-        centerPanel.add(logo, BorderLayout.SOUTH);
-        
+        centerPanel.add(centerBotPanel, BorderLayout.SOUTH);
+
         add(topSpace, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         add(leftSpace, BorderLayout.WEST);
@@ -112,9 +115,41 @@ public class GameScreen extends MasterPanel {
     @Override
     public void setActionListener(ActionListener al) {
         questionButton.addActionListener(al);
-        answer1Button.addActionListener(al);
-        answer2Button.addActionListener(al);
-        answer3Button.addActionListener(al);
-        answer4Button.addActionListener(al);
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].addActionListener(al);
+        }
+        nextQuestionButton.addActionListener(al);
+    }
+
+    public void revealCorrectAnswer() {
+        for (int i = 0; i < answerButtons.length; i++) {
+            if (answerButtons[i].getIsCorrect()){
+                answerButtons[i].setBackground(Color.GREEN);
+                answerButtons[i].setOpaque(true);
+                answerButtons[i].setBorderPainted(false); 
+            }
+        }
+    }
+    
+    private void setAnswerButtons(){
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i] = new AnswerButton();
+            answerButtons[i].setFont(buttonFontSmall);
+            answerButtons[i].setFont(buttonFontSmall);
+            answerButtons[i].setFont(buttonFontSmall);
+            answerButtons[i].setFont(buttonFontSmall);
+            answerButtons[i].setHorizontalAlignment(SwingConstants.CENTER);
+            answerCardsPanel.add(answerButtons[i]);
+        }
+    }
+    
+    public void colorChosenButton(AnswerButton ab){
+        ab.setBackground(Color.RED);
+        ab.setOpaque(true);
+        ab.setBorderPainted(false);
+    }
+    
+    public void setNextQuestion(){
+        
     }
 }
