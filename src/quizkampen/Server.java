@@ -60,6 +60,9 @@ public class Server {
 
         try {
             while (true) {
+                
+                // ersätts med två rader (Kolla Jakobs kod!) - ANNA OCH CLAUDIA
+                
                 session = (SessionQ) user1Input.readObject();    // tar in valt ämne från P1
                 user2Output.writeObject(session);       // skickar valt ämne till P2
                 session = (SessionQ) user1Input.readObject();    // tar in svar från P1

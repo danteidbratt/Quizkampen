@@ -59,7 +59,16 @@ public class SessionQ implements Serializable {
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> lista = new ArrayList<Question>();
         ListClass<Question> searchList = list;
-        Collections.shuffle(searchList);
+        
+        Random rn = new Random();
+        Question temp;
+        for (int i = 0; i < searchList.size(); i++) {
+            int index = rn.nextInt(searchList.size()-1);
+            
+            temp = searchList.get(index);
+            searchList.set(index, searchList.get(i));
+            searchList.set(i, temp);
+        }
 
         for (int i = 0; i < howManyQuestions; i++) {
             lista.add(searchList.get(i));
