@@ -47,6 +47,7 @@ public class GameScreen extends MasterPanel {
         roundPanel.setLayout(new BoxLayout(roundPanel, BoxLayout.Y_AXIS));
         roundPanel.setBackground(backgroundColor);
         roundTextLabel.setFont(buttonFont);
+        roundTextLabel.setForeground(infoTextColor);
         roundTextLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         roundBoxLabel.setBackground(Color.WHITE);
         roundBoxLabel.setOpaque(true);
@@ -75,13 +76,14 @@ public class GameScreen extends MasterPanel {
         cardsPanel.setBackground(backgroundColor);
         answerCardsPanel.setLayout(new GridLayout(2, 2, 10, 10));
         answerCardsPanel.setBackground(backgroundColor);
-        answer1Button.setFont(buttonFont);
-        answer2Button.setFont(buttonFont);
-        answer3Button.setFont(buttonFont);
-        answer4Button.setFont(buttonFont);
-//        answer1Button.setBackground(Color.GREEN);
-//        answer1Button.setOpaque(true);
-//        answer1Button.setBorderPainted(false);
+        answer1Button.setFont(buttonFontSmall);
+        answer2Button.setFont(buttonFontSmall);
+        answer2Button.setForeground(Color.GREEN);
+        answer3Button.setFont(buttonFontSmall);
+        answer4Button.setFont(buttonFontSmall);
+        answer1Button.setBackground(Color.GREEN);
+        answer1Button.setOpaque(true);
+        answer1Button.setBorderPainted(false);
         answerCardsPanel.add(answer1Button);
         answerCardsPanel.add(answer2Button);
         answerCardsPanel.add(answer3Button);
@@ -94,7 +96,7 @@ public class GameScreen extends MasterPanel {
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setForeground(logoColor);
-        logo.setFont(logoFont);
+        logo.setFont(new Font("SansSarif", 2, 60));
 
         centerPanel.add(roundPanel, BorderLayout.NORTH);
         centerPanel.add(cardsPanel);

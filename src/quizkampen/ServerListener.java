@@ -82,17 +82,8 @@ public class ServerListener extends Thread {
                 } else {
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
-                }
-                                                                // NY 
-                if(session.getUserOne() == null){
-                    session.setUserOne(um.getUser(userName1));
-                }
-                else{
-                    session.setUserTwo(um.getUser(userName1));
-                }
-                
-                
-                
+                }               
+                              
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

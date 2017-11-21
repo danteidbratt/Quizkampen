@@ -1,10 +1,50 @@
-RANDOM Who was the first woman to win a nobel price in science?
-Marie Curie
-Emilie du Chatelet
-Caroline Herschel
-Gerty Theresa Cori
-RANDOM Who was the first woman to win a nobel price in science?
-Marie Curie
-Emilie du Chatelet
-Caroline Herschel
-Gerty Theresa Cori
+Wich company created the computer language "Java"?
+Oracle
+Microsoft
+Apple
+WinZip
+Who was the creator behind Microsoft besides Bill Gates?
+Paul Allen
+Steve Jobs
+Anthony Wayne
+George Wilson
+Who was the worlds first computer programmer?
+Ada Lovelace
+Bill Gates
+Amanda Wirzsenko
+Anthony Wayne
+What does PC stand for?
+Personal Computer
+Private Computer
+Practical Case
+Practical Computer
+How many bits does one byte have?
+8
+10
+100
+128
+How many gigabytes does one terabyte have?
+1000
+100
+128
+1100
+Who was the creator of Apple Inc?
+Steve Jobs
+Bill Gates
+Paul Allen
+Josef Mayhem
+What is the most common keyboard layout?
+QWERTY
+Svorak
+Dvorak
+Colemak
+What does IDE stand for?
+Integrated Development Environment
+Intact Dilation and Extraction
+Party of Internet Democracy
+Institute of Developing Economies
+What animal does Linux use as mascot?
+Penguin
+Dragon
+Cat
+Lobster

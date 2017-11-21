@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
-=======
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
-    </open-files>
+=======
+        <group>
+<<<<<<< HEAD
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/Database.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/ListClass.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/MasterPanel.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/GameScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/SessionQ.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/GameMenuScreen.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Client.java</file>
+            <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/ServerListener.java</file>
+=======
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/ServerListener.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/LobbyScreen.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/Client.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/SettingsScreen.java</file>
+>>>>>>> DanteFeature
 >>>>>>> master
+        </group>
+>>>>>>> 6ca4a39fa7e68811194f3019632479993583ee8e
+    </open-files>
 </project-private>
