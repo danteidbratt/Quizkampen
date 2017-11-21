@@ -16,9 +16,9 @@ public class ResultScreen extends MasterPanel{
     
     JPanel scoreBoard = new JPanel();
     JPanel namePanel = new JPanel();
-    JLabel leftName = new JLabel("Jesus");
+    JLabel leftName = new JLabel("");
     JLabel namePanelspace = new JLabel(" ");
-    JLabel rightName = new JLabel("Satan");
+    JLabel rightName = new JLabel("");
     JPanel numberDisplay = new JPanel();
     JLabel leftNumber = new JLabel("");
     JLabel dash = new JLabel("-");
