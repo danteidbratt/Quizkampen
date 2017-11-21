@@ -8,19 +8,28 @@ public class SessionQ implements Serializable {
     private int totalRonds;
     private int totalQuestionsinRond;
     protected String username;
-
-    protected List<String> chosenSubject = new ArrayList<String>();  // NY    
-    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
+    protected List<String> chosenSubject = new ArrayList<String>();
+    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();
     public List<Question> currentQuestions;
-
     private boolean requestingNewSubjects = false;
+    
+    protected User userOne;         // NY
+    protected User userTwo;
 
-    public String getUsername() {
-        return username;
+    public User getUserOne() {
+        return userOne;
     }
 
-    public void setUsername(String u) {
-        username = u;
+    public void setUserOne(User userOne) {
+        this.userOne = userOne;
+    }
+    
+    public User getUserTwo(){
+        return userTwo;
+    }
+    
+    public void setUserTwo(User userTwo){
+        this.userTwo = userTwo;
     }
 
     public void setChosenSubject(String subject) {

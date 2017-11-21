@@ -9,6 +9,7 @@ public class ServerListener extends Thread {
 
     protected int port1 = 33333;
     ServerSocket serverSocket1;
+    SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
         serverSocket1 = new ServerSocket(port1);
@@ -77,15 +78,21 @@ public class ServerListener extends Thread {
                 in1 = new ObjectInputStream(clientSock.getInputStream());
                 String userName1 = (String) in1.readObject();
                 if (um.userExist(userName1)) {
-                    System.out.println("hej");
                     out1.writeObject(um.getUser(userName1));
-                    System.out.println("anna finns");
                 } else {
-                    System.out.println("heeej");
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
-                    System.out.println("fiins ej");
                 }
+                                                                // NY 
+                if(session.getUserOne() == null){
+                    session.setUserOne(um.getUser(userName1));
+                }
+                else{
+                    session.setUserTwo(um.getUser(userName1));
+                }
+                
+                
+                
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

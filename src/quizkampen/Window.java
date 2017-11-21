@@ -90,7 +90,7 @@ public class Window extends JFrame implements ActionListener {
             try {
                 if (user != null) {
                     outUserServer.writeObject(user);
-                }
+                }        
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -115,6 +115,7 @@ public class Window extends JFrame implements ActionListener {
                 ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
                 ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
                 ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
+                
                 add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
