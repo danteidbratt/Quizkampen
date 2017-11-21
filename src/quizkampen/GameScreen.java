@@ -30,7 +30,7 @@ public class GameScreen extends MasterPanel {
     JPanel buttonPanel = new JPanel();
     JButton nextQuestionButton = new JButton("Next Question");
 
-    int amountOfQuestions = 3;
+    int numberOfQuestions = 5;
 
     @Override
     public void setPanel() {
@@ -57,14 +57,6 @@ public class GameScreen extends MasterPanel {
         roundBoxLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         questionsPanel.setLayout(new FlowLayout());
         questionsPanel.setBackground(backgroundColor);
-        for (int i = 0; i < amountOfQuestions; i++) {
-            questionBoxes.add(new JLabel(""));
-            questionBoxes.get(i).setPreferredSize(new Dimension(60, 37));
-            questionBoxes.get(i).setOpaque(true);
-            questionBoxes.get(i).setBackground(Color.WHITE);
-            questionBoxes.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-            questionsPanel.add(questionBoxes.get(i));
-        }
 
         roundSpace.setPreferredSize(new Dimension(0, 20));
         roundPanel.add(roundTextLabel);
@@ -111,14 +103,30 @@ public class GameScreen extends MasterPanel {
         add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
+    
+    public void setNumberofQuestions(int amountOfQuestions) {
+        this.numberOfQuestions = amountOfQuestions;
+        for (int i = 0; i < numberOfQuestions; i++) {
+            questionBoxes.add(new JLabel(""));
+            questionBoxes.get(i).setPreferredSize(new Dimension(60, 37));
+            questionBoxes.get(i).setOpaque(true);
+            questionBoxes.get(i).setBackground(Color.WHITE);
+            questionBoxes.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+            questionsPanel.add(questionBoxes.get(i));
+        }
+    }
 
     @Override
-    public void setActionListener(ActionListener al) {
-        questionButton.addActionListener(al);
+    public void setActionListener(ActionListener al){
+        nextQuestionButton.addActionListener(al);
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].addActionListener(al);
         }
-        nextQuestionButton.addActionListener(al);
+    }
+    public void setButtonActionListener(ActionListener al) {
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].addActionListener(al);
+        }
     }
 
     public void revealCorrectAnswer() {
@@ -149,7 +157,20 @@ public class GameScreen extends MasterPanel {
         ab.setBorderPainted(false);
     }
     
-    public void setNextQuestion(){
-        
+    public void setNextQuestion(Question q){
+        questionButton.setText("<html><p>" + q.getQuestionQ() + "</p></html>");
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].setButton(q.getAnswerAlternatives().get(i));
+            answerButtons[i].setBorderPainted(true);
+            answerButtons[i].setBackground(backgroundColor);
+            
+        }
+        nextQuestionButton.setVisible(false);
+    }
+    
+    public void removeActionListeners(ActionListener al){
+        for (int i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].removeActionListener(al);
+        }
     }
 }
