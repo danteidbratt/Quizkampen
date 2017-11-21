@@ -56,7 +56,16 @@ public class Database {
     public void loadThreeSubjects(SessionQ session) {                   // NY - istället för metoden nedanför
         sessionQ = session;                                             // Behövs den här? - Kan skickas in i konstruktorn ist / Anna
         sessionQ.proposedSubjectList.clear();
-        Collections.shuffle(subjectList);
+
+        Random rn = new Random();
+        ListClass<Question> temp;
+        for (int i = 0; i < subjectList.size(); i++) {
+            int index = rn.nextInt(subjectList.size() - 1);
+            temp = subjectList.get(index);
+            subjectList.set(index, subjectList.get(i));
+            subjectList.set(i, temp);
+        }
+
         int counter = 0;
         while (!listFull) {
             if (!(sessionQ.getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
@@ -81,8 +90,15 @@ public class Database {
                 for (int i = 0; i < 3; i++) {
                     tempQuestion.setAnswerAlternatives(in.readLine(), false);
                 }
-//                tempQuestion.shuffleAnswers();  // Blandar svaren - Kommenterar bort tills vi har skrivit metoden / Anna
-                Collections.shuffle(tempQuestion.getAnswerAlternatives());  // den här blandar?
+
+                Random rn = new Random();
+                AnswerAlternative temp;
+                for (int i = 0; i < tempQuestion.getAnswerAlternatives().size(); i++) {
+                    int index = rn.nextInt(tempQuestion.getAnswerAlternatives().size() - 1);
+                    temp = tempQuestion.getAnswerAlternatives().get(index);
+                    tempQuestion.getAnswerAlternatives().set(index, tempQuestion.getAnswerAlternatives().get(i));
+                    tempQuestion.getAnswerAlternatives().set(i, temp);                   
+                }
                 tempList.add(tempQuestion);
             }
         } catch (FileNotFoundException ex) {
