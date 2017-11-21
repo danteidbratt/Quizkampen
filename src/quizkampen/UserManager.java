@@ -13,7 +13,7 @@ public class UserManager implements Serializable {
         fileExist();
         readFile();
     }
-
+ 
     public void addUser(String userName) {
         if(!userExist(userName)) {
             userList.add(new User(userName));

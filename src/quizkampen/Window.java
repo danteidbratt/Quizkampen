@@ -55,7 +55,6 @@ public class Window extends JFrame implements ActionListener {
 //    public void setSessionQ(SessionQ session) {
 //        this.session = session;
 //    }
-
     public void setFrame() {
         ws = new WelcomeScreen();
         rs = new ResultScreen();
@@ -65,7 +64,7 @@ public class Window extends JFrame implements ActionListener {
         sts = new StatsScreen();
         ls = new LobbyScreen();
         gs = new GameScreen();
-        
+
         setTitle("QuizFights");
         add(ws);
         setSize(500, 809);
@@ -128,13 +127,12 @@ public class Window extends JFrame implements ActionListener {
                 }
                 outGameServer.writeObject(session);
 
-                System.out.println("User one; " + session.getUserNameOne().getUserName()
-                        + ", nr: " + this.getPlayerNumber());
+                System.out.println("Du är spelare nr: " + this.getPlayerNumber());
 
                 SessionHandler sessionHandler = new SessionHandler(session);
 
                 outGameServer.writeObject(session);
-                
+
                 rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
                 rs.setPanel();
                 rs.setActionListener(this);
@@ -169,22 +167,29 @@ public class Window extends JFrame implements ActionListener {
             remove(ls);
             gs.setNumberofQuestions(session.getTotalQsInRond());
             gs.setNextQuestion(session.getCurrentQuestions().get(questionCounter));
-            gs.roundBoxLabel.setText(String.valueOf(roundCounter+1) + "/" + String.valueOf(session.getTotalRounds()));
+            gs.roundBoxLabel.setText(String.valueOf(roundCounter + 1) + "/" + String.valueOf(session.getTotalRounds()));
             add(gs);
-        } else if (e.getSource() == gs.nextQuestionButton){
-            if (questionCounter < session.getTotalQsInRond()-1) {
+        } else if (e.getSource() == gs.nextQuestionButton) {
+            if (questionCounter < session.getTotalQsInRond() - 1) {
                 gs.setNextQuestion(session.getCurrentQuestions().get(++questionCounter));
                 gs.setButtonActionListener(this);
+
+                // nya ämnen måste laddas
+                session.loadThreeSubjects();
+//                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
+//                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
+//                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
+
             } else {
                 gs.setButtonActionListener(this);
                 gs.resetColors();
                 remove(gs);
-                if (roundCounter == session.getTotalRounds()-1){
+                if (roundCounter == session.getTotalRounds() - 1) {
                     rs.nextRoundButton.setText("YOU WIN");
                 }
                 add(rs);
             }
-        } else if (e.getSource() == rs.nextRoundButton){
+        } else if (e.getSource() == rs.nextRoundButton) {
             remove(rs);
             roundCounter++;
             questionCounter = 0;
@@ -217,25 +222,24 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ses.red) {
             panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
-        
+
         for (int i = 0; i < gs.answerButtons.length; i++) {
-            if(e.getSource() == gs.answerButtons[i]){
-            gs.colorChosenButton(gs.answerButtons[i]);
-            gs.revealCorrectAnswer();
-            if(gs.answerButtons[i].getIsCorrect()) {
-                rs.increasePlayerScore();
-                rs.boxes[roundCounter][questionCounter].setBackground(Color.GREEN);
-                gs.questionBoxes.get(questionCounter).setBackground(Color.GREEN);
-            }
-            else {
-                rs.boxes[roundCounter][questionCounter].setBackground(Color.RED);
-                gs.questionBoxes.get(questionCounter).setBackground(Color.RED);
-            }
-            gs.nextQuestionButton.setVisible(true);
-            gs.removeActionListeners(this);
-            if(questionCounter == session.getTotalQsInRond()-1) {
-                gs.nextQuestionButton.setText("Show Results");
-            }
+            if (e.getSource() == gs.answerButtons[i]) {
+                gs.colorChosenButton(gs.answerButtons[i]);
+                gs.revealCorrectAnswer();
+                if (gs.answerButtons[i].getIsCorrect()) {
+                    rs.increasePlayerScore();
+                    rs.boxes[roundCounter][questionCounter].setBackground(Color.GREEN);
+                    gs.questionBoxes.get(questionCounter).setBackground(Color.GREEN);
+                } else {
+                    rs.boxes[roundCounter][questionCounter].setBackground(Color.RED);
+                    gs.questionBoxes.get(questionCounter).setBackground(Color.RED);
+                }
+                gs.nextQuestionButton.setVisible(true);
+                gs.removeActionListeners(this);
+                if (questionCounter == session.getTotalQsInRond() - 1) {
+                    gs.nextQuestionButton.setText("Show Results");
+                }
             }
         }
         revalidate();

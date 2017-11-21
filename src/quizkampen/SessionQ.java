@@ -10,10 +10,11 @@ public class SessionQ implements Serializable {
     protected User userOne;
     protected User userTwo;
     private boolean listFull = false;
-    protected List<String> chosenSubject = new ArrayList<String>();
-    protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();
-    public List<Question> currentQuestions;
-    protected List<ListClass<Question>> subjectList = new ArrayList<ListClass<Question>>();
+    protected List<String> chosenSubject = new ArrayList<>();
+    protected List<ListClass> proposedSubjectList = new ArrayList<>();
+    public List<Question> currentQuestions = new ArrayList<>();
+    protected List<Question> usedQuestions = new ArrayList<>();
+    protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
@@ -56,34 +57,42 @@ public class SessionQ implements Serializable {
     }
 
     public void setCurrentQuestions(String chosenSubject, int howManyQuestions) {
-        setChosenSubject(chosenSubject);
+        this.setChosenSubject(chosenSubject);
+        currentQuestions.clear();
 
-        for (ListClass l : proposedSubjectList) {                               
+        for (ListClass l : proposedSubjectList) {
             if (chosenSubject.equalsIgnoreCase(l.getName())) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
+                
+                for (Question q : currentQuestions) {  // lägger till currentQuestions i usedQuestions-listan
+                    this.usedQuestions.add(q);
+                }
                 break;
             }
+
         }
     }
 
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
-        List<Question> lista = new ArrayList<Question>();
-        ListClass<Question> searchList = list;
+        List<Question> randomQuestionsList = new ArrayList<>();
+        ListClass<Question> chosenSubjectList = list;
 
         Random rn = new Random();
         Question temp;
         for (int i = 0; i < 300; i++) {
-            int randNum1 = rn.nextInt(searchList.size() - 1);
-            int randNum2 = rn.nextInt(searchList.size() - 1);
-            temp = searchList.get(randNum1);
-            searchList.set(randNum1, searchList.get(randNum2));
-            searchList.set(randNum2, temp);
+            int randNum1 = rn.nextInt(chosenSubjectList.size() - 1);
+            int randNum2 = rn.nextInt(chosenSubjectList.size() - 1);
+            temp = chosenSubjectList.get(randNum1);
+            chosenSubjectList.set(randNum1, chosenSubjectList.get(randNum2));
+            chosenSubjectList.set(randNum2, temp);
         }
-
-        for (int i = 0; i < howManyQuestions; i++) {
-            lista.add(searchList.get(i));
+        // 2
+        for (int i = 0; i < howManyQuestions; i++) {    // Om Question inte finns i usedQuestions-lista
+            if (!(usedQuestions.contains(i))) {           // läggs den till i randomQs-lista
+                randomQuestionsList.add(chosenSubjectList.get(i));
+            }
         }
-        return lista;
+        return randomQuestionsList;
     }
 
     public List<Question> getCurrentQuestions() {
@@ -117,7 +126,6 @@ public class SessionQ implements Serializable {
             subjectList.set(index, subjectList.get(i));
             subjectList.set(i, temp);
         }
-
         int counter = 0;
         while (!listFull) {
             if (!(getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
