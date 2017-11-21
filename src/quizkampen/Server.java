@@ -17,7 +17,10 @@ public class Server {
 
     private Socket clientSocket1;
     private Socket clientSocket2;
+    ObjectOutputStream user2Output;
+    ObjectInputStream user2Input;
     private SessionQ session;
+    protected boolean p2Connected = false;
     protected Database database = new Database();
 
     public Server(Socket clientSocket1) {
@@ -29,14 +32,15 @@ public class Server {
             ObjectInputStream user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 
             user1Output.writeObject(session);
-//            while ((session = (SessionQ) user1Input.readObject()) != null) {
-//                if (session.getRequestingNewSubjects()) {    //  - metod som fyller på frågor i session objektet
-//                    database.loadThreeSubjects(session);
-//                    session.setRequestingNewSubjects(false);
-//                }
-//                user1Output.writeObject(session);
-//            }
             session = (SessionQ) user1Input.readObject();
+
+            while (!p2Connected) {
+                if (p2Connected) {
+                    user2Output.writeObject(session);
+                    session = (SessionQ) user2Input.readObject(); 
+                }
+                break;
+            }
 
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,28 +49,12 @@ public class Server {
 
     public void setPlayer2(Socket clientsocket2) {
         this.clientSocket2 = clientsocket2;
-        ObjectOutputStream user2Output;
-        ObjectInputStream user2Input;
         try {
             user2Output = new ObjectOutputStream(clientSocket2.getOutputStream());
             user2Input = new ObjectInputStream(clientSocket2.getInputStream());
-
-            user2Output.writeObject(session);
-            session = (SessionQ) user2Input.readObject();
-
-//            while ((session = (SessionQ) user2Input.readObject()) != null) {
-//                if (session.getRequestingNewSubjects()) {    //  - metod som fyller på frågor i session objektet
-//                    database.loadThreeSubjects(session);
-//                    session.setRequestingNewSubjects(false);
-//                }
-//                user2Output.writeObject(session);
-//            }
-
+            p2Connected = true;
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
