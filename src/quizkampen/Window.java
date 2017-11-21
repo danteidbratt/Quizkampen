@@ -174,12 +174,6 @@ public class Window extends JFrame implements ActionListener {
                 gs.setNextQuestion(session.getCurrentQuestions().get(++questionCounter));
                 gs.setButtonActionListener(this);
 
-                // nya ämnen måste laddas
-                session.loadThreeSubjects();
-//                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
-//                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
-//                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
-
             } else {
                 gs.setButtonActionListener(this);
                 gs.resetColors();
