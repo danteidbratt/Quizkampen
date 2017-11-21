@@ -12,8 +12,8 @@ public class Client {
         Window w = new Window();
 
         w.setFrame();
-        w.ws.setPanel();
-        w.ws.setActionListener(w);
+//        w.ws.setPanel();
+//        w.ws.setActionListener(w);
 
     }
     
