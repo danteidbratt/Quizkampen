@@ -34,7 +34,7 @@ public class ResultScreen extends MasterPanel{
     JLabel[] subjects = new JLabel[6];
     
     JPanel botPanel = new JPanel();
-    JButton nextButton = new JButton("Next Round");
+    JButton nextRoundButton = new JButton("Next Round");
     
     int subjectCounter;
 
@@ -110,9 +110,9 @@ public class ResultScreen extends MasterPanel{
         botPanel.setBackground(backgroundColor);
         botPanel.setPreferredSize(new Dimension(0, 90));
         botPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nextButton.setPreferredSize(new Dimension(180, 70));
-        nextButton.setFont(buttonFont);
-        botPanel.add(nextButton);
+        nextRoundButton.setPreferredSize(new Dimension(180, 70));
+        nextRoundButton.setFont(buttonFont);
+        botPanel.add(nextRoundButton);
         
         add(logo, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
@@ -222,7 +222,7 @@ public class ResultScreen extends MasterPanel{
             
     @Override
     public void setActionListener(ActionListener al) {
-        nextButton.addActionListener(al);
+        nextRoundButton.addActionListener(al);
     }
     
 }

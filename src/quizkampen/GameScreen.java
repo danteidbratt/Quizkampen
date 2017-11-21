@@ -22,7 +22,7 @@ public class GameScreen extends MasterPanel {
     private final JPanel centerBotPanel = new JPanel();
 
     private final JLabel roundTextLabel = new JLabel("Round");
-    private JLabel roundBoxLabel = new JLabel("  1/2  ");
+    public JLabel roundBoxLabel = new JLabel();
     private final JLabel roundSpace = new JLabel("");
     List<JLabel> questionBoxes = new ArrayList<>();
     JButton questionButton = new JButton("");

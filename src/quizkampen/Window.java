@@ -135,13 +135,13 @@ public class Window extends JFrame implements ActionListener {
 
                 outGameServer.writeObject(session);
                 
-                rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRonds(), "Pronut", "David");
+                rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
                 rs.setPanel();
                 rs.setActionListener(this);
 
-                ls.subjectOneButton.setText(session.getProposedSubject().get(0).getName());
-                ls.subjectTwoButton.setText(session.getProposedSubject().get(1).getName());
-                ls.subjectThreeButton.setText(session.getProposedSubject().get(2).getName());
+                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
+                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
+                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
 
                 add(ls);
             } catch (IOException ex) {
@@ -150,40 +150,45 @@ public class Window extends JFrame implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else if (e.getSource() == ls.subjectOneButton) {
-            session.setCurrentQuestions(ls.subjectOneButton.getText(), session.getTotalQsInRond());
-            ls.buttonPanel.add(ls.startButton);
-        } else if (e.getSource() == ls.subjectTwoButton) {
-            session.setCurrentQuestions(ls.subjectTwoButton.getText(), session.getTotalQsInRond());
-            ls.buttonPanel.add(ls.startButton);
-        } else if (e.getSource() == ls.subjectThreeButton) {
-            session.setCurrentQuestions(ls.subjectThreeButton.getText(), session.getTotalQsInRond());
-            ls.buttonPanel.add(ls.startButton);
+        } else if (e.getSource() == ls.subjectButton1) {
+            session.setCurrentQuestions(ls.subjectButton1.getText(), session.getTotalQsInRond());
+            ls.subjectButton1.setBackground(Color.YELLOW);
+            ls.subjectButton1.setBorderPainted(false);
+            ls.startButton.setVisible(true);
+        } else if (e.getSource() == ls.subjectButton2) {
+            session.setCurrentQuestions(ls.subjectButton2.getText(), session.getTotalQsInRond());
+            ls.subjectButton2.setBackground(Color.YELLOW);
+            ls.subjectButton2.setBorderPainted(false);
+            ls.startButton.setVisible(true);
+        } else if (e.getSource() == ls.subjectButton3) {
+            session.setCurrentQuestions(ls.subjectButton3.getText(), session.getTotalQsInRond());
+            ls.subjectButton3.setBackground(Color.YELLOW);
+            ls.subjectButton3.setBorderPainted(false);
+            ls.startButton.setVisible(true);
         } else if (e.getSource() == ls.startButton) {
             remove(ls);
             gs.setNumberofQuestions(session.getTotalQsInRond());
-            gs.questionButton.setText("<html><p>" + session.currentQuestions.get(0).getQuestionQ() + "</p></html>");
-            for (int i = 0; i < gs.answerButtons.length; i++) {
-                gs.answerButtons[i].setButton(session.getCurrentQuestions().get(0).getAnswerAlternatives().get(i));
-            }
+            gs.setNextQuestion(session.getCurrentQuestions().get(questionCounter));
+            gs.roundBoxLabel.setText(String.valueOf(roundCounter+1) + "/" + String.valueOf(session.getTotalRounds()));
             add(gs);
         } else if (e.getSource() == gs.nextQuestionButton){
             if (questionCounter < session.getTotalQsInRond()-1) {
-                gs.setNextQuestion(session.getCurrentQuestions().get(questionCounter++));
+                gs.setNextQuestion(session.getCurrentQuestions().get(++questionCounter));
                 gs.setButtonActionListener(this);
             } else {
                 gs.setButtonActionListener(this);
                 gs.resetColors();
                 remove(gs);
-                if (roundCounter == session.getTotalRonds()-1){
-                    rs.nextButton.setText("YOU WIN");
+                if (roundCounter == session.getTotalRounds()-1){
+                    rs.nextRoundButton.setText("YOU WIN");
                 }
                 add(rs);
             }
-        } else if (e.getSource() == rs.nextButton){
+        } else if (e.getSource() == rs.nextRoundButton){
             remove(rs);
             roundCounter++;
             questionCounter = 0;
+            ls.resetPanel();
             add(ls);
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
@@ -191,10 +196,6 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == gms.backButton) {
             remove(gms);
             add(ms);
-        } else if (e.getSource() == ls.backButton) {
-            ls.buttonPanel.remove(ls.startButton);
-            remove(ls);
-            add(gms);
         } else if (e.getSource() == ses.backButton) {
             remove(ses);
             add(ms);
@@ -232,8 +233,9 @@ public class Window extends JFrame implements ActionListener {
             }
             gs.nextQuestionButton.setVisible(true);
             gs.removeActionListeners(this);
-            if(questionCounter == session.getTotalQsInRond()-1)
+            if(questionCounter == session.getTotalQsInRond()-1) {
                 gs.nextQuestionButton.setText("Show Results");
+            }
             }
         }
         revalidate();

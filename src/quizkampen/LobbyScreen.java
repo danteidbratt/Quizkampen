@@ -24,16 +24,16 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     JLabel centerTopSpace = new JLabel("Choose Subject");
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
-    JButton subjectOneButton = new JButton("");
-    JButton subjectTwoButton = new JButton("");
-    JButton subjectThreeButton = new JButton("");
+    JButton subjectButton1 = new JButton("");
+    JButton subjectButton2 = new JButton("");
+    JButton subjectButton3 = new JButton("");
     
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
     JLabel bottomBottomSpace = new JLabel("");
     JPanel buttonPanel = new JPanel();
     JButton startButton = new JButton("Start");
-    JButton backButton = new JButton("Back");
+//    JButton backButton = new JButton("Back");
     
     public boolean loopAnimation = true;
     
@@ -45,7 +45,7 @@ public class LobbyScreen extends MasterPanel implements Runnable{
         topSpace.setPreferredSize(new Dimension(0, 80));
         rightSpace.setPreferredSize(new Dimension(70, 0));
         leftSpace.setPreferredSize(new Dimension(70, 0));
-        bottomSpace.setPreferredSize(new Dimension(0, 120));
+        bottomSpace.setPreferredSize(new Dimension(0, 60));
 
         opponentPanel.setLayout(new BorderLayout(0, 10));
         opponentPanel.setBackground(backgroundColor);
@@ -83,26 +83,30 @@ public class LobbyScreen extends MasterPanel implements Runnable{
         centerBotSpace.setPreferredSize(new Dimension(0, 30));
         subjectPanel.setLayout(new GridLayout(1, 3, 10, 0));
         subjectPanel.setBackground(backgroundColor);
-        subjectOneButton.setFont(buttonFont);
-        subjectTwoButton.setFont(buttonFont);
-        subjectThreeButton.setFont(buttonFont);
-        subjectPanel.add(subjectOneButton);
-        subjectPanel.add(subjectTwoButton);
-        subjectPanel.add(subjectThreeButton);
+        subjectButton1.setFont(buttonFont);
+        subjectButton1.setBackground(backgroundColor);
+        subjectButton1.setOpaque(true);
+        subjectButton2.setFont(buttonFont);
+        subjectButton2.setBackground(backgroundColor);
+        subjectButton2.setOpaque(true);
+        subjectButton3.setFont(buttonFont);
+        subjectButton3.setBackground(backgroundColor);
+        subjectButton3.setOpaque(true);
+        subjectPanel.add(subjectButton1);
+        subjectPanel.add(subjectButton2);
+        subjectPanel.add(subjectButton3);
         centerCenterPanel.add(centerTopSpace, BorderLayout.NORTH);
         centerCenterPanel.add(subjectPanel, BorderLayout.CENTER);
         centerCenterPanel.add(centerBotSpace, BorderLayout.SOUTH);
 
-        bottomPanel.setLayout(new GridLayout(3, 1, 0, 0));
+        bottomPanel.setLayout(new GridLayout(2, 1, 0, 0));
         bottomPanel.setBackground(backgroundColor);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.setBackground(backgroundColor);
-        backButton.setFont(buttonFont);
-        backButton.setPreferredSize(new Dimension(160, 40));
         startButton.setFont(buttonFont);
-        startButton.setPreferredSize(new Dimension(160, 40));
-        buttonPanel.add(backButton);
-        bottomPanel.add(bottomTopSpace);
+        startButton.setPreferredSize(new Dimension(170, 70));
+        startButton.setVisible(false);
+        buttonPanel.add(startButton);
         bottomPanel.add(buttonPanel);
         bottomPanel.add(bottomBottomSpace);
 
@@ -119,11 +123,10 @@ public class LobbyScreen extends MasterPanel implements Runnable{
 
     @Override
     public void setActionListener(ActionListener al) {
-            backButton.addActionListener(al);
             startButton.addActionListener(al);
-            subjectOneButton.addActionListener(al);
-            subjectTwoButton.addActionListener(al);
-            subjectThreeButton.addActionListener(al);
+            subjectButton1.addActionListener(al);
+            subjectButton2.addActionListener(al);
+            subjectButton3.addActionListener(al);
     }
 
     @Override
@@ -142,5 +145,14 @@ public class LobbyScreen extends MasterPanel implements Runnable{
                 System.out.println(e.getMessage());
             }
         }
+    }
+    
+    public void resetPanel(){
+        JButton[] buttonArray = {subjectButton1, subjectButton2, subjectButton3};
+        for (int i = 0; i < buttonArray.length; i++) {
+            buttonArray[i].setBackground(backgroundColor);
+            buttonArray[i].setBorderPainted(true);
+        }
+        startButton.setVisible(false);
     }
 }
