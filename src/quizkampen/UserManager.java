@@ -35,7 +35,7 @@ public class UserManager implements Serializable {
 
     public void removeUser(String userName) { }
 
-    private boolean userExist(String userName) {
+    public boolean userExist(String userName) {
         for(User u : userList) {
             if(u.getUserName().equalsIgnoreCase(userName))
                 return true;

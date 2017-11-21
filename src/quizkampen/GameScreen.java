@@ -94,7 +94,7 @@ public class GameScreen extends MasterPanel {
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setForeground(logoColor);
-        logo.setFont(logoFont);
+        logo.setFont(new Font("SansSarif", 2, 60));
 
         centerPanel.add(roundPanel, BorderLayout.NORTH);
         centerPanel.add(cardsPanel);

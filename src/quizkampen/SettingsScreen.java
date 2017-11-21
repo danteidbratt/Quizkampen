@@ -40,10 +40,13 @@ public class SettingsScreen extends MasterPanel {
         centerPanel.setBackground(backgroundColor);
         backButton.setFont(buttonFont);
         blue.setFont(buttonFont);
-        red.setFont(buttonFont);
-        green.setFont(buttonFont);
+        blue.setForeground(infoTextColor);
         blue.setOpaque(false);
+        red.setFont(buttonFont);
+        red.setForeground(infoTextColor);
         red.setOpaque(false);
+        green.setFont(buttonFont);
+        green.setForeground(infoTextColor);
         green.setOpaque(false);
         centerPanel.add(blue);
         centerPanel.add(red);
