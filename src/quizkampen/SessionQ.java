@@ -72,12 +72,12 @@ public class SessionQ implements Serializable {
 
         Random rn = new Random();
         Question temp;
-        for (int i = 0; i < searchList.size(); i++) {
-            int index = rn.nextInt(searchList.size() - 1);
-
-            temp = searchList.get(index);
-            searchList.set(index, searchList.get(i));
-            searchList.set(i, temp);
+        for (int i = 0; i < 300; i++) {
+            int randNum1 = rn.nextInt(searchList.size() - 1);
+            int randNum2 = rn.nextInt(searchList.size() - 1);
+            temp = searchList.get(randNum1);
+            searchList.set(randNum1, searchList.get(randNum2));
+            searchList.set(randNum2, temp);
         }
 
         for (int i = 0; i < howManyQuestions; i++) {
@@ -102,7 +102,7 @@ public class SessionQ implements Serializable {
         return this.totalQuestionsinRond;
     }
 
-    public int getTotalRonds() {
+    public int getTotalRounds() {
         return this.totalRonds;
     }
 
