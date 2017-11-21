@@ -9,7 +9,6 @@ public class ServerListener extends Thread {
 
     protected int port1 = 33333;
     ServerSocket serverSocket1;
-//    SessionQ session = new SessionQ();
 
     public ServerListener() throws IOException {
         serverSocket1 = new ServerSocket(port1);
@@ -18,8 +17,8 @@ public class ServerListener extends Thread {
     }
 
     @Override
-    public void run() {
-        while (true) {
+    public void run() {         // Väntar på att en user ska trycka "Random Player" - då startas servern
+        while (true) {          // När user2 klickar "Random Player" kopplas den upp till samma server
             try {
                 Socket clientSock1 = serverSocket1.accept();
                 Server server = new Server(clientSock1);
@@ -32,7 +31,7 @@ public class ServerListener extends Thread {
         }
     }
 
-    public class UserServerListener extends Thread {
+    public class UserServerListener extends Thread {    // Väntar på att en användare ska logga in
 
         protected int port2 = 33334;
         ServerSocket loginSocket;
@@ -60,7 +59,7 @@ public class ServerListener extends Thread {
         }
     }
 
-    public class UserServerConnection extends Thread {
+    public class UserServerConnection extends Thread {  // Skickar user object när användare loggat in
 
         Socket clientSock;
 
