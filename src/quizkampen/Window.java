@@ -23,6 +23,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
     protected User user; 
+    protected int playerNumber;
 
     Socket gameServerSocket;
 
@@ -120,12 +121,15 @@ public class Window extends JFrame implements ActionListener {
                 
                 if (session.getUserNameOne() == null) {
                     session.setUserNameOne(this.user);
+                    this.setPlayerNumber(1);
                 }
                 else {
                     session.setUserNameTwo(this.user);
+                    this.setPlayerNumber(2);
                 }
                 
-                System.out.println("User one; " + session.getUserNameOne());
+                System.out.println("User one; " + session.getUserNameOne() + 
+                        ", nr: " + this.getPlayerNumber());
                 System.out.println("User two; " + session.getUserNameTwo());
                 
                 SessionHandler sessionHandler = new SessionHandler(session);
@@ -200,5 +204,11 @@ public class Window extends JFrame implements ActionListener {
     }
     public void setUser(User u) {
         this.user = u;
+    }
+    public int getPlayerNumber(){
+        return this.playerNumber;
+    }
+    public void setPlayerNumber(int number){
+        this.playerNumber = number;
     }
 }
