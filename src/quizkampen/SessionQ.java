@@ -13,7 +13,6 @@ public class SessionQ implements Serializable {
     protected List<String> chosenSubject = new ArrayList<String>();  // NY    
     protected List<ListClass> proposedSubjectList = new ArrayList<ListClass>();  // NY
     public List<Question> currentQuestions;
-
     private boolean requestingNewSubjects = false;
 
     public User getUserNameOne() {
