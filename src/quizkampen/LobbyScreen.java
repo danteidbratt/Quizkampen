@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -24,9 +25,7 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     JLabel centerTopSpace = new JLabel("Choose Subject");
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
-    JButton subjectButton1 = new JButton("");
-    JButton subjectButton2 = new JButton("");
-    JButton subjectButton3 = new JButton("");
+    JButton[] subjectButtons = new JButton[3];
     
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
@@ -83,18 +82,13 @@ public class LobbyScreen extends MasterPanel implements Runnable{
         centerBotSpace.setPreferredSize(new Dimension(0, 30));
         subjectPanel.setLayout(new GridLayout(1, 3, 10, 0));
         subjectPanel.setBackground(backgroundColor);
-        subjectButton1.setFont(buttonFont);
-        subjectButton1.setBackground(backgroundColor);
-        subjectButton1.setOpaque(true);
-        subjectButton2.setFont(buttonFont);
-        subjectButton2.setBackground(backgroundColor);
-        subjectButton2.setOpaque(true);
-        subjectButton3.setFont(buttonFont);
-        subjectButton3.setBackground(backgroundColor);
-        subjectButton3.setOpaque(true);
-        subjectPanel.add(subjectButton1);
-        subjectPanel.add(subjectButton2);
-        subjectPanel.add(subjectButton3);
+        for (int i = 0; i < subjectButtons.length; i++) {
+            subjectButtons[i] = new JButton();
+            subjectButtons[i].setFont(buttonFont);
+            subjectButtons[i].setFont(buttonFont);
+            subjectButtons[i].setFont(new Font("SansSarif", Font.BOLD, 15));
+            subjectPanel.add(subjectButtons[i]);
+        }
         centerCenterPanel.add(centerTopSpace, BorderLayout.NORTH);
         centerCenterPanel.add(subjectPanel, BorderLayout.CENTER);
         centerCenterPanel.add(centerBotSpace, BorderLayout.SOUTH);
@@ -123,10 +117,10 @@ public class LobbyScreen extends MasterPanel implements Runnable{
 
     @Override
     public void setActionListener(ActionListener al) {
-            startButton.addActionListener(al);
-            subjectButton1.addActionListener(al);
-            subjectButton2.addActionListener(al);
-            subjectButton3.addActionListener(al);
+        startButton.addActionListener(al);
+            for (JButton sb : subjectButtons) {
+            sb.addActionListener(al);
+        }
     }
 
     @Override
@@ -148,11 +142,16 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     }
     
     public void resetPanel(){
-        JButton[] buttonArray = {subjectButton1, subjectButton2, subjectButton3};
-        for (int i = 0; i < buttonArray.length; i++) {
-            buttonArray[i].setBackground(backgroundColor);
-            buttonArray[i].setBorderPainted(true);
+        for (JButton sb : subjectButtons) {
+            sb.setOpaque(false);
+            sb.setBorderPainted(true);
         }
         startButton.setVisible(false);
+    }
+    
+    public void setSubjectButtons(Subject[] s){
+        for (int i = 0; i < subjectButtons.length; i++) {
+            subjectButtons[i].setText(s[i].getName());
+        }
     }
 }
