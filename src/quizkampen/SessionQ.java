@@ -12,10 +12,34 @@ public class SessionQ implements Serializable {
     private boolean listFull = false;
     protected List<String> chosenSubject = new ArrayList<>();
     protected List<ListClass> proposedSubjectList = new ArrayList<>();
+	public Queue subjects = new LinkedList();
     public List<Question> currentQuestions = new ArrayList<>();
     protected List<Question> usedQuestions = new ArrayList<>();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
+	public void setQuestionsQueue() {
+		
+	}
+	
+	public Queue getRandomSubjectQueue() {
+		return subjectsQueue;
+	}
+	
+	public void setRandomSubjectQueue() {
+		
+		
+		for (int i = 0; i < 10; i++) {
+			subjects.add(new Subject(name, subjects))
+			
+		}
+		
+		for (int i = 0; i < 2; i++) {
+		Collections.shuffle(subjectList);
+		
+		subjectList.forEach(a -> {a.forEach(b -> )});
+		}
+	}
+	
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
     }
@@ -71,7 +95,7 @@ public class SessionQ implements Serializable {
 
         }
     }
-
+	
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> randomQuestionsList = new ArrayList<>();
         ListClass<Question> chosenSubjectList = list;
@@ -115,26 +139,28 @@ public class SessionQ implements Serializable {
         return this.totalRonds;
     }
 
-    public void loadThreeSubjects() {
-        this.getProposedSubject().clear();
-
-        Random rn = new Random();
-        ListClass<Question> temp;
-        for (int i = 0; i < subjectList.size(); i++) {
-            int index = rn.nextInt(subjectList.size() - 1);
-            temp = subjectList.get(index);
-            subjectList.set(index, subjectList.get(i));
-            subjectList.set(i, temp);
-        }
-        int counter = 0;
-        while (!listFull) {
-            if (!(getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
-                setProposedSubject(subjectList.get(counter));             // ADD ÄMNE TILL PROPOSED SUBJECT-LISTAN
-            }
-            counter++;
-            if (getProposedSubject().size() == 3) { // OM LISTAN ÄR FULL - BREAK
-                listFull = true;
-            }
-        }
-    }
+//    public void loadThreeSubjects() {
+//		
+//		
+//        this.getProposedSubject().clear();
+//
+////        Random rn = new Random();
+////        ListClass<Question> temp;
+////        for (int i = 0; i < subjectList.size(); i++) {
+////            int index = rn.nextInt(subjectList.size() - 1);
+////            temp = subjectList.get(index);
+////            subjectList.set(index, subjectList.get(i));
+////            subjectList.set(i, temp);
+////        }
+//        int counter = 0;
+//        while (!listFull) {
+//            if (!(getChosenSubject().contains(subjectList.get(counter).getName()))) { // OM ÄMNE EJ FINNS I CHOSEN SUBJECT-LISTAN
+//                setProposedSubject(subjectList.get(counter));             // ADD ÄMNE TILL PROPOSED SUBJECT-LISTAN
+//            }
+//            counter++;
+//            if (getProposedSubject().size() == 3) { // OM LISTAN ÄR FULL - BREAK
+//                listFull = true;
+//            }
+//        }
+//    }
 }
