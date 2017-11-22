@@ -211,6 +211,10 @@ public class ResultScreen extends MasterPanel{
         subjects[subjectCounter++].setText("- " + subject + " -");
     }
     
+    public void setRightName(String player2){   // FÖR ATT SÄTTA Opponent I RESULTS
+        rightName.setText(player2);
+    }
+    
     public void setResultScreen(int numberOfQuestions, int numberOfRounds, String player1, String player2) {
         leftName.setText(player1);
         rightName.setText(player2);

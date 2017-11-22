@@ -64,7 +64,7 @@ public class LobbyScreen2 extends MasterPanel{
         subjectIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         subjectButton.setPreferredSize(new Dimension(100, 100));
         subjectButton.setFont(buttonFont);
-//        subjectIconPanel.add(subjectButton);
+//        subjectIconPanel.add(subjectButton);  // Händer i sessionHandler
         centerMidPanel.add(textLabel2, BorderLayout.NORTH);
         centerMidPanel.add(subjectIconPanel, BorderLayout.CENTER);
         
@@ -78,7 +78,7 @@ public class LobbyScreen2 extends MasterPanel{
         readyButton.setPreferredSize(new Dimension(180, 70));
         readyIconPanel.setBackground(backgroundColor);
         readyIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        readyIconPanel.add(readyButton);
+//        readyIconPanel.add(readyButton);      // Händer i sessionHandler
         centerBotPanel.add(centerBotTopSpace, BorderLayout.NORTH);
         centerBotPanel.add(readyIconPanel, BorderLayout.CENTER);
         
