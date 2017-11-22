@@ -144,7 +144,6 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     public void resetPanel(){
         JButton[] buttonArray = {subjectButton1, subjectButton2, subjectButton3};
         for (int i = 0; i < buttonArray.length; i++) {
-            buttonArray[i].setBackground(backgroundColor);
             buttonArray[i].setOpaque(false);
             buttonArray[i].setBorderPainted(true);
         }
