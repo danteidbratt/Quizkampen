@@ -56,6 +56,9 @@ public class Server {
 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
+                
+                
+                
                 session.setSubjectQueue();
 //                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user2Output.writeObject(session);       //P2 får de nya ämnena

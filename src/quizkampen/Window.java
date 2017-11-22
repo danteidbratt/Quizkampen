@@ -14,8 +14,8 @@ public class Window extends JFrame {
     Subject[] tempSubjects = new Subject[3];
     Question[] tempQuestions;
     int tempIndex;
-    
-	ActionHandler ah;
+
+    ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
@@ -29,7 +29,7 @@ public class Window extends JFrame {
     ObjectInputStream inGameServer;
     protected User user;
     protected int playerNumber;
-    
+
     Socket gameServerSocket;
 
     List<IPanel> panelList;
@@ -38,13 +38,14 @@ public class Window extends JFrame {
     MenuScreen ms;
     GameMenuScreen gms;
     LobbyScreen ls;
+    LobbyScreen2 ls2;
     GameScreen gs;
     ResultScreen rs;
     SettingsScreen ses;
     StatsScreen sts;
 
     public Window() {
-		ah = new ActionHandler(this);
+        ah = new ActionHandler(this);
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
@@ -56,7 +57,6 @@ public class Window extends JFrame {
         }
     }
 
-
     public void setFrame() {
         ws = new WelcomeScreen();
         rs = new ResultScreen();
@@ -65,6 +65,7 @@ public class Window extends JFrame {
         ses = new SettingsScreen();
         sts = new StatsScreen();
         ls = new LobbyScreen();
+        ls2 = new LobbyScreen2();
         gs = new GameScreen();
 
         setTitle("QuizFights");
@@ -82,6 +83,7 @@ public class Window extends JFrame {
         panelList.add(sts);
         panelList.add(gs);
         panelList.add(ls);
+        panelList.add(ls2);
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(ah);

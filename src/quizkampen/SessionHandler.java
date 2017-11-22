@@ -21,13 +21,14 @@ public class SessionHandler {
                     case WAITING4P1USERNAME: // Servern skapas. UserOne skriver in UserName
                         session.setUserNameOne(w.user);
                         w.setPlayerNumber(1);
-                        w.rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
+                        w.rs.setResultScreen(session.getTotalQsInRound(), session.getTotalRounds(), "Pronut", "David");
                         w.rs.setPanel();
-                        w.rs.setActionListener(w);
+                        w.rs.setActionListener(w.ah);
+//
+                        w.ls.subjectButtons[0].setText(w.session.getSubject().getName());
+                        w.ls.subjectButtons[1].setText(w.session.getSubject().getName());   
+                        w.ls.subjectButtons[2].setText(w.session.getSubject().getName());
 
-                        w.ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
-                        w.ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
-                        w.ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
                         w.session.setState(State.WAITING4P2USERNAME);
                         w.outGameServer.writeObject(session);
                         w.revalidate();
@@ -38,12 +39,33 @@ public class SessionHandler {
                         session.setUserNameTwo(w.user);
                         w.setPlayerNumber(2);
                         w.outGameServer.writeObject(session);
-                        w.session.setState(State.CHOSINGSUBJECT);
+                        w.session.setState(State.WAITINGFORCHOICE);
                         break;
                         
-                    case CHOSINGSUBJECT://Chosing Subject, Talar om vems tur de är- väljer ämne.UserTwo får info om ämne.
+                    case WAITINGFORCHOICE: 
+                        
+                        w.session.setState(State.CHOICESENT);
+                        break;
+                        
+                        
+                        
+                        
+                        
+                    case CHOICESENT:
+                        
+                        w.session.setState(State.PLAYGAME);
+                        break;
+                        
+                        
+                        
+                        
+                        
+                        
+                    case PLAYGAME://Chosing Subject, Talar om vems tur de är- väljer ämne.UserTwo får info om ämne.
                         if (session.getUserChosing() == w.user) {
-                            // få gamescreeen
+                                
+                            
+                            
                             session.ChangeUserChosing();
                         }
                         break;

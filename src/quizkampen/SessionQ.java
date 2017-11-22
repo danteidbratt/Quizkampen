@@ -12,6 +12,7 @@ public class SessionQ implements Serializable {
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
     protected State state;
+    protected Subject chosenSubject;
 
     private PropertiesReader p;
 
