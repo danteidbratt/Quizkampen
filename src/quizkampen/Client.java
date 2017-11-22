@@ -5,6 +5,7 @@ public class Client {
     Window w;
 
     public Client() {
+        //hej
         Window w = new Window();
         w.setFrame();
     }
