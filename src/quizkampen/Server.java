@@ -2,7 +2,6 @@ package quizkampen;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.logging.*;
 
 public class Server {
@@ -21,7 +20,7 @@ public class Server {
             this.clientSocket1 = clientSocket1;
             session = new SessionQ();
             session.setSubjectList(database.loadSubjectList());
-//            session.loadThreeSubjects();
+            session.setSubjectQueue();
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -69,7 +68,7 @@ public class Server {
 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
-                session.setRandomSubjectQueue();
+                session.setSubjectQueue();
 //                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user2Output.writeObject(session);       //P2 får de nya ämnena
                 session = (SessionQ) user2Input.readObject();    // läser in valt ämne från P2 

@@ -14,6 +14,10 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame implements ActionListener {
 
+    Subject[] tempSubjects = new Subject[3];
+    Question[] tempQuestions;
+    int tempIndex;
+    
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
@@ -52,9 +56,6 @@ public class Window extends JFrame implements ActionListener {
         }
     }
 
-//    public void setSessionQ(SessionQ session) {
-//        this.session = session;
-//    }
     public void setFrame() {
         ws = new WelcomeScreen();
         rs = new ResultScreen();
@@ -74,7 +75,6 @@ public class Window extends JFrame implements ActionListener {
 
         panelList = new ArrayList<>();
         panelList.add(ws);
-//        panelList.add(rs);
         panelList.add(ms);
         panelList.add(gms);
         panelList.add(ses);
@@ -117,7 +117,7 @@ public class Window extends JFrame implements ActionListener {
                 this.gameServerSocket = new Socket("127.0.0.1", portGame);
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
-                session = (SessionQ) inGameServer.readObject();
+                session = (SessionQ)inGameServer.readObject();
                 if (session.getUserNameOne() == null) {
                     session.setUserNameOne(this.user);
                     this.setPlayerNumber(1);
@@ -133,48 +133,32 @@ public class Window extends JFrame implements ActionListener {
 
                 outGameServer.writeObject(session);
 
-                rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
+                rs.setResultScreen(session.getTotalQsInRound(), session.getTotalRounds(), "Pronut", "David");
                 rs.setPanel();
                 rs.setActionListener(this);
-
-                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
-                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
-                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
-
+                
+                
+                tempQuestions = new Question[session.getTotalQsInRound()];
+                for (int i = 0; i < 3; i++) {
+                    tempSubjects[i] = session.getSubject();
+                }
+                ls.setSubjectButtons(tempSubjects);
+                
                 add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } else if (e.getSource() == ls.subjectButton1) {
-            session.setCurrentQuestions(ls.subjectButton1.getText(), session.getTotalQsInRond());
-            ls.subjectButton1.setBackground(Color.YELLOW);
-            ls.subjectButton1.setBorderPainted(false);
-            ls.subjectButton1.setOpaque(true);
-            ls.startButton.setVisible(true);
-        } else if (e.getSource() == ls.subjectButton2) {
-            session.setCurrentQuestions(ls.subjectButton2.getText(), session.getTotalQsInRond());
-            ls.subjectButton2.setBackground(Color.YELLOW);
-            ls.subjectButton2.setBorderPainted(false);
-            ls.subjectButton2.setOpaque(true);
-            ls.startButton.setVisible(true);
-        } else if (e.getSource() == ls.subjectButton3) {
-            session.setCurrentQuestions(ls.subjectButton3.getText(), session.getTotalQsInRond());
-            ls.subjectButton3.setBackground(Color.YELLOW);
-            ls.subjectButton3.setBorderPainted(false);
-            ls.subjectButton3.setOpaque(true);
-            ls.startButton.setVisible(true);
         } else if (e.getSource() == ls.startButton) {
             remove(ls);
-            gs.setNumberofQuestions(session.getTotalQsInRond());
-            gs.setNextQuestion(session.getCurrentQuestions().get(questionCounter));
+            gs.setNumberofQuestions(session.getTotalQsInRound());
             gs.roundBoxLabel.setText(String.valueOf(roundCounter + 1) + "/" + String.valueOf(session.getTotalRounds()));
             add(gs);
         } else if (e.getSource() == gs.nextQuestionButton) {
-            if (questionCounter < session.getTotalQsInRond() - 1) {
-                gs.setNextQuestion(session.getCurrentQuestions().get(++questionCounter));
+            if (questionCounter < session.getTotalQsInRound() - 1) {
+                gs.setNextQuestion(tempSubjects[tempIndex].getQuestion());
+                questionCounter++;
                 gs.setButtonActionListener(this);
 
             } else {
@@ -191,6 +175,10 @@ public class Window extends JFrame implements ActionListener {
             roundCounter++;
             questionCounter = 0;
             ls.resetPanel();
+            for (int i = 0; i < 3; i++) {
+                    tempSubjects[i] = session.getSubject();
+                }
+                ls.setSubjectButtons(tempSubjects);
             add(ls);
         } else if (e.getSource() == ms.settingsButton) {
             remove(ms);
@@ -219,6 +207,17 @@ public class Window extends JFrame implements ActionListener {
         } else if (e.getSource() == ses.red) {
             panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
+        
+        for (int i = 0; i < ls.subjectButtons.length; i++) {
+            if (e.getSource() == ls.subjectButtons[i]){
+                ls.subjectButtons[i].setBackground(Color.YELLOW);
+                ls.subjectButtons[i].setBorderPainted(false);
+                ls.subjectButtons[i].setOpaque(true);
+                ls.startButton.setVisible(true);
+                tempIndex = i;
+                gs.setNextQuestion(tempSubjects[tempIndex].getQuestion());
+            }
+        }
 
         for (int i = 0; i < gs.answerButtons.length; i++) {
             if (e.getSource() == gs.answerButtons[i]) {
@@ -234,7 +233,7 @@ public class Window extends JFrame implements ActionListener {
                 }
                 gs.nextQuestionButton.setVisible(true);
                 gs.removeActionListeners(this);
-                if (questionCounter == session.getTotalQsInRond() - 1) {
+                if (questionCounter == session.getTotalQsInRound() - 1) {
                     gs.nextQuestionButton.setText("Show Results");
                 }
             }

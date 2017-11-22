@@ -1,10 +1,11 @@
 package quizkampen;
 
+import java.io.Serializable;
 import java.util.Queue;
 
-public class Subject {
+public class Subject implements Serializable{
 	String name;
-	Queue questions;
+	Queue<Question> questions;
 
 	public Subject(String name, Queue questions) {
 		this.name = name;
@@ -15,7 +16,7 @@ public class Subject {
 		return name;
 	}
 
-	public Queue getQuestion() {
-		return questions;
+	public Question getQuestion() {
+		return questions.remove();
 	}
 }
