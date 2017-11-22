@@ -88,7 +88,7 @@ public class SessionQ implements Serializable {
         // 2
         // Daven: ändrade den lite då det inte såg ut som att den skulle fungera
         for (int i = 0; i < howManyQuestions; i++) {                    // Om Question inte finns i usedQuestions-lista
-            if (!(usedQuestions.contains(usedQuestions.get(i)))) {      // läggs den till i randomQs-lista
+            if (!(usedQuestions.contains(chosenSubjectList.get(i)))) {      // läggs den till i randomQs-lista
                 randomQuestionsList.add(chosenSubjectList.get(i));
             }
         }
