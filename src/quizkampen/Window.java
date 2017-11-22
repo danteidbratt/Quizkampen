@@ -58,7 +58,7 @@ public class Window extends JFrame implements ActionListener, Runnable {
     @Override
     public void run() {
         System.out.println("TestarTråd");
-        try {   
+        try {
             while (true) {
                 try {
                     session = (SessionQ) inGameServer.readObject();
@@ -73,10 +73,11 @@ public class Window extends JFrame implements ActionListener, Runnable {
                             ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
                             ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
                             ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
+                            add(ls);
                             this.session.setState(State.WAITINGFOROPPONENTTOCONNECT);
                             outGameServer.writeObject(session);
-                                    revalidate();
-        repaint();
+                            revalidate();
+                            repaint();
                             break;
 
                         case WAITINGFOROPPONENTTOCONNECT: // UserTwo skriver in UserName
@@ -96,7 +97,6 @@ public class Window extends JFrame implements ActionListener, Runnable {
 //                        case // Playing, Spelet körs
 //                        
 //                            break;
-
                     }
 
                     // Här ska användarnamen sättas ut
@@ -116,9 +116,7 @@ public class Window extends JFrame implements ActionListener, Runnable {
 //                session.setUserNameTwo(this.user);
 //                this.setPlayerNumber(2);
 //            }
-
 //            outGameServer.writeObject(session); // Skicka tillbaka användarnamn till servern
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -217,10 +215,10 @@ public class Window extends JFrame implements ActionListener, Runnable {
 //                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
 //                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
 //                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
-                add(ls);
+                
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
 
         } else if (e.getSource() == ls.subjectButton1) {
             session.setCurrentQuestions(ls.subjectButton1.getText(), session.getTotalQsInRond());
