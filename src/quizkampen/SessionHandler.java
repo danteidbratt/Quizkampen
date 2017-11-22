@@ -18,7 +18,7 @@ public class SessionHandler {
         p = new PropertiesReader();
         this.totalRonds = p.getRonds();
         this.totalQuestionsinRond = p.getQuestionsInRond();
-        this.sessionQ.setTotalRonds(totalRonds);
+        this.sessionQ.setTotalRounds(totalRonds);
         this.sessionQ.setTotalQsInRond(totalQuestionsinRond);
     }
 

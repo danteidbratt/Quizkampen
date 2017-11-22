@@ -2,7 +2,6 @@ package quizkampen;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.logging.*;
 
 public class Server {
@@ -21,7 +20,7 @@ public class Server {
             this.clientSocket1 = clientSocket1;
             session = new SessionQ();
             session.setSubjectList(database.loadSubjectList());
-            session.loadThreeSubjects();
+            session.setSubjectQueue();
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -55,8 +54,22 @@ public class Server {
         try {
             while (true) {
 
-                user1Output.writeObject(session);       // user2 name till P1
-                session = (SessionQ) user1Input.readObject();    // 
+                // kolla om antalSpeladeRonder == totalaRonder. BREAK
+                
+                session.setSubjectQueue();
+//                session.loadThreeSubjects();    // laddar om 3 ämnen i session
+                user2Output.writeObject(session);       //P2 får de nya ämnena
+                session = (SessionQ) user2Input.readObject();    // läser in valt ämne från P2 
+                // ska P1 få reda på nästa valda ämne?
+                session = (SessionQ) user2Input.readObject();    // läser in svar från P2
+                user1Output.writeObject(session);       // skickar ämne + P2 svar till P1
+                session = (SessionQ) user1Input.readObject();    // får veta när P1 svarat
+                user2Output.writeObject(session);        // skickar P1 resultat till P2
+                
+                // kolla om antalSpeladeRonder == totalaRonder. BREAK
+                
+//                session.loadThreeSubjects();    // laddar om 3 ämnen i session
+                user1Output.writeObject(session);       // skickar ämnen till P1
 
 //                session = (SessionQ) user1Input.readObject();    // tar in valt ämne från P1
 //                user2Output.writeObject(session);       // skickar valt ämne till P2
