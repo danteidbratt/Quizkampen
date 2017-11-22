@@ -1,0 +1,7 @@
+
+package quizkampen;
+
+public enum State {
+        CONNECTED, WAITINGFOROPPONENTTOCONNECT,CHOSINGSUBJECT,
+        PLAYINGGAME, WAITINGFORSERVER, IDLE
+}

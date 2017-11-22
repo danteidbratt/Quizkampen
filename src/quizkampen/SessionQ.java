@@ -9,13 +9,50 @@ public class SessionQ implements Serializable {
     private int totalQuestionsinRond;
     protected User userOne;
     protected User userTwo;
+    protected State state;
     private boolean listFull = false;
     protected List<String> chosenSubject = new ArrayList<>();
     protected List<ListClass> proposedSubjectList = new ArrayList<>();
     public List<Question> currentQuestions = new ArrayList<>();
     protected List<Question> usedQuestions = new ArrayList<>();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
+    
+   
+    private PropertiesReader p;
+    
+    protected User userChosing; 
+    
+        SessionQ() {
+        p = new PropertiesReader();
+        this.totalRonds = p.getRonds();
+        this.totalQuestionsinRond = p.getQuestionsInRond();
+        this.setTotalRonds(totalRonds);
+        this.setTotalQsInRond(totalQuestionsinRond);
+        userChosing = userOne;
+    }
 
+    public void ChangeUserChosing() {
+        if (userChosing == userOne) {
+            setUserChosing(userTwo);
+        } else if (userChosing == userTwo) {
+            setUserChosing(userOne);
+        }
+    }
+
+    public void setUserChosing(User userChosing) {
+        this.userChosing = userChosing; 
+    }
+    public User getUserChosing (){
+        return userChosing;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+    public State getState() {
+        return state; 
+    }
+    
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
     }

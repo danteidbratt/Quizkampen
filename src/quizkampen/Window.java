@@ -12,11 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends JFrame implements ActionListener, Runnable {
 
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
+    protected SessionHandler states;
     protected int portUser = 33334;
     protected int portGame = 33333;
     protected Socket userServerSocket;
@@ -26,6 +27,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inGameServer;
     protected User user;
     protected int playerNumber;
+    protected Thread startGameLoop;
 
     Socket gameServerSocket;
 
@@ -41,6 +43,7 @@ public class Window extends JFrame implements ActionListener {
     StatsScreen sts;
 
     public Window() {
+        startGameLoop = new Thread();
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
@@ -52,9 +55,76 @@ public class Window extends JFrame implements ActionListener {
         }
     }
 
-//    public void setSessionQ(SessionQ session) {
-//        this.session = session;
-//    }
+    @Override
+    public void run() {
+        System.out.println("TestarTråd");
+        try {   
+            while (true) {
+                try {
+                    session = (SessionQ) inGameServer.readObject();
+                    switch (this.session.getState()) {
+                        case CONNECTED: // Servern skapas. UserOne skriver in UserName
+                            session.setUserNameOne(this.user);
+                            this.setPlayerNumber(1);
+                            rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
+                            rs.setPanel();
+                            rs.setActionListener(this);
+
+                            ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
+                            ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
+                            ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
+                            this.session.setState(State.WAITINGFOROPPONENTTOCONNECT);
+                            outGameServer.writeObject(session);
+                                    revalidate();
+        repaint();
+                            break;
+
+                        case WAITINGFOROPPONENTTOCONNECT: // UserTwo skriver in UserName
+                            session.setUserNameTwo(this.user);
+                            this.setPlayerNumber(2);
+                            outGameServer.writeObject(session);
+                            break;
+
+                        case CHOSINGSUBJECT://Chosing Subject, Talar om vems tur de är- väljer ämne.UserTwo får info om ämne.
+                            if (session.getUserChosing() == user) {
+
+                                session.ChangeUserChosing();
+                            }
+
+                            break;
+
+//                        case // Playing, Spelet körs
+//                        
+//                            break;
+
+                    }
+
+                    // Här ska användarnamen sättas ut
+//            if (session) {
+//                break;
+//            }
+                } catch (IOException ex) {
+                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+//            session = (SessionQ) inGameServer.readObject();
+//            if (session.getUserNameOne() == null) {
+////                    session.setUserNameOne(this.user);
+////                    this.setPlayerNumber(1);
+//            } else {
+//                session.setUserNameTwo(this.user);
+//                this.setPlayerNumber(2);
+//            }
+
+//            outGameServer.writeObject(session); // Skicka tillbaka användarnamn till servern
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void setFrame() {
         ws = new WelcomeScreen();
         rs = new ResultScreen();
@@ -117,49 +187,40 @@ public class Window extends JFrame implements ActionListener {
                 this.gameServerSocket = new Socket("127.0.0.1", portGame);
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
-                session = (SessionQ) inGameServer.readObject();
-                if (session.getUserNameOne() == null) {
-                    session.setUserNameOne(this.user);
-                    this.setPlayerNumber(1);
-                } else {
-                    session.setUserNameTwo(this.user);
-                    this.setPlayerNumber(2);
-                }
-                
-                outGameServer.writeObject(session); // Skicka tillbaka användarnamn till servern
-                while ((session = (SessionQ) inGameServer.readObject()) != null) {
-                    // Här ska användarnamen sättas ut
-                System.out.println("Du möter: " + session.getUserNameOne().getUserName());
-                System.out.println(session.getUserNameTwo().getUserName());
-                
-                
-                }
-                
-                
-                
-                
-                
+//                try { 
+//                    session = (SessionQ) inGameServer.readObject();
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                startGameLoop.start();
+
+//                session = (SessionQ) inGameServer.readObject();
+//                if (session.getUserNameOne() == null) {
+//                    session.setUserNameOne(this.user);
+//                    this.setPlayerNumber(1);
+//                } else {
+//                    session.setUserNameTwo(this.user);
+//                    this.setPlayerNumber(2);
+//                }
+//                
+//                outGameServer.writeObject(session); // Skicka tillbaka användarnamn till servern
+//                while ((session = (SessionQ) inGameServer.readObject()) != null) {
+//                    // Här ska användarnamen sättas ut
+//                    if (session) 
+//                
+//                break; 
+//                }
+//                rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
+//                rs.setPanel();
+//                rs.setActionListener(this);
 //
-//                System.out.println("Du möter: " + session.getUserNameOne().getUserName());
-//                System.out.println(session.getUserNameTwo().getUserName());
-                SessionHandler sessionHandler = new SessionHandler(session);
-
-                outGameServer.writeObject(session);
-
-                rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
-                rs.setPanel();
-                rs.setActionListener(this);
-
-                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
-                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
-                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
-
+//                ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
+//                ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
+//                ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
                 add(ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
 
         } else if (e.getSource() == ls.subjectButton1) {
             session.setCurrentQuestions(ls.subjectButton1.getText(), session.getTotalQsInRond());
