@@ -22,13 +22,12 @@ public class Server {
             session = new SessionQ();
             session.setSubjectList(database.loadSubjectList());
             session.loadThreeSubjects();
-            
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
 
-            user1Output.writeObject(session);
-            session = (SessionQ) user1Input.readObject();
+            user1Output.writeObject(session);   // skickar session till P1 för första gången
+            session = (SessionQ) user1Input.readObject();   // tar emot session med user1 uppdaterad
 
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,7 +41,7 @@ public class Server {
             user2Input = new ObjectInputStream(clientSocket2.getInputStream());
             user2Output.writeObject(session);
             session = (SessionQ) user2Input.readObject();
-            this.playGame();                     // SPELET BÖRJAR HÄR
+            this.playGame();                     // spelet börjar här
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -56,7 +55,10 @@ public class Server {
         try {
             while (true) {
                 
-                // ersätts med två rader (Kolla Jakobs kod!) - ANNA OCH CLAUDIA
+                // IN - från P1
+                // UT- till P2
+                
+                 
                 
                 session = (SessionQ) user1Input.readObject();    // tar in valt ämne från P1
                 user2Output.writeObject(session);       // skickar valt ämne till P2
