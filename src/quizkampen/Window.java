@@ -14,8 +14,8 @@ public class Window extends JFrame {
     Subject[] tempSubjects = new Subject[3];
     Question[] tempQuestions;
     int tempIndex;
-    
-	ActionHandler ah;
+
+    ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
@@ -43,7 +43,7 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
-		ah = new ActionHandler(this);
+        ah = new ActionHandler(this);
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());

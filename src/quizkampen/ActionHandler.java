@@ -10,14 +10,15 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ActionHandler implements ActionListener{
-	Window w;
-	
-	public ActionHandler(Window window) {
-		this.w = window;
-	}
-	
-	 @Override
+public class ActionHandler implements ActionListener {
+
+    Window w;
+
+    public ActionHandler(Window window) {
+        this.w = window;
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == w.ws.okButton || e.getSource() == w.ws.userNameInput) {
             String userName = w.ws.userNameInput.getText();
@@ -46,7 +47,7 @@ public class ActionHandler implements ActionListener{
                 w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
-                w.session = (SessionQ)w.inGameServer.readObject();
+                w.session = (SessionQ) w.inGameServer.readObject();
                 if (w.session.getUserNameOne() == null) {
                     w.session.setUserNameOne(w.user);
                     w.setPlayerNumber(1);
@@ -65,14 +66,13 @@ public class ActionHandler implements ActionListener{
                 w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), "Pronut", "David");
                 w.rs.setPanel();
                 w.rs.setActionListener(this);
-                
-                
+
                 w.tempQuestions = new Question[w.session.getTotalQsInRound()];
                 for (int i = 0; i < 3; i++) {
                     w.tempSubjects[i] = w.session.getSubject();
                 }
                 w.ls.setSubjectButtons(w.tempSubjects);
-                
+
                 w.add(w.ls);
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,9 +105,9 @@ public class ActionHandler implements ActionListener{
             w.questionCounter = 0;
             w.ls.resetPanel();
             for (int i = 0; i < 3; i++) {
-                    w.tempSubjects[i] = w.session.getSubject();
-                }
-                w.ls.setSubjectButtons(w.tempSubjects);
+                w.tempSubjects[i] = w.session.getSubject();
+            }
+            w.ls.setSubjectButtons(w.tempSubjects);
             w.add(w.ls);
         } else if (e.getSource() == w.ms.settingsButton) {
             w.remove(w.ms);
@@ -134,11 +134,11 @@ public class ActionHandler implements ActionListener{
         } else if (e.getSource() == w.ses.green) {
             w.panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
         } else if (e.getSource() == w.ses.red) {
-           w.panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
+            w.panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
-        
+
         for (int i = 0; i < w.ls.subjectButtons.length; i++) {
-            if (e.getSource() == w.ls.subjectButtons[i]){
+            if (e.getSource() == w.ls.subjectButtons[i]) {
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
                 w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
