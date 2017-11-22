@@ -67,7 +67,6 @@ public class ActionHandler implements ActionListener {
                 w.rs.setPanel();
                 w.rs.setActionListener(this);
 
-                w.tempQuestions = new Question[w.session.getTotalQsInRound()];
                 for (int i = 0; i < 3; i++) {
                     w.tempSubjects[i] = w.session.getSubject();
                 }

@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
-    Question[] tempQuestions;
     int tempIndex;
 
     ActionHandler ah;
