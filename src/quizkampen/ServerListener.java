@@ -2,8 +2,7 @@ package quizkampen;
 
 import java.io.*;
 import java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class ServerListener extends Thread {
 
@@ -17,8 +16,8 @@ public class ServerListener extends Thread {
     }
 
     @Override
-    public void run() {
-        while (true) {
+    public void run() {         // Väntar på att en user ska trycka "Random Player" - då startas servern
+        while (true) {          // När user2 klickar "Random Player" kopplas den upp till samma server
             try {
                 Socket clientSock1 = serverSocket1.accept();
                 Server server = new Server(clientSock1);
@@ -31,7 +30,7 @@ public class ServerListener extends Thread {
         }
     }
 
-    public class UserServerListener extends Thread {
+    public class UserServerListener extends Thread {    // Väntar på att en användare ska logga in
 
         protected int port2 = 33334;
         ServerSocket loginSocket;
@@ -59,7 +58,7 @@ public class ServerListener extends Thread {
         }
     }
 
-    public class UserServerConnection extends Thread {
+    public class UserServerConnection extends Thread {  // Skickar user object när användare loggat in
 
         Socket clientSock;
 
@@ -77,15 +76,12 @@ public class ServerListener extends Thread {
                 in1 = new ObjectInputStream(clientSock.getInputStream());
                 String userName1 = (String) in1.readObject();
                 if (um.userExist(userName1)) {
-                    System.out.println("hej");
                     out1.writeObject(um.getUser(userName1));
-                    System.out.println("anna finns");
                 } else {
-                    System.out.println("heeej");
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
-                    System.out.println("fiins ej");
-                }
+                }               
+                              
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
