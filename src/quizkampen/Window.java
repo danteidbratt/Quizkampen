@@ -125,10 +125,23 @@ public class Window extends JFrame implements ActionListener {
                     session.setUserNameTwo(this.user);
                     this.setPlayerNumber(2);
                 }
-                outGameServer.writeObject(session);
-
-                System.out.println("Du är spelare nr: " + this.getPlayerNumber());
-
+                
+                outGameServer.writeObject(session); // Skicka tillbaka användarnamn till servern
+                while ((session = (SessionQ) inGameServer.readObject()) != null) {
+                    // Här ska användarnamen sättas ut
+                System.out.println("Du möter: " + session.getUserNameOne().getUserName());
+                System.out.println(session.getUserNameTwo().getUserName());
+                
+                
+                }
+                
+                
+                
+                
+                
+//
+//                System.out.println("Du möter: " + session.getUserNameOne().getUserName());
+//                System.out.println(session.getUserNameTwo().getUserName());
                 SessionHandler sessionHandler = new SessionHandler(session);
 
                 outGameServer.writeObject(session);
