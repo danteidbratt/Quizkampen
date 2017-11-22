@@ -12,12 +12,12 @@ public class SessionQ implements Serializable {
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
     protected State state;
-   
+
     private PropertiesReader p;
-    
-    protected User userChosing; 
-    
-        SessionQ() {
+
+    protected User userChosing;
+
+    SessionQ() {
         p = new PropertiesReader();
         this.totalRonds = p.getRonds();
         this.totalQuestionsinRond = p.getQuestionsInRond();
@@ -36,19 +36,21 @@ public class SessionQ implements Serializable {
     }
 
     public void setUserChosing(User userChosing) {
-        this.userChosing = userChosing; 
+        this.userChosing = userChosing;
     }
-    public User getUserChosing (){
+
+    public User getUserChosing() {
         return userChosing;
     }
 
     public void setState(State state) {
         this.state = state;
     }
+
     public State getState() {
-        return state; 
+        return state;
     }
-    
+
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
     }
@@ -83,5 +85,19 @@ public class SessionQ implements Serializable {
 
     public int getTotalRounds() {
         return this.totalRonds;
+    }
+
+    public void setSubjectQueue() {
+        for (int p = 0; p < 2; p++) {
+            Collections.shuffle(subjectList);
+            for (int i = 0; i < subjectList.size(); i++) {
+                Queue questions = new LinkedList();
+                Collections.shuffle(subjectList.get(i));
+                for (int j = 0; j < subjectList.get(i).size(); j++) {
+                    questions.add(subjectList.get(i).get(j));
+                }
+                subjects.add(new Subject(subjectList.get(i).getName(), questions));
+            }
+        }
     }
 }
