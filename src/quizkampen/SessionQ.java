@@ -100,4 +100,8 @@ public class SessionQ implements Serializable {
             }
         }
     }
+    
+        public Subject getSubject(){
+        return subjects.remove();
+    }
 }
