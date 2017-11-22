@@ -29,6 +29,7 @@ public class SessionQ implements Serializable {
         this.setTotalRonds(totalRonds);
         this.setTotalQsInRond(totalQuestionsinRond);
         userChosing = userOne;
+        this.state = State.WAITING4P1USERNAME;
     }
 
     public void ChangeUserChosing() {

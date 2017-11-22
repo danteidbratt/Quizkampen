@@ -17,7 +17,7 @@ public class Window extends JFrame implements ActionListener {
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
-    protected SessionHandler states;
+    protected SessionHandler sh = new SessionHandler(this);
     protected int portUser = 33334;
     protected int portGame = 33333;
     protected Socket userServerSocket;
@@ -27,7 +27,7 @@ public class Window extends JFrame implements ActionListener {
     ObjectInputStream inGameServer;
     protected User user;
     protected int playerNumber;
-
+    
     Socket gameServerSocket;
 
     List<IPanel> panelList;
@@ -53,48 +53,6 @@ public class Window extends JFrame implements ActionListener {
         }
     }
 
-    public void gameLoop() {
-        while (true) {
-            try {
-                
-                switch (this.session.getState()) {
-                    case CONNECTED: // Servern skapas. UserOne skriver in UserName
-                        session.setUserNameOne(this.user);
-                        this.setPlayerNumber(1);
-                        rs.setResultScreen(session.getTotalQsInRond(), session.getTotalRounds(), "Pronut", "David");
-                        rs.setPanel();
-                        rs.setActionListener(this);
-
-                        ls.subjectButton1.setText(session.getProposedSubject().get(0).getName());
-                        ls.subjectButton2.setText(session.getProposedSubject().get(1).getName());
-                        ls.subjectButton3.setText(session.getProposedSubject().get(2).getName());
-                        this.session.setState(State.WAITINGFOROPPONENTTOCONNECT);
-                        outGameServer.writeObject(session);
-                        revalidate();
-                        repaint();
-                        break;
-
-                    case WAITINGFOROPPONENTTOCONNECT: // UserTwo skriver in UserName
-                        session.setUserNameTwo(this.user);
-                        this.setPlayerNumber(2);
-                        outGameServer.writeObject(session);
-                        break;
-
-                    case CHOSINGSUBJECT://Chosing Subject, Talar om vems tur de är- väljer ämne.UserTwo får info om ämne.
-                        if (session.getUserChosing() == user) {
-
-                            session.ChangeUserChosing();
-                        }
-
-                        break;
-
-                }
-
-            } catch (IOException ex) {
-                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 
     public void setFrame() {
         ws = new WelcomeScreen();
@@ -158,7 +116,7 @@ public class Window extends JFrame implements ActionListener {
                 outGameServer = new ObjectOutputStream(gameServerSocket.getOutputStream());
                 inGameServer = new ObjectInputStream(gameServerSocket.getInputStream());
                 session = (SessionQ) inGameServer.readObject();
-                this.gameLoop();
+                sh.checkGame(session);
 
                 add(ls);
             } catch (IOException ex) {
