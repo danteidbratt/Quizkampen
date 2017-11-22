@@ -63,10 +63,9 @@ public class SessionQ implements Serializable {
         for (ListClass l : proposedSubjectList) {
             if (chosenSubject.equalsIgnoreCase(l.getName())) {
                 currentQuestions = getRandomQsFromList(howManyQuestions, l);
-                
-                for (Question q : currentQuestions) {  // lägger till currentQuestions i usedQuestions-listan
-                    this.usedQuestions.add(q);
-                }
+
+                // lägger till currentQuestions i usedQuestions-listan
+                this.usedQuestions.addAll(currentQuestions);
                 break;
             }
 
@@ -87,8 +86,9 @@ public class SessionQ implements Serializable {
             chosenSubjectList.set(randNum2, temp);
         }
         // 2
-        for (int i = 0; i < howManyQuestions; i++) {    // Om Question inte finns i usedQuestions-lista
-            if (!(usedQuestions.contains(i))) {           // läggs den till i randomQs-lista
+        // Daven: ändrade den lite då det inte såg ut som att den skulle fungera
+        for (int i = 0; i < howManyQuestions; i++) {                    // Om Question inte finns i usedQuestions-lista
+            if (!(usedQuestions.contains(usedQuestions.get(i)))) {      // läggs den till i randomQs-lista
                 randomQuestionsList.add(chosenSubjectList.get(i));
             }
         }
