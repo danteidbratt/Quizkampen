@@ -154,16 +154,19 @@ public class Window extends JFrame implements ActionListener {
             session.setCurrentQuestions(ls.subjectButton1.getText(), session.getTotalQsInRond());
             ls.subjectButton1.setBackground(Color.YELLOW);
             ls.subjectButton1.setBorderPainted(false);
+            ls.subjectButton1.setOpaque(true);
             ls.startButton.setVisible(true);
         } else if (e.getSource() == ls.subjectButton2) {
             session.setCurrentQuestions(ls.subjectButton2.getText(), session.getTotalQsInRond());
             ls.subjectButton2.setBackground(Color.YELLOW);
             ls.subjectButton2.setBorderPainted(false);
+            ls.subjectButton1.setOpaque(true);
             ls.startButton.setVisible(true);
         } else if (e.getSource() == ls.subjectButton3) {
             session.setCurrentQuestions(ls.subjectButton3.getText(), session.getTotalQsInRond());
             ls.subjectButton3.setBackground(Color.YELLOW);
             ls.subjectButton3.setBorderPainted(false);
+            ls.subjectButton1.setOpaque(true);
             ls.startButton.setVisible(true);
         } else if (e.getSource() == ls.startButton) {
             remove(ls);
