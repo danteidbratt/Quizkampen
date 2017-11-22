@@ -21,7 +21,7 @@ public class Server {
             this.clientSocket1 = clientSocket1;
             session = new SessionQ();
             session.setSubjectList(database.loadSubjectList());
-            session.loadThreeSubjects();
+//            session.loadThreeSubjects();
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -69,7 +69,8 @@ public class Server {
 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
-                session.loadThreeSubjects();    // laddar om 3 ämnen i session
+                session.setRandomSubjectQueue();
+//                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user2Output.writeObject(session);       //P2 får de nya ämnena
                 session = (SessionQ) user2Input.readObject();    // läser in valt ämne från P2 
                 // ska P1 få reda på nästa valda ämne?
@@ -80,7 +81,7 @@ public class Server {
                 
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 
-                session.loadThreeSubjects();    // laddar om 3 ämnen i session
+//                session.loadThreeSubjects();    // laddar om 3 ämnen i session
                 user1Output.writeObject(session);       // skickar ämnen till P1
 
             }

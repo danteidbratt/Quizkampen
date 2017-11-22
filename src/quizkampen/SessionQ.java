@@ -12,34 +12,34 @@ public class SessionQ implements Serializable {
     private boolean listFull = false;
     protected List<String> chosenSubject = new ArrayList<>();
     protected List<ListClass> proposedSubjectList = new ArrayList<>();
-	public Queue subjects = new LinkedList();
+    public Queue<Subject> subjects = new LinkedList();
     public List<Question> currentQuestions = new ArrayList<>();
     protected List<Question> usedQuestions = new ArrayList<>();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
-	public void setQuestionsQueue() {
-		
-	}
-	
-	public Queue getRandomSubjectQueue() {
-		return subjectsQueue;
-	}
-	
-	public void setRandomSubjectQueue() {
-		
-		
-		for (int i = 0; i < 10; i++) {
-			subjects.add(new Subject(name, subjects))
-			
-		}
-		
-		for (int i = 0; i < 2; i++) {
-		Collections.shuffle(subjectList);
-		
-		subjectList.forEach(a -> {a.forEach(b -> )});
-		}
-	}
-	
+    public void setQuestionsQueue() {
+
+    }
+
+//    public Queue getRandomSubjectQueue() {
+//        return subjectsQueue;
+//    }
+
+    public void setRandomSubjectQueue() {
+        Collections.shuffle(subjectList);
+        for (int i = 0; i < subjectList.size(); i++) {
+            Queue questions = new LinkedList();
+            Collections.shuffle(subjectList.get(i));
+            for (int j = 0; j < subjectList.get(i).size(); j++) {
+                questions.add(subjectList.get(i).get(j));
+            }
+            subjects.add(new Subject(subjectList.get(i).getName(), questions));
+        }
+        for (int i = 0; i < 10; i++) {
+            subjects.peek().getName();
+        }
+    }
+
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
     }
@@ -95,7 +95,7 @@ public class SessionQ implements Serializable {
 
         }
     }
-	
+
     public List<Question> getRandomQsFromList(int howManyQuestions, ListClass list) {
         List<Question> randomQuestionsList = new ArrayList<>();
         ListClass<Question> chosenSubjectList = list;
