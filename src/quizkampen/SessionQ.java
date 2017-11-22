@@ -12,10 +12,6 @@ public class SessionQ implements Serializable {
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
-    public void setQuestionsQueue() {
-
-    }
-
     public void setSubjectQueue() {
         for (int p = 0; p < 2; p++) {
             Collections.shuffle(subjectList);
@@ -28,8 +24,6 @@ public class SessionQ implements Serializable {
                 subjects.add(new Subject(subjectList.get(i).getName(), questions));
             }
         }
-        Subject temp1 = subjects.remove();
-        Subject temp2 = subjects.remove();
     }
     
     public Subject getSubject(){
