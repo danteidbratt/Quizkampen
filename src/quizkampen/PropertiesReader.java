@@ -30,7 +30,7 @@ public class PropertiesReader {
     }
 
     public int getQuestionsInRond() {
-        String in = p.getProperty("questionsInRond");
+        String in = p.getProperty("questionsInRond", "2");
         questionsInRond = Integer.parseInt(in);
         return questionsInRond;
     }
