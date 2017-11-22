@@ -84,14 +84,8 @@ public class LobbyScreen extends MasterPanel implements Runnable{
         subjectPanel.setLayout(new GridLayout(1, 3, 10, 0));
         subjectPanel.setBackground(backgroundColor);
         subjectButton1.setFont(buttonFont);
-        subjectButton1.setBackground(backgroundColor);
-//        subjectButton1.setOpaque(true);
         subjectButton2.setFont(buttonFont);
-        subjectButton2.setBackground(backgroundColor);
-//        subjectButton2.setOpaque(true);
         subjectButton3.setFont(buttonFont);
-        subjectButton3.setBackground(backgroundColor);
-//        subjectButton3.setOpaque(true);
         subjectPanel.add(subjectButton1);
         subjectPanel.add(subjectButton2);
         subjectPanel.add(subjectButton3);
@@ -150,7 +144,6 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     public void resetPanel(){
         JButton[] buttonArray = {subjectButton1, subjectButton2, subjectButton3};
         for (int i = 0; i < buttonArray.length; i++) {
-            buttonArray[i].setBackground(backgroundColor);
             buttonArray[i].setOpaque(false);
             buttonArray[i].setBorderPainted(true);
         }
