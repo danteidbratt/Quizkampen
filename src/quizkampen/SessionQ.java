@@ -7,41 +7,39 @@ public class SessionQ implements Serializable {
 
     private int totalRonds;
     private int totalQuestionsinRond;
-    protected User userOne;
-    protected User userTwo;
+    protected String playerNameOne;
+    protected String playerNameTwo;
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
     protected State state;
-    protected Subject chosenSubject;
+    protected String chosenSubjectName;
+    Question[] tempQuestions;
+    int playerNumber;
 
-    private PropertiesReader p;
-
-    protected User userChosing;
 
     SessionQ() {
-        p = new PropertiesReader();
-        this.totalRonds = p.getRonds();
-        this.totalQuestionsinRond = p.getQuestionsInRond();
-        this.setTotalRounds(totalRonds);
-        this.setTotalQsInRond(totalQuestionsinRond);
-        userChosing = userOne;
-        this.state = State.WAITING4P1USERNAME;
+        playerNumber = 1;
+        this.state = State.CHOOSESUBJECT;
     }
 
-    public void ChangeUserChosing() {
-        if (userChosing == userOne) {
-            setUserChosing(userTwo);
-        } else if (userChosing == userTwo) {
-            setUserChosing(userOne);
-        }
+    public int getPlayerNumber() {
+        return playerNumber++;
+    }
+    
+    public String getPlayerNameTwo() {
+        return playerNameTwo;
     }
 
-    public void setUserChosing(User userChosing) {
-        this.userChosing = userChosing;
+    public String getPlayerNameOne() {
+        return playerNameOne;
     }
 
-    public User getUserChosing() {
-        return userChosing;
+    public void setPlayerNameTwo(String playerNameTwo) {
+        this.playerNameTwo = playerNameTwo;
+    }
+
+    public void setPlayerNameOne(String playerNameOne) {
+        this.playerNameOne = playerNameOne;
     }
 
     public void setState(State state) {
@@ -54,22 +52,6 @@ public class SessionQ implements Serializable {
 
     public void setSubjectList(List<ListClass<Question>> subjectList) {
         this.subjectList = subjectList;
-    }
-
-    public User getUserNameOne() {
-        return userOne;
-    }
-
-    public void setUserNameOne(User u) {
-        userOne = u;
-    }
-
-    public User getUserNameTwo() {
-        return userTwo;
-    }
-
-    public void setUserNameTwo(User u) {
-        userTwo = u;
     }
 
     public void setTotalQsInRond(int totalQuestions) {
@@ -101,8 +83,8 @@ public class SessionQ implements Serializable {
             }
         }
     }
-    
-        public Subject getSubject(){
+
+    public Subject getSubject() {
         return subjects.remove();
     }
 }

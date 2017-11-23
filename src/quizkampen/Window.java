@@ -12,11 +12,11 @@ import javax.swing.JFrame;
 public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
-    int tempIndex;
-
     ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
+    int playerNumber;
+
     protected SessionQ session;
 
     SessionHandlerPlayerOne sh1;
@@ -30,7 +30,6 @@ public class Window extends JFrame {
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
     protected User user;
-    protected int playerNumber;
 
     Socket gameServerSocket;
 
@@ -101,13 +100,5 @@ public class Window extends JFrame {
 
     public void setUser(User u) {
         this.user = u;
-    }
-
-    public int getPlayerNumber() {
-        return this.playerNumber;
-    }
-
-    public void setPlayerNumber(int number) {
-        this.playerNumber = number;
     }
 }

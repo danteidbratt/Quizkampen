@@ -14,6 +14,7 @@ public class Server {
     ObjectInputStream user1Input;
     private SessionQ session;
     protected Database database = new Database();
+    private PropertiesReader p;
 
     public Server(Socket clientSocket1) {
         try {
@@ -21,6 +22,9 @@ public class Server {
             session = new SessionQ();
             session.setSubjectList(database.loadSubjectList());
             session.setSubjectQueue();
+            p = new PropertiesReader();
+            session.setTotalRounds(p.getRonds());
+            session.setTotalQsInRond(p.getQuestionsInRond());
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -57,34 +61,18 @@ public class Server {
                 // kolla om antalSpeladeRonder == totalaRonder. BREAK
                 session.setSubjectQueue();
 
-                while(true){
-                user1Output.writeObject(session); // skickar P2 namn till P1     (set result screen P1)
-                session = (SessionQ) user1Input.readObject(); // läser in valt ämne + svar från P1
-                // IF - gameOver - break
-                // IF - Rond is over - LoadQuestions?
-                user2Output.writeObject(session); // skickar valt ämne + P1 resultat till P2    (set result screen P2)
-                
-                session = (SessionQ) user2Input.readObject(); // läser in från P2
-                user1Output.writeObject(session); // skickar till P1
-                // IF - GameOver - break
-    
-                
-                
+                while (true) {
+                    user1Output.writeObject(session); // skickar P2 namn till P1     (set result screen P1)
+                    session = (SessionQ) user1Input.readObject(); // läser in valt ämne + svar från P1
+                    // IF - gameOver - break
+                    // IF - Rond is over - LoadQuestions?
+                    user2Output.writeObject(session); // skickar valt ämne + P1 resultat till P2    (set result screen P2)
+
+                    session = (SessionQ) user2Input.readObject(); // läser in från P2
+                    user1Output.writeObject(session); // skickar till P1
+                    // IF - GameOver - break
+
                 }
-                
-                
-//                
-//                user2Output.writeObject(session);       //P2 får de nya ämnena
-//                session = (SessionQ) user2Input.readObject();    // läser in valt ämne från P2 
-//                session = (SessionQ) user2Input.readObject();    // läser in svar från P2
-//                user1Output.writeObject(session);       // skickar ämne + P2 svar till P1
-//                session = (SessionQ) user1Input.readObject();    // får veta när P1 svarat
-//                user2Output.writeObject(session);        // skickar P1 resultat till P2
-//
-//                user1Output.writeObject(session);       // skickar ämnen till P1
-//
-//                
-                
 
             }
         } catch (IOException e) {

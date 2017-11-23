@@ -87,6 +87,7 @@ public class LobbyScreen extends MasterPanel implements Runnable{
             subjectButtons[i].setFont(buttonFont);
             subjectButtons[i].setFont(buttonFont);
             subjectButtons[i].setFont(new Font("SansSarif", Font.BOLD, 15));
+            subjectButtons[i].setVisible(false);
             subjectPanel.add(subjectButtons[i]);
         }
         centerCenterPanel.add(centerTopSpace, BorderLayout.NORTH);
