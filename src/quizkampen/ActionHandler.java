@@ -46,11 +46,13 @@ public class ActionHandler implements ActionListener {
                 w.gameServerSocket = new Socket("127.0.0.1", w.portGame);   // ÖPPNAR STRÖM TILL GAME-SERVERN
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
+                System.out.println("hej1");
                 w.session = (SessionQ) w.inGameServer.readObject(); // FÅR IN FÖRSTA SESSION
+                System.out.println("hej2");
 
                 w.sh.checkGame(w.session);  // metod som kollar state
+                System.out.println("hej3");
 
-                w.rs.setActionListener(this);
 
                 w.session = (SessionQ) w.inGameServer.readObject();    // P1 får P2 användarnamn -- // P2 får ämne+resultat från P1
                 w.sh.checkGame(w.session);  // metod som kollar state
@@ -70,7 +72,6 @@ public class ActionHandler implements ActionListener {
             
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
-            w.tempQuestions = new Question[w.session.getTotalQsInRound()];
 
             w.add(w.gs);
         } else if (e.getSource() == w.gs.nextQuestionButton) {

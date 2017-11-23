@@ -21,7 +21,7 @@ public class SessionHandler {
                     System.out.println("waiting4p1userName");
                     session.setUserNameOne(w.user);
                     w.setPlayerNumber(1);
-                    w.rs.setResultScreen(session.getTotalQsInRound(), session.getTotalRounds(),w.getUser().getUserName(), "David");
+                    w.rs.setResultScreen(session.getTotalQsInRound(), session.getTotalRounds(), w.getUser().getUserName(), "David");
                     w.rs.setPanel();
                     w.rs.setActionListener(w.ah);
 
@@ -29,26 +29,23 @@ public class SessionHandler {
                     w.ls.subjectButtons[1].setText(w.session.getSubject().getName());
                     w.ls.subjectButtons[2].setText(w.session.getSubject().getName());
 
-                    w.tempQuestions = new Question[w.session.getTotalQsInRound()];
                     for (int i = 0; i < 3; i++) {
                         w.tempSubjects[i] = w.session.getSubject();
                     }
                     w.ls.setSubjectButtons(w.tempSubjects);
-                    w.ls2.opponentLabel.setText(w.session.getUserNameOne().getUserName());
 
                     w.session.setState(State.WAITING4P2USERNAME);
 
                     w.add(w.ls);
 
                     w.outGameServer.writeObject(session); // skickar session -> server från P1
-                    w.revalidate();
-                    w.repaint();
                     break;
 
                 case WAITING4P2USERNAME: // UserTwo skriver in UserName
                     System.out.println("waiting4p2username");
                     session.setUserNameTwo(w.user);
                     w.setPlayerNumber(2);
+                    w.ls2.opponentLabel.setText(w.session.getUserNameOne().getUserName());
                     w.add(w.ls2);
                     w.session.setState(State.WAITINGFORCHOICE);
                     w.outGameServer.writeObject(session);   // skickar session -> server från P2
