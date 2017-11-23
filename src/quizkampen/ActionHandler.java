@@ -142,7 +142,7 @@ public class ActionHandler implements ActionListener{
                     w.tempQuestions[j] = w.tempSubjects[i].getQuestion();
                 }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
-                w.ls.subjectButtons[i].setBorderPainted(false);
+//                w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
                 w.ls.startButton.setVisible(true);
                 w.tempIndex = i;
