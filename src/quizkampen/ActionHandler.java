@@ -145,7 +145,10 @@ public class ActionHandler implements ActionListener{
                 w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
                 w.ls.startButton.setVisible(true);
+<<<<<<< HEAD
                 w.tempIndex = i;
+=======
+>>>>>>> 15ede1fafba40310377788555e9118a8344ace43
                 w.gs.setNextQuestion(w.tempQuestions[w.questionCounter]);
             }
         }

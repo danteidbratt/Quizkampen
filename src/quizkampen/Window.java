@@ -13,7 +13,10 @@ public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
     Question[] tempQuestions;
+<<<<<<< HEAD
     int tempIndex;
+=======
+>>>>>>> 15ede1fafba40310377788555e9118a8344ace43
     ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
