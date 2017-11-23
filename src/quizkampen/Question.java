@@ -9,6 +9,9 @@ public class Question implements Serializable {
     protected String question;
     protected List<AnswerAlternative> answers = new ArrayList<>();
 
+    public Question() {
+    }
+
     public Question(String question) {
         this.question = question;
     }

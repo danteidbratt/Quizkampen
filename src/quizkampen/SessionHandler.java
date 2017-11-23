@@ -1,100 +1,52 @@
 package quizkampen;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class SessionHandler {
 
-    private SessionQ sessionQ;
-    protected Window w;
+   private SessionQ sessionQ;
+   private States state;
+   private int totalRonds;
+   private int totalQuestionsinRond;
+   private PropertiesReader p;
 
-    public SessionHandler(Window w) {
-        this.w = w;
-    }
+   private enum States {
+       CONNECTED, WAITINGFOROPPONENTTOCONNECT,
+       PLAYINGGAME, WAITINGFORSERVER, IDLE
+   }
 
-    public void checkGame(SessionQ session) {
-        this.sessionQ = session;
-        try {
-            switch (session.getState()) {
-                case WAITING4P1USERNAME: // Servern skapas. UserOne skriver in UserName
-                    System.out.println("waiting4p1userName");
-                    session.setUserNameOne(w.user);
-                    w.setPlayerNumber(1);
-                    w.rs.setResultScreen(session.getTotalQsInRound(), session.getTotalRounds(), w.getUser().getUserName(), "David");
-                    w.rs.setPanel();
-                    w.rs.setActionListener(w.ah);
+   public SessionHandler(SessionQ sessionQ) {
+       this.sessionQ = sessionQ;
+       p = new PropertiesReader();
+       this.totalRonds = p.getRonds();
+       this.totalQuestionsinRond = p.getQuestionsInRond();
+       this.sessionQ.setTotalRounds(totalRonds);
+       this.sessionQ.setTotalQsInRond(totalQuestionsinRond);
+   }
 
-                    w.ls.subjectButtons[0].setText(w.session.getSubject().getName());
-                    w.ls.subjectButtons[1].setText(w.session.getSubject().getName());
-                    w.ls.subjectButtons[2].setText(w.session.getSubject().getName());
+   public void setState(States state) {
+       this.state = state;
+   }
 
-                    w.tempQuestions = new Question[w.session.getTotalQsInRound()];
-                    for (int i = 0; i < 3; i++) {
-                        w.tempSubjects[i] = w.session.getSubject();
-                    }
-                    w.ls.setSubjectButtons(w.tempSubjects);
-//                    w.ls2.opponentLabel.setText(w.session.getUserNameOne().getUserName());
+   public void checkState() {
+       switch (this.state) {
+           case CONNECTED:
 
-                    w.session.setState(State.WAITING4P2USERNAME);
+               break;
 
-                    w.add(w.ls);
+           case WAITINGFOROPPONENTTOCONNECT:
 
-                    w.outGameServer.writeObject(session); // skickar session -> server från P1
-                    w.revalidate();
-                    w.repaint();
-                    break;
+               break;
 
-                case WAITING4P2USERNAME: // UserTwo skriver in UserName
-                    System.out.println("waiting4p2username");
-                    session.setUserNameTwo(w.user);
-                    w.setPlayerNumber(2);
-                    w.add(w.ls2);
-                    w.session.setState(State.WAITINGFORCHOICE);
-                    w.outGameServer.writeObject(session);   // skickar session -> server från P2
-                    w.revalidate();
-                    w.repaint();
-                    break;
+           case PLAYINGGAME:
 
-                case WAITINGFORCHOICE:  // P1 får P2 namn. väljer ämne och spelar
-                    System.out.println("Waiting4Choice - should be only P1");
-                    w.ls2.opponentLabel.setText(w.session.getUserNameTwo().getUserName());
-                    // skickar tillbaka session i ActionHandler när P1 spelat
-                    w.session.setState(State.CHOICESENT);
-                    w.revalidate();
-                    w.repaint();
-                    break;
+               break;
 
-                case CHOICESENT:
-                    System.out.println("Choice sent");
-                    w.ls2.subjectButton.setText("Valt ämne?");
-                    w.ls2.setActionListener(w.ah);
-                    w.ls2.readyIconPanel.add(w.ls2.readyButton);
-                    w.ls2.subjectIconPanel.add(w.ls2.subjectButton);
+           case WAITINGFORSERVER:
 
-                    w.session.setState(State.PLAYGAME);
-                    w.ls2.revalidate();
-                    w.ls2.repaint();
-                    break;
+               break;
 
-                case PLAYGAME://Chosing Subject, Talar om vems tur de är- väljer ämne.UserTwo får info om ämne.
-                    if (session.getUserChosing() == w.user) {
-                        session.ChangeUserChosing();
-                    }
-                    // Set resultat
-                    // skriver ut resultat till andra spelaren
-                    w.outGameServer.writeObject(w.session);
+           case IDLE:
 
-                    break;
-
-                case GAMEOVER:
-                    break;
-
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+               break;
+       }
+   }
 }

@@ -11,6 +11,7 @@ public class SessionQ implements Serializable {
     protected User userTwo;
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
+    
 
     public void setSubjectQueue() {
         for (int p = 0; p < 2; p++) {
