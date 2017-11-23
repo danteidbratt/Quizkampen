@@ -1,5 +1,6 @@
 package quizkampen;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +60,7 @@ public class ActionHandler implements ActionListener {
 
                 System.out.println("Du är spelare nr: " + w.getPlayerNumber());
 
-                SessionHandler sessionHandler = new SessionHandler(w.session);
+//                SessionHandler sessionHandler = new SessionHandler(w.session);
 
                 w.outGameServer.writeObject(w.session);
 
@@ -67,6 +68,7 @@ public class ActionHandler implements ActionListener {
                 w.rs.setPanel();
                 w.rs.setActionListener(this);
 
+                w.tempQuestions = new Question[w.session.getTotalQsInRound()];
                 for (int i = 0; i < 3; i++) {
                     w.tempSubjects[i] = w.session.getSubject();
                 }
@@ -85,8 +87,7 @@ public class ActionHandler implements ActionListener {
             w.add(w.gs);
         } else if (e.getSource() == w.gs.nextQuestionButton) {
             if (w.questionCounter < w.session.getTotalQsInRound() - 1) {
-                w.gs.setNextQuestion(w.tempSubjects[w.tempIndex].getQuestion());
-                w.questionCounter++;
+                w.gs.setNextQuestion(w.tempQuestions[w.questionCounter++]);
                 w.gs.setButtonActionListener(this);
 
             } else {
@@ -138,12 +139,15 @@ public class ActionHandler implements ActionListener {
 
         for (int i = 0; i < w.ls.subjectButtons.length; i++) {
             if (e.getSource() == w.ls.subjectButtons[i]) {
+                for (int j = 0; j < w.tempQuestions.length; j++) {
+                    w.tempQuestions[j] = w.tempSubjects[i].getQuestion();
+                }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
                 w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
                 w.ls.startButton.setVisible(true);
                 w.tempIndex = i;
-                w.gs.setNextQuestion(w.tempSubjects[w.tempIndex].getQuestion());
+                w.gs.setNextQuestion(w.tempQuestions[w.questionCounter++]);
             }
         }
 
