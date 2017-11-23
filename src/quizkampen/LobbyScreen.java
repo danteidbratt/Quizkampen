@@ -9,33 +9,39 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class LobbyScreen extends MasterPanel implements Runnable{
-    
+public class LobbyScreen extends MasterPanel implements Runnable {
+
+    Window w;
+
     public Thread animation = new Thread(this);
-    
+
     JPanel centerPanel = new JPanel();
-    
+
     JPanel opponentPanel = new JPanel();
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
     JLabel nextOpponentIs = new JLabel("- Next Opponent -");
     JLabel opponentLabel = new JLabel("...");
-    
+
     JPanel centerCenterPanel = new JPanel();
-    JLabel centerTopSpace = new JLabel("Choose Subject");
+    JLabel chooseSubjectLabel = new JLabel("Choose Subject");
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
     JButton[] subjectButtons = new JButton[3];
-    
+
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
     JLabel bottomBottomSpace = new JLabel("");
     JPanel buttonPanel = new JPanel();
     JButton startButton = new JButton("Start");
 //    JButton backButton = new JButton("Back");
-    
+
     public boolean loopAnimation = true;
-    
+
+    public LobbyScreen(Window w) {
+        this.w = w;
+    }
+
     @Override
     public void setPanel() {
         setLayout(new BorderLayout());
@@ -71,12 +77,13 @@ public class LobbyScreen extends MasterPanel implements Runnable{
         centerPanel.setBackground(backgroundColor);
 
         centerCenterPanel.setLayout(new BorderLayout());
-        centerTopSpace.setHorizontalAlignment(SwingConstants.CENTER);
-        centerTopSpace.setFont(infoTextFontBig);
-        centerTopSpace.setForeground(infoTextColor);
-        centerTopSpace.setBackground(backgroundColor);
-        centerTopSpace.setOpaque(true);
-        centerTopSpace.setPreferredSize(new Dimension(0, 50));
+        chooseSubjectLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        chooseSubjectLabel.setFont(infoTextFontBig);
+        chooseSubjectLabel.setForeground(infoTextColor);
+        chooseSubjectLabel.setBackground(backgroundColor);
+        chooseSubjectLabel.setOpaque(true);
+        chooseSubjectLabel.setVisible(false);
+        chooseSubjectLabel.setPreferredSize(new Dimension(0, 50));
         centerBotSpace.setBackground(backgroundColor);
         centerBotSpace.setOpaque(true);
         centerBotSpace.setPreferredSize(new Dimension(0, 30));
@@ -87,9 +94,10 @@ public class LobbyScreen extends MasterPanel implements Runnable{
             subjectButtons[i].setFont(buttonFont);
             subjectButtons[i].setFont(buttonFont);
             subjectButtons[i].setFont(new Font("SansSarif", Font.BOLD, 15));
+            subjectButtons[i].setVisible(false);
             subjectPanel.add(subjectButtons[i]);
         }
-        centerCenterPanel.add(centerTopSpace, BorderLayout.NORTH);
+        centerCenterPanel.add(chooseSubjectLabel, BorderLayout.NORTH);
         centerCenterPanel.add(subjectPanel, BorderLayout.CENTER);
         centerCenterPanel.add(centerBotSpace, BorderLayout.SOUTH);
 
@@ -118,14 +126,14 @@ public class LobbyScreen extends MasterPanel implements Runnable{
     @Override
     public void setActionListener(ActionListener al) {
         startButton.addActionListener(al);
-            for (JButton sb : subjectButtons) {
+        for (JButton sb : subjectButtons) {
             sb.addActionListener(al);
         }
     }
 
     @Override
     public void run() {
-        while(loopAnimation){
+        while (loopAnimation) {
             try {
                 opponentLabel.setText("");
                 Thread.sleep(400);
@@ -139,17 +147,25 @@ public class LobbyScreen extends MasterPanel implements Runnable{
                 System.out.println(e.getMessage());
             }
         }
+        if(w.playerNumber == 1)
+            opponentLabel.setText(w.session.getPlayerNameTwo());
+        else
+            opponentLabel.setText(w.session.getPlayerNameOne());
+        chooseSubjectLabel.setVisible(true);
+        for (int i = 0; i < subjectButtons.length; i++) {
+            subjectButtons[i].setVisible(true);
+        }
     }
-    
-    public void resetPanel(){
+
+    public void resetPanel() {
         for (JButton sb : subjectButtons) {
             sb.setOpaque(false);
             sb.setBorderPainted(true);
         }
         startButton.setVisible(false);
     }
-    
-    public void setSubjectButtons(Subject[] s){
+
+    public void setSubjectButtons(Subject[] s) {
         for (int i = 0; i < subjectButtons.length; i++) {
             subjectButtons[i].setText(s[i].getName());
         }

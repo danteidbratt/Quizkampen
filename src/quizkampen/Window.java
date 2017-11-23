@@ -15,8 +15,13 @@ public class Window extends JFrame {
     ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
+    int playerNumber;
 
     protected SessionQ session;
+
+    SessionHandlerPlayerOne sh1;
+    SessionHandlerPlayerTwo sh2;
+
     protected int portUser = 33334;
     protected int portGame = 33333;
     protected Socket userServerSocket;
@@ -25,7 +30,6 @@ public class Window extends JFrame {
     ObjectOutputStream outGameServer;
     ObjectInputStream inGameServer;
     protected User user;
-    protected int playerNumber;
 
     Socket gameServerSocket;
 
@@ -35,6 +39,7 @@ public class Window extends JFrame {
     MenuScreen ms;
     GameMenuScreen gms;
     LobbyScreen ls;
+    LobbyScreen2 ls2;
     GameScreen gs;
     ResultScreen rs;
     SettingsScreen ses;
@@ -48,8 +53,10 @@ public class Window extends JFrame {
             System.out.println("output connected");
             inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
             System.out.println("inputconnected");
+
         } catch (IOException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Window.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -60,7 +67,8 @@ public class Window extends JFrame {
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
         sts = new StatsScreen();
-        ls = new LobbyScreen();
+        ls = new LobbyScreen(this);
+        ls2 = new LobbyScreen2();
         gs = new GameScreen();
 
         setTitle("QuizFights");
@@ -78,6 +86,7 @@ public class Window extends JFrame {
         panelList.add(sts);
         panelList.add(gs);
         panelList.add(ls);
+        panelList.add(ls2);
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(ah);
@@ -91,13 +100,5 @@ public class Window extends JFrame {
 
     public void setUser(User u) {
         this.user = u;
-    }
-
-    public int getPlayerNumber() {
-        return this.playerNumber;
-    }
-
-    public void setPlayerNumber(int number) {
-        this.playerNumber = number;
     }
 }
