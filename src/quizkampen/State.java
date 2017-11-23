@@ -1,0 +1,7 @@
+
+package quizkampen;
+
+public enum State {
+        WAITING4P1USERNAME, WAITING4P2USERNAME,WAITINGFORCHOICE, CHOICESENT,
+        PLAYGAME, GAMEOVER
+}

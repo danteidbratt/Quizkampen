@@ -2,51 +2,51 @@ package quizkampen;
 
 public class SessionHandler {
 
-    private SessionQ sessionQ;
-    private States state;
-    private int totalRonds;
-    private int totalQuestionsinRond;
-    private PropertiesReader p;
+   private SessionQ sessionQ;
+   private States state;
+   private int totalRonds;
+   private int totalQuestionsinRond;
+   private PropertiesReader p;
 
-    private enum States {
-        CONNECTED, WAITINGFOROPPONENTTOCONNECT,
-        PLAYINGGAME, WAITINGFORSERVER, IDLE
-    }
+   private enum States {
+       CONNECTED, WAITINGFOROPPONENTTOCONNECT,
+       PLAYINGGAME, WAITINGFORSERVER, IDLE
+   }
 
-    public SessionHandler(SessionQ sessionQ) {
-        this.sessionQ = sessionQ;
-        p = new PropertiesReader();
-        this.totalRonds = p.getRonds();
-        this.totalQuestionsinRond = p.getQuestionsInRond();
-        this.sessionQ.setTotalRounds(totalRonds);
-        this.sessionQ.setTotalQsInRond(totalQuestionsinRond);
-    }
+   public SessionHandler(SessionQ sessionQ) {
+       this.sessionQ = sessionQ;
+       p = new PropertiesReader();
+       this.totalRonds = p.getRonds();
+       this.totalQuestionsinRond = p.getQuestionsInRond();
+       this.sessionQ.setTotalRounds(totalRonds);
+       this.sessionQ.setTotalQsInRond(totalQuestionsinRond);
+   }
 
-    public void setState(States state) {
-        this.state = state;
-    }
+   public void setState(States state) {
+       this.state = state;
+   }
 
-    public void checkState() {
-        switch (this.state) {
-            case CONNECTED:
+   public void checkState() {
+       switch (this.state) {
+           case CONNECTED:
 
-                break;
+               break;
 
-            case WAITINGFOROPPONENTTOCONNECT:
+           case WAITINGFOROPPONENTTOCONNECT:
 
-                break;
+               break;
 
-            case PLAYINGGAME:
+           case PLAYINGGAME:
 
-                break;
+               break;
 
-            case WAITINGFORSERVER:
+           case WAITINGFORSERVER:
 
-                break;
+               break;
 
-            case IDLE:
+           case IDLE:
 
-                break;
-        }
-    }
+               break;
+       }
+   }
 }

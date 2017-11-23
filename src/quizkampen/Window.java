@@ -12,11 +12,12 @@ import javax.swing.JFrame;
 public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
+    Question[] tempQuestions;
     int tempIndex;
-
     ActionHandler ah;
     protected int questionCounter = 0;
     protected int roundCounter = 0;
+
     protected SessionQ session;
     protected int portUser = 33334;
     protected int portGame = 33333;
