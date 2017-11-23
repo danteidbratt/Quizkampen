@@ -50,12 +50,29 @@ public class ActionHandler implements ActionListener {
                 w.session = (SessionQ) w.inGameServer.readObject(); // FÅR IN FÖRSTA SESSION
                 System.out.println("hej2");
 
-                w.sh.checkGame(w.session);  // metod som kollar state
+                if (w.session.userOne == null) {      // sätter p1 och p2 + deras sessionHandlers
+                    w.session.setUserNameOne(w.getUser());
+                    w.sh1 = new SessionHandlerPlayerOne(w);
+                } else {
+                    w.session.setUserNameTwo(w.getUser());
+                    w.sh2 = new SessionHandlerPlayerTwo(w);
+                }
+
+                if (w.sh1 != null) {          // KOLLAR STATE i SessionHandler
+                    w.sh1.checkGame(w.session);
+                } else if (w.sh2 != null) {
+                    w.sh2.checkGame(w.session);
+                }
+
                 System.out.println("hej3");
 
-
                 w.session = (SessionQ) w.inGameServer.readObject();    // P1 får P2 användarnamn -- // P2 får ämne+resultat från P1
-                w.sh.checkGame(w.session);  // metod som kollar state
+
+                if (w.sh1 != null) {          // KOLLAR STATE i SessionHandler
+                    w.sh1.checkGame(w.session);
+                } else if (w.sh2 != null) {
+                    w.sh2.checkGame(w.session);
+                }
 
             } catch (IOException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +86,7 @@ public class ActionHandler implements ActionListener {
             w.add(w.gs);
         } else if (e.getSource() == w.ls2.readyButton) {    // När spelare 2 trycker redo
             w.remove(w.ls2);
-            
+
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
 
@@ -98,7 +115,11 @@ public class ActionHandler implements ActionListener {
                 }
 
                 // Skicka tillbaka valt ämne + resultat från P1 till P2
-                w.sh.checkGame(w.session);
+                if (w.sh1 != null) {          // KOLLAR STATE i SessionHandler
+                    w.sh1.checkGame(w.session);
+                } else if (w.sh2 != null) {
+                    w.sh2.checkGame(w.session);
+                }
 
                 w.add(w.rs);
             }

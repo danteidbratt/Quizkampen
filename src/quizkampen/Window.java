@@ -18,7 +18,10 @@ public class Window extends JFrame {
     protected int questionCounter = 0;
     protected int roundCounter = 0;
     protected SessionQ session;
-    protected SessionHandler sh = new SessionHandler(this);
+
+    SessionHandlerPlayerOne sh1;
+    SessionHandlerPlayerTwo sh2;
+
     protected int portUser = 33334;
     protected int portGame = 33333;
     protected Socket userServerSocket;
@@ -51,8 +54,10 @@ public class Window extends JFrame {
             System.out.println("output connected");
             inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
             System.out.println("inputconnected");
+
         } catch (IOException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Window.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
