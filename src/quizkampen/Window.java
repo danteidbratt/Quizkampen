@@ -67,7 +67,7 @@ public class Window extends JFrame {
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
         sts = new StatsScreen();
-        ls = new LobbyScreen();
+        ls = new LobbyScreen(this);
         ls2 = new LobbyScreen2();
         gs = new GameScreen();
 

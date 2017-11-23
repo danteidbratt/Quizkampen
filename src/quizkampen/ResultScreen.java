@@ -229,4 +229,12 @@ public class ResultScreen extends MasterPanel{
         nextRoundButton.addActionListener(al);
     }
     
+    public void setOpponentBoxes(boolean[] b, int roundCounter, int questionsInRound){
+        for (int i = 0; i < b.length; i++) {
+            if(b[i])
+                boxes[roundCounter][i+questionsInRound].setBackground(Color.GREEN);
+            else 
+                boxes[roundCounter][i+questionsInRound].setBackground(Color.RED);
+        }
+    }
 }

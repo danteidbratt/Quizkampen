@@ -5,6 +5,8 @@ import java.util.*;
 
 public class SessionQ implements Serializable {
 
+    int playerWhoshouldChoose = 1;
+    boolean[] opponentsAnswers;
     private int totalRonds;
     private int totalQuestionsinRond;
     protected String playerNameOne;
@@ -56,6 +58,10 @@ public class SessionQ implements Serializable {
 
     public void setTotalQsInRond(int totalQuestions) {
         this.totalQuestionsinRond = totalQuestions;
+        opponentsAnswers = new boolean[totalQuestions];
+        for (int i = 0; i < opponentsAnswers.length; i++) {
+            opponentsAnswers[i] = false;
+        }
     }
 
     public void setTotalRounds(int totalRonds) {
@@ -86,5 +92,12 @@ public class SessionQ implements Serializable {
 
     public Subject getSubject() {
         return subjects.remove();
+    }
+    
+    public void switchPlayerWhoShoulgChoose(){
+        if(playerWhoshouldChoose == 1)
+            playerWhoshouldChoose = 2;
+        else 
+            playerWhoshouldChoose = 1;
     }
 }
