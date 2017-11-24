@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class ActionHandler implements ActionListener {
@@ -83,6 +84,9 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == w.ls.startButton) {
+			for (int i = 0; i < 3; i++) {
+				w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
+			}
             w.session.switchPlayerWhoShoulgChoose();
             if (w.session.roundCounter == 0){
                 w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
