@@ -34,7 +34,7 @@ public class Database {
         it = createQuestionList("Database_IT.txt", "IT");
         sport = createQuestionList("Database_Sport.txt", "Sport");
         general = createQuestionList("Database_General.txt", "General"); 
-        animals = createQuestionList("Database_Animals","Animals");
+        animals = createQuestionList("Database_Animals.txt","Animals");
 
         subjectList.add(science);
         subjectList.add(film);

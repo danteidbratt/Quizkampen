@@ -18,3 +18,25 @@ Four
 Two
 Three
 One
+Which animals are Micka and Molle in the movie?
+Dog and fox
+Cat and fox
+Dog and dog
+Cat and cat
+Which animal has a movie named Gustav about him?
+Cat
+Dog
+Horse
+Fish
+The movie Finding Nemo is about a little fish, but witch fish is hi?
+Clown fish
+Shark
+Golden fish
+White Cloud
+How many horn has a rhinoceros?
+Two
+Three
+One
+None
+
+
