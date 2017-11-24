@@ -11,8 +11,8 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/Server.java</file>
             <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/src/quizkampen/ActionHandler.java</file>
             <file>file:/C:/Users/David/Documents/Skola/Nackademin/Objektorienterad%20programmering/Inlämningar/Quizkampen/Database_Film.txt</file>
@@ -44,5 +44,14 @@
         <group/>
 >>>>>>> 838826146f23ec0b4d4c350fa6c8d92d2f983e83
 >>>>>>> DanteFeature
+=======
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/SessionHandlerPlayerOne.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/ServerListener.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/SessionHandlerPlayerTwo.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/ActionHandler.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/Client.java</file>
+        </group>
+>>>>>>> ClAw-Feature-ThisOne
     </open-files>
 </project-private>
