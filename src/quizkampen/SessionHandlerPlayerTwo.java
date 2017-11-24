@@ -12,6 +12,7 @@ public class SessionHandlerPlayerTwo extends Thread {
 
     @Override
     public void run() {
+        w.ls.removeActionListener();
         try {
             while (true) {
                 w.session = (SessionQ) w.inGameServer.readObject();
@@ -31,8 +32,8 @@ public class SessionHandlerPlayerTwo extends Thread {
                         break;
                     case 2: // ANSWERQUESTIONS1
                         System.out.println("2");
-//                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
-
+                        w.ls.startButton.setVisible(true);
+                        w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
                     case 3: // ASWERQUESTIONS2
                         if (w.session.roundCounter == 0) {

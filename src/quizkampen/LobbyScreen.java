@@ -130,6 +130,12 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             sb.addActionListener(al);
         }
     }
+    
+    public void removeActionListener(){
+        for (JButton sb : subjectButtons) {
+            sb.removeActionListener(w.ah);
+        }
+    }
 
     @Override
     public void run() {
@@ -163,6 +169,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             sb.setBorderPainted(true);
         }
         startButton.setVisible(false);
+//        setActionListener(w.ah);
     }
 
     public void setSubjectButtons(Subject[] s) {

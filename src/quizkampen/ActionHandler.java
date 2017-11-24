@@ -82,12 +82,11 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == w.ls.startButton) {
-            w.session.switchPlayerWhoShoulgChoose();
             if (w.session.roundCounter == 0){
                 w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
                 w.rs.setPanel();
-                w.rs.setActionListener(this);
             }
+            w.rs.setActionListener(this);
             w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
             w.remove(w.ls);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
@@ -115,8 +114,6 @@ public class ActionHandler implements ActionListener {
                 w.remove(w.gs);
                 w.add(w.rs);
                 
-                // *************** FIXA HÄR
-                
                 if (w.session.getState() == w.session.ANSWERQUESTIONS1) {
                     w.session.setState(w.session.ANSWERQUESTIONS2);
                     w.rs.nextRoundButton.setVisible(false);
@@ -140,6 +137,7 @@ public class ActionHandler implements ActionListener {
             } else if (w.session.getState() == w.session.CHOOSESUBJECT) {
                 w.remove(w.rs);
                 w.ls.resetPanel();
+                w.ls.setActionListener(this);
                 w.add(w.ls);
             }
                 
@@ -187,12 +185,11 @@ public class ActionHandler implements ActionListener {
                 for (int j = 0; j < w.session.tempQuestions.length; j++) {
                     w.session.tempQuestions[j] = new Question();
                     w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
-                    w.tempSubjects[i].questions.size();
                 }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
                 w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
-                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
+//                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                 w.session.chosenSubjectName = w.tempSubjects[i].getName();
                 try { // skickar valt ämne till server -> till P2
                     w.session.setState(w.session.SHOWSUBJECT);
@@ -200,6 +197,7 @@ public class ActionHandler implements ActionListener {
                 } catch (IOException ex) {
                     Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                w.ls.removeActionListener();
                 w.ls.startButton.setVisible(true);
             }
         }
