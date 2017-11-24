@@ -17,7 +17,6 @@ public class Window extends JFrame {
     int tempIndex;
     ActionHandler ah;
     protected int questionCounter = 0;
-    protected int roundCounter = 0;
     int playerNumber;
 
     protected SessionQ session;
