@@ -14,7 +14,6 @@ public class Window extends JFrame {
     Subject[] tempSubjects = new Subject[3];
     ActionHandler ah;
     protected int questionCounter = 0;
-    protected int roundCounter = 0;
     int playerNumber;
 
     protected SessionQ session;
