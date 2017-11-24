@@ -20,23 +20,25 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.ls2.subjectButton.setText(w.session.chosenSubjectName);
                         w.ls2.subjectButton.setVisible(true);
                         w.ls.loopAnimation = false;
-                        w.session.setState(w.session.ANSWERQUESTIONS);
+                        w.session.setState(w.session.ANSWERQUESTIONS1);
                         w.outGameServer.writeObject(w.session);
                         break;
-                    case 2: // ANSWERQUESTIONS
-                        if (w.roundCounter == 0) {
+                    case 2: // ANSWERQUESTIONS1
+                        if (w.session.roundCounter == 0) {
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameOne());
                             w.rs.setPanel();
                             w.rs.setActionListener(w.ah);
                         }
-                        w.rs.subjects[w.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
-                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.roundCounter, w.session.getTotalQsInRound());
+                        w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
 
                         w.ls2.readyButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
-                    case 3: // SHOWOPPONENTANSWERS
-                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.roundCounter, w.session.getTotalQsInRound());
+                    case 3: // ASWERQUESTIONS2
+                        break;
+                    case 4: // SHOWOPPONENTANSWERS
+                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.session.setState(0);
                         w.rs.nextRoundButton.setVisible(false);
                         w.outGameServer.writeObject(w.session);

@@ -7,8 +7,9 @@ public class SessionQ implements Serializable {
 
     final int CHOOSESUBJECT = 0;
     final int SHOWSUBJECT = 1; 
-    final int ANSWERQUESTIONS = 2; 
-    final int SHOWOPPONENTANSWERS = 3;
+    final int ANSWERQUESTIONS1 = 2; 
+    final int ANSWERQUESTIONS2 = 3; 
+    final int SHOWOPPONENTANSWERS = 4;
 
     int playerWhoshouldChoose = 1;
     boolean[] opponentsAnswers;
@@ -23,8 +24,10 @@ public class SessionQ implements Serializable {
     Question[] tempQuestions;
     int playerNumber;
     int state;
+    int roundCounter;
 
     SessionQ() {
+        roundCounter = 0;
         playerNumber = 1;
         state = CHOOSESUBJECT;
     }

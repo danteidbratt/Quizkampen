@@ -83,15 +83,15 @@ public class ActionHandler implements ActionListener {
             }
         } else if (e.getSource() == w.ls.startButton) {
             w.session.switchPlayerWhoShoulgChoose();
-            if (w.roundCounter == 0){
+            if (w.session.roundCounter == 0){
                 w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
                 w.rs.setPanel();
                 w.rs.setActionListener(this);
             }
-            w.rs.subjects[w.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+            w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
             w.remove(w.ls);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
-            w.gs.roundBoxLabel.setText(String.valueOf(w.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
+            w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
         } else if (e.getSource() == w.ls2.readyButton) {    // När spelare 2 trycker redo
 //            if (w.roundCounter == 0) {
@@ -104,7 +104,7 @@ public class ActionHandler implements ActionListener {
             w.session.clearOpponentAnswers();
             w.remove(w.ls2);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
-            w.gs.roundBoxLabel.setText(String.valueOf(w.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
+            w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
         } else if (e.getSource() == w.gs.nextQuestionButton) {
             w.gs.setButtonActionListener(this);
@@ -129,7 +129,7 @@ public class ActionHandler implements ActionListener {
         } else if (e.getSource() == w.rs.nextRoundButton) {
             if (w.session.playerWhoshouldChoose == w.playerNumber) {
                 w.remove(w.rs);
-                w.roundCounter++;
+//                w.roundCounter++;
                 w.questionCounter = 0;
                 w.ls.resetPanel();
                 w.add(w.ls);
@@ -194,10 +194,10 @@ public class ActionHandler implements ActionListener {
                 if (w.gs.answerButtons[i].getIsCorrect()) {
                     w.session.opponentsAnswers[w.questionCounter] = true;
                     w.rs.increasePlayerScore();
-                    w.rs.boxes[w.roundCounter][w.questionCounter].setBackground(Color.GREEN);
+                    w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.GREEN);
                     w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.GREEN);
                 } else {
-                    w.rs.boxes[w.roundCounter][w.questionCounter].setBackground(Color.RED);
+                    w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
                     w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
                 }
                 w.gs.nextQuestionButton.setVisible(true);

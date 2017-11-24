@@ -29,17 +29,22 @@ public class SessionHandlerPlayerOne extends Thread {
                         }
                         w.ls.setSubjectButtons(w.tempSubjects);
                         break;
-                    case 2: // ANSWERQUESTIONS
-                        if (w.roundCounter > 0) {
-                            w.rs.subjects[w.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
-                            w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.roundCounter, w.session.getTotalQsInRound());
+                    case 1: // SHOWSUBJECT
+                        w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                        w.session.setState(w.session.ANSWERQUESTIONS1);
+                        w.outGameServer.writeObject(w.session);
+                    case 2: // ANSWERQUESTIONS1
+                        if (w.session.roundCounter > 0) {
+                            w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                            w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         }
                         w.ls2.readyButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
-                    case 3: // SHOWOPPONENTANSWERS
-                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.roundCounter, w.session.getTotalQsInRound());
+                    case 4: // SHOWOPPONENTANSWERS
+                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.session.setState(w.session.CHOOSESUBJECT);
+                        w.session.roundCounter++;
                         w.outGameServer.writeObject(w.session);
                         break;
                 }
