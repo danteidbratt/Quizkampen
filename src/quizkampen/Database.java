@@ -17,6 +17,8 @@ public class Database {
     protected ListClass<Question> history;
     protected ListClass<Question> it;
     protected ListClass<Question> sport;
+    protected ListClass<Question> general;
+    protected ListClass <Question> animals; 
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
 
     Database() {
@@ -31,6 +33,8 @@ public class Database {
         history = createQuestionList("Database_History.txt", "History");
         it = createQuestionList("Database_IT.txt", "IT");
         sport = createQuestionList("Database_Sport.txt", "Sport");
+        general = createQuestionList("Database_General.txt", "General"); 
+        animals = createQuestionList("Database_Animals","Animals");
 
         subjectList.add(science);
         subjectList.add(film);
@@ -42,6 +46,8 @@ public class Database {
         subjectList.add(history);
         subjectList.add(it);
         subjectList.add(sport);
+        subjectList.add(general); 
+        subjectList.add(animals);
     }
 
     public List<ListClass<Question>> loadSubjectList() {
