@@ -117,7 +117,12 @@ public class ActionHandler implements ActionListener {
                 w.add(w.rs);
                 
                 // *************** FIXA HÄR
-                if (w.playerNumber == 2) {
+                
+                if (w.session.getState() == w.session.ANSWERQUESTIONS1) {
+                    w.session.setState(w.session.ANSWERQUESTIONS2);
+                    w.rs.nextRoundButton.setVisible(false);
+                }
+                else if (w.session.getState() == w.session.ANSWERQUESTIONS2){
                     w.session.setState(w.session.SHOWOPPONENTANSWERS);
                 }
 
@@ -128,17 +133,28 @@ public class ActionHandler implements ActionListener {
                 }
             }
         } else if (e.getSource() == w.rs.nextRoundButton) {
-            if (w.session.playerWhoshouldChoose == w.playerNumber) {
+            w.session.clearOpponentAnswers();
+            w.questionCounter = 0;
+            if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                 w.remove(w.rs);
-//                w.roundCounter++;
-                w.questionCounter = 0;
+                w.add(w.gs);
+            } else if (w.session.getState() == w.session.CHOOSESUBJECT) {
+                w.remove(w.rs);
                 w.ls.resetPanel();
                 w.add(w.ls);
             }
-            else {
-                w.remove(w.rs);
-                w.add(w.ls);
-            }
+                
+//            if (w.session.playerWhoshouldChoose == w.playerNumber) {
+//                w.remove(w.rs);
+////                w.roundCounter++;
+//                w.questionCounter = 0;
+//                w.ls.resetPanel();
+//                w.add(w.ls);
+//            }
+//            else {
+//                w.remove(w.rs);
+//                w.add(w.ls);
+//            }
         } else if (e.getSource() == w.ms.settingsButton) {
             w.remove(w.ms);
             w.add(w.ses);
@@ -172,6 +188,7 @@ public class ActionHandler implements ActionListener {
                 for (int j = 0; j < w.session.tempQuestions.length; j++) {
                     w.session.tempQuestions[j] = new Question();
                     w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
+                    w.tempSubjects[i].questions.size();
                 }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
 //                w.ls.subjectButtons[i].setBorderPainted(false);
