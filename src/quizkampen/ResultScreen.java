@@ -112,6 +112,7 @@ public class ResultScreen extends MasterPanel{
         botPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nextRoundButton.setPreferredSize(new Dimension(180, 70));
         nextRoundButton.setFont(buttonFont);
+        nextRoundButton.setVisible(false);
         botPanel.add(nextRoundButton);
         
         add(logo, BorderLayout.NORTH);
@@ -157,7 +158,7 @@ public class ResultScreen extends MasterPanel{
         }
         
         for (int i = 0; i < subjects.length; i++) {
-            subjects[i] = new JLabel("- Mat -");
+            subjects[i] = new JLabel(" ");
             subjects[i].setBackground(backgroundColor);
             subjects[i].setOpaque(true);
             subjects[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -211,6 +212,10 @@ public class ResultScreen extends MasterPanel{
         subjects[subjectCounter++].setText("- " + subject + " -");
     }
     
+    public void setRightName(String player2){   // FÖR ATT SÄTTA Opponent I RESULTS
+        rightName.setText(player2);
+    }
+    
     public void setResultScreen(int numberOfQuestions, int numberOfRounds, String player1, String player2) {
         leftName.setText(player1);
         rightName.setText(player2);
@@ -225,4 +230,14 @@ public class ResultScreen extends MasterPanel{
         nextRoundButton.addActionListener(al);
     }
     
+    public void setOpponentBoxes(boolean[] b, int roundCounter, int questionsInRound){
+        for (int i = 0; i < b.length; i++) {
+            if(b[i]){
+                boxes[roundCounter][i+questionsInRound].setBackground(Color.GREEN);
+                increaseOpponentScore();
+            }
+            else 
+                boxes[roundCounter][i+questionsInRound].setBackground(Color.RED);
+        }
+    }
 }
