@@ -162,7 +162,7 @@ public class GameScreen extends MasterPanel {
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setButton(q.getAnswerAlternatives().get(i));
             answerButtons[i].setBorderPainted(true);
-            answerButtons[i].setBackground(backgroundColor);
+            answerButtons[i].setBackground(new JButton().getBackground());
         }
         nextQuestionButton.setVisible(false);
     }
@@ -177,7 +177,7 @@ public class GameScreen extends MasterPanel {
         questionBoxes.forEach(e -> e.setBackground(Color.WHITE));
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setBorderPainted(true);
-            answerButtons[i].setBackground(backgroundColor);
+            answerButtons[i].setBackground(new JButton().getBackground());
         }
         nextQuestionButton.setText("Next Question");
         nextQuestionButton.setVisible(false);
