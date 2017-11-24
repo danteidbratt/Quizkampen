@@ -8,10 +8,13 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
+    Question[] tempQuestions;
+    int tempIndex;
     ActionHandler ah;
     protected int questionCounter = 0;
     int playerNumber;
@@ -54,8 +57,8 @@ public class Window extends JFrame {
             System.out.println("inputconnected");
 
         } catch (IOException ex) {
-            Logger.getLogger(Window.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Could not connect to server. \nPlease try again later.", "QuizFights - Server problem", JOptionPane.PLAIN_MESSAGE);
+			System.exit(0);
         }
     }
 

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ActionHandler implements ActionListener {
 
@@ -77,7 +78,7 @@ public class ActionHandler implements ActionListener {
                     w.sh2.start();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Could not connect to server. \nPlease try again later.", "QuizFights - Server problem", JOptionPane.PLAIN_MESSAGE);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -199,6 +200,8 @@ public class ActionHandler implements ActionListener {
                 }
                 w.ls.removeActionListener();
                 w.ls.startButton.setVisible(true);
+
+                w.tempIndex = i;
             }
         }
 
