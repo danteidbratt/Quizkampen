@@ -12,7 +12,7 @@ public class SessionHandlerPlayerTwo extends Thread {
 
     @Override
     public void run() {
-        w.ls.removeActionListener();
+        w.ls.removeActionListener(w.ah);
         try {
             while (w.session.getState() != w.session.GAMEOVER && w.session.getState() != w.session.SHUTDOWN) {
                 w.session = (SessionQ) w.inGameServer.readObject();

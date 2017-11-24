@@ -12,7 +12,6 @@ import javax.swing.*;
 public class LobbyScreen extends MasterPanel implements Runnable {
 
     Window w;
-
     public Thread animation = new Thread(this);
 
     JPanel centerPanel = new JPanel();
@@ -40,7 +39,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
     public LobbyScreen(Window w) {
         this.w = w;
     }
-
+    
     @Override
     public void setPanel() {
         setLayout(new BorderLayout());
@@ -128,9 +127,9 @@ public class LobbyScreen extends MasterPanel implements Runnable {
         }
     }
     
-    public void removeActionListener(){
+    public void removeActionListener(ActionListener al){
         for (JButton sb : subjectButtons) {
-            sb.removeActionListener(w.ah);
+            sb.removeActionListener(al);
         }
     }
 

@@ -69,14 +69,14 @@ public class Window extends JFrame {
 
     public void setFrame() {
         ws = new WelcomeScreen();
-        rs = new ResultScreen();
+//        rs = new ResultScreen();
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
         sts = new StatsScreen();
-        ls = new LobbyScreen(this);
-        ls2 = new LobbyScreen2();
-        gs = new GameScreen();
+//        ls = new LobbyScreen(this);
+//        ls2 = new LobbyScreen2();
+//        gs = new GameScreen();
 
         setTitle("QuizFights");
         add(ws);
@@ -91,14 +91,13 @@ public class Window extends JFrame {
         panelList.add(gms);
         panelList.add(ses);
         panelList.add(sts);
-        panelList.add(gs);
-        panelList.add(ls);
-        panelList.add(ls2);
+//        panelList.add(gs);
+//        panelList.add(ls);
+//        panelList.add(ls2);
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(ah);
         });
-//        ls.animation.start();
     }
 
     public User getUser() {

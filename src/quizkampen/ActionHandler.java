@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -44,6 +47,16 @@ public class ActionHandler implements ActionListener {
             w.add(w.gms);
         } else if (e.getSource() == w.gms.randomPlayerButton) {
             try {
+                w.rs = new ResultScreen();
+                w.ls = new LobbyScreen(w);
+                w.ls2 = new LobbyScreen2();
+                w.gs = new GameScreen();
+                List<MasterPanel> gamePanels = new ArrayList<>();
+                gamePanels = Arrays.asList(w.ls, w.ls2, w.gs);
+                gamePanels.forEach(a -> {
+                    a.setPanel();
+                    a.setActionListener(this);
+                });
                 w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
@@ -166,44 +179,45 @@ public class ActionHandler implements ActionListener {
             w.panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
         } else if (e.getSource() == w.ses.red) {
             w.panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
-        }
-        for (int i = 0; i < w.ls.subjectButtons.length; i++) {
-            if (e.getSource() == w.ls.subjectButtons[i]) {
-                for (int j = 0; j < w.session.tempQuestions.length; j++) {
-                    w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
+        } else {
+            for (int i = 0; i < w.ls.subjectButtons.length; i++) {
+                if (e.getSource() == w.ls.subjectButtons[i]) {
+                    for (int j = 0; j < w.session.tempQuestions.length; j++) {
+                        w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
+                    }
+                    w.ls.subjectButtons[i].setBackground(Color.YELLOW);
+                    w.ls.subjectButtons[i].setOpaque(true);
+                    w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
+                    w.session.chosenSubjectName = w.tempSubjects[i].getName();
+                    try {
+                        w.session.setState(w.session.SHOWSUBJECT);
+                        w.outGameServer.writeObject(w.session);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    w.ls.removeActionListener(this);
+                    w.ls.startButton.setVisible(true);
+                    w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                 }
-                w.ls.subjectButtons[i].setBackground(Color.YELLOW);
-                w.ls.subjectButtons[i].setOpaque(true);
-                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
-                w.session.chosenSubjectName = w.tempSubjects[i].getName();
-                try {
-                    w.session.setState(w.session.SHOWSUBJECT);
-                    w.outGameServer.writeObject(w.session);
-                } catch (IOException ex) {
-                    Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                w.ls.removeActionListener();
-                w.ls.startButton.setVisible(true);
-                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
             }
-        }
-        for (int i = 0; i < w.gs.answerButtons.length; i++) {
-            if (e.getSource() == w.gs.answerButtons[i]) {
-                w.gs.colorChosenButton(w.gs.answerButtons[i]);
-                w.gs.revealCorrectAnswer();
-                if (w.gs.answerButtons[i].getIsCorrect()) {
-                    w.session.opponentsAnswers[w.questionCounter] = true;
-                    w.rs.increasePlayerScore();
-                    w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.GREEN);
-                    w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.GREEN);
-                } else {
-                    w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
-                    w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
-                }
-                w.gs.nextQuestionButton.setVisible(true);
-                w.gs.removeActionListeners(this);
-                if (w.questionCounter == w.session.getTotalQsInRound() - 1) {
-                    w.gs.nextQuestionButton.setText("Show Results");
+            for (int i = 0; i < w.gs.answerButtons.length; i++) {
+                if (e.getSource() == w.gs.answerButtons[i]) {
+                    w.gs.colorChosenButton(w.gs.answerButtons[i]);
+                    w.gs.revealCorrectAnswer();
+                    if (w.gs.answerButtons[i].getIsCorrect()) {
+                        w.session.opponentsAnswers[w.questionCounter] = true;
+                        w.rs.increasePlayerScore();
+                        w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.GREEN);
+                        w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.GREEN);
+                    } else {
+                        w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
+                        w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
+                    }
+                    w.gs.nextQuestionButton.setVisible(true);
+                    w.gs.removeActionListeners(this);
+                    if (w.questionCounter == w.session.getTotalQsInRound() - 1) {
+                        w.gs.nextQuestionButton.setText("Show Results");
+                    }
                 }
             }
         }
