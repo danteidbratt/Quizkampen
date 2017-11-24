@@ -82,7 +82,7 @@ public class GameScreen extends MasterPanel {
         buttonPanel.setPreferredSize(new Dimension(0, 100));
         nextQuestionButton.setFont(buttonFont);
         nextQuestionButton.setVisible(false);
-        nextQuestionButton.setPreferredSize(new Dimension(180, 80));
+        nextQuestionButton.setPreferredSize(new Dimension(200, 75));
         buttonPanel.add(nextQuestionButton);
         logo.setBackground(backgroundColor);
         logo.setOpaque(true);

@@ -5,8 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -14,8 +12,6 @@ import javax.swing.UIManager;
 public class Window extends JFrame {
 
     Subject[] tempSubjects = new Subject[3];
-    Question[] tempQuestions;
-    int tempIndex;
     ActionHandler ah;
     protected int questionCounter = 0;
     int playerNumber;
@@ -49,11 +45,11 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ah = new ActionHandler(this);
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
@@ -63,8 +59,11 @@ public class Window extends JFrame {
             System.out.println("inputconnected");
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to server. \nPlease try again later.", "QuizFights - Server problem", JOptionPane.PLAIN_MESSAGE);
-			System.exit(0);
+            JOptionPane.showMessageDialog(null, "Could not connect to server. "
+                                              + "\nPlease try again later.",
+                                                "QuizFights - Server problem",
+                                                 JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
         }
     }
 
@@ -99,7 +98,7 @@ public class Window extends JFrame {
             e.setPanel();
             e.setActionListener(ah);
         });
-        ls.animation.start();
+//        ls.animation.start();
     }
 
     public User getUser() {

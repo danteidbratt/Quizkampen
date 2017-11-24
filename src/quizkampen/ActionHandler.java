@@ -44,33 +44,30 @@ public class ActionHandler implements ActionListener {
             w.add(w.gms);
         } else if (e.getSource() == w.gms.randomPlayerButton) {
             try {
-                w.gameServerSocket = new Socket("127.0.0.1", w.portGame);   // ÖPPNAR STRÖM TILL GAME-SERVERN
+                w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
                 w.session = (SessionQ) w.inGameServer.readObject();
-                System.out.println("hej1");
-
-                w.playerNumber = w.session.getPlayerNumber();
-
-                if (w.playerNumber == 1) {      // sätter p1 och p2 + deras sessionHandlers
-                    w.session.tempQuestions = new Question[w.session.getTotalQsInRound()];
+                if (w.session.getState() == w.session.FIRST) {
                     w.session.setPlayerNameOne(w.getUser().getUserName());
+                    w.session.setState(w.session.SECOND);
                     w.outGameServer.writeObject(w.session);
-//                    for (int i = 0; i < 3; i++) {
-//                        w.tempSubjects[i] = w.session.getSubject();
-//                    }
-//                    w.ls.setSubjectButtons(w.tempSubjects);
-                    w.sh1 = new SessionHandlerPlayerOne(w);
+                    w.session.tempQuestions = new Question[w.session.getTotalQsInRound()];
                     w.remove(w.gms);
+                    w.ls.animation.start();
+                    w.ls.chooseSubjectLabel.setVisible(false);
+                    for (int i = 0; i < w.ls.subjectButtons.length; i++) {
+                        w.ls.subjectButtons[i].setVisible(false);
+                    }
                     w.add(w.ls);
-                    w.revalidate();
-                    w.repaint();
+                    w.sh1 = new SessionHandlerPlayerOne(w);
                     w.sh1.start();
-
                 } else {
                     w.session.setPlayerNameTwo(w.getUser().getUserName());
+                    w.session.setState(w.session.CHOOSESUBJECT);
                     w.outGameServer.writeObject(w.session);
                     w.ls2.opponentLabel.setText(w.session.getPlayerNameOne());
+                    w.ls.opponentLabel.setText(w.session.playerNameOne);
                     w.remove(w.gms);
                     w.add(w.ls2);
                     w.revalidate();
@@ -87,24 +84,13 @@ public class ActionHandler implements ActionListener {
             for (int i = 0; i < 3; i++) {
                 w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
             }
-            if (w.session.roundCounter == 0) {
-                w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
-                w.rs.setPanel();
-            }
             w.rs.setActionListener(this);
-            w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+            w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
             w.remove(w.ls);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
-        } else if (e.getSource() == w.ls2.readyButton) {    // När spelare 2 trycker redo
-//            if (w.roundCounter == 0) {
-//                w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameOne());
-//                w.rs.setPanel();
-//                w.rs.setActionListener(this);
-//            }
-//            w.rs.subjects[w.roundCounter].setText(w.session.chosenSubjectName);
-//            w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.roundCounter, w.session.getTotalQsInRound());
+        } else if (e.getSource() == w.ls2.readyButton) {
             w.session.clearOpponentAnswers();
             w.remove(w.ls2);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
@@ -112,20 +98,28 @@ public class ActionHandler implements ActionListener {
             w.add(w.gs);
         } else if (e.getSource() == w.gs.nextQuestionButton) {
             w.gs.setButtonActionListener(this);
-            if (w.questionCounter < w.session.getTotalQsInRound() - 1) {
+            if (w.questionCounter < (w.session.getTotalQsInRound() - 1)) {
                 w.gs.setNextQuestion(w.session.tempQuestions[++w.questionCounter]);
             } else {
                 w.gs.resetColors();
+                w.questionCounter = 0;
                 w.remove(w.gs);
                 w.add(w.rs);
-
                 if (w.session.getState() == w.session.ANSWERQUESTIONS1) {
                     w.session.setState(w.session.ANSWERQUESTIONS2);
                     w.rs.nextRoundButton.setVisible(false);
                 } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                     w.session.setState(w.session.SHOWOPPONENTANSWERS);
                 }
-
+                if (w.session.roundCounter >= w.session.getTotalRounds() - 1) {
+                    if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
+                        w.rs.nextRoundButton.setText("Draw");
+                    } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
+                        w.rs.nextRoundButton.setText("You Win");
+                    } else {
+                        w.rs.nextRoundButton.setText("You Lose");
+                    }
+                }
                 try {
                     w.outGameServer.writeObject(w.session);
                 } catch (IOException ex) {
@@ -134,8 +128,10 @@ public class ActionHandler implements ActionListener {
             }
         } else if (e.getSource() == w.rs.nextRoundButton) {
             w.session.clearOpponentAnswers();
-            w.questionCounter = 0;
-            if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
+            if ((w.session.roundCounter >= w.session.getTotalRounds())) {
+                w.remove(w.rs);
+                w.add(w.ms);
+            } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                 w.remove(w.rs);
                 w.add(w.gs);
             } else if (w.session.getState() == w.session.CHOOSESUBJECT) {
@@ -144,18 +140,6 @@ public class ActionHandler implements ActionListener {
                 w.ls.setActionListener(this);
                 w.add(w.ls);
             }
-
-//            if (w.session.playerWhoshouldChoose == w.playerNumber) {
-//                w.remove(w.rs);
-////                w.roundCounter++;
-//                w.questionCounter = 0;
-//                w.ls.resetPanel();
-//                w.add(w.ls);
-//            }
-//            else {
-//                w.remove(w.rs);
-//                w.add(w.ls);
-//            }
         } else if (e.getSource() == w.ms.settingsButton) {
             w.remove(w.ms);
             w.add(w.ses);
@@ -183,19 +167,16 @@ public class ActionHandler implements ActionListener {
         } else if (e.getSource() == w.ses.red) {
             w.panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         }
-
         for (int i = 0; i < w.ls.subjectButtons.length; i++) {
             if (e.getSource() == w.ls.subjectButtons[i]) {
                 for (int j = 0; j < w.session.tempQuestions.length; j++) {
-                    w.session.tempQuestions[j] = new Question();
                     w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
                 }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
-//                w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
-//                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
+                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                 w.session.chosenSubjectName = w.tempSubjects[i].getName();
-                try { // skickar valt ämne till server -> till P2
+                try {
                     w.session.setState(w.session.SHOWSUBJECT);
                     w.outGameServer.writeObject(w.session);
                 } catch (IOException ex) {
@@ -203,10 +184,9 @@ public class ActionHandler implements ActionListener {
                 }
                 w.ls.removeActionListener();
                 w.ls.startButton.setVisible(true);
-                w.gs.setNextQuestion(w.tempQuestions[w.questionCounter]);
+                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
             }
         }
-
         for (int i = 0; i < w.gs.answerButtons.length; i++) {
             if (e.getSource() == w.gs.answerButtons[i]) {
                 w.gs.colorChosenButton(w.gs.answerButtons[i]);
@@ -230,5 +210,4 @@ public class ActionHandler implements ActionListener {
         w.revalidate();
         w.repaint();
     }
-
 }

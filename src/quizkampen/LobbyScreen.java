@@ -21,7 +21,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
     JLabel nextOpponentIs = new JLabel("- Next Opponent -");
-    JLabel opponentLabel = new JLabel("...");
+    JLabel opponentLabel = new JLabel("");
 
     JPanel centerCenterPanel = new JPanel();
     JLabel chooseSubjectLabel = new JLabel("Choose Subject");
@@ -34,7 +34,6 @@ public class LobbyScreen extends MasterPanel implements Runnable {
     JLabel bottomBottomSpace = new JLabel("");
     JPanel buttonPanel = new JPanel();
     JButton startButton = new JButton("Start");
-//    JButton backButton = new JButton("Back");
 
     public boolean loopAnimation = true;
 
@@ -48,8 +47,8 @@ public class LobbyScreen extends MasterPanel implements Runnable {
         setBackground(backgroundColor);
 
         topSpace.setPreferredSize(new Dimension(0, 80));
-        rightSpace.setPreferredSize(new Dimension(70, 0));
-        leftSpace.setPreferredSize(new Dimension(70, 0));
+        rightSpace.setPreferredSize(new Dimension(50, 0));
+        leftSpace.setPreferredSize(new Dimension(50, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 60));
 
         opponentPanel.setLayout(new BorderLayout(0, 10));
@@ -82,7 +81,6 @@ public class LobbyScreen extends MasterPanel implements Runnable {
         chooseSubjectLabel.setForeground(infoTextColor);
         chooseSubjectLabel.setBackground(backgroundColor);
         chooseSubjectLabel.setOpaque(true);
-        chooseSubjectLabel.setVisible(false);
         chooseSubjectLabel.setPreferredSize(new Dimension(0, 50));
         centerBotSpace.setBackground(backgroundColor);
         centerBotSpace.setOpaque(true);
@@ -93,8 +91,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             subjectButtons[i] = new JButton();
             subjectButtons[i].setFont(buttonFont);
             subjectButtons[i].setFont(buttonFont);
-            subjectButtons[i].setFont(new Font("SansSarif", Font.BOLD, 15));
-            subjectButtons[i].setVisible(false);
+            subjectButtons[i].setFont(new Font("SansSarif", Font.BOLD, 14));
             subjectPanel.add(subjectButtons[i]);
         }
         centerCenterPanel.add(chooseSubjectLabel, BorderLayout.NORTH);
@@ -153,10 +150,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
                 System.out.println(e.getMessage());
             }
         }
-        if(w.playerNumber == 1)
-            opponentLabel.setText(w.session.getPlayerNameTwo());
-        else
-            opponentLabel.setText(w.session.getPlayerNameOne());
+        opponentLabel.setText(w.session.getPlayerNameTwo());
         chooseSubjectLabel.setVisible(true);
         for (int i = 0; i < subjectButtons.length; i++) {
             subjectButtons[i].setVisible(true);
@@ -169,7 +163,6 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             sb.setBorderPainted(true);
         }
         startButton.setVisible(false);
-//        setActionListener(w.ah);
     }
 
     public void setSubjectButtons(Subject[] s) {

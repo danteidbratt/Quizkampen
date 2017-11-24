@@ -1,13 +1,10 @@
 package quizkampen;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SessionHandlerPlayerOne extends Thread {
 
     protected Window w;
-    static State s;
 
     public SessionHandlerPlayerOne(Window w) {
         this.w = w;
@@ -16,15 +13,13 @@ public class SessionHandlerPlayerOne extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (w.session.getState() != w.session.GAMEOVER && w.session.getState() != w.session.SHUTDOWN) {
                 w.session = (SessionQ) w.inGameServer.readObject();
                 switch (w.session.getState()) {
                     case 0: // CHOOSESUBJECT
                         System.out.println("0");
                         w.ls.loopAnimation = false;
                         w.ls.resetPanel();
-                        System.out.println("vad fan");
-                        w.rs.nextRoundButton.setVisible(true);
                         for (int i = 0; i < 3; i++) {
                             w.tempSubjects[i] = w.session.getSubject();
                         }
@@ -32,12 +27,16 @@ public class SessionHandlerPlayerOne extends Thread {
                         break;
                     case 1: // SHOWSUBJECT
                         System.out.println("1");
-                        w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                        w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
                         w.session.setState(w.session.ANSWERQUESTIONS1);
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 2: // ANSWERQUESTIONS1
                         System.out.println("2");
+                        if (w.session.roundCounter == 0) {
+                            w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
+                            w.rs.setPanel();
+                        }
                         w.rs.nextRoundButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
@@ -51,17 +50,33 @@ public class SessionHandlerPlayerOne extends Thread {
                     case 4: // SHOWOPPONENTANSWERS
                         System.out.println("4");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
-                        w.session.setState(w.session.CHOOSESUBJECT);
                         w.session.roundCounter++;
+                        if (w.session.roundCounter == (w.session.getTotalRounds())) {
+                            if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
+                                w.rs.nextRoundButton.setText("Draw");
+                            } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
+                                w.rs.nextRoundButton.setText("You Win");
+                            } else {
+                                w.rs.nextRoundButton.setText("You Lose");
+                            }
+                            w.rs.nextRoundButton.setVisible(true);
+                            w.session.setState(w.session.GAMEOVER);
+                        }
+                        else {
+                            w.session.setState(w.session.CHOOSESUBJECT);
+                        }
+                        w.outGameServer.writeObject(w.session);
+                        break;
+                    case 5: // GAMEOVER
+                        w.session.setState(w.session.SHUTDOWN);
                         w.outGameServer.writeObject(w.session);
                         break;
                 }
 
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SessionHandlerPlayerOne.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("loppen är slut");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

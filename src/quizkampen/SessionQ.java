@@ -5,35 +5,31 @@ import java.util.*;
 
 public class SessionQ implements Serializable {
 
+    int state;
+    final int FIRST = -2;
+    final int SECOND = -1;
     final int CHOOSESUBJECT = 0;
     final int SHOWSUBJECT = 1; 
     final int ANSWERQUESTIONS1 = 2; 
     final int ANSWERQUESTIONS2 = 3; 
     final int SHOWOPPONENTANSWERS = 4;
+    final int GAMEOVER = 5;
+    final int SHUTDOWN = 6;
 
-    int playerWhoshouldChoose = 1;
+    public Queue<Subject> subjects = new LinkedList();
+    protected List<ListClass<Question>> subjectList = new ArrayList<>();
+    protected String chosenSubjectName;
+    Question[] tempQuestions;
     boolean[] opponentsAnswers;
+    int roundCounter;
     private int totalRonds;
     private int totalQuestionsinRond;
     protected String playerNameOne;
     protected String playerNameTwo;
-    public Queue<Subject> subjects = new LinkedList();
-    protected List<ListClass<Question>> subjectList = new ArrayList<>();
-//    protected State state;
-    protected String chosenSubjectName;
-    Question[] tempQuestions;
-    int playerNumber;
-    int state;
-    int roundCounter;
 
     SessionQ() {
         roundCounter = 0;
-        playerNumber = 1;
-        state = CHOOSESUBJECT;
-    }
-
-    public int getPlayerNumber() {
-        return playerNumber++;
+        state = FIRST;
     }
 
     public String getPlayerNameTwo() {
@@ -66,8 +62,10 @@ public class SessionQ implements Serializable {
 
     public void setTotalQsInRond(int totalQuestions) {
         this.totalQuestionsinRond = totalQuestions;
-        opponentsAnswers = new boolean[totalQuestions];
-        for (int i = 0; i < opponentsAnswers.length; i++) {
+        tempQuestions = new Question[totalQuestionsinRond];
+        opponentsAnswers = new boolean[totalQuestionsinRond];
+        for (int i = 0; i < totalQuestionsinRond; i++) {
+            tempQuestions[i] = new Question();
             opponentsAnswers[i] = false;
         }
     }
@@ -100,14 +98,6 @@ public class SessionQ implements Serializable {
 
     public Subject getSubject() {
         return subjects.remove();
-    }
-
-    public void switchPlayerWhoShoulgChoose() {
-        if (playerWhoshouldChoose == 1) {
-            playerWhoshouldChoose = 2;
-        } else {
-            playerWhoshouldChoose = 1;
-        }
     }
 
     public void clearOpponentAnswers() {
