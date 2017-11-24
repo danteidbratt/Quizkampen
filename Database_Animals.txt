@@ -38,5 +38,13 @@ Two
 Three
 One
 None
-
-
+Which animal drags mantas slay?
+Raindeers
+Elk
+Pig
+Horses
+Which animal looks like a horse but a have longer ears?
+Dunkey
+Elefant
+Unicorn
+Zebrah
