@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class ActionHandler implements ActionListener {
@@ -83,7 +84,10 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == w.ls.startButton) {
-            if (w.session.roundCounter == 0){
+            for (int i = 0; i < 3; i++) {
+                w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
+            }
+            if (w.session.roundCounter == 0) {
                 w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
                 w.rs.setPanel();
             }
@@ -114,12 +118,11 @@ public class ActionHandler implements ActionListener {
                 w.gs.resetColors();
                 w.remove(w.gs);
                 w.add(w.rs);
-                
+
                 if (w.session.getState() == w.session.ANSWERQUESTIONS1) {
                     w.session.setState(w.session.ANSWERQUESTIONS2);
                     w.rs.nextRoundButton.setVisible(false);
-                }
-                else if (w.session.getState() == w.session.ANSWERQUESTIONS2){
+                } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                     w.session.setState(w.session.SHOWOPPONENTANSWERS);
                 }
 
@@ -141,7 +144,7 @@ public class ActionHandler implements ActionListener {
                 w.ls.setActionListener(this);
                 w.add(w.ls);
             }
-                
+
 //            if (w.session.playerWhoshouldChoose == w.playerNumber) {
 //                w.remove(w.rs);
 ////                w.roundCounter++;
@@ -188,7 +191,7 @@ public class ActionHandler implements ActionListener {
                     w.session.tempQuestions[j] = w.tempSubjects[i].getQuestion();
                 }
                 w.ls.subjectButtons[i].setBackground(Color.YELLOW);
-                w.ls.subjectButtons[i].setBorderPainted(false);
+//                w.ls.subjectButtons[i].setBorderPainted(false);
                 w.ls.subjectButtons[i].setOpaque(true);
 //                w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                 w.session.chosenSubjectName = w.tempSubjects[i].getName();
@@ -200,8 +203,7 @@ public class ActionHandler implements ActionListener {
                 }
                 w.ls.removeActionListener();
                 w.ls.startButton.setVisible(true);
-
-                w.tempIndex = i;
+                w.gs.setNextQuestion(w.tempQuestions[w.questionCounter]);
             }
         }
 

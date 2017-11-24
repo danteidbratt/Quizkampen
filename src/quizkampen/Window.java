@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class Window extends JFrame {
 
@@ -48,6 +49,11 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         ah = new ActionHandler(this);
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
