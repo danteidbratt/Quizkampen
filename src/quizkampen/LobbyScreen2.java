@@ -14,12 +14,12 @@ public class LobbyScreen2 extends MasterPanel{
     
     JPanel centerTopPanel = new JPanel();
     JLabel textLabel1 = new JLabel("- Next Opponent -");
-    JLabel opponentLabel = new JLabel("DayWeed");
+    JLabel opponentLabel = new JLabel("");
     JLabel centerTopBotSpace = new JLabel(" ");
     JPanel centerMidPanel = new JPanel();
     JLabel textLabel2 = new JLabel("Chosen Subject");
     JPanel subjectIconPanel = new JPanel();
-    JButton subjectButton = new JButton("Mat");
+    JButton subjectButton = new JButton("");
     JPanel centerBotPanel = new JPanel();
     JPanel readyIconPanel = new JPanel();
     JLabel centerBotTopSpace = new JLabel(" ");
@@ -62,9 +62,10 @@ public class LobbyScreen2 extends MasterPanel{
         textLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         subjectIconPanel.setBackground(backgroundColor);
         subjectIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        subjectButton.setPreferredSize(new Dimension(100, 100));
+        subjectButton.setPreferredSize(new Dimension(150, 130));
         subjectButton.setFont(buttonFont);
-//        subjectIconPanel.add(subjectButton);
+        subjectButton.setVisible(false);
+        subjectIconPanel.add(subjectButton);
         centerMidPanel.add(textLabel2, BorderLayout.NORTH);
         centerMidPanel.add(subjectIconPanel, BorderLayout.CENTER);
         
@@ -76,9 +77,10 @@ public class LobbyScreen2 extends MasterPanel{
         centerBotTopSpace.setPreferredSize(new Dimension(0, 40));
         readyButton.setFont(buttonFont);
         readyButton.setPreferredSize(new Dimension(180, 70));
+        readyButton.setVisible(false);
         readyIconPanel.setBackground(backgroundColor);
         readyIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        readyIconPanel.add(readyButton);
+        readyIconPanel.add(readyButton);      // Händer i sessionHandler
         centerBotPanel.add(centerBotTopSpace, BorderLayout.NORTH);
         centerBotPanel.add(readyIconPanel, BorderLayout.CENTER);
         

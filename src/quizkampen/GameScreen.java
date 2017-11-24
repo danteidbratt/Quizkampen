@@ -162,8 +162,7 @@ public class GameScreen extends MasterPanel {
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setButton(q.getAnswerAlternatives().get(i));
             answerButtons[i].setBorderPainted(true);
-            answerButtons[i].setBackground(backgroundColor);
-            
+            answerButtons[i].setBackground(new JButton().getBackground());
         }
         nextQuestionButton.setVisible(false);
     }
