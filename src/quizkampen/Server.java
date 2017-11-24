@@ -69,7 +69,7 @@ public class Server {
                     user2Output.writeObject(session); // skickar valt ämne + P1 resultat till P2    (set result screen P2)
 
                     session = (SessionQ) user2Input.readObject(); // läser in från P2
-                    user1Output.writeObject(session); // skickar till P1
+//                    user1Output.writeObject(session); // skickar till P1
                     // IF - GameOver - break
 
                 }

@@ -112,6 +112,7 @@ public class ResultScreen extends MasterPanel{
         botPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nextRoundButton.setPreferredSize(new Dimension(180, 70));
         nextRoundButton.setFont(buttonFont);
+        nextRoundButton.setVisible(false);
         botPanel.add(nextRoundButton);
         
         add(logo, BorderLayout.NORTH);
@@ -157,7 +158,7 @@ public class ResultScreen extends MasterPanel{
         }
         
         for (int i = 0; i < subjects.length; i++) {
-            subjects[i] = new JLabel("- Mat -");
+            subjects[i] = new JLabel(" ");
             subjects[i].setBackground(backgroundColor);
             subjects[i].setOpaque(true);
             subjects[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,8 +232,10 @@ public class ResultScreen extends MasterPanel{
     
     public void setOpponentBoxes(boolean[] b, int roundCounter, int questionsInRound){
         for (int i = 0; i < b.length; i++) {
-            if(b[i])
+            if(b[i]){
                 boxes[roundCounter][i+questionsInRound].setBackground(Color.GREEN);
+                increaseOpponentScore();
+            }
             else 
                 boxes[roundCounter][i+questionsInRound].setBackground(Color.RED);
         }
