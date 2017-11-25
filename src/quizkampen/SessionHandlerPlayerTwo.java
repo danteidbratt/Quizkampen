@@ -14,7 +14,7 @@ public class SessionHandlerPlayerTwo extends Thread {
     public void run() {
         w.ls.removeActionListener(w.ah);
         try {
-            while (w.session.getState() != w.session.GAMEOVER && w.session.getState() != w.session.SHUTDOWN) {
+            while (w.session.getState() != w.session.GAMEOVER) {
                 w.session = (SessionQ) w.inGameServer.readObject();
                 switch (w.session.getState()) {
                     case 0: //CHOOSESUBJECT
