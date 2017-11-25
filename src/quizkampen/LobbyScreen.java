@@ -104,6 +104,7 @@ public class LobbyScreen extends MasterPanel implements Runnable {
         startButton.setFont(buttonFont);
         startButton.setPreferredSize(new Dimension(170, 70));
         startButton.setVisible(false);
+        startButton.addActionListener(w.ah);
         buttonPanel.add(startButton);
         bottomPanel.add(buttonPanel);
         bottomPanel.add(bottomBottomSpace);
@@ -121,7 +122,6 @@ public class LobbyScreen extends MasterPanel implements Runnable {
 
     @Override
     public void setActionListener(ActionListener al) {
-        startButton.addActionListener(al);
         for (JButton sb : subjectButtons) {
             sb.addActionListener(al);
         }

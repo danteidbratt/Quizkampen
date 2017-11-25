@@ -24,6 +24,7 @@ public class SessionQ implements Serializable {
     int roundCounter;
     private int totalRonds;
     private int totalQuestionsinRond;
+    private int timerLength;
     protected String playerNameOne;
     protected String playerNameTwo;
 
@@ -73,6 +74,10 @@ public class SessionQ implements Serializable {
     public void setTotalRounds(int totalRonds) {
         this.totalRonds = totalRonds;
     }
+    
+    public void setTimerLength(int timerLength){
+        this.timerLength = timerLength;
+    }
 
     public int getTotalQsInRound() {
         return this.totalQuestionsinRond;
@@ -80,6 +85,10 @@ public class SessionQ implements Serializable {
 
     public int getTotalRounds() {
         return this.totalRonds;
+    }
+    
+    public int getTimerLength(){
+        return timerLength;
     }
 
     public void setSubjectQueue() {

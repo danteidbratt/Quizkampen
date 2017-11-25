@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 public class ActionHandler implements ActionListener {
 
     Window w;
+    TimerClass tc;
 
     public ActionHandler(Window window) {
         this.w = window;
@@ -50,7 +51,7 @@ public class ActionHandler implements ActionListener {
                 w.rs = new ResultScreen();
                 w.ls = new LobbyScreen(w);
                 w.ls2 = new LobbyScreen2();
-                w.gs = new GameScreen();
+                w.gs = new GameScreen(w);
                 List<MasterPanel> gamePanels = new ArrayList<>();
                 gamePanels = Arrays.asList(w.ls, w.ls2, w.gs);
                 gamePanels.forEach(a -> {
@@ -94,25 +95,33 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == w.ls.startButton) {
+            System.out.println("1 klick på ls.startButton");
             for (int i = 0; i < 3; i++) {
                 w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
             }
             w.rs.setActionListener(this);
             w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
             w.remove(w.ls);
+            w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
+            tc = new TimerClass();
+            tc.start();
         } else if (e.getSource() == w.ls2.readyButton) {
             w.session.clearOpponentAnswers();
             w.remove(w.ls2);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
+            tc = new TimerClass();
+            tc.start();
         } else if (e.getSource() == w.gs.nextQuestionButton) {
             w.gs.setButtonActionListener(this);
             if (w.questionCounter < (w.session.getTotalQsInRound() - 1)) {
                 w.gs.setNextQuestion(w.session.tempQuestions[++w.questionCounter]);
+                tc = new TimerClass();
+                tc.start();
             } else {
                 w.gs.resetColors();
                 w.questionCounter = 0;
@@ -147,6 +156,8 @@ public class ActionHandler implements ActionListener {
             } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                 w.remove(w.rs);
                 w.add(w.gs);
+                tc = new TimerClass();
+                tc.start();
             } else if (w.session.getState() == w.session.CHOOSESUBJECT) {
                 w.remove(w.rs);
                 w.ls.resetPanel();
@@ -187,7 +198,6 @@ public class ActionHandler implements ActionListener {
                     }
                     w.ls.subjectButtons[i].setBackground(Color.YELLOW);
                     w.ls.subjectButtons[i].setOpaque(true);
-                    w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                     w.session.chosenSubjectName = w.tempSubjects[i].getName();
                     try {
                         w.session.setState(w.session.SHOWSUBJECT);
@@ -197,11 +207,11 @@ public class ActionHandler implements ActionListener {
                     }
                     w.ls.removeActionListener(this);
                     w.ls.startButton.setVisible(true);
-                    w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                 }
             }
             for (int i = 0; i < w.gs.answerButtons.length; i++) {
                 if (e.getSource() == w.gs.answerButtons[i]) {
+                    tc.stopTimer();
                     w.gs.colorChosenButton(w.gs.answerButtons[i]);
                     w.gs.revealCorrectAnswer();
                     if (w.gs.answerButtons[i].getIsCorrect()) {
@@ -213,7 +223,6 @@ public class ActionHandler implements ActionListener {
                         w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
                         w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
                     }
-                    w.gs.nextQuestionButton.setVisible(true);
                     w.gs.removeActionListeners(this);
                     if (w.questionCounter == w.session.getTotalQsInRound() - 1) {
                         w.gs.nextQuestionButton.setText("Show Results");
@@ -223,5 +232,59 @@ public class ActionHandler implements ActionListener {
         }
         w.revalidate();
         w.repaint();
+    }
+
+    public class TimerClass extends Thread {
+
+        int timerLength;
+        private boolean keepCounting;
+
+        public TimerClass() {
+            this.timerLength = w.session.getTimerLength();
+        }
+
+        public void stopTimer() {
+            keepCounting = false;
+        }
+
+        @Override
+        public void run() {
+            try {
+                w.gs.buttonPanel.remove(w.gs.nextQuestionButton);
+                w.gs.buttonPanel.add(w.gs.timerLabel);
+                keepCounting = true;
+                int i;
+                for (i = 0; i <= timerLength && keepCounting; i++) {
+                    w.gs.timerLabel.setText(String.valueOf(timerLength - i));
+                    w.gs.revalidate();
+                    w.gs.repaint();
+                    System.out.println("timer " + i);
+                    for (int j = 0; j < 10; j++) {
+                        Thread.sleep(100);
+                        if (!keepCounting) {
+                            break;
+                        }
+                    }
+                    if (!keepCounting) {
+                        break;
+                    }
+                }
+                if (i > timerLength) {
+                    w.gs.removeActionListeners(w.ah);
+                    w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
+                    w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
+                    w.gs.revealCorrectAnswer();
+                    if (w.questionCounter == w.session.getTotalQsInRound() - 1) {
+                        w.gs.nextQuestionButton.setText("Show Results");
+                    }
+                }
+                w.gs.buttonPanel.remove(w.gs.timerLabel);
+                w.gs.buttonPanel.add(w.gs.nextQuestionButton);
+                w.gs.revalidate();
+                w.gs.repaint();
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }

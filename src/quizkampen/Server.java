@@ -25,6 +25,7 @@ public class Server {
             p = new PropertiesReader();
             session.setTotalRounds(p.getRonds());
             session.setTotalQsInRond(p.getQuestionsInRond());
+            session.setTimerLength(p.getTimerLength());
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());

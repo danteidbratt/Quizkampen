@@ -28,9 +28,16 @@ public class GameScreen extends MasterPanel {
     JButton questionButton = new JButton("");
     AnswerButton[] answerButtons = new AnswerButton[4];
     JPanel buttonPanel = new JPanel();
+    JLabel timerLabel = new JLabel(" ");
     JButton nextQuestionButton = new JButton("Next Question");
 
-    int numberOfQuestions = 5;
+    Window w;
+    
+    public GameScreen(Window w) {
+        this.w = w;
+    }
+    
+    
 
     @Override
     public void setPanel() {
@@ -69,7 +76,7 @@ public class GameScreen extends MasterPanel {
         answerCardsPanel.setLayout(new GridLayout(2, 2, 10, 10));
         answerCardsPanel.setBackground(backgroundColor);
         setAnswerButtons();
-        
+
         questionButton.setFont(new Font("SansSarif", Font.BOLD, 15));
         cardsPanel.add(questionButton);
         cardsPanel.add(answerCardsPanel);
@@ -80,16 +87,20 @@ public class GameScreen extends MasterPanel {
         buttonPanel.setBackground(backgroundColor);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.setPreferredSize(new Dimension(0, 100));
+        timerLabel.setBackground(backgroundColor);
+        timerLabel.setOpaque(true);
+        timerLabel.setFont(infoTextFontBig);
+        timerLabel.setForeground(infoTextColor);
         nextQuestionButton.setFont(buttonFont);
-        nextQuestionButton.setVisible(false);
+        nextQuestionButton.setVisible(true);
         nextQuestionButton.setPreferredSize(new Dimension(200, 75));
-        buttonPanel.add(nextQuestionButton);
+        buttonPanel.add(timerLabel);
         logo.setBackground(backgroundColor);
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setForeground(logoColor);
         logo.setFont(new Font("SansSarif", 2, 60));
-        
+
         centerBotPanel.add(buttonPanel, BorderLayout.NORTH);
         centerBotPanel.add(logo, BorderLayout.CENTER);
 
@@ -103,9 +114,8 @@ public class GameScreen extends MasterPanel {
         add(rightSpace, BorderLayout.EAST);
         add(bottomSpace, BorderLayout.SOUTH);
     }
-    
-    public void setNumberofQuestions(int amountOfQuestions) {
-        this.numberOfQuestions = amountOfQuestions;
+
+    public void setNumberofQuestions(int numberOfQuestions) {
         for (int i = 0; i < numberOfQuestions; i++) {
             questionBoxes.add(new JLabel(""));
             questionBoxes.get(i).setPreferredSize(new Dimension(60, 37));
@@ -117,12 +127,13 @@ public class GameScreen extends MasterPanel {
     }
 
     @Override
-    public void setActionListener(ActionListener al){
+    public void setActionListener(ActionListener al) {
         nextQuestionButton.addActionListener(al);
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].addActionListener(al);
         }
     }
+
     public void setButtonActionListener(ActionListener al) {
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].addActionListener(al);
@@ -131,15 +142,15 @@ public class GameScreen extends MasterPanel {
 
     public void revealCorrectAnswer() {
         for (int i = 0; i < answerButtons.length; i++) {
-            if (answerButtons[i].getIsCorrect()){
+            if (answerButtons[i].getIsCorrect()) {
                 answerButtons[i].setBackground(Color.GREEN);
                 answerButtons[i].setOpaque(true);
-                answerButtons[i].setBorderPainted(false); 
+                answerButtons[i].setBorderPainted(false);
             }
         }
     }
-    
-    private void setAnswerButtons(){
+
+    private void setAnswerButtons() {
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i] = new AnswerButton();
             answerButtons[i].setFont(buttonFontSmall);
@@ -150,36 +161,34 @@ public class GameScreen extends MasterPanel {
             answerCardsPanel.add(answerButtons[i]);
         }
     }
-    
-    public void colorChosenButton(AnswerButton ab){
+
+    public void colorChosenButton(AnswerButton ab) {
         ab.setBackground(Color.RED);
         ab.setOpaque(true);
         ab.setBorderPainted(false);
     }
-    
-    public void setNextQuestion(Question q){
+
+    public void setNextQuestion(Question q) {
         questionButton.setText("<html><p>" + q.getQuestionQ() + "</p></html>");
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setButton(q.getAnswerAlternatives().get(i));
             answerButtons[i].setBorderPainted(true);
             answerButtons[i].setBackground(new JButton().getBackground());
         }
-        nextQuestionButton.setVisible(false);
     }
-    
-    public void removeActionListeners(ActionListener al){
+
+    public void removeActionListeners(ActionListener al) {
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].removeActionListener(al);
         }
     }
-    
-    public void resetColors(){
+
+    public void resetColors() {
         questionBoxes.forEach(e -> e.setBackground(Color.WHITE));
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setBorderPainted(true);
             answerButtons[i].setBackground(backgroundColor);
         }
         nextQuestionButton.setText("Next Question");
-        nextQuestionButton.setVisible(false);
     }
 }
