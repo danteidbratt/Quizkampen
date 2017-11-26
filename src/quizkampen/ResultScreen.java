@@ -238,4 +238,14 @@ public class ResultScreen extends MasterPanel{
                 boxes[roundCounter][i+questionsInRound].setBackground(Color.RED);
         }
     }
+    
+    @Override
+    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
+        this.backgroundColor = backgroundColor;
+        this.logoColor = logoColor;
+        this.infoTextColor = infoTextColor;
+//        removeAll();
+        revalidate();
+        repaint();
+    }
 }

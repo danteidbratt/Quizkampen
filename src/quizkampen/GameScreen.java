@@ -20,6 +20,7 @@ public class GameScreen extends MasterPanel {
     private final JPanel cardsPanel = new JPanel();
     private final JPanel answerCardsPanel = new JPanel();
     private final JPanel centerBotPanel = new JPanel();
+    
 
     private final JLabel roundTextLabel = new JLabel("Round");
     public JLabel roundBoxLabel = new JLabel();
@@ -30,6 +31,8 @@ public class GameScreen extends MasterPanel {
     JPanel buttonPanel = new JPanel();
     JLabel timerLabel = new JLabel(" ");
     JButton nextQuestionButton = new JButton("Next Question");
+    JPanel timerPanel = new JPanel();
+    JLabel[] timerBar = new JLabel[100];
 
     Window w;
     
@@ -81,7 +84,7 @@ public class GameScreen extends MasterPanel {
         cardsPanel.add(questionButton);
         cardsPanel.add(answerCardsPanel);
 
-        centerBotPanel.setLayout(new BorderLayout(0, 0));
+        centerBotPanel.setLayout(new BorderLayout());
         centerBotPanel.setBackground(backgroundColor);
         centerBotPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.setBackground(backgroundColor);
@@ -94,7 +97,17 @@ public class GameScreen extends MasterPanel {
         nextQuestionButton.setFont(buttonFont);
         nextQuestionButton.setVisible(true);
         nextQuestionButton.setPreferredSize(new Dimension(200, 75));
-        buttonPanel.add(timerLabel);
+        timerPanel.setLayout(new GridLayout(1, 100));
+        timerPanel.setPreferredSize(new Dimension(390, 12));
+        timerPanel.setBackground(backgroundColor);
+        
+        for (int i = 0; i < timerBar.length; i++) {
+            timerBar[i] = new JLabel("");
+            timerBar[i].setBackground(Color.YELLOW);
+            timerBar[i].setOpaque(true);
+            timerPanel.add(timerBar[i]);
+        }
+        buttonPanel.add(timerPanel);
         logo.setBackground(backgroundColor);
         logo.setOpaque(true);
         logo.setHorizontalAlignment(SwingConstants.CENTER);

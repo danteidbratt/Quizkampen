@@ -110,5 +110,14 @@ public class LobbyScreen2 extends MasterPanel{
     public void setActionListener(ActionListener al) {
         readyButton.addActionListener(al);
     }
+    
+    @Override
+    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
+        this.backgroundColor = backgroundColor;
+        this.logoColor = logoColor;
+        this.infoTextColor = infoTextColor;
+        setPanel();
+        repaint();
+    }
 
 }

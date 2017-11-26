@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 abstract public class MasterPanel extends JPanel implements IPanel{
     
-    protected JLabel logo = new JLabel("QuizFights");
+    protected JLabel logo = new JLabel("QuizFights");;
     protected Color logoColor = Color.YELLOW;
     protected Font logoFont = new Font("SansSarif", 2, 80);
     protected Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
@@ -23,12 +23,17 @@ abstract public class MasterPanel extends JPanel implements IPanel{
     protected final JLabel rightSpace = new JLabel("");
     protected final JLabel bottomSpace = new JLabel("");
     
+    public MasterPanel(){
+    }
+    
     @Override
     public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
         this.backgroundColor = backgroundColor;
         this.logoColor = logoColor;
         this.infoTextColor = infoTextColor;
+        removeAll();
         setPanel();
+        revalidate();
         repaint();
     }
 }

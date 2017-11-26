@@ -1,5 +1,6 @@
 package quizkampen;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,6 +12,10 @@ import javax.swing.UIManager;
 
 public class Window extends JFrame {
 
+    Color color1;
+    Color color2;
+    Color color3;
+    
     Subject[] tempSubjects = new Subject[3];
     ActionHandler ah;
     protected int questionCounter = 0;
@@ -45,6 +50,9 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
+        color1 = new Color(20, 0, 150);
+        color2 = Color.YELLOW;
+        color3 = Color.WHITE;
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {

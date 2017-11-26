@@ -169,4 +169,13 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             subjectButtons[i].setText(s[i].getName());
         }
     }
+    
+//    @Override
+//    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
+//        this.backgroundColor = backgroundColor;
+//        this.logoColor = logoColor;
+//        this.infoTextColor = infoTextColor;
+//        revalidate();
+//        repaint();
+//    }
 }

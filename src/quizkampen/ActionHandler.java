@@ -46,6 +46,41 @@ public class ActionHandler implements ActionListener {
         } else if (e.getSource() == w.ms.newGameButton) {
             w.remove(w.ms);
             w.add(w.gms);
+        } else if (e.getSource() == w.ms.settingsButton) {
+            w.remove(w.ms);
+            w.add(w.ses);
+        } else if (e.getSource() == w.gms.backButton) {
+            w.remove(w.gms);
+            w.add(w.ms);
+        } else if (e.getSource() == w.ses.backButton) {
+            w.remove(w.ses);
+            w.add(w.ms);
+        } else if (e.getSource() == w.ms.statsButton) {
+            w.remove(w.ms);
+            w.add(w.sts);
+        } else if (e.getSource() == w.ms.logoutButton) {
+            w.remove(w.ms);
+            w.add(w.ws);
+        } else if (e.getSource() == w.sts.backButton) {
+            w.remove(w.sts);
+            w.add(w.ms);
+        } else if (e.getSource() == w.ws.exitButton || e.getSource() == w.ms.exitButton || e.getSource() == w.gms.exitButton) {
+            System.exit(0);
+        } else if (e.getSource() == w.ses.blue) {
+            w.color1 = new Color(20, 0, 150);
+            w.color2 = Color.YELLOW;
+            w.color3 = Color.WHITE;
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
+        } else if (e.getSource() == w.ses.green) {
+            w.color1 = new Color(80, 180, 0);
+            w.color2 = Color.WHITE;
+            w.color3 = Color.WHITE;
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
+        } else if (e.getSource() == w.ses.red) {
+            w.color1 = new Color(190, 0, 0);
+            w.color2 = Color.WHITE;
+            w.color3 = Color.WHITE;
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
         } else if (e.getSource() == w.gms.randomPlayerButton) {
             try {
                 w.rs = new ResultScreen();
@@ -55,7 +90,8 @@ public class ActionHandler implements ActionListener {
                 List<MasterPanel> gamePanels = new ArrayList<>();
                 gamePanels = Arrays.asList(w.ls, w.ls2, w.gs);
                 gamePanels.forEach(a -> {
-                    a.setPanel();
+                    a.setCustomColor(w.color1, w.color2, w.color3);
+//                    a.setPanel();
                     a.setActionListener(this);
                 });
                 w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
@@ -95,7 +131,6 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == w.ls.startButton) {
-            System.out.println("1 klick på ls.startButton");
             for (int i = 0; i < 3; i++) {
                 w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
             }
@@ -164,32 +199,6 @@ public class ActionHandler implements ActionListener {
                 w.ls.setActionListener(this);
                 w.add(w.ls);
             }
-        } else if (e.getSource() == w.ms.settingsButton) {
-            w.remove(w.ms);
-            w.add(w.ses);
-        } else if (e.getSource() == w.gms.backButton) {
-            w.remove(w.gms);
-            w.add(w.ms);
-        } else if (e.getSource() == w.ses.backButton) {
-            w.remove(w.ses);
-            w.add(w.ms);
-        } else if (e.getSource() == w.ms.statsButton) {
-            w.remove(w.ms);
-            w.add(w.sts);
-        } else if (e.getSource() == w.ms.logoutButton) {
-            w.remove(w.ms);
-            w.add(w.ws);
-        } else if (e.getSource() == w.sts.backButton) {
-            w.remove(w.sts);
-            w.add(w.ms);
-        } else if (e.getSource() == w.ws.exitButton || e.getSource() == w.ms.exitButton || e.getSource() == w.gms.exitButton) {
-            System.exit(0);
-        } else if (e.getSource() == w.ses.blue) {
-            w.panelList.forEach(x -> x.setCustomColor(new Color(20, 0, 150), Color.YELLOW, Color.WHITE));
-        } else if (e.getSource() == w.ses.green) {
-            w.panelList.forEach(x -> x.setCustomColor(new Color(80, 180, 0), Color.WHITE, Color.WHITE));
-        } else if (e.getSource() == w.ses.red) {
-            w.panelList.forEach(x -> x.setCustomColor(new Color(190, 0, 0), Color.WHITE, Color.WHITE));
         } else {
             for (int i = 0; i < w.ls.subjectButtons.length; i++) {
                 if (e.getSource() == w.ls.subjectButtons[i]) {
@@ -251,25 +260,17 @@ public class ActionHandler implements ActionListener {
         public void run() {
             try {
                 w.gs.buttonPanel.remove(w.gs.nextQuestionButton);
-                w.gs.buttonPanel.add(w.gs.timerLabel);
+                w.gs.buttonPanel.add(w.gs.timerPanel);
                 keepCounting = true;
+                int milliseconds = w.session.getTimerLength() * 10;
                 int i;
-                for (i = 0; i <= timerLength && keepCounting; i++) {
-                    w.gs.timerLabel.setText(String.valueOf(timerLength - i));
+                for (i = w.gs.timerBar.length - 1; i >= 0 && keepCounting == true; i--) {
+                    Thread.sleep(milliseconds);
+                    w.gs.timerBar[i].setBackground(w.gs.backgroundColor);
                     w.gs.revalidate();
                     w.gs.repaint();
-                    System.out.println("timer " + i);
-                    for (int j = 0; j < 10; j++) {
-                        Thread.sleep(100);
-                        if (!keepCounting) {
-                            break;
-                        }
-                    }
-                    if (!keepCounting) {
-                        break;
-                    }
                 }
-                if (i > timerLength) {
+                if (i < 0) {
                     w.gs.removeActionListeners(w.ah);
                     w.gs.questionBoxes.get(w.questionCounter).setBackground(Color.RED);
                     w.rs.boxes[w.session.roundCounter][w.questionCounter].setBackground(Color.RED);
@@ -278,10 +279,13 @@ public class ActionHandler implements ActionListener {
                         w.gs.nextQuestionButton.setText("Show Results");
                     }
                 }
-                w.gs.buttonPanel.remove(w.gs.timerLabel);
+                w.gs.buttonPanel.remove(w.gs.timerPanel);
                 w.gs.buttonPanel.add(w.gs.nextQuestionButton);
                 w.gs.revalidate();
                 w.gs.repaint();
+                for (int j = 0; j < w.gs.timerBar.length; j++) {
+                    w.gs.timerBar[j].setBackground(Color.YELLOW);
+                }
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
