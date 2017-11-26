@@ -15,7 +15,7 @@ public class Server implements Runnable{
     private SessionQ session;
     protected Database database = new Database();
     private PropertiesReader p;
-    Thread play;
+    Thread playGame;
 
     public Server(Socket clientSocket1) {
         try {
@@ -27,7 +27,7 @@ public class Server implements Runnable{
             session.setTotalRounds(p.getRonds());
             session.setTotalQsInRond(p.getQuestionsInRond());
             session.setTimerLength(p.getTimerLength());
-            play = new Thread(this);
+            playGame = new Thread(this);
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -47,8 +47,7 @@ public class Server implements Runnable{
             user2Input = new ObjectInputStream(clientSocket2.getInputStream());
             user2Output.writeObject(session);
             session = (SessionQ) user2Input.readObject();
-            play.start();
-//            this.playGame();                     // spelet börjar här
+            playGame.start();
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -56,23 +55,6 @@ public class Server implements Runnable{
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-//    public void playGame() {
-//        try {
-//            session.setSubjectQueue();
-//            while (session.getState() != session.SHUTDOWN) {
-//                user1Output.writeObject(session);
-//                session = (SessionQ) user1Input.readObject();
-//                if (session.getState() == session.SHUTDOWN)
-//                    break;
-//                user2Output.writeObject(session);
-//                session = (SessionQ) user2Input.readObject();
-//            }
-//            System.out.println("Server loop ends");
-//        } catch (IOException | ClassNotFoundException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
 
     @Override
     public void run() {
