@@ -244,7 +244,6 @@ public class ResultScreen extends MasterPanel{
         this.backgroundColor = backgroundColor;
         this.logoColor = logoColor;
         this.infoTextColor = infoTextColor;
-//        removeAll();
         revalidate();
         repaint();
     }

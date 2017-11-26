@@ -134,7 +134,6 @@ public class ActionHandler implements ActionListener {
             for (int i = 0; i < 3; i++) {
                 w.ls.subjectButtons[i].setBackground(new JButton().getBackground());
             }
-            w.rs.setActionListener(this);
             w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
             w.remove(w.ls);
             w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
@@ -258,6 +257,7 @@ public class ActionHandler implements ActionListener {
 
         @Override
         public void run() {
+            System.out.println("Timer fråga: " + w.questionCounter);
             try {
                 w.gs.buttonPanel.remove(w.gs.nextQuestionButton);
                 w.gs.buttonPanel.add(w.gs.timerPanel);

@@ -38,6 +38,7 @@ public class SessionHandlerPlayerOne extends Thread {
                             w.rs.setCustomColor(w.color1, w.color2, w.color3);
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
                             w.rs.setPanel();
+                            w.rs.setActionListener(w.ah);
                         }
                         w.rs.nextRoundButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
