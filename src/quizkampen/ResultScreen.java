@@ -36,12 +36,10 @@ public class ResultScreen extends MasterPanel{
     JPanel botPanel = new JPanel();
     JButton nextRoundButton = new JButton("Next Round");
     
-    int subjectCounter;
 
     public ResultScreen(){
         leftNumber.setText("0");
         rightNumber.setText("0");
-        subjectCounter = 0;
     }
     
     @Override
@@ -208,8 +206,8 @@ public class ResultScreen extends MasterPanel{
         rightNumber.setText(String.valueOf(Integer.parseInt(rightNumber.getText()) + 1));
     }
     
-    public void setSubject(String subject){
-        subjects[subjectCounter++].setText("- " + subject + " -");
+    public void setSubject(String subject, int roundCounter){
+        subjects[roundCounter].setText("- " + subject + " -");
     }
     
     public void setRightName(String player2){   // FÖR ATT SÄTTA Opponent I RESULTS
@@ -239,5 +237,14 @@ public class ResultScreen extends MasterPanel{
             else 
                 boxes[roundCounter][i+questionsInRound].setBackground(Color.RED);
         }
+    }
+    
+    @Override
+    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
+        this.backgroundColor = backgroundColor;
+        this.logoColor = logoColor;
+        this.infoTextColor = infoTextColor;
+        revalidate();
+        repaint();
     }
 }

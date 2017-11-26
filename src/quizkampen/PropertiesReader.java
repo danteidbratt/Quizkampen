@@ -9,6 +9,7 @@ public class PropertiesReader implements Serializable{
 
     int ronds;
     int questionsInRond;
+    int timerLength;
     Properties p;
 
     public PropertiesReader() {
@@ -33,5 +34,11 @@ public class PropertiesReader implements Serializable{
         String in = p.getProperty("questionsInRond", "2");
         questionsInRond = Integer.parseInt(in);
         return questionsInRond;
+    }
+    
+    public int getTimerLength() {
+        String in = p.getProperty("timerLength", "10");
+        timerLength = Integer.parseInt(in);
+        return timerLength;
     }
 }

@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 
-public class Server {
+public class Server implements Runnable{
 
     private Socket clientSocket1;
     private Socket clientSocket2;
@@ -15,6 +15,7 @@ public class Server {
     private SessionQ session;
     protected Database database = new Database();
     private PropertiesReader p;
+    Thread playGame;
 
     public Server(Socket clientSocket1) {
         try {
@@ -25,6 +26,8 @@ public class Server {
             p = new PropertiesReader();
             session.setTotalRounds(p.getRonds());
             session.setTotalQsInRond(p.getQuestionsInRond());
+            session.setTimerLength(p.getTimerLength());
+            playGame = new Thread(this);
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -44,7 +47,7 @@ public class Server {
             user2Input = new ObjectInputStream(clientSocket2.getInputStream());
             user2Output.writeObject(session);
             session = (SessionQ) user2Input.readObject();
-            this.playGame();                     // spelet börjar här
+            playGame.start();
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -53,33 +56,21 @@ public class Server {
         }
     }
 
-    public void playGame() {
-
+    @Override
+    public void run() {
         try {
-            while (true) {
-
-                // kolla om antalSpeladeRonder == totalaRonder. BREAK
-                session.setSubjectQueue();
-
-                while (true) {
-                    user1Output.writeObject(session); // skickar P2 namn till P1     (set result screen P1)
-                    session = (SessionQ) user1Input.readObject(); // läser in valt ämne + svar från P1
-                    // IF - gameOver - break
-                    // IF - Rond is over - LoadQuestions?
-                    user2Output.writeObject(session); // skickar valt ämne + P1 resultat till P2    (set result screen P2)
-
-                    session = (SessionQ) user2Input.readObject(); // läser in från P2
-//                    user1Output.writeObject(session); // skickar till P1
-                    // IF - GameOver - break
-
-                }
-
+            session.setSubjectQueue();
+            while (session.getState() != session.SHUTDOWN) {
+                user1Output.writeObject(session);
+                session = (SessionQ) user1Input.readObject();
+                if (session.getState() == session.SHUTDOWN)
+                    break;
+                user2Output.writeObject(session);
+                session = (SessionQ) user2Input.readObject();
             }
-        } catch (IOException e) {
+            System.out.println("Server loop ends");
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }
