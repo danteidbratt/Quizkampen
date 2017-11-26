@@ -35,7 +35,7 @@ public class SessionHandlerPlayerOne extends Thread {
                     case 2: // ANSWERQUESTIONS1
                         System.out.println("2");
                         if (w.session.roundCounter == 0) {
-                            w.rs.setCustomColor(w.color1, w.color2, w.color3);
+                            w.rs.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
                             w.rs.setPanel();
                             w.rs.setActionListener(w.ah);

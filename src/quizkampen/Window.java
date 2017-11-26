@@ -15,7 +15,8 @@ public class Window extends JFrame {
     Color color1;
     Color color2;
     Color color3;
-    
+    Color color4;
+
     Subject[] tempSubjects = new Subject[3];
     ActionHandler ah;
     protected int questionCounter = 0;
@@ -50,9 +51,10 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
-        color1 = new Color(20, 0, 150);
+        color1 = new Color(20, 0, 160);
         color2 = Color.YELLOW;
         color3 = Color.WHITE;
+        color4 = new Color(20, 0, 185);
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
@@ -68,9 +70,9 @@ public class Window extends JFrame {
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Could not connect to server. "
-                                              + "\nPlease try again later.",
-                                                "QuizFights - Server problem",
-                                                 JOptionPane.PLAIN_MESSAGE);
+                    + "\nPlease try again later.",
+                    "QuizFights - Server problem",
+                    JOptionPane.PLAIN_MESSAGE);
             System.exit(0);
         }
     }
