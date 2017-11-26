@@ -31,8 +31,8 @@ public class LobbyScreen2 extends MasterPanel{
         setBackground(backgroundColor);
         
         topSpace.setPreferredSize(new Dimension(0, 80));
-        rightSpace.setPreferredSize(new Dimension(70, 0));
-        leftSpace.setPreferredSize(new Dimension(70, 0));
+        rightSpace.setPreferredSize(new Dimension(50, 0));
+        leftSpace.setPreferredSize(new Dimension(50, 0));
         bottomSpace.setPreferredSize(new Dimension(0, 90));
         
         centerPanel.setLayout(new GridLayout(3, 1, 0, 0));
