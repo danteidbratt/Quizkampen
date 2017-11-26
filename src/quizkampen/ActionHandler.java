@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class ActionHandler implements ActionListener {
 
     Window w;
-    TimerClass tc;
+    Timer timer;
 
     public ActionHandler(Window window) {
         this.w = window;
@@ -140,22 +140,22 @@ public class ActionHandler implements ActionListener {
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
-            tc = new TimerClass();
-            tc.start();
+            timer = new Timer();
+            timer.start();
         } else if (e.getSource() == w.ls2.readyButton) {
             w.session.clearOpponentAnswers();
             w.remove(w.ls2);
             w.gs.setNumberofQuestions(w.session.getTotalQsInRound());
             w.gs.roundBoxLabel.setText(String.valueOf(w.session.roundCounter + 1) + "/" + String.valueOf(w.session.getTotalRounds()));
             w.add(w.gs);
-            tc = new TimerClass();
-            tc.start();
+            timer = new Timer();
+            timer.start();
         } else if (e.getSource() == w.gs.nextQuestionButton) {
             w.gs.setButtonActionListener(this);
             if (w.questionCounter < (w.session.getTotalQsInRound() - 1)) {
                 w.gs.setNextQuestion(w.session.tempQuestions[++w.questionCounter]);
-                tc = new TimerClass();
-                tc.start();
+                timer = new Timer();
+                timer.start();
             } else {
                 w.gs.resetColors();
                 w.questionCounter = 0;
@@ -190,8 +190,8 @@ public class ActionHandler implements ActionListener {
             } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                 w.remove(w.rs);
                 w.add(w.gs);
-                tc = new TimerClass();
-                tc.start();
+                timer = new Timer();
+                timer.start();
             } else if (w.session.getState() == w.session.CHOOSESUBJECT) {
                 w.remove(w.rs);
                 w.ls.resetPanel();
@@ -219,7 +219,7 @@ public class ActionHandler implements ActionListener {
             }
             for (int i = 0; i < w.gs.answerButtons.length; i++) {
                 if (e.getSource() == w.gs.answerButtons[i]) {
-                    tc.stopTimer();
+                    timer.stopTimer();
                     w.gs.colorChosenButton(w.gs.answerButtons[i]);
                     w.gs.revealCorrectAnswer();
                     if (w.gs.answerButtons[i].getIsCorrect()) {
@@ -242,12 +242,12 @@ public class ActionHandler implements ActionListener {
         w.repaint();
     }
 
-    public class TimerClass extends Thread {
+    public class Timer extends Thread {
 
         int timerLength;
         private boolean keepCounting;
 
-        public TimerClass() {
+        public Timer() {
             this.timerLength = w.session.getTimerLength();
         }
 
