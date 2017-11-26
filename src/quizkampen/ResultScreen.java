@@ -148,7 +148,6 @@ public class ResultScreen extends MasterPanel{
                 threes[i][j] = new JPanel();
                 threes[i][j].setLayout(new GridLayout(1, numberOfQuestions));
                 threes[i][j].setBackground(nuance);
-//                threes[i][j].setOpaque(true);
                 for (int k = 0; k < numberOfQuestions; k++) {
                     threes[i][j].add(boxes[counter1][counter2++]);
                 }
@@ -159,7 +158,6 @@ public class ResultScreen extends MasterPanel{
         for (int i = 0; i < subjects.length; i++) {
             subjects[i] = new JLabel(" ");
             subjects[i].setBackground(nuance);
-//            subjects[i].setOpaque(true);
             subjects[i].setHorizontalAlignment(SwingConstants.CENTER);
             subjects[i].setFont(new Font("SansSerif", 1, 15));
             subjects[i].setForeground(infoTextColor);
@@ -169,7 +167,6 @@ public class ResultScreen extends MasterPanel{
             stats[i] = new JPanel();
             stats[i].setLayout(new GridLayout(1, 3));
             stats[i].setBackground(nuance);
-//            stats[i].setOpaque(true);
             int j = 0;
             stats[i].add(threes[i][j++]);
             stats[i].add(subjects[i]);
