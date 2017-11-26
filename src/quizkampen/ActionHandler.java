@@ -67,20 +67,23 @@ public class ActionHandler implements ActionListener {
         } else if (e.getSource() == w.ws.exitButton || e.getSource() == w.ms.exitButton || e.getSource() == w.gms.exitButton) {
             System.exit(0);
         } else if (e.getSource() == w.ses.blue) {
-            w.color1 = new Color(20, 0, 150);
+            w.color1 = new Color(20, 0, 160);
             w.color2 = Color.YELLOW;
             w.color3 = Color.WHITE;
-            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
+            w.color4 = new Color(20, 0, 185);
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3, w.color4));
         } else if (e.getSource() == w.ses.green) {
             w.color1 = new Color(80, 180, 0);
             w.color2 = Color.WHITE;
             w.color3 = Color.WHITE;
-            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
+            w.color4 = new Color(70, 160, 0);
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3, w.color4));
         } else if (e.getSource() == w.ses.red) {
             w.color1 = new Color(190, 0, 0);
             w.color2 = Color.WHITE;
             w.color3 = Color.WHITE;
-            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3));
+            w.color4 = new Color(170, 0, 0);
+            w.panelList.forEach(x -> x.setCustomColor(w.color1, w.color2, w.color3, w.color4));
         } else if (e.getSource() == w.gms.randomPlayerButton) {
             try {
                 w.rs = new ResultScreen();
@@ -90,8 +93,7 @@ public class ActionHandler implements ActionListener {
                 List<MasterPanel> gamePanels = new ArrayList<>();
                 gamePanels = Arrays.asList(w.ls, w.ls2, w.gs);
                 gamePanels.forEach(a -> {
-                    a.setCustomColor(w.color1, w.color2, w.color3);
-//                    a.setPanel();
+                    a.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                     a.setActionListener(this);
                 });
                 w.gameServerSocket = new Socket("127.0.0.1", w.portGame);

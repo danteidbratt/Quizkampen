@@ -54,10 +54,10 @@ public class LobbyScreen extends MasterPanel implements Runnable {
         opponentPanel.setBackground(backgroundColor);
         topBottomPanel.setLayout(new GridLayout(2, 1, 0, 5));
         topBottomPanel.setBackground(backgroundColor);
-        opponentLabel.setBackground(backgroundColor);
+        opponentLabel.setBackground(nuance);
         opponentLabel.setOpaque(true);
         opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
-        opponentLabel.setForeground(Color.WHITE);
+        opponentLabel.setForeground(infoTextColor);
         opponentLabel.setHorizontalAlignment(SwingConstants.CENTER);
         opponentLabel.setFont(infoTextFontBig);
         topBottomSpace1.setBackground(backgroundColor);
@@ -169,13 +169,4 @@ public class LobbyScreen extends MasterPanel implements Runnable {
             subjectButtons[i].setText(s[i].getName());
         }
     }
-    
-//    @Override
-//    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
-//        this.backgroundColor = backgroundColor;
-//        this.logoColor = logoColor;
-//        this.infoTextColor = infoTextColor;
-//        revalidate();
-//        repaint();
-//    }
 }

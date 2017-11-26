@@ -43,7 +43,7 @@ public class LobbyScreen2 extends MasterPanel{
         textLabel1.setFont(infoTextFontSmall);
         textLabel1.setForeground(infoTextColor);
         textLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLabel.setBackground(backgroundColor);
+        opponentLabel.setBackground(nuance);
         opponentLabel.setOpaque(true);
         opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
         opponentLabel.setForeground(infoTextColor);
@@ -72,7 +72,6 @@ public class LobbyScreen2 extends MasterPanel{
         centerBotPanel.setLayout(new BorderLayout());
         centerBotPanel.setBackground(backgroundColor);
         centerBotPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        centerBotPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         centerBotTopSpace.setPreferredSize(new Dimension(0, 60));
         readyButton.setFont(buttonFont);
         readyButton.setPreferredSize(new Dimension(180, 70));
@@ -111,13 +110,13 @@ public class LobbyScreen2 extends MasterPanel{
         readyButton.addActionListener(al);
     }
     
-    @Override
-    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor) {
-        this.backgroundColor = backgroundColor;
-        this.logoColor = logoColor;
-        this.infoTextColor = infoTextColor;
-        setPanel();
-        repaint();
-    }
-
+//    @Override
+//    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor, Color nuance) {
+//        this.backgroundColor = backgroundColor;
+//        this.logoColor = logoColor;
+//        this.infoTextColor = infoTextColor;
+//        this.nuance = nuance;
+//        setPanel();
+//        repaint();
+//    }
 }
