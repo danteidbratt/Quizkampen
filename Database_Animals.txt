@@ -1,8 +1,8 @@
 Which animal is has a tags on its back? 
 Hedgehog
-Cattles
+Cattle
 Sharks
-Krokodiles
+Crocodiles
 Which animal live in the jungle, looks like a cat but is black?
 Panther
 Jaguare
@@ -18,7 +18,7 @@ Four
 Two
 Three
 One
-Which animals are Micka and Molle in the movie?
+Which animals are Micke and Molle in the movie?
 Dog and fox
 Cat and fox
 Dog and dog
@@ -38,13 +38,13 @@ Two
 Three
 One
 None
-Which animal drags mantas slay?
-Raindeers
+Which animal drags Santas slay?
+Reindeers
 Elk
 Pig
 Horses
 Which animal looks like a horse but a have longer ears?
-Dunkey
+Donkey
 Elefant
 Unicorn
-Zebrah
+Zebra
