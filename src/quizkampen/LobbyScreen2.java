@@ -31,11 +31,11 @@ public class LobbyScreen2 extends MasterPanel{
         setBackground(backgroundColor);
         
         topSpace.setPreferredSize(new Dimension(0, 80));
-        rightSpace.setPreferredSize(new Dimension(70, 0));
-        leftSpace.setPreferredSize(new Dimension(70, 0));
-        bottomSpace.setPreferredSize(new Dimension(0, 120));
+        rightSpace.setPreferredSize(new Dimension(50, 0));
+        leftSpace.setPreferredSize(new Dimension(50, 0));
+        bottomSpace.setPreferredSize(new Dimension(0, 90));
         
-        centerPanel.setLayout(new GridLayout(3, 1, 0, 50));
+        centerPanel.setLayout(new GridLayout(3, 1, 0, 0));
         centerPanel.setBackground(backgroundColor);
         
         centerTopPanel.setLayout(new BorderLayout(0, 10));
@@ -43,14 +43,14 @@ public class LobbyScreen2 extends MasterPanel{
         textLabel1.setFont(infoTextFontSmall);
         textLabel1.setForeground(infoTextColor);
         textLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        opponentLabel.setBackground(backgroundColor);
+        opponentLabel.setBackground(nuance);
         opponentLabel.setOpaque(true);
         opponentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
         opponentLabel.setForeground(infoTextColor);
         opponentLabel.setHorizontalAlignment(SwingConstants.CENTER);
         opponentLabel.setFont(infoTextFontBig);
         centerTopBotSpace.setBackground(backgroundColor);
-        centerTopBotSpace.setPreferredSize(new Dimension(0, 40));
+        centerTopBotSpace.setPreferredSize(new Dimension(0, 70));
         centerTopPanel.add(textLabel1, BorderLayout.NORTH);
         centerTopPanel.add(opponentLabel, BorderLayout.CENTER);
         centerTopPanel.add(centerTopBotSpace, BorderLayout.SOUTH);
@@ -62,19 +62,17 @@ public class LobbyScreen2 extends MasterPanel{
         textLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         subjectIconPanel.setBackground(backgroundColor);
         subjectIconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        subjectButton.setPreferredSize(new Dimension(100, 100));
+        subjectButton.setPreferredSize(new Dimension(130, 110));
         subjectButton.setFont(buttonFont);
         subjectButton.setVisible(false);
         subjectIconPanel.add(subjectButton);
         centerMidPanel.add(textLabel2, BorderLayout.NORTH);
         centerMidPanel.add(subjectIconPanel, BorderLayout.CENTER);
         
-        centerBotPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerBotPanel.setLayout(new BorderLayout());
         centerBotPanel.setBackground(backgroundColor);
         centerBotPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        centerBotPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        centerBotTopSpace.setPreferredSize(new Dimension(0, 40));
+        centerBotTopSpace.setPreferredSize(new Dimension(0, 60));
         readyButton.setFont(buttonFont);
         readyButton.setPreferredSize(new Dimension(180, 70));
         readyButton.setVisible(false);
@@ -111,5 +109,14 @@ public class LobbyScreen2 extends MasterPanel{
     public void setActionListener(ActionListener al) {
         readyButton.addActionListener(al);
     }
-
+    
+//    @Override
+//    public void setCustomColor(Color backgroundColor, Color logoColor, Color infoTextColor, Color nuance) {
+//        this.backgroundColor = backgroundColor;
+//        this.logoColor = logoColor;
+//        this.infoTextColor = infoTextColor;
+//        this.nuance = nuance;
+//        setPanel();
+//        repaint();
+//    }
 }

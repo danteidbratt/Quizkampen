@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/quizkampen/Window.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>66</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/ServerListener.java</file>
             <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/Client.java</file>
+=======
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/ServerListener.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/SessionHandlerPlayerOne.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/Window.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/LobbyScreen.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/Client.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/SessionHandlerPlayerTwo.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/Server.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/info.properties</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/SessionQ.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/ResultScreen.java</file>
+            <file>file:/Users/Donut/Skola/Objektorienterad%20Programmering/Sprint_4/Quizkampen/Quizkampen/src/quizkampen/ActionHandler.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
