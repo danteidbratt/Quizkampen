@@ -11,7 +11,7 @@ public class GameMenuScreen extends MasterPanel{
     private final JPanel centerPanel = new JPanel();
 
     public JButton randomPlayerButton = new JButton("Random player");
-    JButton searchButton = new JButton("Search player");
+    public JButton searchButton = new JButton("Search player");
     public JButton backButton = new JButton("Back");
     public JButton exitButton = new JButton("Exit");
 
