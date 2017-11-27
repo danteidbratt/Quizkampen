@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 
-public class Server implements Runnable{
+public class Server implements Runnable {
 
     private Socket clientSocket1;
     private Socket clientSocket2;
@@ -16,8 +16,9 @@ public class Server implements Runnable{
     protected Database database = new Database();
     private PropertiesReader p;
     Thread playGame;
+    UserManager um;
 
-    public Server(Socket clientSocket1) {
+    public Server(Socket clientSocket1, UserManager um) {
         try {
             this.clientSocket1 = clientSocket1;
             session = new SessionQ();
@@ -28,6 +29,7 @@ public class Server implements Runnable{
             session.setTotalQsInRond(p.getQuestionsInRond());
             session.setTimerLength(p.getTimerLength());
             playGame = new Thread(this);
+            this.um = um;
 
             user1Output = new ObjectOutputStream(clientSocket1.getOutputStream());
             user1Input = new ObjectInputStream(clientSocket1.getInputStream());
@@ -63,10 +65,20 @@ public class Server implements Runnable{
             while (session.getState() != session.SHUTDOWN) {
                 user1Output.writeObject(session);
                 session = (SessionQ) user1Input.readObject();
-                if (session.getState() == session.SHUTDOWN)
+                
+                if (session.getState() == session.SHUTDOWN) {
+                    um.updateUsers(session.userOne, session.userTwo);
+                    System.out.println("kom in i UM");
                     break;
+                }
                 user2Output.writeObject(session);
                 session = (SessionQ) user2Input.readObject();
+                
+                if (session.getState() == session.SHUTDOWN) {
+                    um.updateUsers(session.userOne, session.userTwo);
+                    System.out.println("kom in i UM");
+                    break;
+                }
             }
             System.out.println("Server loop ends");
         } catch (IOException | ClassNotFoundException e) {

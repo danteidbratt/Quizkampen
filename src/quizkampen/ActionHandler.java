@@ -102,6 +102,7 @@ public class ActionHandler implements ActionListener {
                 w.session = (SessionQ) w.inGameServer.readObject();
                 if (w.session.getState() == w.session.FIRST) {
                     w.session.setPlayerNameOne(w.getUser().getUserName());
+                    w.session.setUserOne(w.getUser());
                     w.session.setState(w.session.SECOND);
                     w.outGameServer.writeObject(w.session);
                     w.session.tempQuestions = new Question[w.session.getTotalQsInRound()];
@@ -116,6 +117,7 @@ public class ActionHandler implements ActionListener {
                     w.sh1.start();
                 } else {
                     w.session.setPlayerNameTwo(w.getUser().getUserName());
+                    w.session.setUserTwo(w.getUser());
                     w.session.setState(w.session.CHOOSESUBJECT);
                     w.outGameServer.writeObject(w.session);
                     w.ls2.opponentLabel.setText(w.session.getPlayerNameOne());

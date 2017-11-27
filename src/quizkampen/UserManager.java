@@ -88,47 +88,33 @@ public class UserManager implements Serializable {
         }
     }
 
-    /* Testar klassen */
-//    public static void main(String[] args) {
-//
-//        UserManager userManager = new UserManager();
-//
-//        userManager.addUser("Claudia");
-//        userManager.addUser("Anna");
-//        userManager.addUser("David");
-//        userManager.addUser("Daven");
-//        userManager.addUser("hej");
-//        userManager.addUser("på");
-//        userManager.addUser("dig");
-//                userManager.addUser("testttt");
-//        userManager.addUser("ja");
-//        userManager.addUser("nej");
-//        userManager.addUser("fffå");
-//        userManager.addUser("ggggg");
-//
-//        userManager.writeToFile();
-//        
-//        userManager.printUserList();
-//    }
-    public void updateUser(User user) {
-
+    public void updateUsers(User p1, User p2) {
         for (User u : userList) {
 
-            if (u.getUserName().equals(user.getUserName())) {
+            if (u.getUserName().equals(p1.getUserName())) {
+                u.totalGames = p1.getTotalGames();
+                u.wins = p1.wins;
+                u.losses = p1.losses;
+                u.draws = p1.draws;
 
-                u.totalGames = user.getTotalGames();
-                u.wins = user.wins;
-                u.losses = user.losses;
-                u.draws = user.draws;
-
-                System.out.println("update hände");
-                break;
+                System.out.println("update hände för P1");
             }
+            else{
+                System.out.println("P1 ingen update");
+            }
+            if (u.getUserName().equals(p2.getUserName())) {
+                u.totalGames = p2.getTotalGames();
+                u.wins = p2.wins;
+                u.losses = p2.losses;
+                u.draws = p2.draws;
 
+                System.out.println("update hände för P2");
+            }
+            else{
+                System.out.println("P2 update nej");
+            }
         }
-
         writeToFile();
-
     }
 
 }

@@ -8,6 +8,7 @@ public class ServerListener extends Thread {
 
     protected int port1 = 33333;
     ServerSocket serverSocket1;
+    UserManager um = new UserManager();
 
     public ServerListener() throws IOException {
         serverSocket1 = new ServerSocket(port1);
@@ -20,7 +21,7 @@ public class ServerListener extends Thread {
         while (true) {          // När user2 klickar "Random Player" kopplas den upp till samma server
             try {
                 Socket clientSock1 = serverSocket1.accept();
-                Server server = new Server(clientSock1);
+                Server server = new Server(clientSock1, um);
                 Socket clientSock2 = serverSocket1.accept();
                 server.setPlayer2(clientSock2);
 
@@ -70,7 +71,6 @@ public class ServerListener extends Thread {
         public void run() {
             ObjectOutputStream out1 = null;
             ObjectInputStream in1 = null;
-            UserManager um = new UserManager();
             User updatedUser;
             try {
                 out1 = new ObjectOutputStream(clientSock.getOutputStream());
@@ -81,9 +81,6 @@ public class ServerListener extends Thread {
                 } else {
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
-                }
-                while ((updatedUser = (User) in1.readObject()) != null) {
-                    um.updateUser(updatedUser);
                 }
 
             } catch (IOException ex) {

@@ -27,10 +27,28 @@ public class SessionQ implements Serializable {
     private int timerLength;
     protected String playerNameOne;
     protected String playerNameTwo;
+    protected User userOne;
+    protected User userTwo;
 
     SessionQ() {
         roundCounter = 0;
         state = FIRST;
+    }
+    
+    public void setUserOne(User userOne){
+        this.userOne = userOne;
+    }
+    
+    public void setUserTwo(User userTwo){
+        this.userTwo = userTwo;
+    }
+    
+    public User getUserOne(){
+        return this.userOne;
+    }
+    
+    public User getUserTwo(){
+        return this.userTwo;
     }
 
     public String getPlayerNameTwo() {
