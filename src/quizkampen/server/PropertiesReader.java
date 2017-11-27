@@ -16,7 +16,7 @@ public class PropertiesReader implements Serializable{
         p = new Properties();
 
         try {
-            p.load(new FileInputStream("src/quizkampen.server/info.properties"));
+            p.load(new FileInputStream("src/quizkampen/server/info.properties"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PropertiesReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
