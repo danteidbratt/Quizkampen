@@ -1,4 +1,3 @@
-
 package quizkampen;
 
 public class Quizkampen {
