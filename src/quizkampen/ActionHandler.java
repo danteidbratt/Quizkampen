@@ -57,7 +57,9 @@ public class ActionHandler implements ActionListener {
             w.add(w.ms);
         } else if (e.getSource() == w.ms.statsButton) {
             w.remove(w.ms);
+            w.sts.setUserData();
             w.add(w.sts);
+            
         } else if (e.getSource() == w.ms.logoutButton) {
             w.remove(w.ms);
             w.add(w.ws);
@@ -169,11 +171,29 @@ public class ActionHandler implements ActionListener {
                 }
                 if (w.session.roundCounter >= w.session.getTotalRounds() - 1) {
                     if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
-                        w.rs.nextRoundButton.setText("Draw");
+                        try {
+                            w.rs.nextRoundButton.setText("Draw");
+                            w.user.addDraw();
+                            w.outUserServer.writeObject(w.user);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
-                        w.rs.nextRoundButton.setText("You Win");
+                        try {
+                            w.rs.nextRoundButton.setText("You Win");
+                            w.user.addWin();
+                            w.outUserServer.writeObject(w.user);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else {
-                        w.rs.nextRoundButton.setText("You Lose");
+                        try {
+                            w.rs.nextRoundButton.setText("You Lose");
+                            w.user.addLoss();
+                            w.outUserServer.writeObject(w.user);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
                 try {

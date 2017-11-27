@@ -80,7 +80,7 @@ public class Window extends JFrame {
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
-        sts = new StatsScreen();
+        sts = new StatsScreen(this);
 
         setTitle("QuizFights");
         add(ws);

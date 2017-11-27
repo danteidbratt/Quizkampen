@@ -71,6 +71,7 @@ public class ServerListener extends Thread {
             ObjectOutputStream out1 = null;
             ObjectInputStream in1 = null;
             UserManager um = new UserManager();
+            User updatedUser;
             try {
                 out1 = new ObjectOutputStream(clientSock.getOutputStream());
                 in1 = new ObjectInputStream(clientSock.getInputStream());
@@ -80,8 +81,12 @@ public class ServerListener extends Thread {
                 } else {
                     um.addUser(userName1);
                     out1.writeObject(um.getUser(userName1));
-                }               
-                              
+                }
+                while ((updatedUser = (User) in1.readObject()) != null) {
+                    um.updateUser(updatedUser);
+                    System.out.println("uppdaterar user");
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
