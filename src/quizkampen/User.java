@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    protected final static long LserialVersionUID = 42L;
     boolean isPremuim;
     private String userName;
     int Rating;
@@ -20,19 +19,6 @@ public class User implements Serializable {
 
     public String getUserName() {
         return userName;
-    }
-    
-    public void setWins(int wins){
-        this.wins = wins;
-    }
-    public void setLosses(int losses){
-        this.losses = losses;
-    }
-    public void setTotalGames(int totalGames){
-        this.totalGames = totalGames;
-    }
-    public void setDraws(int draws){
-        this.draws = draws;
     }
 
     public void addWin() {
@@ -66,7 +52,4 @@ public class User implements Serializable {
         return this.totalGames;
     }
 
-    public void addTotalGames() {
-        this.totalGames++;
-    }
 }

@@ -67,30 +67,14 @@ public class Server implements Runnable {
                 session = (SessionQ) user1Input.readObject();
                 
                 if (session.getState() == session.SHUTDOWN) {
-                    if(session.winner == null){
-                        um.updateDraw(session.userOne, session.userTwo);
-                    }
-                    else if(session.winner == session.userOne){
-                    um.updateUsers(session.userOne, session.userTwo);
-                    }
-                    else{
-                    um.updateUsers(session.userTwo, session.userOne);
-                    }
+                    um.checkWinner(session);
                     break;
                 }
                 user2Output.writeObject(session);
                 session = (SessionQ) user2Input.readObject();
                 
                 if (session.getState() == session.SHUTDOWN) {
-                    if(session.winner == null){
-                        um.updateDraw(session.userOne, session.userTwo);
-                    }
-                    else if(session.winner == session.userOne){
-                    um.updateUsers(session.userOne, session.userTwo);
-                    }
-                    else{
-                    um.updateUsers(session.userTwo, session.userOne);
-                    }
+                    um.checkWinner(session);
                     break;
                 }
             }

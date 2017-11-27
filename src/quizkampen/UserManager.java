@@ -97,6 +97,7 @@ public class UserManager implements Serializable {
                 u.addDraw();
             }
         }
+        writeToFile();
     }
 
     public void updateUsers(User p1, User p2) {
@@ -108,7 +109,7 @@ public class UserManager implements Serializable {
                 System.out.println("update hände för P1");
                 System.out.println(u.getUserName() + " total games: "
                         + u.getTotalGames() + " losses: "
-                        + u.losses + " wins: " + u.wins + " draws: " + u.draws);
+                        + u.getLosses() + " wins: " + u.wins + " draws: " + u.draws);
             }
 
             if (u.getUserName().equals(p2.getUserName())) {
@@ -123,4 +124,13 @@ public class UserManager implements Serializable {
         writeToFile();
     }
 
+    public void checkWinner(SessionQ session) {
+        if (session.getWinner() == null) {
+            updateDraw(session.getUserOne(), session.getUserTwo());
+        } else if (session.getWinner() == session.getUserOne()) {
+            updateUsers(session.getUserOne(), session.getUserTwo());
+        } else {
+            updateUsers(session.getUserTwo(), session.getUserOne());
+        }
+    }
 }

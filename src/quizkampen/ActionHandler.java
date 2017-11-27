@@ -59,7 +59,7 @@ public class ActionHandler implements ActionListener {
             w.remove(w.ms);
             w.sts.setUserData();
             w.add(w.sts);
-            
+
         } else if (e.getSource() == w.ms.logoutButton) {
             w.remove(w.ms);
             w.add(w.ws);
@@ -171,36 +171,36 @@ public class ActionHandler implements ActionListener {
                 } else if (w.session.getState() == w.session.ANSWERQUESTIONS2) {
                     w.session.setState(w.session.SHOWOPPONENTANSWERS);
                 }
-                if (w.session.roundCounter >= w.session.getTotalRounds() - 1) {
-                    if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
-                        try {
-                            w.rs.nextRoundButton.setText("Draw");
-                            w.user.addDraw();
-                            w.outUserServer.writeObject(w.user);
-                            System.out.println("adding draw " + w.user.getUserName());
-                        } catch (IOException ex) {
-                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
-                        try {
-                            w.rs.nextRoundButton.setText("You Win");
-                            w.user.addWin();
-                            w.session.winner = w.user;
-                            w.outUserServer.writeObject(w.user);
-                            System.out.println("adding win " + w.user.getUserName());
-                        } catch (IOException ex) {
-                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                if (w.user == w.session.userOne) {  // sets score - behövs för att visa stats
+                    if (w.session.scorePlayerOne == w.session.scorePlayerTwo) {
+                        w.user.addDraw();
+                    } else if (w.session.scorePlayerOne > w.session.scorePlayerTwo) {
+                        w.user.addWin();
+                        w.session.winner = w.user;
                     } else {
-                        try {
-                            w.rs.nextRoundButton.setText("You Lose");
-                            w.user.addLoss();
-                            w.session.loser = w.user;
-                            w.outUserServer.writeObject(w.user);
-                            System.out.println("adding loss " + w.user.getUserName());
-                        } catch (IOException ex) {
-                            Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        w.user.addLoss();
+                        w.session.loser = w.user;
+                    }
+                } else {
+                    if (w.session.scorePlayerOne == w.session.scorePlayerTwo) {
+                        w.user.addDraw();
+                    } else if (w.session.scorePlayerOne < w.session.scorePlayerTwo) {
+                        w.user.addWin();
+                        w.session.winner = w.user;
+                    } else {
+                        w.user.addLoss();
+                        w.session.loser = w.user;
+                    }
+                }
+
+                if (w.session.roundCounter >= w.session.getTotalRounds() - 1) {
+
+                    if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
+                        w.rs.nextRoundButton.setText("Draw");
+                    } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
+                        w.rs.nextRoundButton.setText("You Win");
+                    } else {
+                        w.rs.nextRoundButton.setText("You Lose");
                     }
                 }
                 try {
@@ -261,6 +261,11 @@ public class ActionHandler implements ActionListener {
                     w.gs.removeActionListeners(this);
                     if (w.questionCounter == w.session.getTotalQsInRound() - 1) {
                         w.gs.nextQuestionButton.setText("Show Results");
+                    }
+                    if (w.getUser().getUserName() == w.session.getPlayerNameOne()) {  // Set score i session
+                        w.session.setScoreUserOne(w.rs.getPlayerScore());
+                    } else if (w.getUser().getUserName() == w.session.getPlayerNameTwo()) {
+                        w.session.setScorePlayerTwo(w.rs.getPlayerScore());
                     }
                 }
             }

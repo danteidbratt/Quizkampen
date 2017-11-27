@@ -201,6 +201,9 @@ public class ResultScreen extends MasterPanel{
     public void increasePlayerScore(){
         leftNumber.setText(String.valueOf(Integer.parseInt(leftNumber.getText()) + 1));
     }
+    public int getPlayerScore(){
+        return Integer.parseInt(leftNumber.getText());
+    }
     
     public void increaseOpponentScore(){
         rightNumber.setText(String.valueOf(Integer.parseInt(rightNumber.getText()) + 1));

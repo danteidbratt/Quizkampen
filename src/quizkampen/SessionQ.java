@@ -31,6 +31,8 @@ public class SessionQ implements Serializable {
     protected User userTwo;
     protected User winner;
     protected User loser;
+    protected int scorePlayerOne;
+    protected int scorePlayerTwo;
 
     SessionQ() {
         roundCounter = 0;
@@ -133,5 +135,25 @@ public class SessionQ implements Serializable {
         for (int i = 0; i < opponentsAnswers.length; i++) {
             opponentsAnswers[i] = false;
         }
+    }
+    
+    public User getWinner(){
+        return this.winner;
+    }
+    public User getLoser(){
+        return this.loser;
+    }
+    
+    public void setScoreUserOne(int score){
+        this.scorePlayerOne = score;
+    }
+    public void setScorePlayerTwo(int score){
+        this.scorePlayerTwo = score;
+    }
+    public int getScorePlayerOne(){
+        return this.scorePlayerOne;
+    }
+    public int getScorePlayerTwo(){
+        return this.scorePlayerTwo;
     }
 }
