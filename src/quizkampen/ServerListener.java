@@ -84,7 +84,6 @@ public class ServerListener extends Thread {
                 }
                 while ((updatedUser = (User) in1.readObject()) != null) {
                     um.updateUser(updatedUser);
-                    System.out.println("uppdaterar user");
                 }
 
             } catch (IOException ex) {

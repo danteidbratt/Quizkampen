@@ -9,48 +9,22 @@ import java.util.ArrayList;
 public class UserManager implements Serializable {
 
     private ArrayList<User> userList = new ArrayList<>();
+    private String userFile = "users.ser";
 
     public UserManager() {
-        fileExist();
-//        readUserFile();
-    }
-
-    private void writeToUserFile() {
-        try (FileOutputStream fou = new FileOutputStream("userObject.ser");
-                ObjectOutputStream ous = new ObjectOutputStream(fou)) {
-
-            for (User u : userList) {
-                ous.writeObject(u);
+        checkIfFileExist();
+        readFile();
+        for (User r : userList) {
+            if (r.getWins() != 0) {
+                System.out.println(r.getUserName());
             }
-            fou.close();
-            ous.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readUserFile() {
-
-        try (FileInputStream fiu = new FileInputStream("userObject.ser");
-                ObjectInputStream oiss = new ObjectInputStream(fiu);) {
-
-            User temp;
-            while ((temp = (User) oiss.readObject()) != null) {
-                userList.add(temp);
-                System.out.println(temp.getUserName());
-            }
-            
-            fiu.close(); oiss.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
     public void addUser(String userName) {
         if (!userExist(userName)) {
             userList.add(new User(userName));
-            writeToUserFile();
+            writeToFile();
         } else //TODO Ändra hur felmeddelandet visas
         {
             System.out.println("Användare finns");
@@ -82,7 +56,7 @@ public class UserManager implements Serializable {
     private void writeToFile() {
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream("users.ser");
+            fos = new FileOutputStream(userFile);
 
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(userList);
@@ -94,50 +68,67 @@ public class UserManager implements Serializable {
         }
     }
 
-//    private void readFile() {
-//
-//        try {
-//            FileInputStream fis = new FileInputStream("users.ser");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            userList = (ArrayList<User>) ois.readObject();
-//            System.out.println(userList.get(1).getUserName());
-//            ois.close();
-//            fis.close();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
-    private void fileExist() {
-        Path path = Paths.get("users.ser");
+    private void readFile() {
+
+        try {
+            FileInputStream fis = new FileInputStream(userFile);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            userList = (ArrayList<User>) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void checkIfFileExist() {
+        Path path = Paths.get(userFile);
         if ((!Files.exists(path))) {
-            writeToUserFile();
+            writeToFile();
         }
     }
 
     /* Testar klassen */
-    public static void main(String[] args) {
-
-        UserManager userManager = new UserManager();
-        userManager.addUser("Claudia");
-        userManager.addUser("Anna");
-        userManager.addUser("David");
-        userManager.addUser("Daven");
-                userManager.addUser("hej");
-        userManager.addUser("på");
-        userManager.addUser("dig");
-
-        userManager.readUserFile();
-    }
-
-    public void updateUser(User user) {
-//        readFile();
-//        
+//    public static void main(String[] args) {
 //
-//        int index = userList.indexOf(0);
-//        System.out.println(userList.get(index).getUserName());
+//        UserManager userManager = new UserManager();
+//
+//        userManager.addUser("Claudia");
+//        userManager.addUser("Anna");
+//        userManager.addUser("David");
+//        userManager.addUser("Daven");
+//        userManager.addUser("hej");
+//        userManager.addUser("på");
+//        userManager.addUser("dig");
+//                userManager.addUser("testttt");
+//        userManager.addUser("ja");
+//        userManager.addUser("nej");
+//        userManager.addUser("fffå");
+//        userManager.addUser("ggggg");
+//
+//        userManager.writeToFile();
 //        
-////        userList.set(index, user);
-//        writeToFile();
+//        userManager.printUserList();
+//    }
+    public void updateUser(User user) {
+
+        for (User u : userList) {
+
+            if (u.getUserName().equals(user.getUserName())) {
+
+                u.totalGames = user.getTotalGames();
+                u.wins = user.wins;
+                u.losses = user.losses;
+                u.draws = user.draws;
+
+                System.out.println("update hände");
+                break;
+            }
+
+        }
+
+        writeToFile();
 
     }
+
 }

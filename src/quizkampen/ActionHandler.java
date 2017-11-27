@@ -175,6 +175,7 @@ public class ActionHandler implements ActionListener {
                             w.rs.nextRoundButton.setText("Draw");
                             w.user.addDraw();
                             w.outUserServer.writeObject(w.user);
+                            System.out.println("adding draw " + w.user.getUserName());
                         } catch (IOException ex) {
                             Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -183,6 +184,7 @@ public class ActionHandler implements ActionListener {
                             w.rs.nextRoundButton.setText("You Win");
                             w.user.addWin();
                             w.outUserServer.writeObject(w.user);
+                            System.out.println("adding win " + w.user.getUserName());
                         } catch (IOException ex) {
                             Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -191,6 +193,7 @@ public class ActionHandler implements ActionListener {
                             w.rs.nextRoundButton.setText("You Lose");
                             w.user.addLoss();
                             w.outUserServer.writeObject(w.user);
+                            System.out.println("adding loss " + w.user.getUserName());
                         } catch (IOException ex) {
                             Logger.getLogger(ActionHandler.class.getName()).log(Level.SEVERE, null, ex);
                         }
