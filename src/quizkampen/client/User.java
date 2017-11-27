@@ -1,0 +1,22 @@
+package quizkampen.client;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+    
+    boolean isPremuim;
+    private String userName;
+    int Rating;
+    int totalGames;
+    int wins;
+    int losses;
+    int averageCorrect;
+
+    public User(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+}
