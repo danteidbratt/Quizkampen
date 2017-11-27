@@ -39,20 +39,10 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 2: // ANSWERQUESTIONS1
-
-                        if (w.session.roundCounter > 0) {
-                            w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
-                            w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
-                        }
+                       System.out.println("2");
                         w.ls2.readyButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
 
-                        break;
-                    case 3: // ASWERQUESTIONS2
-
-                        System.out.println("2");
-                        w.ls.startButton.setVisible(true);
-                        w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
                     case 3: // ASWERQUESTIONS2
                         System.out.println("3");
@@ -69,11 +59,6 @@ public class SessionHandlerPlayerTwo extends Thread {
                         }
                         w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
- 
-
-                        w.ls2.readyButton.setVisible(true);
-                        w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
-
                         w.rs.nextRoundButton.setVisible(true);
  
                         break;
