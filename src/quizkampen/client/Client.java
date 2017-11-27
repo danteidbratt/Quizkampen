@@ -1,7 +1,5 @@
 package quizkampen.client;
 
-import quizkampen.server.Window;
-
 public class Client {
 
     Window w;

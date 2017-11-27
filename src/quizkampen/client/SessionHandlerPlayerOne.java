@@ -3,8 +3,6 @@ package quizkampen.client;
 import quizkampen.client.SessionQ;
 import java.awt.Color;
 import java.io.IOException;
-import quizkampen.server.Window;
-import quizkampen.server.Window;
 
 public class SessionHandlerPlayerOne extends Thread {
     

@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class LobbyScreen2 extends MasterPanel{
     
@@ -15,16 +14,16 @@ public class LobbyScreen2 extends MasterPanel{
     
     JPanel centerTopPanel = new JPanel();
     JLabel textLabel1 = new JLabel("- Next Opponent -");
-    JLabel opponentLabel = new JLabel("");
+    public JLabel opponentLabel = new JLabel("");
     JLabel centerTopBotSpace = new JLabel(" ");
     JPanel centerMidPanel = new JPanel();
     JLabel textLabel2 = new JLabel("Chosen Subject");
     JPanel subjectIconPanel = new JPanel();
-    JButton subjectButton = new JButton("");
+    public JButton subjectButton = new JButton("");
     JPanel centerBotPanel = new JPanel();
     JPanel readyIconPanel = new JPanel();
     JLabel centerBotTopSpace = new JLabel(" ");
-    JButton readyButton = new JButton("Ready");
+    public JButton readyButton = new JButton("Ready");
     
     @Override
     public void setPanel() {

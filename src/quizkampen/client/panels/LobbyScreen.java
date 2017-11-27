@@ -8,9 +8,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 import quizkampen.server.Subject;
-import quizkampen.server.Window;
+import quizkampen.client.Window;
 
 public class LobbyScreen extends MasterPanel implements Runnable {
 
@@ -23,19 +22,19 @@ public class LobbyScreen extends MasterPanel implements Runnable {
     JPanel topBottomPanel = new JPanel();
     JLabel topBottomSpace1 = new JLabel("");
     JLabel nextOpponentIs = new JLabel("- Next Opponent -");
-    JLabel opponentLabel = new JLabel("");
+    public JLabel opponentLabel = new JLabel("");
 
     JPanel centerCenterPanel = new JPanel();
-    JLabel chooseSubjectLabel = new JLabel("Choose Subject");
+    public JLabel chooseSubjectLabel = new JLabel("Choose Subject");
     JLabel centerBotSpace = new JLabel();
     JPanel subjectPanel = new JPanel();
-    JButton[] subjectButtons = new JButton[3];
+    public JButton[] subjectButtons = new JButton[3];
 
     JPanel bottomPanel = new JPanel();
     JLabel bottomTopSpace = new JLabel("");
     JLabel bottomBottomSpace = new JLabel("");
     JPanel buttonPanel = new JPanel();
-    JButton startButton = new JButton("Start");
+    public JButton startButton = new JButton("Start");
 
     public boolean loopAnimation = true;
 

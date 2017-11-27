@@ -5,16 +5,15 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class GameMenuScreen extends MasterPanel{
 
     private final JPanel centerPanel = new JPanel();
 
-    JButton randomPlayerButton = new JButton("Random player");
+    public JButton randomPlayerButton = new JButton("Random player");
     JButton searchButton = new JButton("Search player");
-    JButton backButton = new JButton("Back");
-    JButton exitButton = new JButton("Exit");
+    public JButton backButton = new JButton("Back");
+    public JButton exitButton = new JButton("Exit");
 
     @Override
     public void setPanel() {

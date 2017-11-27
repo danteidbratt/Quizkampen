@@ -5,16 +5,15 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class SettingsScreen extends MasterPanel {
 
     private final JPanel centerPanel = new JPanel();
-    final JRadioButton blue;
-    final JRadioButton red;
-    final JRadioButton green;
+    public JRadioButton blue;
+    public JRadioButton red;
+    public JRadioButton green;
     final ButtonGroup buttonGroup;
-    final JButton backButton;
+    public JButton backButton;
 
     public SettingsScreen() {
         blue = new JRadioButton("Blue", true);

@@ -11,9 +11,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import quizkampen.server.MasterPanel;
 import quizkampen.server.Question;
-import quizkampen.server.Window;
+import quizkampen.client.Window;
 
 public class GameScreen extends MasterPanel {
 
@@ -28,14 +27,14 @@ public class GameScreen extends MasterPanel {
     private final JLabel roundTextLabel = new JLabel("Round");
     public JLabel roundBoxLabel = new JLabel();
     private final JLabel roundSpace = new JLabel("");
-    List<JLabel> questionBoxes = new ArrayList<>();
+    public List<JLabel> questionBoxes = new ArrayList<>();
     JButton questionButton = new JButton("");
-    AnswerButton[] answerButtons = new AnswerButton[4];
-    JPanel buttonPanel = new JPanel();
-    JLabel timerLabel = new JLabel(" ");
-    JButton nextQuestionButton = new JButton("Next Question");
-    JPanel timerPanel = new JPanel();
-    JLabel[] timerBar = new JLabel[100];
+    public AnswerButton[] answerButtons = new AnswerButton[4];
+    public JPanel buttonPanel = new JPanel();
+    public JLabel timerLabel = new JLabel(" ");
+    public JButton nextQuestionButton = new JButton("Next Question");
+    public JPanel timerPanel = new JPanel();
+    public JLabel[] timerBar = new JLabel[100];
 
     Window w;
     

@@ -1,10 +1,11 @@
 
-package quizkampen.server;
+package quizkampen.client.panels;
 
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import quizkampen.server.IPanel;
 
 abstract public class MasterPanel extends JPanel implements IPanel{
     
@@ -13,7 +14,7 @@ abstract public class MasterPanel extends JPanel implements IPanel{
     protected Font logoFont = new Font("SansSarif", 2, 80);
     protected Font buttonFont = new Font("SansSarif", Font.BOLD, 20);
     protected Font buttonFontSmall = new Font("SansSarif", Font.BOLD, 12);
-    protected Color backgroundColor = new Color(20, 0, 190);
+    public Color backgroundColor = new Color(20, 0, 190);
     protected Color infoTextColor = Color.WHITE;
     protected Font infoTextFontBig = new Font("SansSerif", 3, 30);
     protected Font infoTextFontSmall = new Font("SansSerif", 1, 20);

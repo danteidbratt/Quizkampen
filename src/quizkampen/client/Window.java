@@ -1,4 +1,4 @@
-package quizkampen.server;
+package quizkampen.client;
 
 import quizkampen.client.panels.StatsScreen;
 import quizkampen.client.panels.SettingsScreen;
@@ -23,6 +23,8 @@ import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import quizkampen.server.IPanel;
+import quizkampen.server.Subject;
 
 public class Window extends JFrame {
 
@@ -35,7 +37,7 @@ public class Window extends JFrame {
     public ActionHandler ah;
     protected int questionCounter = 0;
     int playerNumber;
-    protected SessionQ session;
+    public SessionQ session;
 
     SessionHandlerPlayerOne sh1;
     SessionHandlerPlayerTwo sh2;
@@ -114,5 +116,12 @@ public class Window extends JFrame {
             e.setPanel();
             e.setActionListener(ah);
         });
+    }
+   public User getUser() {
+        return user;
+    }
+
+    public void setUser(User u) {
+        this.user = u;
     }
 }

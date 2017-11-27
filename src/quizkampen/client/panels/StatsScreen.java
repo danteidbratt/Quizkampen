@@ -3,7 +3,6 @@ package quizkampen.client.panels;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class StatsScreen extends MasterPanel{
     
@@ -12,7 +11,7 @@ public class StatsScreen extends MasterPanel{
     JLabel test3 = new JLabel("Wins: ");
     JLabel test4 = new JLabel("Losses: ");
     JLabel test5 = new JLabel("Age?");
-    JButton backButton = new JButton("Back");
+    public JButton backButton = new JButton("Back");
 
     @Override
     public void setPanel(){

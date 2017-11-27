@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class ResultScreen extends MasterPanel{
     
@@ -19,20 +18,20 @@ public class ResultScreen extends MasterPanel{
     JLabel namePanelspace = new JLabel(" ");
     JLabel rightName = new JLabel("");
     JPanel numberDisplay = new JPanel();
-    JLabel leftNumber = new JLabel("");
+    public JLabel leftNumber = new JLabel("");
     JLabel dash = new JLabel("-");
-    JLabel rightNumber = new JLabel("");
+    public JLabel rightNumber = new JLabel("");
     
     JPanel roundPanel = new JPanel();
     JPanel[] rounds = new JPanel[6];
     JLabel[] roundSpaces = new JLabel[6];
     JPanel[] stats = new JPanel[6];
     JPanel[][] threes = new JPanel[6][2];
-    JLabel[][] boxes;
+    public JLabel[][] boxes;
     JLabel[] subjects = new JLabel[6];
     
     JPanel botPanel = new JPanel();
-    JButton nextRoundButton = new JButton("Next Round");
+    public JButton nextRoundButton = new JButton("Next Round");
     Color nuance;
     
     int numberOfQuestions;

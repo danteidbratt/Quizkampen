@@ -2,8 +2,6 @@ package quizkampen.client;
 
 import quizkampen.client.SessionQ;
 import java.io.IOException;
-import quizkampen.server.Window;
-import quizkampen.server.Window;
 
 public class SessionHandlerPlayerTwo extends Thread {
 

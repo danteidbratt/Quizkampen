@@ -18,13 +18,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import quizkampen.client.panels.GameScreen;
+import quizkampen.client.panels.*;
 import quizkampen.client.panels.LobbyScreen;
 import quizkampen.client.panels.LobbyScreen2;
-import quizkampen.server.MasterPanel;
+import quizkampen.client.panels.MasterPanel;
 import quizkampen.server.Question;
 import quizkampen.client.panels.ResultScreen;
-import quizkampen.server.Window;
 
 public class ActionHandler implements ActionListener {
 

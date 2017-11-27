@@ -8,6 +8,7 @@ import quizkampen.server.Subject;
 
 public class SessionQ implements Serializable {
 
+    
     int state;
     final int FIRST = -2;
     final int SECOND = -1;
@@ -17,7 +18,7 @@ public class SessionQ implements Serializable {
     final int ANSWERQUESTIONS2 = 3; 
     final int SHOWOPPONENTANSWERS = 4;
     final int GAMEOVER = 5;
-    final int SHUTDOWN = 6;
+    public int SHUTDOWN = 6;
 
     public Queue<Subject> subjects = new LinkedList();
     protected List<ListClass<Question>> subjectList = new ArrayList<>();
@@ -31,7 +32,7 @@ public class SessionQ implements Serializable {
     protected String playerNameOne;
     protected String playerNameTwo;
 
-    SessionQ() {
+    public SessionQ() {
         roundCounter = 0;
         state = FIRST;
     }

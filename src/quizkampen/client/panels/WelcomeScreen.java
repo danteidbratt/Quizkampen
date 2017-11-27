@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class WelcomeScreen extends MasterPanel {
 
@@ -19,9 +18,9 @@ public class WelcomeScreen extends MasterPanel {
     private final JLabel loginText = new JLabel("Login");
     private final JLabel centerSpace = new JLabel("");
 
-    JTextField userNameInput = new JTextField("Enter username to start");
-    JButton okButton = new JButton("OK");
-    JButton exitButton = new JButton("EXIT");
+    public JTextField userNameInput = new JTextField("Enter username to start");
+    public JButton okButton = new JButton("OK");
+    public JButton exitButton = new JButton("EXIT");
 
     @Override
     public void setPanel() {

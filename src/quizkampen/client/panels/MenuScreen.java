@@ -5,17 +5,16 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import quizkampen.server.MasterPanel;
 
 public class MenuScreen extends MasterPanel{
 
     private final JPanel centerPanel = new JPanel();
 
-    JButton newGameButton = new JButton("New Game");
-    JButton settingsButton = new JButton("Settings");
-    JButton statsButton = new JButton("Stats");
-    JButton logoutButton = new JButton("Logout");
-    JButton exitButton = new JButton("Exit");
+    public JButton newGameButton = new JButton("New Game");
+    public JButton settingsButton = new JButton("Settings");
+    public JButton statsButton = new JButton("Stats");
+    public JButton logoutButton = new JButton("Logout");
+    public JButton exitButton = new JButton("Exit");
 
     @Override
     public void setPanel() {
