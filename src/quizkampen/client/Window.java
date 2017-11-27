@@ -1,19 +1,5 @@
 package quizkampen.client;
-
-import quizkampen.client.panels.StatsScreen;
-import quizkampen.client.panels.SettingsScreen;
-import quizkampen.client.panels.ResultScreen;
-import quizkampen.client.panels.LobbyScreen;
-import quizkampen.client.panels.LobbyScreen2;
-import quizkampen.client.panels.WelcomeScreen;
-import quizkampen.client.panels.MenuScreen;
-import quizkampen.client.panels.GameScreen;
-import quizkampen.client.panels.GameMenuScreen;
-import quizkampen.client.ActionHandler;
-import quizkampen.client.User;
-import quizkampen.client.SessionHandlerPlayerOne;
-import quizkampen.client.SessionHandlerPlayerTwo;
-import quizkampen.client.SessionQ;
+import quizkampen.client.panels.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;

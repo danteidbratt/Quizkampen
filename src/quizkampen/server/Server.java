@@ -1,11 +1,9 @@
 package quizkampen.server;
 
-import quizkampen.server.Database;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
-import quizkampen.client.SessionQ;
-import quizkampen.server.PropertiesReader;
+import quizkampen.client.*;
 
 public class Server implements Runnable{
 

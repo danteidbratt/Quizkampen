@@ -1,12 +1,11 @@
 package quizkampen.client;
 
-import quizkampen.client.SessionQ;
 import java.io.IOException;
 
 public class SessionHandlerPlayerTwo extends Thread {
 
     protected Window w;
-    private SessionQ session; 
+    protected SessionQ session; 
     
     public SessionHandlerPlayerTwo(Window w) {
         this.w = w;

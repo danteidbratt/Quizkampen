@@ -1,7 +1,5 @@
 package quizkampen.client;
 
-import quizkampen.client.SessionQ;
-import java.awt.Color;
 import java.io.IOException;
 
 public class SessionHandlerPlayerOne extends Thread {

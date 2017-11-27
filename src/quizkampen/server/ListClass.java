@@ -1,7 +1,6 @@
 package quizkampen.server;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ListClass<Question> extends ArrayList<Question>{

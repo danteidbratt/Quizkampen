@@ -4,9 +4,6 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import quizkampen.server.AnswerAlternative;
-import quizkampen.server.ListClass;
-import quizkampen.server.Question;
 
 public class Database {
 
