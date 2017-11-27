@@ -30,7 +30,7 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.ls.setSubjectButtons(w.tempSubjects);
                         break;
                     case 1: // SHOWSUBJECT
-                        w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                        w.rs.subjects[w.session.roundCounter].setText("-" + w.session.chosenSubjectName + " -");
                         w.session.setState(w.session.ANSWERQUESTIONS1);
                         w.outGameServer.writeObject(w.session);
                     case 2: // ANSWERQUESTIONS1
@@ -40,7 +40,23 @@ public class SessionHandlerPlayerOne extends Thread {
                         }
                         w.ls2.readyButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
+                        w.session.setState(3);
                         break;
+                    case 3: // ANSWERQUESTIONS2
+                        if (w.session.roundCounter == 0) {
+                            w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameOne());
+                            w.rs.setPanel();
+                            w.rs.setActionListener(w.ah);
+                        }
+                        else{
+                        w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
+                        w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
+                        
+                        w.ls2.readyButton.setVisible(true);
+                        w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);}
+                        
+                        w.rs.nextRoundButton.setVisible(false);
+
                     case 4: // SHOWOPPONENTANSWERS
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.session.setState(w.session.CHOOSESUBJECT);
