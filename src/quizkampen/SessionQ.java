@@ -29,6 +29,8 @@ public class SessionQ implements Serializable {
     protected String playerNameTwo;
     protected User userOne;
     protected User userTwo;
+    protected User winner;
+    protected User loser;
 
     SessionQ() {
         roundCounter = 0;

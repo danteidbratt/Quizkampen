@@ -185,6 +185,7 @@ public class ActionHandler implements ActionListener {
                         try {
                             w.rs.nextRoundButton.setText("You Win");
                             w.user.addWin();
+                            w.session.winner = w.user;
                             w.outUserServer.writeObject(w.user);
                             System.out.println("adding win " + w.user.getUserName());
                         } catch (IOException ex) {
@@ -194,6 +195,7 @@ public class ActionHandler implements ActionListener {
                         try {
                             w.rs.nextRoundButton.setText("You Lose");
                             w.user.addLoss();
+                            w.session.loser = w.user;
                             w.outUserServer.writeObject(w.user);
                             System.out.println("adding loss " + w.user.getUserName());
                         } catch (IOException ex) {

@@ -67,20 +67,33 @@ public class Server implements Runnable {
                 session = (SessionQ) user1Input.readObject();
                 
                 if (session.getState() == session.SHUTDOWN) {
+                    if(session.winner == null){
+                        um.updateDraw(session.userOne, session.userTwo);
+                    }
+                    else if(session.winner == session.userOne){
                     um.updateUsers(session.userOne, session.userTwo);
-                    System.out.println("kom in i UM");
+                    }
+                    else{
+                    um.updateUsers(session.userTwo, session.userOne);
+                    }
                     break;
                 }
                 user2Output.writeObject(session);
                 session = (SessionQ) user2Input.readObject();
                 
                 if (session.getState() == session.SHUTDOWN) {
+                    if(session.winner == null){
+                        um.updateDraw(session.userOne, session.userTwo);
+                    }
+                    else if(session.winner == session.userOne){
                     um.updateUsers(session.userOne, session.userTwo);
-                    System.out.println("kom in i UM");
+                    }
+                    else{
+                    um.updateUsers(session.userTwo, session.userOne);
+                    }
                     break;
                 }
             }
-            System.out.println("Server loop ends");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }

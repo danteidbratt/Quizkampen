@@ -9,7 +9,6 @@ public class ServerListener extends Thread {
     protected int port1 = 33333;
     ServerSocket serverSocket1;
     UserManager um = new UserManager();
-
     public ServerListener() throws IOException {
         serverSocket1 = new ServerSocket(port1);
         UserServerListener s2 = new UserServerListener();

@@ -88,30 +88,36 @@ public class UserManager implements Serializable {
         }
     }
 
-    public void updateUsers(User p1, User p2) {
+    public void updateDraw(User p1, User p2) {
         for (User u : userList) {
-
             if (u.getUserName().equals(p1.getUserName())) {
-                u.totalGames = p1.getTotalGames();
-                u.wins = p1.wins;
-                u.losses = p1.losses;
-                u.draws = p1.draws;
-
-                System.out.println("update hände för P1");
-            }
-            else{
-                System.out.println("P1 ingen update");
+                u.addDraw();
             }
             if (u.getUserName().equals(p2.getUserName())) {
-                u.totalGames = p2.getTotalGames();
-                u.wins = p2.wins;
-                u.losses = p2.losses;
-                u.draws = p2.draws;
+                u.addDraw();
+            }
+        }
+    }
+
+    public void updateUsers(User p1, User p2) {
+
+        for (User u : userList) {
+            if (u.getUserName().equals(p1.getUserName())) {
+                u.addWin();
+
+                System.out.println("update hände för P1");
+                System.out.println(u.getUserName() + " total games: "
+                        + u.getTotalGames() + " losses: "
+                        + u.losses + " wins: " + u.wins + " draws: " + u.draws);
+            }
+
+            if (u.getUserName().equals(p2.getUserName())) {
+                u.addLoss();
 
                 System.out.println("update hände för P2");
-            }
-            else{
-                System.out.println("P2 update nej");
+                System.out.println(u.getUserName() + " total games: "
+                        + u.getTotalGames() + " losses: "
+                        + u.losses + " wins: " + u.wins + " draws: " + u.draws);
             }
         }
         writeToFile();
