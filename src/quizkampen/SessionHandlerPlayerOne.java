@@ -27,12 +27,12 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.ls.setSubjectButtons(w.tempSubjects);
                         break;
                     case 1: // SHOWSUBJECT
-<<<<<<< HEAD
+
                         w.rs.subjects[w.session.roundCounter].setText("-" + w.session.chosenSubjectName + " -");
-=======
+
                         System.out.println("1");
                         w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
->>>>>>> master
+
                         w.session.setState(w.session.ANSWERQUESTIONS1);
                         w.outGameServer.writeObject(w.session);
                         break;
@@ -49,7 +49,7 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.session.setState(3);
                         break;
                     case 3: // ANSWERQUESTIONS2
-<<<<<<< HEAD
+
                         if (w.session.roundCounter == 0) {
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameOne());
                             w.rs.setPanel();
@@ -64,14 +64,13 @@ public class SessionHandlerPlayerOne extends Thread {
                         
                         w.rs.nextRoundButton.setVisible(false);
 
-=======
-                        System.out.println("3");
+               System.out.println("3");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         w.gs.roundBoxLabel.setText((w.session.roundCounter + 1) + "/" + w.session.getTotalRounds());
                         w.rs.nextRoundButton.setVisible(true);
                         break;
->>>>>>> master
+
                     case 4: // SHOWOPPONENTANSWERS
                         System.out.println("4");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());

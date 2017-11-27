@@ -39,7 +39,7 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 2: // ANSWERQUESTIONS1
-<<<<<<< HEAD
+
                         if (w.session.roundCounter > 0) {
                             w.rs.subjects[w.session.roundCounter].setText("- " + w.session.chosenSubjectName + " -");
                             w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
@@ -49,7 +49,7 @@ public class SessionHandlerPlayerTwo extends Thread {
 
                         break;
                     case 3: // ASWERQUESTIONS2
-=======
+
                         System.out.println("2");
                         w.ls.startButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
@@ -59,7 +59,7 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.ls2.readyButton.setVisible(true);
                         w.gs.roundBoxLabel.setText((w.session.roundCounter + 1) + "/" + w.session.getTotalRounds());
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
->>>>>>> master
+
                         if (w.session.roundCounter == 0) {
                             w.rs.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(),
@@ -69,13 +69,13 @@ public class SessionHandlerPlayerTwo extends Thread {
                         }
                         w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
-<<<<<<< HEAD
+ 
 
                         w.ls2.readyButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
-=======
+
                         w.rs.nextRoundButton.setVisible(true);
->>>>>>> master
+ 
                         break;
                     case 4: // SHOWOPPONENTANSWERS
                         System.out.println("4");
