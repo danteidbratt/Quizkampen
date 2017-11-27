@@ -5,12 +5,25 @@
             <url>src/quizkampen/Window.java</url>
             <bookmark id="1">
                 <name/>
-                <line>69</line>
+                <line>82</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/ActionHandler.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/SessionQ.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/panels/GameMenuScreen.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/server/PropertiesReader.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/SessionHandlerPlayerOne.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/panels/LobbyScreen.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/Client.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/server/ServerListener.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/panels/GameScreen.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/server/Server.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/client/panels/AnswerButton.java</file>
+            <file>file:/Users/claudiastenberg/Desktop/Objektorienterad%20programmering/Quizkampen/src/quizkampen/server/info.properties</file>
+        </group>
     </open-files>
 </project-private>

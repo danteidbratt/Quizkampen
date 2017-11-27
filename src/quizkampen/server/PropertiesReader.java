@@ -25,13 +25,13 @@ public class PropertiesReader implements Serializable{
     }
 
     public int getRonds() {
-        String in = p.getProperty("ronds", "2");
+        String in = p.getProperty("ronds", "5");
         ronds = Integer.parseInt(in);
         return ronds;
     }
 
     public int getQuestionsInRond() {
-        String in = p.getProperty("questionsInRond", "2");
+        String in = p.getProperty("questionsInRond", "3");
         questionsInRond = Integer.parseInt(in);
         return questionsInRond;
     }
