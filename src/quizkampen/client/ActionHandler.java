@@ -64,6 +64,8 @@ public class ActionHandler implements ActionListener {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullPointerException nue){
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, nue);
             }
             w.remove(w.ws);
             w.add(w.ms);
