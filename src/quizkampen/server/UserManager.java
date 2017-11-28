@@ -18,7 +18,6 @@ public class UserManager implements Serializable {
         readFile();
         for (User r : userList) {
             if (r.getWins() != 0) {
-                System.out.println(r.getUserName());
             }
         }
     }
@@ -29,7 +28,6 @@ public class UserManager implements Serializable {
             writeToFile();
         } else //TODO Ändra hur felmeddelandet visas
         {
-            System.out.println("Användare finns");
         }
     }
 
