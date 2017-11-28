@@ -19,7 +19,6 @@ public class SessionHandlerPlayerTwo extends Thread {
                 w.session = (SessionQ) w.inGameServer.readObject();
                 switch (w.session.getState()) {
                     case 0: //CHOOSESUBJECT
-                        System.out.println("0");
                         w.rs.nextRoundButton.setVisible(true);
                         w.ls.resetPanel();
                         for (int i = 0; i < 3; i++) {
@@ -28,7 +27,6 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.ls.setSubjectButtons(w.tempSubjects);
                         break;
                     case 1: //SHOWSUBJECT
-                        System.out.println("1");
                         if (w.session.roundCounter == 0) {
                             w.ls2.subjectButton.setText(w.session.chosenSubjectName);
                             w.ls2.subjectButton.setVisible(true);
@@ -40,12 +38,10 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 2: // ANSWERQUESTIONS1
-                        System.out.println("2");
                         w.ls.startButton.setVisible(true);
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
                     case 3: // ASWERQUESTIONS2
-                        System.out.println("3");
                         w.ls2.readyButton.setVisible(true);
                         w.gs.roundBoxLabel.setText((w.session.roundCounter + 1) + "/" + w.session.getTotalRounds());
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
@@ -61,8 +57,6 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.rs.nextRoundButton.setVisible(true);
                         break;
                     case 4: // SHOWOPPONENTANSWERS
-                        System.out.println("4");
-                        System.out.println("4 för P2");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.session.roundCounter++;
                         if (w.session.roundCounter >= (w.session.getTotalRounds())) {
@@ -72,17 +66,14 @@ public class SessionHandlerPlayerTwo extends Thread {
                                 w.rs.nextRoundButton.setText("Draw");
                                 w.session.userTwo.addDraw();
                                 w.user.addDraw();
-                                System.out.println("P2 draw");
                                 w.session.setDraw(true);
                             } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
                                 w.rs.nextRoundButton.setText("You Win");
-                                System.out.println("P2 win");
                                 w.session.userTwo.addWin();
                                 w.user.addWin();
                                 w.session.winner = w.session.userTwo;
                             } else {
                                 w.rs.nextRoundButton.setText("You Lose");
-                                System.out.println("P2 loss");
                                 w.session.userTwo.addLoss();
                                 w.user.addLoss();
                                 w.session.loser = w.session.userTwo;
@@ -95,25 +86,20 @@ public class SessionHandlerPlayerTwo extends Thread {
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 5: // GAMEOVER
-                        System.out.println("5 för P2");
-                        
                             if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
                                 
                                 // HAR LAGT TILL 
                                 w.rs.nextRoundButton.setText("Draw");
                                 w.session.userTwo.addDraw();
                                 w.user.addDraw();
-                                System.out.println("P2 draw");
                                 w.session.setDraw(true);
                             } else if (Integer.parseInt(w.rs.leftNumber.getText()) > Integer.parseInt(w.rs.rightNumber.getText())) {
                                 w.rs.nextRoundButton.setText("You Win");
-                                System.out.println("P2 win");
                                 w.session.userTwo.addWin();
                                 w.user.addWin();
                                 w.session.winner = w.session.userTwo;
                             } else {
                                 w.rs.nextRoundButton.setText("You Lose");
-                                System.out.println("P2 loss");
                                 w.session.userTwo.addLoss();
                                 w.user.addLoss();
                                 w.session.loser = w.session.userTwo;
@@ -124,7 +110,6 @@ public class SessionHandlerPlayerTwo extends Thread {
                         break;
                 }
             }
-            System.out.println("loppen är slut");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }

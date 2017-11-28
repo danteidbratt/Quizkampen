@@ -17,7 +17,6 @@ public class SessionHandlerPlayerOne extends Thread {
                 w.session = (SessionQ) w.inGameServer.readObject();
                 switch (w.session.getState()) {
                     case 0: // CHOOSESUBJECT
-                        System.out.println("0");
                         w.ls.loopAnimation = false;
                         w.ls.resetPanel();
                         for (int i = 0; i < 3; i++) {
@@ -26,13 +25,11 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.ls.setSubjectButtons(w.tempSubjects);
                         break;
                     case 1: // SHOWSUBJECT
-                        System.out.println("1");
                         w.rs.setSubject(w.session.chosenSubjectName, w.session.roundCounter);
                         w.session.setState(w.session.ANSWERQUESTIONS1);
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 2: // ANSWERQUESTIONS1
-                        System.out.println("2");
                         if (w.session.roundCounter == 0) {
                             w.rs.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                             w.rs.setResultScreen(w.session.getTotalQsInRound(), w.session.getTotalRounds(), w.user.getUserName(), w.session.getPlayerNameTwo());
@@ -43,15 +40,12 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         break;
                     case 3: // ANSWERQUESTIONS2
-                        System.out.println("3");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.gs.setNextQuestion(w.session.tempQuestions[w.questionCounter]);
                         w.gs.roundBoxLabel.setText((w.session.roundCounter + 1) + "/" + w.session.getTotalRounds());
                         w.rs.nextRoundButton.setVisible(true);
                         break;
                     case 4: // SHOWOPPONENTANSWERS
-                        System.out.println("4");
-                        System.out.println("4 för P1");
                         w.rs.setOpponentBoxes(w.session.opponentsAnswers, w.session.roundCounter, w.session.getTotalQsInRound());
                         w.session.roundCounter++;
                         if (w.session.roundCounter == (w.session.getTotalRounds())) {
@@ -82,7 +76,6 @@ public class SessionHandlerPlayerOne extends Thread {
                         w.outGameServer.writeObject(w.session);
                         break;
                     case 5: // GAMEOVER
-                        System.out.println("5 för P1");
                                 if (Integer.parseInt(w.rs.leftNumber.getText()) == Integer.parseInt(w.rs.rightNumber.getText())) {
 
                                 // LAGT TILL
@@ -108,7 +101,6 @@ public class SessionHandlerPlayerOne extends Thread {
                 }
 
             }
-            System.out.println("loppen är slut");
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }

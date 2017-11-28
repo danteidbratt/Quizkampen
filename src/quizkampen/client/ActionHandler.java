@@ -37,15 +37,12 @@ public class ActionHandler implements ActionListener {
             try {
                 w.userServerSocket = new Socket("172.20.201.98", w.portUser);
                 w.outUserServer = new ObjectOutputStream(w.userServerSocket.getOutputStream());
-                System.out.println("output connected");
                 w.inUserServer = new ObjectInputStream(w.userServerSocket.getInputStream());
-                System.out.println("inputconnected");
                 if (userName != null) {
                     w.outUserServer.writeObject(userName);
                 }
                 if ((w.user = (User) w.inUserServer.readObject()) != null) {
                     w.setUser(w.user);
-                    System.out.println(w.user.getUserName());
                     w.remove(w.ws);
                     w.add(w.ms);
                 }
@@ -284,7 +281,6 @@ public class ActionHandler implements ActionListener {
 
         @Override
         public void run() {
-            System.out.println("Timer fråga: " + w.questionCounter);
             try {
                 w.gs.buttonPanel.remove(w.gs.nextQuestionButton);
                 w.gs.buttonPanel.add(w.gs.timerPanel);
