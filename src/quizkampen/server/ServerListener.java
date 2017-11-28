@@ -24,7 +24,6 @@ public class ServerListener extends Thread {
                 Server server = new Server(clientSock1, um);
                 Socket clientSock2 = serverSocket1.accept();
                 server.setPlayer2(clientSock2);
-
             } catch (IOException ex) {
                 Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
             }

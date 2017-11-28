@@ -62,20 +62,20 @@ public class Window extends JFrame {
             e.printStackTrace();
         }
         ah = new ActionHandler(this);
-        try {
-            this.userServerSocket = new Socket("127.0.0.1", portUser);
-            outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
-            System.out.println("output connected");
-            inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
-            System.out.println("inputconnected");
-
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to server. "
-                    + "\nPlease try again later.",
-                    "QuizFights - Server problem",
-                    JOptionPane.PLAIN_MESSAGE);
-            System.exit(0);
-        }
+//        try {
+//            this.userServerSocket = new Socket("127.0.0.1", portUser);
+//            outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
+//            System.out.println("output connected");
+//            inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
+//            System.out.println("inputconnected");
+//
+//        } catch (IOException ex) {
+//            JOptionPane.showMessageDialog(null, "Could not connect to server. "
+//                    + "\nPlease try again later.",
+//                    "QuizFights - Server problem",
+//                    JOptionPane.PLAIN_MESSAGE);
+//            System.exit(0);
+//        }
     }
 
     public void setFrame() {
