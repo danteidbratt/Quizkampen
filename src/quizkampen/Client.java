@@ -16,7 +16,6 @@ public class Client extends Application{
 	public void start(Stage stage) throws Exception {
         Window w = new Window();
         w.setFrame();
-		Music.playSound();
 		File file = new File("bensound-epic.mp3");
 		Media media = new Media(file.toURI().toString()); //replace /Movies/test.mp3 with your file
 		MediaPlayer player = new MediaPlayer(media); 
