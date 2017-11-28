@@ -28,12 +28,8 @@ public class Window extends JFrame {
     SessionHandlerPlayerOne sh1;
     SessionHandlerPlayerTwo sh2;
 
-    protected int portUser = 55567;
-<<<<<<< HEAD
-    protected int portGame = 55567;
-=======
+    protected int portUser = 33334; // Nya porten
     protected int portGame = 33333;
->>>>>>> bc7a8e9670b10573e4cce6d6df5533bf38e0a138
     protected Socket userServerSocket;
     ObjectOutputStream outUserServer;
     ObjectInputStream inUserServer;
@@ -67,7 +63,7 @@ public class Window extends JFrame {
         }
         ah = new ActionHandler(this);
         try {
-            this.userServerSocket = new Socket("172.20.201.98", portUser);
+            this.userServerSocket = new Socket("127.0.0.1", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
             System.out.println("output connected");
             inUserServer = new ObjectInputStream(userServerSocket.getInputStream());

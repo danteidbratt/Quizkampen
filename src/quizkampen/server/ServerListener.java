@@ -7,7 +7,7 @@ import quizkampen.client.User;
 
 public class ServerListener extends Thread {
 
-    protected int port1 = 55567;
+    protected int port1 = 33333;
     ServerSocket serverSocket1;
     UserManager um = new UserManager();
     public ServerListener() throws IOException {
