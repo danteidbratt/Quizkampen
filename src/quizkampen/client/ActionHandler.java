@@ -1,9 +1,5 @@
 package quizkampen.client;
 
-import quizkampen.client.User;
-import quizkampen.client.SessionHandlerPlayerOne;
-import quizkampen.client.SessionHandlerPlayerTwo;
-import quizkampen.client.SessionQ;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,36 +35,28 @@ public class ActionHandler implements ActionListener {
         if (e.getSource() == w.ws.okButton || e.getSource() == w.ws.userNameInput) {
             String userName = w.ws.userNameInput.getText();
             try {
-                try {
-                    w.userServerSocket = new Socket("127.0.0.1", w.portUser);
-                    w.outUserServer = new ObjectOutputStream(w.userServerSocket.getOutputStream());
-                    System.out.println("output connected");
-                    w.inUserServer = new ObjectInputStream(w.userServerSocket.getInputStream());
-                    System.out.println("inputconnected");
-
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(null, "Could not connect to server. "
-                            + "\nPlease try again later.",
-                            "QuizFights - Server problem",
-                            JOptionPane.PLAIN_MESSAGE);
-//                    System.exit(0);
-                }
+                w.userServerSocket = new Socket("172.20.201.98", w.portUser);
+                w.outUserServer = new ObjectOutputStream(w.userServerSocket.getOutputStream());
+                System.out.println("output connected");
+                w.inUserServer = new ObjectInputStream(w.userServerSocket.getInputStream());
+                System.out.println("inputconnected");
                 if (userName != null) {
                     w.outUserServer.writeObject(userName);
                 }
                 if ((w.user = (User) w.inUserServer.readObject()) != null) {
                     w.setUser(w.user);
                     System.out.println(w.user.getUserName());
+                    w.remove(w.ws);
+                    w.add(w.ms);
                 }
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Could not connect to server. "
+                        + "\nPlease try again later.",
+                        "QuizFights - Server problem",
+                        JOptionPane.PLAIN_MESSAGE);
+            } catch (ClassNotFoundException | NullPointerException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NullPointerException nue){
-                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, nue);
             }
-            w.remove(w.ws);
-            w.add(w.ms);
         } else if (e.getSource() == w.ms.newGameButton) {
             w.remove(w.ms);
             w.add(w.gms);
@@ -124,7 +112,7 @@ public class ActionHandler implements ActionListener {
                     a.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                     a.setActionListener(this);
                 });
-                w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
+                w.gameServerSocket = new Socket("172.20.201.98", w.portGame);
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
                 w.session = (SessionQ) w.inGameServer.readObject();
