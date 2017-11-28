@@ -10,13 +10,12 @@ public class Client extends Application{
     Window w;
 	
     public Client() {
-        Window w = new Window();
-        w.setFrame();
-    }
+	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-//		Music.playSound();
+        Window w = new Window();
+        w.setFrame();
 		File file = new File("bensound-epic.mp3");
 		Media media = new Media(file.toURI().toString()); //replace /Movies/test.mp3 with your file
 		MediaPlayer player = new MediaPlayer(media); 
@@ -24,7 +23,7 @@ public class Client extends Application{
    } 
     
     public static void main(String[] args) {
-		launch();
         Client c = new Client();
+		launch();
     }
 }

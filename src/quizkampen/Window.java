@@ -1,21 +1,23 @@
 package quizkampen;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class Window extends JFrame {
 
+    Color color1;
+    Color color2;
+    Color color3;
+    Color color4;
+
     Subject[] tempSubjects = new Subject[3];
-    Question[] tempQuestions;
-    int tempIndex;
     ActionHandler ah;
     protected int questionCounter = 0;
     int playerNumber;
@@ -49,11 +51,15 @@ public class Window extends JFrame {
     StatsScreen sts;
 
     public Window() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        color1 = new Color(20, 0, 160);
+        color2 = Color.YELLOW;
+        color3 = Color.WHITE;
+        color4 = new Color(20, 0, 185);
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ah = new ActionHandler(this);
         try {
             this.userServerSocket = new Socket("127.0.0.1", portUser);
@@ -63,21 +69,20 @@ public class Window extends JFrame {
             System.out.println("inputconnected");
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Could not connect to server. \nPlease try again later.", "QuizFights - Server problem", JOptionPane.PLAIN_MESSAGE);
-			System.exit(0);
+            JOptionPane.showMessageDialog(null, "Could not connect to server. "
+                    + "\nPlease try again later.",
+                    "QuizFights - Server problem",
+                    JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
         }
     }
 
     public void setFrame() {
         ws = new WelcomeScreen();
-        rs = new ResultScreen();
         ms = new MenuScreen();
         gms = new GameMenuScreen();
         ses = new SettingsScreen();
         sts = new StatsScreen();
-        ls = new LobbyScreen(this);
-        ls2 = new LobbyScreen2();
-        gs = new GameScreen();
 
         setTitle("QuizFights");
         add(ws);
@@ -92,14 +97,10 @@ public class Window extends JFrame {
         panelList.add(gms);
         panelList.add(ses);
         panelList.add(sts);
-        panelList.add(gs);
-        panelList.add(ls);
-        panelList.add(ls2);
         panelList.forEach(e -> {
             e.setPanel();
             e.setActionListener(ah);
         });
-        ls.animation.start();
     }
 
     public User getUser() {
