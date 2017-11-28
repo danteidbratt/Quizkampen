@@ -26,7 +26,7 @@ public class Window extends JFrame {
     SessionHandlerPlayerOne sh1;
     SessionHandlerPlayerTwo sh2;
 
-    protected int portUser = 33334;
+    protected int portUser = 55567;
     protected int portGame = 33333;
     protected Socket userServerSocket;
     ObjectOutputStream outUserServer;
@@ -60,7 +60,7 @@ public class Window extends JFrame {
         }
         ah = new ActionHandler(this);
         try {
-            this.userServerSocket = new Socket("127.0.0.1", portUser);
+            this.userServerSocket = new Socket("172.20.201.98", portUser);
             outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
             System.out.println("output connected");
             inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
