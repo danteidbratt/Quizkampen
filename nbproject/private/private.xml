@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/client/Client.java</file>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/client/User.java</file>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/server/UserManager.java</file>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/server/info.properties</file>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/server/ServerListener.java</file>
+            <file>file:/C:/Javamapp/Objektorienterad/Sprint04/Q/Quizkampen/src/quizkampen/server/Quizkampen.java</file>
+        </group>
     </open-files>
 </project-private>
