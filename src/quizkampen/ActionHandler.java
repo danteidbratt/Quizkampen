@@ -29,6 +29,20 @@ public class ActionHandler implements ActionListener {
         if (e.getSource() == w.ws.okButton || e.getSource() == w.ws.userNameInput) {
             String userName = w.ws.userNameInput.getText();
             try {
+                try {
+                    w.userServerSocket = new Socket("127.0.0.1", w.portUser);
+                    w.outUserServer = new ObjectOutputStream(w.userServerSocket.getOutputStream());
+                    System.out.println("output connected");
+                    w.inUserServer = new ObjectInputStream(w.userServerSocket.getInputStream());
+                    System.out.println("inputconnected");
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Could not connect to server. "
+                            + "\nPlease try again later.",
+                            "QuizFights - Server problem",
+                            JOptionPane.PLAIN_MESSAGE);
+//                    System.exit(0);
+                }
                 if (userName != null) {
                     w.outUserServer.writeObject(userName);
                 }
