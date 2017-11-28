@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
     Window w;
+	MediaPlayer player;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -16,7 +17,7 @@ public class Client extends Application {
         w.setFrame();
         File file = new File("bensound-epic.mp3");
         Media media = new Media(file.toURI().toString()); //replace /Movies/test.mp3 with your file
-        MediaPlayer player = new MediaPlayer(media);
+        player = new MediaPlayer(media);
         player.play();
     }
 
