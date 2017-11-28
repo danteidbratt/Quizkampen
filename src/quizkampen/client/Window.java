@@ -28,8 +28,8 @@ public class Window extends JFrame {
     SessionHandlerPlayerOne sh1;
     SessionHandlerPlayerTwo sh2;
 
-    protected int portUser = 33334;
-    protected int portGame = 33333;
+    protected int portUser = 55567;
+    protected int portGame = 55567;
     protected Socket userServerSocket;
     ObjectOutputStream outUserServer;
     ObjectInputStream inUserServer;
