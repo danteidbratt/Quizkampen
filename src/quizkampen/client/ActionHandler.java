@@ -40,7 +40,7 @@ public class ActionHandler implements ActionListener {
             String userName = w.ws.userNameInput.getText();
             try {
                 try {
-                    w.userServerSocket = new Socket("127.0.0.1", w.portUser);
+                    w.userServerSocket = new Socket("172.20.201.98", w.portUser);
                     w.outUserServer = new ObjectOutputStream(w.userServerSocket.getOutputStream());
                     System.out.println("output connected");
                     w.inUserServer = new ObjectInputStream(w.userServerSocket.getInputStream());
@@ -124,7 +124,7 @@ public class ActionHandler implements ActionListener {
                     a.setCustomColor(w.color1, w.color2, w.color3, w.color4);
                     a.setActionListener(this);
                 });
-                w.gameServerSocket = new Socket("127.0.0.1", w.portGame);
+                w.gameServerSocket = new Socket("172.20.201.98", w.portGame);
                 w.outGameServer = new ObjectOutputStream(w.gameServerSocket.getOutputStream());
                 w.inGameServer = new ObjectInputStream(w.gameServerSocket.getInputStream());
                 w.session = (SessionQ) w.inGameServer.readObject();
