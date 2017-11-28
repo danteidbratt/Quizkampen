@@ -10,9 +10,6 @@ public class Client extends Application {
 
     Window w;
 
-    public Client() {
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
         Window w = new Window();
