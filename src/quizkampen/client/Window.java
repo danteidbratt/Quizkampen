@@ -1,13 +1,12 @@
 package quizkampen.client;
+
 import quizkampen.client.panels.*;
 import java.awt.Color;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import quizkampen.server.IPanel;
 import quizkampen.server.Subject;
@@ -62,20 +61,6 @@ public class Window extends JFrame {
             e.printStackTrace();
         }
         ah = new ActionHandler(this);
-//        try {
-//            this.userServerSocket = new Socket("127.0.0.1", portUser);
-//            outUserServer = new ObjectOutputStream(userServerSocket.getOutputStream());
-//            System.out.println("output connected");
-//            inUserServer = new ObjectInputStream(userServerSocket.getInputStream());
-//            System.out.println("inputconnected");
-//
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(null, "Could not connect to server. "
-//                    + "\nPlease try again later.",
-//                    "QuizFights - Server problem",
-//                    JOptionPane.PLAIN_MESSAGE);
-//            System.exit(0);
-//        }
     }
 
     public void setFrame() {
@@ -103,7 +88,8 @@ public class Window extends JFrame {
             e.setActionListener(ah);
         });
     }
-   public User getUser() {
+
+    public User getUser() {
         return user;
     }
 

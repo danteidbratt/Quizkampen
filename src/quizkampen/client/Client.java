@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Client extends Application {
 
     Window w;
-	MediaPlayer player;
+    MediaPlayer player;
 
     @Override
     public void start(Stage stage) throws Exception {
