@@ -12,7 +12,7 @@ import javax.swing.GroupLayout.Group;
 
 public class Client extends Application{
 
-	JFXPanel fxPanel = new JFXPanel();
+//	JFXPanel fxPanel = new JFXPanel();
     Window w;
     public Client() {
         Window w = new Window();
@@ -20,28 +20,27 @@ public class Client extends Application{
 //		fxPanel = new JFXPanel();
 //		Platform.runLater(new Runnable() {
 //			@Override public void run() {  
-//				String bip = "fox.mp3";
 //				MediaPlayer player;
 //				Media audioFile = new Media("file:///Users/David/Desktop/bensound-extremeaction.mp3");
 //				player = new MediaPlayer(audioFile);
 //				player.play();
 //				MediaView mediaView = new MediaView(player);
-//        ((Group)scene.getRoot()).getChildren().add(mediaView);
+////        ((Group)scene.getRoot()).getChildren().add(mediaView);
 //			}
 //		});
     }
 
 	
-	  @Override
-   public void start(Stage stage) throws Exception {
+	@Override
+	public void start(Stage stage) throws Exception {
 		Music.playSound();
-       Media media = new Media("file:///Users/David/Desktop/bensound-extremeaction.mp3"); //replace /Movies/test.mp3 with your file
-       MediaPlayer player = new MediaPlayer(media); 
-       player.play();
-   } 
+		Media media = new Media("file:///Users/David/Desktop/bensound-extremeaction.mp3"); //replace /Movies/test.mp3 with your file
+		MediaPlayer player = new MediaPlayer(media); 
+		player.play();
+	} 
     
     public static void main(String[] args) {
-		launch();
         Client c = new Client();
+		launch();
     }
 }
